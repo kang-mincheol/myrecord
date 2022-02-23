@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+/********** reset CSS **********/
+body, div, p, a, ul, ol, li, input, button {
+    padding: 0; margin: 0;
+}
+
+div, ul, ol, li, a, p, span, input, button {
+    font-family:'SpoqaHanSansNeo', Dotum, Helvetica, AppleGothic, Sans-serif;
+}
+
+ul, ol {
+    list-style:none;
+}
+
+a {
+    text-decoration:none; color:inherit;
+}
+
+button {
+    border: 0; background-color: unset; cursor: pointer;
+}
+
+button:focus, input:focus, a:focus, textarea:focus {
+    outline: none;
+}
+/********** reset CSS END **********/
