@@ -1,13 +1,9 @@
-function headerMenuHover(name) {
-    console.log(name);
-    var check = $("#header .sub_menu_container .sub_menu_wrap[name="+name+"]").length;
-
-    $("#header .sub_menu_container .sub_menu_wrap").removeClass("on");
-    if(check) {
-        $("#header .sub_menu_container .sub_menu_wrap[name="+name+"]").addClass("on");
+function mobileMenuRemote(remote) {
+    if(remote == undefined) {
+        $("#mobile_menu_wrap").fadeOut("fast");
+        $("#mobile_menu_container").removeClass("on");
+    } else {
+        $("#mobile_menu_wrap").fadeIn("fast");
+        $("#mobile_menu_container").addClass("on");
     }
-}
-
-function headerSubMenuOut() {
-    $("#header .sub_menu_container .sub_menu_wrap").removeClass("on");
 }
