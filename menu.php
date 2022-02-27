@@ -8,11 +8,10 @@ if(is_null($member)) {
     array_push(
         $menuArr, array(
             "name"=>"로그인",
-            "url"=>"javascript:void(0);",
-            "event"=>"onclick=\"loginRemote('on');\" "
+            "url"=>"/account/login"
         ),array(
             "name"=>"회원가입",
-            "url"=>"/member/join/"
+            "url"=>"/account/join/"
         )
     );
 }
@@ -21,12 +20,11 @@ if(is_null($member)) {
 if(!is_null($member)){
     array_push(
         $menuArr, array(
-            "name"=>"내 정보",
+            "name"=>"마이페이지",
             "url"=>"/mypage/mypage/"
         ), array(
             "name"=>"로그아웃",
-            "url"=>"javascript:void(0);",
-            "event"=>"onclick=\"logoutRemote();\""
+            "url"=>"/"
         )
     );
 }
@@ -45,20 +43,23 @@ $mainMenuArr = array();
 
 array_push(
     $mainMenuArr, array(
-        "name"=>"샵 찾기",
-        "url"=>"/shop/list/"
+        "name"=>"커뮤니티",
+        "url"=>"/community/freeboard/",
+        "sub_menu"=>
+            array(
+                "sub_name"=>"자유게시판",
+                "url"=>"/community/free_board/"
+            ),
+            array(
+                "sub_name"=>"득근일지",
+                "url"=>"/community/muscle_gain/"
+            )
     ), array (
-        "name"=>"샵 리뷰",
-        "url"=>"/review/list/"
+        "name"=>"마이레코드",
+        "url"=>"/record/record_main/"
     ), array (
-        "name"=>"공지사항",
-        "url"=>"/help/"
-    ), array (
-        "name"=>"요청하기",
-        "url"=>"/board/request/"
-    ), array (
-        "name"=>"제휴문의",
-        "url"=>"/board/contact/"
+        "name"=>"고객센터",
+        "url"=>"/help/notice"
     )
 )
 

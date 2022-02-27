@@ -52,15 +52,15 @@ echo css_load('/common/header.css');
 
 <body>
 
-</body>
-
 
 <div id="header">
     <div class="pc_header">
 
         <div class="left_box">
             <div class="logo_box">
-                <img class="logo_img" src="//via.placeholder.com/200x100"/>
+                <a class="logo_btn" href="/">
+                    <img class="logo_img" src="//via.placeholder.com/200x100"/>
+                </a>
             </div>
             <div class="menu_wrap">
                 <div class="menu_box">
@@ -111,60 +111,69 @@ echo css_load('/common/header.css');
 
     <div class="mobile_header">
         <div class="logo_box">
-            <img class="logo_img" src="//via.placeholder.com/100x50"/>
+            <a class="logo_link" href="/">
+                <img class="logo_img" src="//via.placeholder.com/100x50"/>
+            </a>
         </div>
 
         <div class="menu_box">
-            <button class="menu_btn" title="메뉴"><i class="fa-solid fa-bars"></i></button>
+            <button class="menu_btn" title="메뉴" onclick="mobileMenuRemote('on');"><i class="fa-solid fa-bars"></i></button>
         </div>
 
-        <div id="mobile_menu_container">
-            <div class="account_box">
-                <a href="#" class="account_btn login"><i class="fa-solid fa-power-off"></i>로그인</a>
-                <a href="#" class="account_btn"><i class="fa-solid fa-right-to-bracket"></i>회원가입</a>
-            </div>
-            <div class="menu_list_container">
-                <div class="menu_wrap">
-                    <div class="wrap_title">
-                        <a href="#" class="menu_title">커뮤니티</a>
-                    </div>
-                    <div class="wrap_body">
-                        <div class="menu_row">
-                            <a href="#" class="menu_btn">자유게시판1</a>
-                        </div>
-                        <div class="menu_row">
-                            <a href="#" class="menu_btn">자유게시판1</a>
-                        </div>
-                        <div class="menu_row">
-                            <a href="#" class="menu_btn">자유게시판1</a>
-                        </div>
-                    </div>
+        <div id="mobile_menu_wrap" onclick="mobileMenuRemote();">
+            <div id="mobile_menu_container">
+                <div class="account_box">
+                    <button class="close_btn" title="닫기" onclick="mobileMenuRemote();"><i class="fa-solid fa-xmark"></i></button>
+                    <a href="#" class="account_btn login"><i class="fa-solid fa-power-off"></i>로그인</a>
+                    <a href="#" class="account_btn"><i class="fa-solid fa-right-to-bracket"></i>회원가입</a>
                 </div>
+                <div class="menu_list_container">
+                    <div class="menu_wrap">
+                        <div class="wrap_title">
+                            <a href="#" class="menu_title">커뮤니티</a>
+                        </div>
+                        <div class="wrap_body">
+                            <div class="menu_row">
+                                <a href="#" class="menu_btn">자유게시판1</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="#" class="menu_btn">자유게시판1</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="#" class="menu_btn">자유게시판1</a>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="menu_wrap">
-                    <div class="wrap_title">
-                        <a href="#" class="menu_title">커뮤니티</a>
+                    <div class="menu_wrap">
+                        <div class="wrap_title">
+                            <a href="#" class="menu_title">커뮤니티</a>
+                        </div>
+                        <div class="wrap_body">
+                            <div class="menu_row">
+                                <a href="#" class="menu_btn">자유게시판1</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="#" class="menu_btn">자유게시판1</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="#" class="menu_btn">자유게시판1</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="wrap_body">
-                        <div class="menu_row">
-                            <a href="#" class="menu_btn">자유게시판1</a>
-                        </div>
-                        <div class="menu_row">
-                            <a href="#" class="menu_btn">자유게시판1</a>
-                        </div>
-                        <div class="menu_row">
-                            <a href="#" class="menu_btn">자유게시판1</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="menu_wrap">
-                    <div class="wrap_title">
-                        <a href="#" class="menu_title">커뮤니티</a>
+                    <div class="menu_wrap">
+                        <div class="wrap_title">
+                            <a href="#" class="menu_title">커뮤니티</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- mobile_menu_container -->
+
         </div>
+        <!-- mobile_menu_wrap -->
+
     </div>
     <!-- mobile_header -->
 
