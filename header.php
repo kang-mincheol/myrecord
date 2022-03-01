@@ -38,7 +38,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
-<script src="/library/moment.js"></script>
+<!--<script src="/library/moment.js"></script>-->
 
 <script src="https://kit.fontawesome.com/d56d6b9080.js" crossorigin="anonymous"></script>
 
