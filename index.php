@@ -143,6 +143,12 @@ echo css_load('/common/index.css');
 
 
 
+<div id="ad_wrap_1">
+    <div class="ad_wrap"></div>
+</div>
+
+
+
 
 
 
