@@ -50,6 +50,103 @@ echo css_load('/common/index.css');
 
 
 
+<div id="myrecord_board_wrap">
+    <div class="board_wrap">
+        <div class="board_title_wrap">
+            <p class="board_title"><a href="/">마이레코드 RANKING</a></p>
+        </div>
+        <div class="board_body_wrap">
+            <div class="rank_wrap">
+                <div class="rank_title_box">
+                    <p class="rank_title"><a href="/">3대 TOTAL</a></p>
+                </div>
+                <div class="rank_list_wrap">
+                    <div class="rank_list_row">
+                        <p class="rank_number">1</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                    <div class="rank_list_row">
+                        <p class="rank_number">2</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                    <div class="rank_list_row">
+                        <p class="rank_number">3</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                </div>
+            </div>
+            <!-- rank_wrap -->
+            <div class="rank_wrap">
+                <div class="rank_title_box">
+                    <p class="rank_title"><a href="/">Squat</a></p>
+                </div>
+                <div class="rank_list_wrap">
+                    <div class="rank_list_row">
+                        <p class="rank_number">1</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                    <div class="rank_list_row">
+                        <p class="rank_number">2</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                    <div class="rank_list_row">
+                        <p class="rank_number">3</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                </div>
+            </div>
+            <!-- rank_wrap -->
+            <div class="rank_wrap">
+                <div class="rank_title_box">
+                    <p class="rank_title"><a href="/">Bench Press</a></p>
+                </div>
+                <div class="rank_list_wrap">
+                    <div class="rank_list_row">
+                        <p class="rank_number">1</p>
+                        <p class="rank_user_name">asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf</p>
+                    </div>
+                    <div class="rank_list_row">
+                        <p class="rank_number">2</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                    <div class="rank_list_row">
+                        <p class="rank_number">3</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                </div>
+            </div>
+            <!-- rank_wrap -->
+            <div class="rank_wrap">
+                <div class="rank_title_box">
+                    <p class="rank_title"><a href="/">Deadlift</a></p>
+                </div>
+                <div class="rank_list_wrap">
+                    <div class="rank_list_row">
+                        <p class="rank_number">1</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                    <div class="rank_list_row">
+                        <p class="rank_number">2</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                    <div class="rank_list_row">
+                        <p class="rank_number">3</p>
+                        <p class="rank_user_name">asdf</p>
+                    </div>
+                </div>
+            </div>
+            <!-- rank_wrap -->
+        </div>
+    </div>
+</div>
+<!-- myrecord_board_wrap -->
+
+
+
+
+
+
+
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <?
