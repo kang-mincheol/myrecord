@@ -31,7 +31,7 @@
 }
 
 #free_board_wrap .board_wrap {
-    max-width: 980px; margin: 0 auto; border: 3px solid #9400D1; border-radius: 5px;
+    max-width: 980px; margin: 0 auto; border: 3px solid #9400D1; border-radius: 5px; box-sizing: border-box;
 }
 
 #free_board_wrap .board_wrap .board_title_wrap {
@@ -136,6 +136,29 @@
 #myrecord_board_wrap .board_wrap .board_body_wrap .rank_wrap .rank_list_wrap .rank_list_row .rank_user_name {
     width: calc(100% - 34px); color: #303030; font-size: 16px; font-weight: 400; text-overflow: ellipsis; overflow: hidden;
 }
+
+@media screen and (max-width: 1050px) {
+    #myrecord_board_wrap  {
+        padding: 10px;
+    }
+
+    #myrecord_board_wrap .board_wrap .board_body_wrap {
+        display: block;
+    }
+
+    #myrecord_board_wrap .board_wrap .board_body_wrap .rank_wrap {
+        width: auto; border-right: 0;
+    }
+
+    #myrecord_board_wrap .board_wrap .board_body_wrap .rank_wrap .rank_title_box {
+        border-top: 2px solid #9400D1;
+    }
+
+    
+}
+
+
+
 
 
 
