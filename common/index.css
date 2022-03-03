@@ -16,6 +16,12 @@
     height: 300px; background-color: #ddd;
 }
 
+#slide_wrap .swiper-container .swiper-button-prev,
+#slide_wrap .swiper-container .swiper-button-next,
+#slide_wrap .swiper-container .swiper-pagination .swiper-pagination-bullet {
+    --swiper-theme-color: #9400D1;
+}
+
 
 
 
