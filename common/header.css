@@ -48,7 +48,7 @@
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .sub_menu_container {
-    display: none; position: fixed; top: 100px; left: 0; width: 100%; background-color: #FFF;
+    display: none; position: fixed; top: 100px; left: 0; z-index: 100; width: 100%; background-color: #FFF;
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .sub_menu_container .sub_menu_wrap {
