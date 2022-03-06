@@ -157,8 +157,22 @@ echo css_load('/community/free_board/index.css');
     </div>
     <button class="next_btn" title="다음"><i class="fa-solid fa-angle-right"></i></button>
 </div>
+<!-- paging_wrap -->
 
 
+<div class="board_search_wrap">
+    <select id="search_key" class="search_select">
+        <option value="title">제목</option>
+        <option value="contents">내용</option>
+        <option value="writer">작성자</option>
+    </select>
+
+    <div class="search_keyword">
+        <input id="search_keyword" type="text"/>
+        <button class="search_btn" title="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+</div>
+<!-- board_search_wrap -->
 
 
 
