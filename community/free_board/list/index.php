@@ -2,7 +2,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
-echo css_load('/community/free_board/index.css');
+echo css_load('/community/free_board/list/index.css');
 ?>
 
 
@@ -191,7 +191,7 @@ echo css_load('/community/free_board/index.css');
 
 
 <?
-echo script_load('/community/free_board/index.js');
+echo script_load('/community/free_board/list/index.js');
 ?>
 <script>
 $(function () {
