@@ -58,3 +58,39 @@
 
 
 
+
+#board_contents_wrap {
+    margin-bottom: 20px;
+}
+
+#board_contents_wrap .value_box {
+    border: 2px solid #9400D1; border-radius: 4px; box-sizing: border-box; overflow: hidden;
+}
+
+
+
+
+
+#editor_wrap .bottom_btn_wrap {
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+#editor_wrap .bottom_btn_wrap button {
+    display: flex; justify-content: center; align-items: center; width: calc(50% - 10px); height: 40px; border-radius: 4px; font-size: 16px; font-weight: 700; box-sizing: border-box;
+}
+
+#editor_wrap .bottom_btn_wrap .list_btn {
+    color: #9400D1; border: 2px solid #9400D1;
+}
+
+#editor_wrap .bottom_btn_wrap .edit_btn {
+    color: #FFF; background-color: #9400D1;
+}
+
+
+
+
+
+
+
+

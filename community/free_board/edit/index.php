@@ -46,11 +46,18 @@ echo css_load('/community/free_board/edit/index.css');
 
 
 
-
+<script src="/editor/js/HuskyEZCreator.js"></script>
 <?
 echo script_load('/community/free_board/edit/index.js');
 ?>
 <script>
+var requestEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+    oAppRef: board_editor,
+    elPlaceHolder: "board_editor",
+    sSkinURI: "/editor/SmartEditor2Skin.html",
+    fCreator: "createSEditor2"
+});
 $(function () {
     
 });
