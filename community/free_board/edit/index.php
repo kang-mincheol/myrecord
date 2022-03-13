@@ -10,7 +10,25 @@ echo css_load('/community/free_board/edit/index.css');
 
 
 <div id="editor_wrap">
-    
+
+    <div id="board_title_wrap">
+        <label class="value_title" for="board_title">제목</label>
+        <div class="value_box">
+            <input id="board_title" class="edit_input" type="text" placeholder="제목을 입력해주세요"/>
+        </div>
+    </div>
+
+    <div id="board_contents_wrap">
+        <label class="value_title" for="">내용</label>
+        <div class="value_box">
+            <textarea id="board_editor" name="board_editor" style="display: none;"></textarea>
+        </div>
+    </div>
+
+    <div class="bottom_btn_wrap">
+        <button class="list_btn" onclick="">목록</button>
+        <button class="edit_btn" onclick="">등록</button>
+    </div>
 </div>
 <!-- editor_wrap -->
 
