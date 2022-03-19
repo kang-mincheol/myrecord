@@ -32,6 +32,15 @@
     margin-bottom: 30px;
 }
 
+#board_wrap .write_btn_wrap {
+    display: flex; justify-content: flex-end; align-items: center; max-width: 980px; margin: 0 auto 20px;
+}
+
+#board_wrap .write_btn_wrap .write_btn {
+    display: flex; justify-content: center; align-items: center; padding: 0 10px; height: 40px; box-sizing: border-box; border-radius: 4px; color: #FFF; font-size: 16px; font-weight: 700; background-color: #9400D1;
+}
+
+
 #board_wrap .board_container {
     max-width: 980px; margin: 0 auto; border: 3px solid #9400D1; border-radius: 5px; box-sizing: border-box;
 }

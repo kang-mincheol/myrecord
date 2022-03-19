@@ -10,6 +10,10 @@ echo css_load('/community/free_board/list/index.css');
 
 
 <div id="board_wrap">
+
+    <div class="write_btn_wrap">
+        <a class="write_btn" href="/community/free_board/edit/">글쓰기</a>
+    </div>
     <div class="board_container">
         <div class="board_header_wrap">
             <div class="top_box">
