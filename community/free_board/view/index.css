@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+
+
+
+#container {
+    padding: 0 0 50px 0;
+}
+
+@media screen and (max-width: 1050px) {
+    #container {
+        padding: 0 10px 50px;
+    }
+}
+
+
+#page_title {
+    max-width: 980px; margin: 30px auto; color: #303030; font-size: 28px; font-weight: 700;
+}
+
+@media screen and (max-width: 1050px) {
+    #page_title {
+        font-size: 20px;
+    }
+}
+
+
+
+
+
+#view_wrap {
+    max-width: 980px; margin: 0 auto;
+}
+
+#view_wrap #view_header_wrap {
+    margin-bottom: 10px;
+}
+
+#view_wrap #view_header_wrap #contents_title {
+    display: flex; align-items: center; height: 34px; color: #303030; font-size: 16px; padding: 0 10px; border: 2px solid #9400D1; border-radius: 4px; margin-bottom: 10px; box-sizing: border-box;
+}
+
+#view_wrap #view_header_wrap .view_header_info_box {
+    display: flex; flex-wrap: wrap; padding: 7px 10px; border: 2px solid #9400D1; border-radius: 4px; box-sizing: border-box;
+}
+
+#view_wrap #view_header_wrap .view_header_info_box .info_value {
+    color: #303030; font-size: 14px; font-weight: 400; padding-right: 5px; margin-right: 5px; border-right: 1px solid #9400D1;
+}
+
+#view_wrap #view_header_wrap .view_header_info_box .info_value:last-child {
+    border-right: 0; padding-right: 0; margin-right: 0;
+}
+
+
+
+
+
+#view_contents_wrap {
+    display: block; width: 100%; padding: 7px 10px; color: #303030; font-size: 13px; font-weight: 400; border: 2px solid #9400D1; border-radius: 4px; box-sizing: border-box; margin-bottom: 20px;
+}
+
+#view_contents_wrap p,
+#view_contents_wrap span,
+#view_contents_wrap ul,
+#view_contents_wrap ol,
+#view_contents_wrap li,
+#view_contents_wrap div {
+    font-family: 'Pretendard', Dotum, Helvetica, AppleGothic, Sans-serif;
+}
+
+
+
+
+
+#view_wrap .bottom_btn_wrap {
+    display: flex; justify-content: space-between;
+}
+
+#view_wrap .bottom_btn_wrap .bottom_btn {
+    display: flex; justify-content: center; align-items: center; width: calc(50% - 10px); height: 40px; border-radius: 4px; font-size: 16px; font-weight: 700; box-sizing: border-box;
+}
+
+#view_wrap .bottom_btn_wrap .bottom_btn.list_btn {
+    color: #9400D1; border: 2px solid #9400D1;
+}
+#view_wrap .bottom_btn_wrap .bottom_btn.list_btn.on {
+    width: 100%;
+}
+
+#view_wrap .bottom_btn_wrap .bottom_btn.edit_btn {
+    color: #FFF; background-color: #9400D1;
+}
+#view_wrap .bottom_btn_wrap .bottom_btn.edit_btn.off {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

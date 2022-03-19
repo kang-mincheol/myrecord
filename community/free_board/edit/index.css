@@ -52,7 +52,7 @@
 }
 
 #board_title_wrap .edit_input {
-    display: flex; align-items: center; width: 100%; height: 100%; box-sizing: border-box; border: 2px solid #9400D1; border-radius: 4px; padding: 5px 10px; color: #303030; font-size: 16px; font-weight: 400;
+    display: flex; align-items: center; width: 100%; box-sizing: border-box; border: 2px solid #9400D1; border-radius: 4px; padding: 5px 10px; color: #303030; font-size: 16px; font-weight: 400;
 }
 
 
