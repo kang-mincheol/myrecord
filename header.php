@@ -69,7 +69,7 @@ echo css_load('/common/header.css');
                     <div class="sub_menu_container">
                         <div class="sub_menu_wrap" name="community">
                             <div class="sub_menu_box">
-                                <a href="#" class="sub_menu_btn">자유게시판</a>
+                                <a href="/community/free_board/list/" class="sub_menu_btn">자유게시판</a>
                             </div>
                             <div class="sub_menu_box">
                                 <a href="#" class="sub_menu_btn">자유게시판2</a>
