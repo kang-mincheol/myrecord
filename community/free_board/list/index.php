@@ -2,7 +2,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
-echo css_load('/community/free_board/index.css');
+echo css_load('/community/free_board/list/index.css');
 ?>
 
 
@@ -10,6 +10,10 @@ echo css_load('/community/free_board/index.css');
 
 
 <div id="board_wrap">
+
+    <div class="write_btn_wrap">
+        <a class="write_btn" href="/community/free_board/edit/">글쓰기</a>
+    </div>
     <div class="board_container">
         <div class="board_header_wrap">
             <div class="top_box">
@@ -191,7 +195,7 @@ echo css_load('/community/free_board/index.css');
 
 
 <?
-echo script_load('/community/free_board/index.js');
+echo script_load('/community/free_board/list/index.js');
 ?>
 <script>
 $(function () {
