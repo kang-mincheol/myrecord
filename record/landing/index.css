@@ -29,3 +29,98 @@
 
 
 
+#record_ranking {
+    max-width: 980px; margin: 20px auto 0; border: 3px solid #9400D1; border-radius: 5px; box-sizing: border-box; overflow: hidden;
+}
+
+#record_ranking .section_title {
+    display: flex; align-items: center; height: 34px; padding: 0 5px; background-color: #9400D1; color: #FFF; font-size: 16px; font-weight: 500; padding-bottom: 1px; box-sizing: border-box;
+}
+
+#record_ranking .ranking_header {
+    display: flex; align-items: center; padding: 5px;
+}
+
+#record_ranking .ranking_header .header_box {
+    display: flex; justify-content: center; align-items: center; color: #303030; font-size: 16px; font-weight: 700;
+}
+
+#record_ranking .ranking_header .header_box.rank {
+    width: 20%;
+}
+#record_ranking .ranking_header .header_box.total {
+    width: 15%;
+}
+#record_ranking .ranking_header .header_box.squat {
+    width: 15%;
+}
+#record_ranking .ranking_header .header_box.benchpress {
+    width: 15%;
+}
+#record_ranking .ranking_header .header_box.deadlift {
+    width: 15%;
+}
+#record_ranking .ranking_header .header_box.name {
+    width: 20%;
+}
+
+
+
+#record_ranking .ranking_body {
+    padding: 5px;
+}
+
+#record_ranking .ranking_body .body_row {
+    display: flex; align-items: center; margin-bottom: 5px;
+}
+
+#record_ranking .ranking_body .body_row:last-child {
+    margin-bottom: 0;
+}
+
+#record_ranking .ranking_body .body_row .body_box {
+    display: flex; justify-content: center; align-items: center; color: #303030; font-size: 16px; font-weight: 500;
+}
+
+#record_ranking .ranking_body .body_row .body_box.rank {
+    width: 20%;
+}
+#record_ranking .ranking_body .body_row .body_box.total {
+    width: 15%;
+}
+#record_ranking .ranking_body .body_row .body_box.squat {
+    width: 15%;
+}
+#record_ranking .ranking_body .body_row .body_box.benchpress {
+    width: 15%;
+}
+#record_ranking .ranking_body .body_row .body_box.deadlift {
+    width: 15%;
+}
+#record_ranking .ranking_body .body_row .body_box.name {
+    width: 20%;
+}
+
+#record_ranking .ranking_body .body_row.top .body_box.rank .number {
+    display: flex; justify-content: center; align-items: center; width: 20px; height: 20px; border-radius: 20px; background-color: #9400D1; color: #FFF; box-sizing: border-box; padding-right: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

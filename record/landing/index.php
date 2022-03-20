@@ -12,8 +12,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/record/record_sub_menu/record_sub_menu.
 ?>
 
 <div id="record_ranking">
+    <div class="section_title">TOP10</div>
+
     <div class="ranking_header">
         <div class="header_box rank">순위</div>
+        <div class="header_box total">3대</div>
         <div class="header_box squat">Squat</div>
         <div class="header_box benchpress">BenchPress</div>
         <div class="header_box deadlift">DeadLift</div>
@@ -21,8 +24,65 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/record/record_sub_menu/record_sub_menu.
     </div>
 
     <div class="ranking_body">
+        <div class="body_row top">
+            <div class="body_box rank"><p class="number">1</p></div>
+            <div class="body_box total">440</div>
+            <div class="body_box squat">180</div>
+            <div class="body_box benchpress">100</div>
+            <div class="body_box deadlift">160</div>
+            <div class="body_box name">관리자</div>
+        </div>
+        <div class="body_row top">
+            <div class="body_box rank"><p class="number">2</p></div>
+            <div class="body_box total">440</div>
+            <div class="body_box squat">180</div>
+            <div class="body_box benchpress">100</div>
+            <div class="body_box deadlift">160</div>
+            <div class="body_box name">관리자</div>
+        </div>
+        <div class="body_row top">
+            <div class="body_box rank"><p class="number">3</p></div>
+            <div class="body_box total">440</div>
+            <div class="body_box squat">180</div>
+            <div class="body_box benchpress">100</div>
+            <div class="body_box deadlift">160</div>
+            <div class="body_box name">관리자</div>
+        </div>
         <div class="body_row">
             <div class="body_box rank">1</div>
+            <div class="body_box total">440</div>
+            <div class="body_box squat">180</div>
+            <div class="body_box benchpress">100</div>
+            <div class="body_box deadlift">160</div>
+            <div class="body_box name">관리자</div>
+        </div>
+        <div class="body_row">
+            <div class="body_box rank">1</div>
+            <div class="body_box total">440</div>
+            <div class="body_box squat">180</div>
+            <div class="body_box benchpress">100</div>
+            <div class="body_box deadlift">160</div>
+            <div class="body_box name">관리자</div>
+        </div>
+        <div class="body_row">
+            <div class="body_box rank">1</div>
+            <div class="body_box total">440</div>
+            <div class="body_box squat">180</div>
+            <div class="body_box benchpress">100</div>
+            <div class="body_box deadlift">160</div>
+            <div class="body_box name">관리자</div>
+        </div>
+        <div class="body_row">
+            <div class="body_box rank">1</div>
+            <div class="body_box total">440</div>
+            <div class="body_box squat">180</div>
+            <div class="body_box benchpress">100</div>
+            <div class="body_box deadlift">160</div>
+            <div class="body_box name">관리자</div>
+        </div>
+        <div class="body_row">
+            <div class="body_box rank">1</div>
+            <div class="body_box total">440</div>
             <div class="body_box squat">180</div>
             <div class="body_box benchpress">100</div>
             <div class="body_box deadlift">160</div>
