@@ -13,3 +13,15 @@ function recordSubMenuCheck() {
         $("#record_sub_menu_container .record_sub_menu_btn.my_record").addClass("on");
     }
 }
+
+function recordSubMenuSwiper() {
+    var swiper = new Swiper("#record_sub_menu_container", {
+        slidesPerView: "auto",
+        spaceBetween: 10,
+        freeMode: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+}
