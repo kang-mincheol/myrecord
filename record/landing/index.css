@@ -30,79 +30,99 @@
 
 
 #record_ranking {
-    max-width: 980px; margin: 20px auto 0; border: 3px solid #9400D1; border-radius: 5px; box-sizing: border-box; overflow: hidden;
+    max-width: 980px; margin: 20px auto 0; padding: 10px; background-color: #303030; border-radius: 5px; box-sizing: border-box; overflow: hidden;
 }
 
-#record_ranking .section_title {
-    display: flex; align-items: center; height: 34px; padding: 0 5px; background-color: #9400D1; color: #FFF; font-size: 16px; font-weight: 500; padding-bottom: 1px; box-sizing: border-box;
+
+#record_ranking .ranking_menu_wrap {
+    display: flex; align-items: center;
 }
 
-#record_ranking .ranking_header {
-    display: flex; align-items: center; padding: 5px;
+#record_ranking .ranking_menu_wrap .ranking_menu_btn {
+    padding: 10px 20px; color: #FFF; font-size: 16px; font-weight: 400; transition: all 0.4s; -webkit-transition: all 0.4s;
 }
 
-#record_ranking .ranking_header .header_box {
+#record_ranking .ranking_menu_wrap .ranking_menu_btn.on {
+    background-color: #FFF; border-radius: 4px 4px 0 0; color: #303030; font-weight: 700;
+}
+
+
+
+
+
+#record_ranking .ranking_contents_box {
+    display: none; background-color: #FFF; padding: 10px; box-sizing: border-box; border-radius: 0 0 4px 4px;
+}
+
+#record_ranking .ranking_contents_box.on {
+    display: block;
+}
+
+
+#record_ranking .ranking_contents_box .ranking_contents_header {
+    display: flex; align-items: center; margin-bottom: 10px;
+}
+
+#record_ranking .ranking_contents_box .ranking_contents_header .header_box {
     display: flex; justify-content: center; align-items: center; color: #303030; font-size: 16px; font-weight: 700;
 }
 
-#record_ranking .ranking_header .header_box.rank {
+#record_ranking .ranking_contents_box .ranking_contents_header .header_box.rank {
     width: 20%;
 }
-#record_ranking .ranking_header .header_box.total {
+#record_ranking .ranking_contents_box .ranking_contents_header .header_box.total {
     width: 15%;
 }
-#record_ranking .ranking_header .header_box.squat {
+#record_ranking .ranking_contents_box .ranking_contents_header .header_box.squat {
     width: 15%;
 }
-#record_ranking .ranking_header .header_box.benchpress {
+#record_ranking .ranking_contents_box .ranking_contents_header .header_box.benchpress {
     width: 15%;
 }
-#record_ranking .ranking_header .header_box.deadlift {
+#record_ranking .ranking_contents_box .ranking_contents_header .header_box.deadlift {
     width: 15%;
 }
-#record_ranking .ranking_header .header_box.name {
+#record_ranking .ranking_contents_box .ranking_contents_header .header_box.name {
     width: 20%;
 }
 
 
 
-#record_ranking .ranking_body {
-    padding: 5px;
-}
 
-#record_ranking .ranking_body .body_row {
+
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row {
     display: flex; align-items: center; margin-bottom: 5px;
 }
 
-#record_ranking .ranking_body .body_row:last-child {
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row:last-child {
     margin-bottom: 0;
 }
 
-#record_ranking .ranking_body .body_row .body_box {
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box {
     display: flex; justify-content: center; align-items: center; color: #303030; font-size: 16px; font-weight: 500;
 }
 
-#record_ranking .ranking_body .body_row .body_box.rank {
+#record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.rank {
     width: 20%;
 }
-#record_ranking .ranking_body .body_row .body_box.total {
+#record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.total {
     width: 15%;
 }
-#record_ranking .ranking_body .body_row .body_box.squat {
+#record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.squat {
     width: 15%;
 }
-#record_ranking .ranking_body .body_row .body_box.benchpress {
+#record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.benchpress {
     width: 15%;
 }
-#record_ranking .ranking_body .body_row .body_box.deadlift {
+#record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.deadlift {
     width: 15%;
 }
-#record_ranking .ranking_body .body_row .body_box.name {
+#record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.name {
     width: 20%;
 }
 
-#record_ranking .ranking_body .body_row.top .body_box.rank .number {
-    display: flex; justify-content: center; align-items: center; width: 20px; height: 20px; border-radius: 20px; background-color: #9400D1; color: #FFF; box-sizing: border-box; padding-right: 1px;
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row.top .body_box.rank .number {
+    display: flex; justify-content: center; align-items: center; width: 20px; height: 20px; border-radius: 20px; background-color: #303030; color: #FFF; box-sizing: border-box;
 }
 
 
