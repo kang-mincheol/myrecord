@@ -109,7 +109,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/record/record_sub_menu/record_sub_menu.
                 <div class="body_row top">
                     <div class="body_box rank"><p class="number">1</p></div>
                     <div class="body_box weight">440</div>
-                    <div class="body_box name">관리자</div>
+                    <div class="body_box name">관리자관리자관리자관리자관리자관리자관리자</div>
                 </div>
                 <div class="body_row top">
                     <div class="body_box rank"><p class="number">2</p></div>

@@ -48,6 +48,14 @@
 
 
 
+@media screen and (max-width: 1050px) {
+    #record_ranking .ranking_menu_wrap .ranking_menu_btn {
+        font-size: 14px; padding: 5px 10px;
+    }
+}
+
+
+
 
 
 #record_ranking .ranking_contents_box {
@@ -59,6 +67,7 @@
 }
 
 
+/***** ranking_contents_header *****/
 #record_ranking .ranking_contents_box .ranking_contents_header {
     display: flex; justify-content: center; align-items: center; margin-bottom: 10px;
 }
@@ -66,7 +75,6 @@
 #record_ranking .ranking_contents_box .ranking_contents_header .header_box {
     display: flex; justify-content: center; align-items: center; color: #303030; font-size: 16px; font-weight: 700;
 }
-
 
 
 #record_ranking .ranking_contents_box .ranking_contents_header .header_box.rank {
@@ -78,7 +86,6 @@
 #record_ranking .ranking_contents_box .ranking_contents_header .header_box.name {
     width: 20%;
 }
-
 
 
 #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.rank {
@@ -102,8 +109,44 @@
 
 
 
+@media screen and (max-width: 1050px) {
+    #record_ranking .ranking_contents_box .ranking_contents_header .header_box {
+        font-size: 14px;
+    }
+
+    #record_ranking .ranking_contents_box .ranking_contents_header .header_box.rank {
+        width: 20%;
+    }
+    #record_ranking .ranking_contents_box .ranking_contents_header .header_box.weight {
+        width: 40%;
+    }
+    #record_ranking .ranking_contents_box .ranking_contents_header .header_box.name {
+        width: 40%;
+    }
 
 
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.rank {
+        width: 20%;
+    }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.total {
+        width: 40%;
+    }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.squat,
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.benchpress,
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.deadlift {
+        display: none;
+    }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.name {
+        width: 40%;
+    }
+}
+/***** ranking_contents_header END *****/
+
+
+
+
+
+/***** ranking_contents_body *****/
 #record_ranking .ranking_contents_box .ranking_contents_body .body_row {
     display: flex; justify-content: center; align-items: center; margin-bottom: 5px;
 }
@@ -130,8 +173,6 @@
 
 
 
-
-
 #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.rank {
     width: 20%;
 }
@@ -153,16 +194,43 @@
 
 
 
-
-
-
-
 #record_ranking .ranking_contents_box .ranking_contents_body .body_row.top .body_box.rank .number {
     display: flex; justify-content: center; align-items: center; width: 20px; height: 20px; border-radius: 20px; background-color: #303030; color: #FFF; box-sizing: border-box;
 }
 
 
 
+@media screen and (max-width: 1050px) {
+    #record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box {
+        font-size: 14px;
+    }
+
+    #record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box.rank {
+        width: 20%;
+    }
+    #record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box.weight {
+        width: 40%;
+    }
+    #record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box.name {
+        width: 40%;
+    }
+
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.rank {
+        width: 20%;
+    }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.total {
+        width: 40%;
+    }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.squat,
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.benchpress,
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.deadlift {
+        display: none;
+    }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.name {
+        width: 40%;
+    }
+}
+/***** ranking_contents_body END *****/
 
 
 
