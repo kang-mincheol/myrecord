@@ -67,7 +67,7 @@ echo css_load('/common/header.css');
             </div>
             <div class="menu_wrap">
                 <div class="menu_box">
-                    <a href="#" class="menu_btn">커뮤니티</a>
+                    <a href="/community/free_board/list/" class="menu_btn">커뮤니티</a>
 
                     <div class="sub_menu_container">
                         <div class="sub_menu_wrap" name="community">
@@ -86,7 +86,21 @@ echo css_load('/common/header.css');
                 <!-- 커뮤니티 -->
 
                 <div class="menu_box">
-                    <a href="#" class="menu_btn">마이레코드</a>
+                    <a href="/record/landing/" class="menu_btn">마이레코드</a>
+
+                    <div class="sub_menu_container">
+                        <div class="sub_menu_wrap" name="community">
+                            <div class="sub_menu_box">
+                                <a href="/record/landing/" class="sub_menu_btn">랭킹</a>
+                            </div>
+                            <div class="sub_menu_box">
+                                <a href="/record/landing/" class="sub_menu_btn">랭킹</a>
+                            </div>
+                            <div class="sub_menu_box">
+                                <a href="/record/landing/" class="sub_menu_btn">랭킹</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu_box">
                     <a href="#" class="menu_btn">바디프로필</a>
