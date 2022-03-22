@@ -7,7 +7,7 @@ echo css_load('/record/record_sub_menu/record_sub_menu.css');
 <div id="record_sub_menu_container" class="swiper">
     <div class="swiper-wrapper">
         <div class="swiper-slide">
-            <a class="record_sub_menu_btn landing" href="/record/landing/">마이레코드</a>
+            <a class="record_sub_menu_btn landing" href="/record/landing/">랭킹</a>
         </div>
         <div class="swiper-slide">
             <a class="record_sub_menu_btn squat" href="/record/squat/list">Squat</a>
