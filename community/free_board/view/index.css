@@ -37,15 +37,15 @@
 }
 
 #view_wrap #view_header_wrap #contents_title {
-    display: flex; align-items: center; height: 34px; color: #303030; font-size: 16px; padding: 0 10px; border: 2px solid #9400D1; border-radius: 4px; margin-bottom: 10px; box-sizing: border-box;
+    display: flex; align-items: center; height: 34px; color: #303030; font-size: 16px; padding: 0 10px; border: 2px solid #303030; border-radius: 4px; margin-bottom: 10px; box-sizing: border-box;
 }
 
 #view_wrap #view_header_wrap .view_header_info_box {
-    display: flex; flex-wrap: wrap; padding: 7px 10px; border: 2px solid #9400D1; border-radius: 4px; box-sizing: border-box;
+    display: flex; flex-wrap: wrap; padding: 7px 10px; border: 2px solid #303030; border-radius: 4px; box-sizing: border-box;
 }
 
 #view_wrap #view_header_wrap .view_header_info_box .info_value {
-    color: #303030; font-size: 14px; font-weight: 400; padding-right: 5px; margin-right: 5px; border-right: 1px solid #9400D1;
+    color: #303030; font-size: 14px; font-weight: 400; padding-right: 5px; margin-right: 5px; border-right: 1px solid #303030;
 }
 
 #view_wrap #view_header_wrap .view_header_info_box .info_value:last-child {
@@ -57,7 +57,7 @@
 
 
 #view_contents_wrap {
-    display: block; width: 100%; padding: 7px 10px; color: #303030; font-size: 13px; font-weight: 400; border: 2px solid #9400D1; border-radius: 4px; box-sizing: border-box; margin-bottom: 20px;
+    display: block; width: 100%; padding: 7px 10px; color: #303030; font-size: 13px; font-weight: 400; border: 2px solid #303030; border-radius: 4px; box-sizing: border-box; margin-bottom: 20px;
 }
 
 #view_contents_wrap p,
@@ -82,14 +82,14 @@
 }
 
 #view_wrap .bottom_btn_wrap .bottom_btn.list_btn {
-    color: #9400D1; border: 2px solid #9400D1;
+    color: #303030; border: 2px solid #303030;
 }
 #view_wrap .bottom_btn_wrap .bottom_btn.list_btn.on {
     width: 100%;
 }
 
 #view_wrap .bottom_btn_wrap .bottom_btn.edit_btn {
-    color: #FFF; background-color: #9400D1;
+    color: #FFF; background-color: #303030;
 }
 #view_wrap .bottom_btn_wrap .bottom_btn.edit_btn.off {
     display: none;
