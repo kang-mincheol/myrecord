@@ -52,7 +52,7 @@
 }
 
 #board_title_wrap .edit_input {
-    display: flex; align-items: center; width: 100%; box-sizing: border-box; border: 2px solid #9400D1; border-radius: 4px; padding: 5px 10px; color: #303030; font-size: 16px; font-weight: 400;
+    display: flex; align-items: center; width: 100%; box-sizing: border-box; border: 2px solid #303030; border-radius: 4px; padding: 5px 10px; color: #303030; font-size: 16px; font-weight: 400;
 }
 
 
@@ -64,7 +64,7 @@
 }
 
 #board_contents_wrap .value_box {
-    border: 2px solid #9400D1; border-radius: 4px; box-sizing: border-box; overflow: hidden;
+    border: 2px solid #303030; border-radius: 4px; box-sizing: border-box; overflow: hidden;
 }
 
 
@@ -80,11 +80,11 @@
 }
 
 #editor_wrap .bottom_btn_wrap .list_btn {
-    color: #9400D1; border: 2px solid #9400D1;
+    color: #303030; border: 2px solid #303030;
 }
 
 #editor_wrap .bottom_btn_wrap .edit_btn {
-    color: #FFF; background-color: #9400D1;
+    color: #FFF; background-color: #303030;
 }
 
 
