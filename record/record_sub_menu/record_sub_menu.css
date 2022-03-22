@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+
+
+
+
+#record_sub_menu_container {
+    display: flex; align-items: top; max-width: 980px; margin: 0 auto;
+}
+
+#record_sub_menu_container .record_sub_menu_btn {
+    display: block; justify-content: center; align-items: center; padding: 5px 10px; color: #303030; font-size: 16px; font-weight: 400; cursor: pointer; box-sizing: border-box;
+}
+
+#record_sub_menu_container .record_sub_menu_btn:first-child {
+    
+}
+
+#record_sub_menu_container .record_sub_menu_btn.on {
+    font-weight: 700; border-bottom: 3px solid #303030;
+}
+
+#record_sub_menu_container .swiper-wrapper .swiper-slide {
+    width: auto;
+}
