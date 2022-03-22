@@ -37,16 +37,16 @@
 }
 
 #board_wrap .write_btn_wrap .write_btn {
-    display: flex; justify-content: center; align-items: center; padding: 0 10px; height: 40px; box-sizing: border-box; border-radius: 4px; color: #FFF; font-size: 16px; font-weight: 700; background-color: #9400D1;
+    display: flex; justify-content: center; align-items: center; padding: 0 10px; height: 40px; box-sizing: border-box; border-radius: 4px; color: #FFF; font-size: 16px; font-weight: 700; background-color: #303030;
 }
 
 
 #board_wrap .board_container {
-    max-width: 980px; margin: 0 auto; border: 3px solid #9400D1; border-radius: 5px; box-sizing: border-box;
+    max-width: 980px; margin: 0 auto; border: 3px solid #303030; border-radius: 5px; box-sizing: border-box;
 }
 
 #board_wrap .board_container .board_header_wrap {
-    display: flex; align-items: center; padding: 10px; background-color: #9400D1;
+    display: flex; align-items: center; padding: 10px; background-color: #303030;
 }
 
 #board_wrap .board_container .board_header_wrap .header_box {
@@ -149,7 +149,7 @@
 
 .paging_wrap .prev_btn,
 .paging_wrap .next_btn {
-    display: block; width: 24px; height: 24px; border-radius: 4px; border: 1px solid #9400D1; box-sizing: border-box;
+    display: block; width: 24px; height: 24px; border-radius: 4px; border: 1px solid #303030; box-sizing: border-box;
 }
 
 .paging_wrap .paging_box {
@@ -157,7 +157,7 @@
 }
 
 .paging_wrap .paging_box .page_btn {
-    display: flex; justify-content: center; align-items: center; width: 24px; height: 24px; border-radius: 4px; border: 1px solid #9400D1; box-sizing: border-box; margin-right: 5px; color: #303030; font-size: 14px; font-weight: 500;
+    display: flex; justify-content: center; align-items: center; width: 24px; height: 24px; border-radius: 4px; border: 1px solid #303030; box-sizing: border-box; margin-right: 5px; color: #303030; font-size: 14px; font-weight: 500;
 }
 
 .paging_wrap .paging_box .page_btn:last-child {
@@ -188,11 +188,11 @@
 }
 
 .board_search_wrap .search_select {
-    display: flex; justify-content: center; align-items: center; width: 70px; height: 24px; margin-right: 5px; border: 1px solid #9400D1; border-radius: 4px; color: #303030; font-size: 12px; font-weight: 700;
+    display: flex; justify-content: center; align-items: center; width: 70px; height: 24px; margin-right: 5px; border: 1px solid #303030; border-radius: 4px; color: #303030; font-size: 12px; font-weight: 700;
 }
 
 .board_search_wrap .search_keyword {
-    width: 278px; height: 24px; position: relative; border: 1px solid #9400D1; border-radius: 4px; box-sizing: border-box;
+    width: 278px; height: 24px; position: relative; border: 1px solid #303030; border-radius: 4px; box-sizing: border-box;
 }
 
 .board_search_wrap .search_keyword #search_keyword {
