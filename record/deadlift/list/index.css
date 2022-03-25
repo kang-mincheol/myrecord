@@ -106,27 +106,25 @@
 
 @media screen and (max-width: 1050px) {
     #board_wrap .board_container .board_body_wrap .board_row {
-        display: block;
+        flex-wrap: wrap; justify-content: center;
     }
 
-    #board_wrap .board_container .board_body_wrap .board_row .top_box,
-    #board_wrap .board_container .board_body_wrap .board_row .bottom_box {
+    #board_wrap .board_container .board_body_wrap .board_row .body_box {
+        padding: 0 5px; border-right: 1px solid #303030;
+    }
+
+    #board_wrap .board_container .board_body_wrap .board_row .body_box:last-child {
+        border-right: 0;
+    }
+
+    #board_wrap .board_container .board_body_wrap .board_row .body_box.writer,
+    #board_wrap .board_container .board_body_wrap .board_row .body_box.weight,
+    #board_wrap .board_container .board_body_wrap .board_row .body_box.audit,
+    #board_wrap .board_container .board_body_wrap .board_row .body_box.date {
         width: auto;
     }
 
-    #board_wrap .board_container .board_body_wrap .board_row .bottom_box .body_box.writer,
-    #board_wrap .board_container .board_body_wrap .board_row .bottom_box .body_box.view,
-    #board_wrap .board_container .board_body_wrap .board_row .bottom_box .body_box.date {
-        width: auto;
-    }
-
-    #board_wrap .board_container .board_body_wrap .board_row .bottom_box .body_box {
-        margin-right: 5px; padding-right: 5px; border-right: 1px solid #aaa; color: #aaa; font-size: 14px; align-items: center;
-    }
-
-    #board_wrap .board_container .board_body_wrap .board_row .bottom_box .body_box:last-child {
-        margin-right: 0; padding-right: 0; border-right: 0;
-    }
+    
 }
 
 
