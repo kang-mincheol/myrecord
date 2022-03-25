@@ -8,6 +8,9 @@ echo css_load('/record/deadlift/list/index.css');
 
 <div id="page_title">마이레코드 ＞ DeadLift</div>
 
+<?
+include_once($_SERVER['DOCUMENT_ROOT'].'/record/record_sub_menu/record_sub_menu.php');
+?>
 
 <div id="board_wrap">
 
