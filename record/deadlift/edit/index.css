@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+
+
+
+
+#container {
+    padding: 0 0 50px 0;
+}
+
+@media screen and (max-width: 1050px) {
+    #container {
+        padding: 0 10px 50px;
+    }
+}
+
+
+#page_title {
+    max-width: 980px; margin: 30px auto; color: #303030; font-size: 28px; font-weight: 700;
+}
+
+@media screen and (max-width: 1050px) {
+    #page_title {
+        font-size: 20px;
+    }
+}
