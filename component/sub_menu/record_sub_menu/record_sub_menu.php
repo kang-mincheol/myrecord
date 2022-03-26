@@ -1,7 +1,7 @@
 <?
 if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
-echo css_load('/record/record_sub_menu/record_sub_menu.css');
+echo css_load('/component/sub_menu/record_sub_menu/record_sub_menu.css');
 ?>
 
 <div id="record_sub_menu_container" class="swiper">
@@ -25,7 +25,7 @@ echo css_load('/record/record_sub_menu/record_sub_menu.css');
 </div>
 
 <?
-echo script_load('/record/record_sub_menu/record_sub_menu.js');
+echo script_load('/component/sub_menu/record_sub_menu/record_sub_menu.js');
 ?>
 <script>
 $(function() {

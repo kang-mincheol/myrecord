@@ -8,7 +8,7 @@ echo css_load('/record/landing/index.css');
 <div id="page_title">마이레코드</div>
 
 <?
-include_once($_SERVER['DOCUMENT_ROOT'].'/record/record_sub_menu/record_sub_menu.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/record_sub_menu.php');
 ?>
 
 <div id="record_ranking">
