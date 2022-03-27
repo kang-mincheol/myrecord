@@ -118,7 +118,7 @@ echo css_load('/common/header.css');
                 <a href="#" class="menu_btn">로그인</a>
             </div>
             <div class="menu_box">
-                <a href="#" class="menu_btn">회원가입</a>
+                <a href="/account/create/" class="menu_btn">회원가입</a>
             </div>
         </div>
         <!-- right_box -->
