@@ -54,7 +54,9 @@ echo css_load('/common/header.css');
 </head>
 
 <body>
-
+<?
+include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
+?>
 
 <div id="header">
     <div class="pc_header">
