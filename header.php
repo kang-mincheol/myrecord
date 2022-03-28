@@ -49,6 +49,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 echo css_load('/fonts/fonts.css');
 echo css_load('/common/common.css');
 echo css_load('/common/header.css');
+echo css_load('/component/input/input.css');
 ?>
 
 </head>

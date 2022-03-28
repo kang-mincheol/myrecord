@@ -14,6 +14,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 <?
 echo script_load('/common/common.js');
+echo script_load('/component/input/input.js');
 ?>
 </body>
 
