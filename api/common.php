@@ -3,10 +3,10 @@ include_once($_SERVER["DOCUMENT_ROOT"]."/common.php");
 
 //method 값 정의
 $_method = $_SERVER['REQUEST_METHOD'];
-$methodArray = ["GET", "POST", "PUT", "DELETE"];
+$methodArray = ["GET", "POST", "PUT", "DELETE", "PATCH"];
 if(!in_array($_method, $methodArray)) {
     $returnArray = array(
-        "code"=>"400",
+        "code"=>"405",
         "msg"=>"존재하지 않는 method 타입 입니다"
     );
 

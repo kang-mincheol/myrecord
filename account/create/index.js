@@ -123,7 +123,7 @@ function createAccountCheck() {
 function test() {
     $.ajax({
         type: "PUT",
-        url: "/api/account/create/set.create_account.php",
+        url: "/api/account/",
         success: function(data) {
             console.log(data);
         },
