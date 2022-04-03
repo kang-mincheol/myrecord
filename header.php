@@ -49,6 +49,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 echo css_load('/fonts/fonts.css');
 echo css_load('/common/common.css');
 echo css_load('/common/header.css');
+echo css_load('/component/input/input.css');
 ?>
 
 </head>
@@ -120,7 +121,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                 <a href="#" class="menu_btn">로그인</a>
             </div>
             <div class="menu_box">
-                <a href="#" class="menu_btn">회원가입</a>
+                <a href="/account/create/" class="menu_btn">회원가입</a>
             </div>
         </div>
         <!-- right_box -->

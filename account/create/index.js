@@ -1,0 +1,172 @@
+function init() {
+    stepRemote('step_1');
+}
+
+function stepRemote(name) {
+    if(name != undefined) {
+        $(".create_wrap .step_box").removeClass("on");
+        $(".create_wrap .step_box[name="+name+"]").addClass("on");
+    }
+}
+
+
+
+
+
+
+
+
+
+/********** step_1 **********/
+
+/***** 모두 동의 *****/
+function termsAll() {
+    $("#terms_service").prop('checked', true);
+    $("#terms_private").prop('checked', true);
+    $("#terms_marketing").prop('checked', true);
+
+    step1Verify();
+}
+/***** 모두 동의 END *****/
+
+/***** step_1 검증 *****/
+function step1Verify() {
+    var service = $("#terms_service").prop('checked');
+    var private = $("#terms_private").prop('checked');
+    if(service && private) {
+        $(".create_wrap .step_box[name=step_1] .next_btn").addClass("on").attr('onclick', 'stepRemote(\'step_2\');');
+    } else {
+        $(".create_wrap .step_box[name=step_1] .next_btn").removeClass("on").attr('onclick', 'myrecordAlert(\'on\', \'필수 약관에 동의해주세요\');');
+    }
+}
+/***** step_1 검증 END *****/
+
+/********** step_1 END **********/
+
+
+
+
+
+/********** step_2 **********/
+
+/***** step_2 검증 onkeyup onchange *****/
+function step2Verify() {
+    var id = $("#account_id").val();
+    var password = $("#account_password").val();
+    var password_check = $("#account_password_check").val();
+    var nickname = $("#account_nickname").val();
+
+    if(id && password && password && password_check && nickname) {
+        $(".create_wrap .step_box[name=step_2] .next_btn").addClass("on").attr('onclick', 'createAccountCheck();');
+    } else {
+        $(".create_wrap .step_box[name=step_2] .next_btn").removeClass("on").attr('onclick', 'myrecordAlert(\'on\', \'필수 입력값을 입력해주세요\')');
+    }
+}
+/***** step_2 검증 onkeyup onchange END *****/
+
+/***** step_2 검사 *****/
+function createAccountCheck() {
+    var id = $("#account_id").val();
+    var password = $("#account_password").val();
+    var password_check = $("#account_password_check").val();
+    var nickname = $("#account_nickname").val();
+    var name = $("#account_name").val();
+    var phone = $("#account_phone").val();
+    var email = $("#account_email").val();
+
+    if(id.length < 5 || id.length > 20) {
+        $("#account_id").addClass("alert").after('<p class="caution_text">아이디는 5~20자리로 입력해주세요</p>');
+        return;
+    }
+
+    var password_reg = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^*&+=]).*$/;
+    if(!password_reg.test(password)) {
+        $("#account_password").addClass("alert").after('<p class="caution_text">비밀번호 규칙에 맞게 입력해주세요</p>');
+        return;
+    }
+
+    if(password != password_check) {
+        $("#account_password_check").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+        return;
+    }
+
+    var nickname_reg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,10}$/;
+    if(!nickname_reg.test(nickname)) {
+        $("#account_nickname").addClass("alert").after('<p class="caution_text">닉네임 규칙에 맞게 입력해주세요</p>');
+        return;
+    }
+
+    if(name != "") {
+        var name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
+        if(!name_reg.test(name)) {
+            $("#account_name").addClass("alert").after('<p class="caution_text">이름 규칙에 맞게 입력해주세요</p>');
+            return;
+        }
+    }
+
+    if(email != "") {
+        var email_reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        if(!email_reg.test(email)) {
+            $("#account_email").addClass("alert").after('<p class="caution_text">이메일을 정확하게 입력해주세요</p>');
+            return;
+        }
+    }
+
+    createAccountSubmit();
+}
+/***** step_2 검사 END *****/
+
+/********** step_2 END **********/
+
+
+function test() {
+    $.ajax({
+        type: "PUT",
+        url: "/api/account/",
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+
+
+function createAccountSubmit() {
+    var terms_marketing = $("#terms_marketing").prop('checked');
+    var id = $("#account_id").val();
+    var password = $("#account_password").val();
+    var nickname = $("#account_nickname").val();
+    var name = $("#account_name").val();
+    var phone = $("#account_phone").val();
+    var email = $("#account_email").val();
+
+    $.ajax({
+        type: "POST",
+        data: JSON.stringify({
+            terms_marketing: terms_marketing,
+            account_id: id,
+            account_password: password,
+            account_nickname: nickname,
+            account_name: name,
+            account_phone: phone,
+            account_email: email
+        }),
+        url: "/api/account/",
+        success: function(data) {
+            console.log(data);
+            if(data["code"] == "200") {
+                myrecordAlert('on', '회원가입이 완료되었습니다', '알림', 'location.href=\'/\'');
+            } else if (data["code"] == "400") {
+                myrecordAlert('on', data["msg"]);
+            } else {
+                
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    })
+}
