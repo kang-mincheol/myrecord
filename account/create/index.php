@@ -94,7 +94,7 @@ echo css_load('/account/create/index.css');
             <label class="wrap_label" for="account_nickname">닉네임</label>
         </div>
         <div class="form_value_box">
-            <input id="account_nickname" class="input_text" onkeyup="inputOnkeyupEvent(this); step2Verify();" type="text" placeholder="영문, 한글, 숫자 포함 2~10자리 특수문자 불가"/>
+            <input id="account_nickname" class="input_text" onkeyup="inputOnkeyupEvent(this); step2Verify();" type="text" placeholder="영문 또는 한글 또는 숫자 2~10자리 (특수문자 불가)"/>
         </div>
     </div>
 
@@ -103,7 +103,7 @@ echo css_load('/account/create/index.css');
             <label class="wrap_label" for="account_name">(선택)이름</label>
         </div>
         <div class="form_value_box">
-            <input id="account_name" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="text" placeholder="한글, 영문 포함 2~17자리"/>
+            <input id="account_name" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="text" placeholder="한글 또는 영문 2~17자리"/>
         </div>
     </div>
 
@@ -112,7 +112,7 @@ echo css_load('/account/create/index.css');
             <label class="wrap_label" for="account_phone">(선택)핸드폰번호</label>
         </div>
         <div class="form_value_box">
-            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number" placeholder="(선택)핸드폰번호를 입력해주세요"/>
+            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number" placeholder="핸드폰번호를 입력해주세요"/>
         </div>
     </div>
 
@@ -121,7 +121,7 @@ echo css_load('/account/create/index.css');
             <label class="wrap_label" for="account_email">(선택)이메일</label>
         </div>
         <div class="form_value_box">
-            <input id="account_email" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="text" placeholder="(선택)이메일을 입력해주세요"/>
+            <input id="account_email" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="text" placeholder="이메일을 입력해주세요"/>
         </div>
     </div>
 

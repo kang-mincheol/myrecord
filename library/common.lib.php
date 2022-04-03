@@ -139,3 +139,36 @@ function xss_clean($data)
 
     return $data;
 }
+
+function sql_escape_string($str) 
+{ 
+    if(defined('G5_ESCAPE_PATTERN') && defined('G5_ESCAPE_REPLACE')) { 
+        $pattern = G5_ESCAPE_PATTERN; 
+        $replace = G5_ESCAPE_REPLACE; 
+        if($pattern) 
+            $str = preg_replace($pattern, $replace, $str); 
+    } 
+    $str = call_user_func('addslashes', $str); 
+    return $str; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>

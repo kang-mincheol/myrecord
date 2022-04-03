@@ -1,5 +1,5 @@
 function init() {
-    stepRemote('step_2');
+    stepRemote('step_1');
 }
 
 function stepRemote(name) {
@@ -75,12 +75,11 @@ function createAccountCheck() {
     var email = $("#account_email").val();
 
     if(id.length < 5 || id.length > 20) {
-        console.log(1);
         $("#account_id").addClass("alert").after('<p class="caution_text">아이디는 5~20자리로 입력해주세요</p>');
         return;
     }
 
-    var password_reg = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+    var password_reg = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^*&+=]).*$/;
     if(!password_reg.test(password)) {
         $("#account_password").addClass("alert").after('<p class="caution_text">비밀번호 규칙에 맞게 입력해주세요</p>');
         return;
@@ -97,7 +96,7 @@ function createAccountCheck() {
         return;
     }
 
-    if(name != undefined) {
+    if(name != "") {
         var name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
         if(!name_reg.test(name)) {
             $("#account_name").addClass("alert").after('<p class="caution_text">이름 규칙에 맞게 입력해주세요</p>');
@@ -105,7 +104,7 @@ function createAccountCheck() {
         }
     }
 
-    if(email != undefined) {
+    if(email != "") {
         var email_reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
         if(!email_reg.test(email)) {
             $("#account_email").addClass("alert").after('<p class="caution_text">이메일을 정확하게 입력해주세요</p>');
@@ -155,9 +154,16 @@ function createAccountSubmit() {
             account_phone: phone,
             account_email: email
         }),
-        url: "/api/account/create/set.create_account.php",
+        url: "/api/account/",
         success: function(data) {
             console.log(data);
+            if(data["code"] == "200") {
+                myrecordAlert('on', '회원가입이 완료되었습니다', '알림', 'location.href=\'/\'');
+            } else if (data["code"] == "400") {
+                myrecordAlert('on', data["msg"]);
+            } else {
+                
+            }
         },
         error: function(error) {
             console.log(error);

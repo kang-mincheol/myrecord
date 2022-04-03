@@ -14,7 +14,7 @@ function myrecordAlert(action, body, header, after, btnText) {
             $("#myrecord_alert .alert_box .alert_heder").html(header);
         }
         if(after != undefined) {
-            $("#myrecord_alert .alert_box .alert_btn").attr('onclick', 'myrecord_alert(); '+after);
+            $("#myrecord_alert .alert_box .alert_btn").attr('onclick', 'myrecordAlert(); '+after);
         }
         if(btnText != undefined) {
             $("#myrecord_alert .alert_box .alert_btn").html(btnText);
