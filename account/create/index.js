@@ -154,19 +154,17 @@ function createAccountSubmit() {
             account_phone: phone,
             account_email: email
         }),
-        url: "/api/account/",
+        url: "/api/account/set.create_account.php",
         success: function(data) {
             console.log(data);
-            if(data["code"] == "200") {
+            if(data["code"] == "SUCCESS") {
                 myrecordAlert('on', '회원가입이 완료되었습니다', '알림', 'location.href=\'/\'');
-            } else if (data["code"] == "400") {
-                myrecordAlert('on', data["msg"]);
             } else {
-                
+                myrecordAlert('on', data["msg"]);
             }
         },
         error: function(error) {
             console.log(error);
         }
-    })
+    });
 }

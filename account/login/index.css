@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+
+
+#login_wrap {
+    margin: 100px 0;
+}
+
+
+
+
+#login_wrap .login_box {
+    width: 450px; margin: 0 auto;
+}
+
+#login_wrap .login_box .box_title {
+    color: #303030; font-size: 20px; font-weight: 700; margin-bottom: 50px;
+}
+
+#login_wrap .login_box .login_info_wrap {
+    border: 1px solid #aaa; box-sizing: border-box; border-radius: 6px; padding: 30px;
+}
+
+
+
+#login_wrap .login_box .login_info_wrap .info_data_wrap .info_box {
+    position: relative;
+}
+
+
+
