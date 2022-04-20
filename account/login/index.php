@@ -14,7 +14,9 @@ echo css_load('/account/login/index.css');
             <div class="info_data_wrap">
                 <div class="info_box top">
                     <div class="article_box"><i class="fa-solid fa-user"></i></div>
-                    <input id="login_id" class="login_input" type="text" placeholder="아이디"/>
+                    <div class="input_box">
+                        <input id="login_id" class="login_input" type="text" placeholder="아이디"/>
+                    </div>
                 </div>
                 <div class="info_box bottom">
                     <div class="article_box"><i class="fa-solid fa-lock"></i></div>
@@ -23,7 +25,14 @@ echo css_load('/account/login/index.css');
                     </div>
                 </div>
             </div>
+            <!-- info_data_wrap -->
+
+            <div class="bottom_btn_wrap">
+                <button class="login_btn">로그인</button>
+                <a class="join_btn" href="/account/create/">회원가입</a>
+            </div>
         </div>
+        <!-- login_info_wrap -->
     </div>
     <!-- login_box -->
 

@@ -119,18 +119,7 @@ function createAccountCheck() {
 /********** step_2 END **********/
 
 
-function test() {
-    $.ajax({
-        type: "PUT",
-        url: "/api/account/",
-        success: function(data) {
-            console.log(data);
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-}
+
 
 
 

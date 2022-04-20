@@ -118,7 +118,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
 
         <div class="right_box">
             <div class="menu_box">
-                <a href="#" class="menu_btn">로그인</a>
+                <a href="/account/login" class="menu_btn">로그인</a>
             </div>
             <div class="menu_box">
                 <a href="/account/create/" class="menu_btn">회원가입</a>
@@ -144,8 +144,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
             <div id="mobile_menu_container">
                 <div class="account_box">
                     <button class="close_btn" title="닫기" onclick="mobileMenuRemote();"><i class="fa-solid fa-xmark"></i></button>
-                    <a href="#" class="account_btn login"><i class="fa-solid fa-power-off"></i>로그인</a>
-                    <a href="#" class="account_btn"><i class="fa-solid fa-right-to-bracket"></i>회원가입</a>
+                    <a href="/account/login/" class="account_btn login"><i class="fa-solid fa-power-off"></i>로그인</a>
+                    <a href="/account/create/" class="account_btn"><i class="fa-solid fa-right-to-bracket"></i>회원가입</a>
                 </div>
                 <div class="menu_list_container">
                     <div class="menu_wrap">
