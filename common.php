@@ -17,6 +17,13 @@ if ($_SESSION['user_id']) { // 로그인중이라면
     $member = getMember($_SESSION['user_id']);
 }
 
+$is_member = false;
+$is_admin = false;
+if($member['user_id']) {
+    $is_member = true;
+    $is_admin = $member["is_admin"] == 1 ? true : false;
+}
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/log.php');   // 접속 로그 기록
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/menu.php');   // Menu 파일 로드
