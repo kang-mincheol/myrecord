@@ -28,7 +28,7 @@ echo css_load('/account/login/index.css');
             <!-- info_data_wrap -->
 
             <div class="bottom_btn_wrap">
-                <button class="login_btn">로그인</button>
+                <button class="login_btn" onclick="loginSubmit();">로그인</button>
                 <a class="join_btn" href="/account/create/">회원가입</a>
             </div>
         </div>

@@ -21,6 +21,18 @@
     border: 1px solid #aaa; box-sizing: border-box; border-radius: 6px; padding: 30px;
 }
 
+@media screen and (max-width: 1050px) {
+    #login_wrap .login_box {
+        width: auto; max-width: 500px; margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #login_wrap .login_box {
+        max-width: auto; margin: 0 20px;
+    }
+}
+
 
 
 
@@ -51,6 +63,12 @@
 
 #login_wrap .login_box .login_info_wrap .info_data_wrap .info_box.top {
     margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1050px) {
+    #login_wrap .login_box .login_info_wrap {
+        padding: 20px;
+    }
 }
 
 

@@ -24,7 +24,7 @@ $data = cleansingParams($data);
 $id_check = sql_fetch("
     Select  count(*) as cnt
     From    Users
-    Where   user_id = '{$data["user_id"]}'
+    Where   user_id = '{$data["id"]}'
 ")["cnt"];
 
 if($id_check == 0) {
