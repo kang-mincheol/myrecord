@@ -10,12 +10,15 @@ function loginInputOnkeyup() {
 }
 
 function loginSubmit() {
+    loadingOn();
     var id = $("#login_id").val();
     if(id == '') {
+        loadingOff();
         return myrecordAlert('on', '아이디를 입력해주세요');
     }
     var password = $("#login_password").val();
     if(password == '') {
+        loadingOff();
         return myrecordAlert('on', '비밀번호를 입력해주세요');
     }
 
@@ -28,6 +31,7 @@ function loginSubmit() {
         }),
         url: "/api/account/set.login_check.php",
         success: function(data) {
+            loadingOff();
             console.log(data);
             if(data["code"] == "SUCCESS") {
                 location.href = "/";
@@ -36,6 +40,7 @@ function loginSubmit() {
             }
         },
         error: function(error) {
+            loadingOff();
             console.log(error);
         }
     })
