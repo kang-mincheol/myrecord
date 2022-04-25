@@ -117,12 +117,27 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
         <!-- left_box -->
 
         <div class="right_box">
+            <?
+            if($is_member) {
+            ?>
+            <div class="menu_box">
+                <a href="/api/account/set.logout.php" class="menu_btn">로그아웃</a>
+            </div>
+            <div class="menu_box">
+                <a href="#" class="menu_btn">내 정보</a>
+            </div>
+            <?  
+            } else {
+            ?>
             <div class="menu_box">
                 <a href="/account/login" class="menu_btn">로그인</a>
             </div>
             <div class="menu_box">
                 <a href="/account/create/" class="menu_btn">회원가입</a>
             </div>
+            <?
+            }
+            ?>
         </div>
         <!-- right_box -->
 
@@ -144,8 +159,19 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
             <div id="mobile_menu_container">
                 <div class="account_box">
                     <button class="close_btn" title="닫기" onclick="mobileMenuRemote();"><i class="fa-solid fa-xmark"></i></button>
+                    <?
+                    if($is_member) {
+                    ?>
+                    <a href="/api/account/set.logout.php" class="account_btn login"><i class="fa-solid fa-right-from-bracket"></i>로그아웃</a>
+                    <a href="#" class="account_btn"><i class="fa-solid fa-user"></i>내 정보</a>
+                    <?
+                    } else {
+                    ?>
                     <a href="/account/login/" class="account_btn login"><i class="fa-solid fa-power-off"></i>로그인</a>
                     <a href="/account/create/" class="account_btn"><i class="fa-solid fa-right-to-bracket"></i>회원가입</a>
+                    <?
+                    }
+                    ?>
                 </div>
                 <div class="menu_list_container">
                     <div class="menu_wrap">
@@ -199,6 +225,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
 
 </div>
 <!-- header -->
+
+
+<div id="loading_wrap">
+    <div class="loading_img_box">
+        <img class="loading_img" src="/common/img/loading.gif" alt="로딩중"/>
+    </div>
+</div>
 
 <?
 echo script_load('/common/header.js');    
