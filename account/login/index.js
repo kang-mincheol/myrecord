@@ -3,6 +3,12 @@ function init() {
 }
 
 
+function loginInputOnkeyup() {
+    if(window.event.keyCode == 13) {
+        loginSubmit();
+    }
+}
+
 function loginSubmit() {
     var id = $("#login_id").val();
     if(id == '') {
@@ -14,6 +20,7 @@ function loginSubmit() {
     }
 
     $.ajax({
+        async: false,
         type: "POST",
         data: JSON.stringify({
             id: id,

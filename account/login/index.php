@@ -15,13 +15,13 @@ echo css_load('/account/login/index.css');
                 <div class="info_box top">
                     <div class="article_box"><i class="fa-solid fa-user"></i></div>
                     <div class="input_box">
-                        <input id="login_id" class="login_input" type="text" placeholder="아이디"/>
+                        <input id="login_id" class="login_input" type="text" onkeyup="loginInputOnkeyup();" placeholder="아이디"/>
                     </div>
                 </div>
                 <div class="info_box bottom">
                     <div class="article_box"><i class="fa-solid fa-lock"></i></div>
                     <div class="input_box">
-                        <input id="login_password" class="login_input" type="password" placeholder="비밀번호"/>
+                        <input id="login_password" class="login_input" type="password" onkeyup="loginInputOnkeyup();" placeholder="비밀번호"/>
                     </div>
                 </div>
             </div>
