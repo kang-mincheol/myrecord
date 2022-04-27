@@ -109,4 +109,37 @@ function sql_fetch_array($result)
 
     return $row;
 }
+
+
+
+
+/********** PDO 설정 **********/
+//$dsn = "mysql:host=localhost;port=3306;dbname=myrecord;charset=utf8";
+//try {
+//    $db = new PDO($dsn, "myrecord", "myrecord2022!");
+//    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+//    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//    echo "데이터베이스 연결 성공!!<br/>";
+//} catch(PDOException $e) {
+//    echo $e->getMessage();
+//}
+
+$mysql_hostname = 'localhost';
+$mysql_username = 'myrecord';
+$mysql_password = 'myrecord2022!';
+$mysql_database = 'myrecord';
+$mysql_port = '3306';
+$mysql_charset = 'utf8';
+
+
+//1. DB 연결
+$connect = new mysqli($mysql_hostname, $mysql_username, $mysql_password, $mysql_database, $mysql_port);
+
+if($connect->connect_errno){
+    echo '[연결실패] : '.$connect->connect_error.'';
+} else {
+    echo '[연결성공]';
+}
+
+/********** PDO 설정 END **********/
 ?>
