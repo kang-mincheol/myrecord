@@ -1,8 +1,9 @@
 <?php
+
 // 이 상수가 정의되지 않으면 각각의 개별 페이지는 별도로 실행될 수 없음
 define('NO_ALONE', true);
 
-define('SERVER_IP', "11.11.11.11");
+define('SERVER_IP', "");
 
 //운영서버여부
 define('IS_LIVE' , gethostbyname($_SERVER["HTTP_HOST"]) == SERVER_IP);
@@ -11,13 +12,13 @@ define('IS_LIVE' , gethostbyname($_SERVER["HTTP_HOST"]) == SERVER_IP);
 define('IS_LOCAL' , strpos($_SERVER["HTTP_HOST"], "localhost") !== false);
 
 //DB 연결
-define('MYSQL_HOST', IS_LIVE && IS_LOCAL ? '11.11.11.11:3306' : 'localhost');
-
+define('MYSQL_HOST', IS_LIVE && IS_LOCAL ? SERVER_IP.':3306' : 'localhost');
 define('MYSQL_USER', IS_LIVE ? 'myrecord' : 'myrecord');
 define('MYSQL_PASSWORD', IS_LIVE ? 'myrecord2022!' : 'myrecord2022!');
 define('MYSQL_DB', 'myrecord'); 
 
 define('SESSION_PATH', "/var/lib/php/sessions");
+
 
 define('SITE_URL', (IS_LIVE ? "https" : "http").'://'.$_SERVER["HTTP_HOST"]);
 
@@ -30,6 +31,7 @@ $con = sql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DB);
 sql_query("use myrecord");
 sql_query("set names utf8");
 
+
 // DB 연결
 function sql_connect($host, $user, $pass, $db)
 {
@@ -40,10 +42,7 @@ function sql_connect($host, $user, $pass, $db)
         if (mysqli_connect_errno()) {
             die('Connect Error: '.mysqli_connect_error());
         }
-    } 
-    // else {
-    //     $link = mysql_connect($host, $user, $pass);
-    // }
+    }
 
     return $link;
 }
@@ -109,4 +108,9 @@ function sql_fetch_array($result)
 
     return $row;
 }
+
+
+
+
+
 ?>
