@@ -24,3 +24,81 @@
         font-size: 20px;
     }
 }
+
+
+
+#record_sub_menu_container {
+    margin-bottom: 30px;
+}
+
+
+
+
+
+.edit_wrap {
+    width: 980px; margin: 0 auto;
+}
+
+.edit_wrap .edit_title {
+    color: #303030; font-size: 22px; font-weight: 700; margin-bottom: 20px;
+}
+
+.edit_wrap .record_option_wrap {
+    display: flex; justify-content: space-between; margin-bottom: 20px;
+}
+
+.edit_wrap .record_option_wrap .myrecord_input_wrap {
+    width: calc(50% - 10px);
+}
+
+
+
+
+
+
+.file_add_wrap .file_add_wrap_header {
+    display: flex; margin-bottom: 10px;
+}
+
+.file_add_wrap .file_add_wrap_header .add_btn {
+    display: flex; color: #FFF; font-size: 16px; background-color: #333; border-radius: 4px; padding: 5px 10px;
+}
+
+.file_add_wrap .file_row_box .file_row {
+    display: flex; align-items: center; box-sizing: border-box; border: 2px solid #333; border-radius: 4px; padding: 10px; margin-bottom: 5px;
+}
+
+.file_add_wrap .file_row_box .file_row:last-child {
+    margin-bottom: 0;
+}
+
+.file_add_wrap .file_row_box .file_row input[type="file"] {
+    display: none;
+}
+
+.file_add_wrap .file_row_box .file_row .file_name_box {
+    width: calc(100% - 120px); margin-right: 10px; color: #303030; font-size: 14px; font-weight: 500;
+}
+
+.file_add_wrap .file_row_box .file_row .file_row_remote_box {
+    display: flex; width: 110px;
+}
+
+.file_add_wrap .file_row_box .file_row .file_row_remote_box .file_select_btn {
+    display: flex; justify-content: center; align-items: center; width: 50px; height: 30px; color: #fff; font-size: 14px; font-weight: 400; background-color: #333; margin-right: 10px; border-radius: 4px;
+}
+
+.file_add_wrap .file_row_box .file_row .file_row_remote_box .file_delete_btn {
+    display: flex; justify-content: center; align-items: center; width: 50px; height: 30px; color: #fff; font-size: 14px; font-weight: 400; background-color: #ff1300; border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+

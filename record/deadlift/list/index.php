@@ -15,7 +15,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 <div id="board_wrap">
 
     <div class="write_btn_wrap">
-        <a class="write_btn" href="/community/free_board/edit/">글쓰기</a>
+        <a class="write_btn" href="/record/deadlift/edit/">내 기록 업로드</a>
     </div>
     <div class="board_container">
         <div class="board_header_wrap">
