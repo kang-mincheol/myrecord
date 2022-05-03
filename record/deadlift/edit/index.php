@@ -7,8 +7,6 @@ echo css_load("/component/input/input.css");
 ?>
 
 
-<div id="page_title">마이레코드 ＞ DeadLift</div>
-
 <?
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/record_sub_menu.php');
 echo css_load('/record/deadlift/edit/index.css');
@@ -83,6 +81,12 @@ echo css_load('/record/deadlift/edit/index.css');
         </div>
     </div>
     <!-- file_wrap -->
+
+    <div class="footer_btn_wrap">
+        <a class="list_btn" href="#">목록</a>
+        <button class="update_btn">등록</button>
+    </div>
+    <!-- footer_btn_wrap -->
 
 </div>
 <!-- edit_wrap -->

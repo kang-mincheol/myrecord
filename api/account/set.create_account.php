@@ -28,7 +28,7 @@ $data = cleansingParams($data);
 //아이디 중복확인
 $id_overlap = sql_fetch("
     Select  count(*) as cnt
-    From    Users
+    From    Account
     Where   user_id = '{$data["account_id"]}'
 ")["cnt"];
 
@@ -88,7 +88,7 @@ foreach($blockNickNameList as $value) {
 //닉네임 중복 체크
 $nickname_overlap = sql_fetch("
     Select  count(*) as cnt
-    From    Users
+    From    Account
     Where   user_nickname = '{$data["account_nickname"]}'
 ")["cnt"];
 
@@ -130,7 +130,7 @@ if(!empty($data["account_phone"])) {
     //핸드폰번호 중복 체크
     $phone_overlap = sql_fetch("
         Select  count(*) as cnt
-        From    Users
+        From    Account
         Where   user_phone = '{$data["account_phone"]}'
     ")["cnt"];
     if($phone_overlap > 0) {
@@ -157,7 +157,7 @@ if(!empty($data["account_email"])) {
     //이메일 중복 체크
     $email_overlap = sql_fetch("
         Select  count(*) as cnt
-        From    Users
+        From    Account
         Where   user_email = '{$data["account_email"]}'
     ")["cnt"];
     if($email_overlap > 0) {
@@ -177,7 +177,7 @@ if(!empty($data["account_email"])) {
 $password = password_hash($data["account_password"], PASSWORD_BCRYPT);
 
 $create = sql_query("
-    Insert Into Users
+    Insert Into Account
     Set
         user_id = '{$data["account_id"]}',
         user_password = '{$password}',

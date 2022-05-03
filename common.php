@@ -8,6 +8,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/library/db.lib.php');
 // library 파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/library/common.lib.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/library/kmc.lib.php');
 
 
 
@@ -40,6 +41,7 @@ if ($_SESSION['user_id']) { // 로그인중이라면
 
 $is_member = false;
 $is_admin = false;
+
 if($member['user_id']) {
     $is_member = true;
     $is_admin = $member["is_admin"] == 1 ? true : false;

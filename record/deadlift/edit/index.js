@@ -1,9 +1,62 @@
 function init() {
+    //등록 수정 체크
+    recordEditCheck();
+
     //셀렉트박스 사용시 아래함수를 호출할것
     selectDeviceCheck();
 }
 
 
+
+
+
+function recordEditCheck() {
+    var record_id = getParam('record_id');
+    record_id = record_id.replace(/[^0-9]/g, "");
+
+    if(record_id == '') {
+        //등록
+    } else {
+        //수정
+        $(".edit_wrap .footer_btn_wrap .update_btn").text('수정');
+        getRecordData(record_id);
+    }
+}
+
+function getRecordData(record_id) {
+    $.ajax({
+        type: "POST",
+        async: false,
+        data: JSON.stringify({
+            record_id: record_id
+        }),
+        url: "/api/record/get.record_edit_data.php",
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function setRecordData() {
+    var record_id = getParam('record_id');
+    record_id = record_id.replace(/[^0-9]/g, "");
+    if(record_id == '') {
+        insertData();
+    } else {
+        updateData();
+    }
+}
+
+function insertData() {
+    
+}
+
+function updateData() {
+    
+}
 
 
 
@@ -40,4 +93,18 @@ function fileChange(obj) {
     var fileName = obj.files[0].name;
 //    console.log(fileName);
     $(obj).siblings('.file_name_box').text(fileName);
+}
+
+function getParam(name) {
+
+    var params = location.search.substr(location.search.indexOf("?") + 1);
+    var value = "";
+    params = params.split("&");
+
+    for (var i = 0; i < params.length; i++) {
+        temp = params[i].split("=");
+        if ([temp[0]] == name) { value = temp[1]; }
+    }
+
+    return value;
 }

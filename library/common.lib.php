@@ -25,7 +25,7 @@ function getMember_admin($id)
 {
     $member = sql_fetch("
 		Select  *
-		From	Users
+		From	Account
         Where	user_id = '{$id}'
 	");
 
@@ -37,7 +37,7 @@ function getMember($user_id)
 {
     $member = sql_fetch("
 		Select  *
-		From	Users
+		From	Account
         Where	user_id = '{$user_id}'
 	");
 
