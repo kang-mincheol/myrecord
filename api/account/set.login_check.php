@@ -23,7 +23,7 @@ $data = cleansingParams($data);
 //아이디 존재하는지 체크
 $id_check = sql_fetch("
     Select  count(*) as cnt
-    From    Users
+    From    Account
     Where   user_id = '{$data["id"]}'
 ")["cnt"];
 
@@ -36,7 +36,7 @@ if($id_check == 0) {
 //회원정보 get
 $member = sql_fetch("
     Select  *
-    From    Users
+    From    Account
     Where   user_id = '{$data["id"]}'
 ");
 
