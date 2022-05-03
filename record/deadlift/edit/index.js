@@ -30,7 +30,7 @@ function getRecordData(record_id) {
         data: JSON.stringify({
             record_id: record_id
         }),
-        url: "",
+        url: "/api/record/get.record_edit_data.php",
         success: function(data) {
             console.log(data);
         },
