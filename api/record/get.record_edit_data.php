@@ -53,9 +53,16 @@ if(!$record_data) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+//본인 글이 아닌경우 원본 데이터 get 불가
 if($member["id"] != $record_data["account_id"]) {
     $returnArray["code"] = "ERROR";
     $returnArray["msg"] = "잘못된 값 입니다.<br/>-3";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
+
+if($record_data["status"] != '0') {
+    $returnArray["code"] = "ERROR";
+    $returnArray["msg"] = "수정 불가능한 상태입니다.";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
@@ -83,7 +90,8 @@ if($record_file_data) {
     foreach($record_file_data as $row) {
         $returnArray["data"]["file"][] = array(
             "file_name" => $row["file_original_name"],
-            "file_id" => $row["file_guid"]
+            "file_id" => $row["file_guid"],
+            "file_no" => $row["id"]
         );
     }
 }
