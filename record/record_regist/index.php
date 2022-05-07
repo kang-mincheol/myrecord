@@ -4,12 +4,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
 
 echo css_load("/component/input/input.css");
+
+if(!$is_member) {
+    echo '<script>myrecordAlert(\'on\', \'로그인 후 이용해주세요\', \'알림\', \'location.href="/account/login/"\');</script>';
+    exit;
+}
 ?>
 
 
 <?
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/record_sub_menu.php');
-echo css_load('/record/deadlift/edit/index.css');
+echo css_load('/record/record_regist/index.css');
 ?>
 
 
@@ -19,12 +24,12 @@ echo css_load('/record/deadlift/edit/index.css');
 
     <div class="record_option_wrap">
 
-        <div class="myrecord_input_wrap">
+        <div class="myrecord_input_wrap record_type">
             <div class="label_box">
-                <label class="wrap_label">Record 선택</label>
+                <label class="wrap_label">Record 종목 선택</label>
             </div>
             <div class="myrecord_select_wrap">
-                <button class="select_remote_btn" value="none" onclick="selectListRemote(this);">선택하세요</button>
+                <button id="record_type" class="select_remote_btn" value="none" onclick="selectListRemote(this);">선택하세요</button>
                 <div class="select_list_wrap">
                     <button class="select_list_btn" value="none" onclick="optionClick(this);">선택하세요</button>
                     <button class="select_list_btn" value="1" onclick="optionClick(this);">Squat</button>
@@ -68,11 +73,11 @@ echo css_load('/record/deadlift/edit/index.css');
             <div class="file_row_box">
 <!--
                 <div class="file_row">
-                    <input name="file_1" type="file"/>
+                    <input name="file_1" type="file" onchange="fileChange(this);"/>
                     <div class="file_name_box">파일없음</div>
                     <div class="file_row_remote_box">
-                        <button class="file_select_btn" onclick="">선택</button>
-                        <button class="file_delete_btn" onclick="">삭제</button>
+                        <button class="file_select_btn" onclick="fileSelect(this);">선택</button>
+                        <button class="file_delete_btn" onclick="fileDelete(this);">삭제</button>
                     </div>
                 </div>
 -->
@@ -83,7 +88,7 @@ echo css_load('/record/deadlift/edit/index.css');
     <!-- file_wrap -->
 
     <div class="footer_btn_wrap">
-        <a class="list_btn" href="#">목록</a>
+        <a class="list_btn" href="/record/my_record/">목록</a>
         <button class="update_btn">등록</button>
     </div>
     <!-- footer_btn_wrap -->
@@ -95,7 +100,7 @@ echo css_load('/record/deadlift/edit/index.css');
 
 <?
 echo script_load("/component/input/input.js");
-echo script_load('/record/deadlift/edit/index.js');
+echo script_load('/record/record_regist/index.js');
 ?>
 <script>
 $(function () {
