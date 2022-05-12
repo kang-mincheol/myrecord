@@ -54,8 +54,5 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/menu.php');   // Menu 파일 로드
 $relative_path = preg_replace("`\/[^/]*\.php$`i", "/", $_SERVER['PHP_SELF']);
 
 
-//$config = sql_fetch("
-//    Select  *
-//    From    Config
-//");
+
 ?>

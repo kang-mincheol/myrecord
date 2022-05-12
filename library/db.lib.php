@@ -7,26 +7,26 @@ class DB extends PDO {
     }
 
     // 단일 row 가져올 때 사용
-    function fetch($sql, $params = array()) {
-        $rs = $this->query($sql, $params);
+    public function fetch($sql, $params = array()) {
+        $rs = $this->queryAll($sql, $params);
         return $rs->fetch(PDO::FETCH_ASSOC);
     }
 
     // 여러 row 가져올 때 사용
-    function fetchAll($sql, $params = array()) {
-        $rs = $this->query($sql, $params);
+    public function fetchAll($sql, $params = array()) {
+        $rs = $this->queryAll($sql, $params);
         return $rs->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // SELECT 시 사용 
-    function query($sql, $params = array()) {
+    private function queryAll($sql, $params = array()) {
         $rs = parent::prepare($sql);
         $rs->execute($params);
         return $rs;
     }
 
     // INSERT, UPDATE, DELETE 작업 시 사용: return boolean
-    function execute($sql, $params = array()) {
+    public function execute($sql, $params = array()) {
         $rs = parent::prepare($sql);
         $result = $rs->execute($params);
         // transaction 처리 중 쿼리 실패 시 ROLLBACK 처리
@@ -34,7 +34,8 @@ class DB extends PDO {
             parent::rollback();
         }
         else{
-            $result = parent::lastInsertId();
+            $idx = parent::lastInsertId();
+            $result = $idx ? $idx : $result;
         }
         return $result;
     }
