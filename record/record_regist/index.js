@@ -16,6 +16,7 @@ function recordEditCheck() {
 
     if(record_id == '') {
         //등록
+        
     } else {
         //수정
         $(".edit_wrap .footer_btn_wrap .update_btn").text('수정');
@@ -37,11 +38,9 @@ function getRecordData(record_id) {
                 var record_data = data["data"];
                 $(".myrecord_input_wrap.record_type .myrecord_select_wrap .select_list_wrap .select_list_btn").val(record_data["type"]).click();
                 $("#record_weight").val(record_data["weight"]);
-                
-//                console.log(record_data["file"].length);
+
                 var fileRenderHtml = "";
                 for(key in record_data["file"]) {
-                    console.log(key);
                     fileRenderHtml +=
                         '<div class="file_row" file_no="'+record_data["file"][key]["file_no"]+'">'+
                             '<div class="file_name_box">'+record_data["file"][key]["file_name"]+'</div>'+
@@ -94,7 +93,55 @@ function insertData() {
         return;
     }
 
-    var fileData = new FormData();
+    var recordData = new FormData();
+
+    var totalFileSize = 0;
+    var fileCount = 0;
+    for(var i = 1; i <= fileCheck; i++) {
+        var thisFile = document.querySelector(".myrecord_input_wrap.file_wrap .file_add_wrap .file_row_box input[name=file_"+i+"]").files[0];
+        totalFileSize += thisFile.size;
+        if(thisFile != undefined) {
+            fileCount++;
+            recordData.append('record_file_'+i, thisFile);
+        }
+    }
+
+    var totalFileSizeCal = totalFileSize / 1024 / 1024;
+    var fileLimitSize = 100;
+
+    if(totalFileSizeCal > fileLimitSize) {
+        myrecordAlert('on', '파일은 총 100MB 이하로 업로드 해주세요');
+        return;
+    }
+
+    if(fileCount == 0) {
+        myrecordAlert('on', '파일을 등록해주세요');
+        return;
+    }
+
+    recordData.append('record_type', record_type);
+    recordData.append('record_weight', record_weight);
+
+
+    $.ajax({
+        async: false,
+        type: "POST",
+        data: recordData,
+        url: "/api/record/set.record_insert.php",
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            console.log(data);
+            if(data["code"] == "SUCCESS") {
+                myrecordAlert('on', '등록 완료', '알림', 'location.href=\'/record/my_record/\'');
+            } else {
+                myrecordAlert('on', data["msg"]);
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
 }
 
 function updateData() {
@@ -133,7 +180,14 @@ function fileDelete(obj) {
 }
 
 function fileChange(obj) {
-    var fileAccessType = ["mp4", "m4v", "avi", "wmv", "mwa", "asf", "mpg", "mpeg", "mkv", "mov", "3gp", "3g2", "webm"];
+    var fileAccessType = ["mp4", "m4v", "avi", "wmv", "mwa", "asf", "mpg", "mpeg", "mkv", "mov", "3gp", "3g2", "webm", "jpeg", "jpg", "png", "HEIC", "HEIF", "HEVC", ""];
+    var fileSize = obj.files[0].size;
+    fileSize = fileSize / 1024 / 1024;
+    var fileLimit = 100;
+    if(fileSize > fileLimit) {
+        myrecordAlert('on', '파일 크기는 100MB 이하로 업로드 해주세요');
+        return;
+    }
     var fileType = obj.files[0].type;
 
     var typeCheck = false;

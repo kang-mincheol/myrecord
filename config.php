@@ -59,7 +59,7 @@ function sql_fetch($sql)
 function sql_query($sql)
 {
     global $con;
-    
+
     $sql = trim($sql);
     // union의 사용을 허락하지 않습니다.
     //$sql = preg_replace("#^select.*from.*union.*#i", "select 1", $sql);
@@ -69,11 +69,8 @@ function sql_query($sql)
 
     if(function_exists('mysqli_query')) {
         $result = @mysqli_query($con, $sql);
-    } 
-    // else {
-    //     $result = @mysql_query($sql, $con);
-    // }
-    
+    }
+
     return $result;
 }
 
@@ -90,10 +87,7 @@ function sql_query_identity($sql)
 
     if(function_exists('mysqli_query')) {
         $result = @mysqli_query($con, $sql);
-    } 
-    // else {
-    //     $result = @mysql_query($sql, $con);
-    // }
+    }
     
     return $con->insert_id;
 }
@@ -101,10 +95,9 @@ function sql_query_identity($sql)
 // 결과값에서 한행 연관배열(이름으로)로 얻는다.
 function sql_fetch_array($result)
 {
-    if(function_exists('mysqli_fetch_assoc'))
+    if(function_exists('mysqli_fetch_assoc')) {
         $row = @mysqli_fetch_assoc($result);
-    // else
-    //     $row = @mysql_fetch_assoc($result);
+    }
 
     return $row;
 }

@@ -89,7 +89,7 @@ echo css_load('/record/record_regist/index.css');
 
     <div class="footer_btn_wrap">
         <a class="list_btn" href="/record/my_record/">목록</a>
-        <button class="update_btn">등록</button>
+        <button class="update_btn" onclick="setRecordData();">등록</button>
     </div>
     <!-- footer_btn_wrap -->
 
