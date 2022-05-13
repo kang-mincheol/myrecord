@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+
+
+
+
+#container {
+    padding: 0 0 50px 0;
+}
+
+@media screen and (max-width: 1050px) {
+    #container {
+        padding: 0 10px 50px;
+    }
+}
+
+
+#page_title {
+    max-width: 980px; margin: 30px auto; color: #303030; font-size: 28px; font-weight: 700;
+}
+
+@media screen and (max-width: 1050px) {
+    #page_title {
+        font-size: 20px;
+    }
+}
+
+
+
+
+#my_record_wrap {
+    max-width: 980px; margin: 30px auto;
+}
+
+#my_record_wrap .record_wrap {
+    display: flex; border: 10px solid #303030; border-radius: 8px; box-sizing: border-box; background-color: #303030;
+}
+
+#my_record_wrap .record_wrap .record_box {
+    background-color: #FFF; flex: 1; border-right: 2px solid #303030;
+}
+
+#my_record_wrap .record_wrap .record_box:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+#my_record_wrap .record_wrap .record_box:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+#my_record_wrap .record_wrap .record_box .box_title {
+    padding: 10px; color: #303030; font-size: 18px; font-weight: 700; text-align: center; border-bottom: 2px solid #303030; box-sizing: border-box;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box {
+    display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100px;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .empty_line {
+    color: #303030; font-size: 16px; font-weight: 400;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_weight {
+    color: #303030; font-size: 16px; font-weight: 700; margin-bottom: 10px;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status {
+    display: flex; align-items: center;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .fa-circle-check {
+    margin-right: 5px;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .black {
+    color: #303030;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .blue {
+    color: #007eff;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .red {
+    color: #ff0000;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .status_text {
+    color: #303030; font-size: 16px; font-weight: 400;
+}
+
+
+
+
+
+
+
+
+
+
+
