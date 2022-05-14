@@ -64,6 +64,10 @@
     color: #303030; font-size: 16px; font-weight: 700; margin-bottom: 10px;
 }
 
+#my_record_wrap .record_wrap .record_box .record_info_box .record_weight .fa-arrow-up-right-from-square {
+    margin-left: 5px;
+}
+
 #my_record_wrap .record_wrap .record_box .record_info_box .record_status {
     display: flex; align-items: center;
 }
@@ -92,7 +96,23 @@
 
 
 
+@media screen and (max-width: 1050px) {
+    #my_record_wrap .record_wrap {
+        display: block;
+    }
 
+    #my_record_wrap .record_wrap .record_box {
+        border-bottom: 5px solid #303030; border-right: 0;
+    }
+
+    #my_record_wrap .record_wrap .record_box:first-child {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #my_record_wrap .record_wrap .record_box:last-child {
+        border-radius: 0 0 4px 4px; border-bottom: 0;
+    }
+}
 
 
 
