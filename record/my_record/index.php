@@ -24,26 +24,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 
 <!--
         <div class="record_box">
-            <div class="box_title">Squat</div>
-            <div class="record_info_box">
-                <p class="empty_line">기록 없음</p>
-            </div>
-        </div>
-
-        <div class="record_box">
-            <div class="box_title">BenchPress</div>
-            <div class="record_info_box">
-                <div class="record_weight">100KG</div>
-                <div class="record_status">
-                    <i class="fa-solid fa-circle-check black"></i>
-                    <p class="status_text">승인</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="record_box">
             <div class="box_title">DeadLift</div>
             <div class="record_info_box">
+                <p class="empty_line">기록 없음</p>
                 <div class="record_weight">100KG</div>
                 <div class="record_status">
                     <i class="fa-solid fa-circle-check blue"></i>
