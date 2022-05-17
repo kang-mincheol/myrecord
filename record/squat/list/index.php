@@ -115,9 +115,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 
 <div class="board_search_wrap">
     <select id="search_key" class="search_select">
-        <option value="title">제목</option>
-        <option value="contents">내용</option>
-        <option value="writer">작성자</option>
+        <option value="nickname">닉네임</option>
+        <option value="weight">무게</option>
     </select>
 
     <div class="search_keyword">
