@@ -26,66 +26,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         </div>
 
         <div class="board_body_wrap">
+<!--
             <div class="board_row">
                 <div class="body_box writer">구스만</div>
                 <div class="body_box weight">120</div>
                 <div class="body_box audit">승인</div>
                 <div class="body_box date">2022.03.04</div>
             </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
+-->
         </div>
         <!-- board_body_wrap -->
     </div>
