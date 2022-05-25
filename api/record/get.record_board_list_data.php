@@ -46,6 +46,7 @@ if(!$param_check || $record_id == "") {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+//페이징 처리
 $start_row = 0;
 if(empty($data["page"])) {
     
@@ -57,6 +58,7 @@ if(empty($data["page"])) {
     }
 }
 $rows = 10;
+
 
 $param = array();
 //검색 쿼리
