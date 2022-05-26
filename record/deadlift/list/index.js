@@ -31,16 +31,32 @@ function getRecordData() {
                 for(key in data["data"]) {
                     renderHtml +=
                     '<div class="board_row">'+
-                        '<div class="body_box writer"><a href="'+listData[key]['nickname']+'</div>'+
-                        '<div class="body_box weight">'+listData[key]['record_weight']+'</div>'+
-                        '<div class="body_box audit">'+listData[key]['record_status']+'</div>'+
+                        '<div class="body_box writer">'+
+                            '<a href="/record/record_view/?record_id='+listData[key]['record_id']+'">'+
+                                listData[key]['nickname']+
+                            '</a>'+
+                        '</div>'+
+                        '<div class="body_box weight">'+
+                            '<a href="/record/record_view/?record_id='+listData[key]['record_id']+'">'+
+                                listData[key]['record_weight']+
+                            '</a>'+
+                        '</div>'+
+                        '<div class="body_box audit">'+
+                            '<a href="/record/record_view/?record_id='+listData[key]['record_id']+'">'+
+                                listData[key]['record_status']+
+                            '</a>'+
+                        '</div>'+
                         '<div class="body_box date">'+listData[key]['date']+'</div>'+
                     '</div>';
                 }
 
                 $("#board_wrap .board_container .board_body_wrap").html(renderHtml);
-                $("#search_key option[value="+search_key+"]").prop('selected', true);
-                $("#search_keyword").val(search_value);
+                if(search_key != '') {
+                    $("#search_key option[value="+search_key+"]").prop('selected', true);
+                }
+                if(search_value != '') {
+                    $("#search_keyword").val(search_value);
+                }
             } else {
                 myrecordAlert('on', data["msg"]);
             }
