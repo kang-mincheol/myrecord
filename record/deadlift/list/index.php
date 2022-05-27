@@ -45,6 +45,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 <div class="paging_wrap">
     <button class="prev_btn" title="이전"><i class="fa-solid fa-angle-left"></i></button>
     <div class="paging_box">
+<!--
         <button class="page_btn">1</button>
         <button class="page_btn">2</button>
         <button class="page_btn">3</button>
@@ -55,6 +56,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         <button class="page_btn">8</button>
         <button class="page_btn">9</button>
         <button class="page_btn">10</button>
+-->
     </div>
     <button class="next_btn" title="다음"><i class="fa-solid fa-angle-right"></i></button>
 </div>

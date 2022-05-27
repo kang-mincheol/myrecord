@@ -51,6 +51,9 @@ function getRecordData() {
                 }
 
                 $("#board_wrap .board_container .board_body_wrap").html(renderHtml);
+
+                pageRender(data["page"]);
+
                 if(search_key != '') {
                     $("#search_key option[value="+search_key+"]").prop('selected', true);
                 }
@@ -81,4 +84,22 @@ function getParam(name) {
     }
 
     return value;
+}
+
+function pageRender(data) {
+    var pageHtml = "";
+    for(key in data) {
+        pageHtml +=
+            '<button class="page_btn" onclick="pageNum('+data[key]+')">'+data[key]+'</button>';
+    }
+
+    //이전버튼 활성화 체크
+    //다음버튼 활성화 체크
+
+    $(".paging_wrap .paging_box").html(pageHtml);
+    console.log(data);
+}
+
+function pageMove(num) {
+    
 }
