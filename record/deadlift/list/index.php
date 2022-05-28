@@ -71,7 +71,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 
     <div class="search_keyword">
         <input id="search_keyword" type="text"/>
-        <button class="search_btn" title="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="search_btn" title="검색" onclick="recordSearch();"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 </div>
 <!-- board_search_wrap -->

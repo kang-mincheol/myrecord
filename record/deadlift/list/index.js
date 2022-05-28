@@ -12,7 +12,7 @@ function getRecordData() {
     var record_type = url[2];
     var page = getParam('page');
     var search_key = getParam('search_key');
-    var search_value = getParam('search_value');
+    var search_keyword = getParam('search_keyword');
 
     $.ajax({
         type: "POST",
@@ -20,7 +20,7 @@ function getRecordData() {
             "record_type": record_type,
             "page": page,
             "search_key": search_key,
-            "search_value": search_value
+            "search_keyword": search_keyword
         }),
         url: "/api/record/get.record_board_list_data.php",
         success: function(data) {
@@ -57,8 +57,8 @@ function getRecordData() {
                 if(search_key != '') {
                     $("#search_key option[value="+search_key+"]").prop('selected', true);
                 }
-                if(search_value != '') {
-                    $("#search_keyword").val(decodeURI(search_value));
+                if(search_keyword != '') {
+                    $("#search_keyword").val(decodeURI(search_keyword));
                 }
             } else {
                 myrecordAlert('on', data["msg"]);
@@ -120,4 +120,11 @@ function pageMove(num) {
     }
 
     location.href = window.location.pathname+next_param;
+}
+
+function recordSearch() {
+    var search_key = $("#search_key").val();
+    var search_keyword = $("#search_keyword").val();
+
+    location.href = window.location.pathname+"?search_key="+search_key+"&search_keyword="+search_keyword;
 }

@@ -63,8 +63,8 @@ $rows = 10;
 $param = array();
 //검색 쿼리
 $and_query = "";
-if($data["search_key"] && $data["search_value"]) {
-    if(strlen($data["search_value"]) < 1) {
+if($data["search_key"] && $data["search_keyword"]) {
+    if(strlen($data["search_keyword"]) < 1) {
         $returnArray["code"] = "KEYWORD_ERROR";
         $returnArray["msg"] = "검색시 두글자 이상 입력해주세요";
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
@@ -78,9 +78,9 @@ if($data["search_key"] && $data["search_value"]) {
                 Where   user_nickname like :keyword
             )
         ";
-        $param[":keyword"] = "%{$data["search_value"]}%";
+        $param[":keyword"] = "%{$data["search_keyword"]}%";
     } else if($data["search_key"] == "weight") {
-        $keyword = $data["search_value"];
+        $keyword = $data["search_keyword"];
         $keyword = preg_replace("/[^0-9]/u", "", $keyword);
         $and_query = "
             And record_weight = :keyword
