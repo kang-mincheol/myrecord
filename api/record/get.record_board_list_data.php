@@ -46,9 +46,10 @@ if(!$param_check || $record_id == "") {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+//페이징 처리
 $start_row = 0;
 if(empty($data["page"])) {
-    
+    $start_row = 0;
 } else {
     if($data["page"] == 1) {
         $start_row = 0;
@@ -57,6 +58,7 @@ if(empty($data["page"])) {
     }
 }
 $rows = 10;
+
 
 $param = array();
 //검색 쿼리
@@ -126,6 +128,47 @@ foreach($get_record_list as $key => $value) {
         "date" => date("Y.m.d", strtotime($value["create_date"]))
     );
 }
+
+
+
+//페이징 데이터
+$start_page = 0;
+if(empty($data["page"])) {
+    $start_page = 0;
+} else {
+    $start_page = floor($data["page"] / 10);
+
+    if($start_page == 0) {
+        $start_page = 0;
+    } else {
+        $start_page = parseInt($start_page."0");
+    }
+}
+
+$total_count_sql = "
+    Select  count(*) as cnt
+    From    tb_record_request
+    Where   record_type = :record_type
+";
+$param = array(
+    ":record_type" => $record_id
+);
+
+$total_count = $PDO -> fetch($total_count_sql, $param);
+$total_count = $total_count["cnt"];
+
+$max_page = floor($total_count / 10) + 1;
+
+$page_arr = array();
+for ($i = 1; $i <= 10; $i++) {
+    $this_page = $start_page + $i;
+
+    if ($this_page <= $max_page) {
+        $page_arr[] = $this_page;
+    }
+}
+
+$returnArray["page"] = $page_arr;
 
 
 

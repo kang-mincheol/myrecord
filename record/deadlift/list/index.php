@@ -26,66 +26,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         </div>
 
         <div class="board_body_wrap">
+<!--
             <div class="board_row">
                 <div class="body_box writer">구스만</div>
                 <div class="body_box weight">120</div>
                 <div class="body_box audit">승인</div>
                 <div class="body_box date">2022.03.04</div>
             </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
-            <div class="board_row">
-                <div class="body_box writer">구스만</div>
-                <div class="body_box weight">120</div>
-                <div class="body_box audit">승인</div>
-                <div class="body_box date">2022.03.04</div>
-            </div>
+-->
         </div>
         <!-- board_body_wrap -->
     </div>
@@ -97,6 +45,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 <div class="paging_wrap">
     <button class="prev_btn" title="이전"><i class="fa-solid fa-angle-left"></i></button>
     <div class="paging_box">
+<!--
         <button class="page_btn">1</button>
         <button class="page_btn">2</button>
         <button class="page_btn">3</button>
@@ -107,6 +56,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         <button class="page_btn">8</button>
         <button class="page_btn">9</button>
         <button class="page_btn">10</button>
+-->
     </div>
     <button class="next_btn" title="다음"><i class="fa-solid fa-angle-right"></i></button>
 </div>
@@ -121,7 +71,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 
     <div class="search_keyword">
         <input id="search_keyword" type="text"/>
-        <button class="search_btn" title="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="search_btn" title="검색" onclick="recordSearch();"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 </div>
 <!-- board_search_wrap -->
