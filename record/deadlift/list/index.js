@@ -58,7 +58,7 @@ function getRecordData() {
                     $("#search_key option[value="+search_key+"]").prop('selected', true);
                 }
                 if(search_value != '') {
-                    $("#search_keyword").val(search_value);
+                    $("#search_keyword").val(decodeURI(search_value));
                 }
             } else {
                 myrecordAlert('on', data["msg"]);
@@ -88,9 +88,18 @@ function getParam(name) {
 
 function pageRender(data) {
     var pageHtml = "";
+    var page = getParam('page');
+    if(page == '') {
+        page = 1;
+    }
     for(key in data) {
-        pageHtml +=
-            '<button class="page_btn" onclick="pageNum('+data[key]+')">'+data[key]+'</button>';
+        if(page == data[key]) {
+            pageHtml +=
+            '<button class="page_btn select" onclick="pageMove('+data[key]+')">'+data[key]+'</button>';
+        } else {
+            pageHtml +=
+            '<button class="page_btn" onclick="pageMove('+data[key]+')">'+data[key]+'</button>';
+        }
     }
 
     //이전버튼 활성화 체크
@@ -101,5 +110,7 @@ function pageRender(data) {
 }
 
 function pageMove(num) {
+//    location.href="";
+    console.log(num);
     
 }
