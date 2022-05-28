@@ -109,8 +109,15 @@ function pageRender(data) {
     console.log(data);
 }
 
-function pageMove(num) {
-//    location.href="";
-    console.log(num);
-    
+function pageMove(num) { 
+    var prev_param = window.location.search;
+    var page_check = getParam('page');
+    var next_param = '';
+    if(page_check == '') {
+        next_param = prev_param + "&page="+num;
+    } else {
+        next_param = prev_param.replace(/page=[0-9]/g, "page="+num);
+    }
+
+    location.href = window.location.pathname+next_param;
 }
