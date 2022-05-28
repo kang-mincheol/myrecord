@@ -102,9 +102,6 @@ function pageRender(data) {
         }
     }
 
-    //이전버튼 활성화 체크
-    //다음버튼 활성화 체크
-
     $(".paging_wrap .paging_box").html(pageHtml);
     console.log(data);
 }
@@ -117,6 +114,44 @@ function pageMove(num) {
         next_param = prev_param + "&page="+num;
     } else {
         next_param = prev_param.replace(/page=[0-9]/g, "page="+num);
+    }
+
+    location.href = window.location.pathname+next_param;
+}
+
+function prevPage() {
+    var prev_param = window.location.search;
+    var page_check = getParam('page');
+    var next_param = '';
+    var page = '';
+    if(page_check == '') {
+        page = 1;
+        next_param = prev_param + "&page="+page;
+    } else {
+        page = parseInt(page_check) - 1;
+        if(page < 1) {
+            page = 1;
+        }
+        next_param = prev_param.replace(/page=[0-9]/g, "page="+page);
+    }
+
+    location.href = window.location.pathname+next_param;
+}
+
+function nextPage() {
+    var prev_param = window.location.search;
+    var page_check = getParam('page');
+    var next_param = '';
+    var page = '';
+    if(page_check == '') {
+        page = 1;
+        next_param = prev_param + "&page="+page;
+    } else {
+        page = parseInt(page_check) + 1;
+        if(page < 1) {
+            page = 1;
+        }
+        next_param = prev_param.replace(/page=[0-9]/g, "page="+page);
     }
 
     location.href = window.location.pathname+next_param;
