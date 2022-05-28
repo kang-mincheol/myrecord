@@ -66,13 +66,21 @@
 
 
 #view_wrap .file_wrap .file_row {
-    padding-bottom: 10px; margin-bottom: 10px; border-bottom: 2px solid #303030; 
+    padding-bottom: 10px; margin-bottom: 10px; border-bottom: 2px solid #303030; display: flex; flex-direction: column; justify-content: center;
 }
 
 #view_wrap .file_wrap .file_row:last-child {
     margin-bottom: 0; border-bottom: 0;
 }
 
+#view_wrap .file_wrap .file_row .row_title {
+    border: 2px solid #303030; border-radius: 4px; padding: 5px; box-sizing: border-box; margin-bottom: 10px;
+}
+
 #view_wrap .file_wrap .file_row .file_video {
-    max-width: 500px; width: 100%; border: 2px solid #303030; box-sizing: border-box; border-radius: 4px; overflow: hidden;
+    max-width: 500px; width: 100%; border: 2px solid #303030; box-sizing: border-box; border-radius: 4px; overflow: hidden; margin: 0 auto;
+}
+
+#view_wrap .file_wrap .file_row .file_img {
+    max-width: 500px; width: 100%; border: 2px solid #303030; box-sizing: border-box; border-radius: 4px; overflow: hidden; margin: 0 auto;
 }

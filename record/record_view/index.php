@@ -62,7 +62,7 @@ echo script_load('/record/record_view/index.js');
 ?>
 <script>
 $(function () {
-//    init();
+    init();
 });
 </script>
 <?
