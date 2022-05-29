@@ -19,6 +19,7 @@ function recordEditCheck() {
         
     } else {
         //수정
+        $(".edit_wrap .edit_title").text('Record 수정');
         $(".edit_wrap .footer_btn_wrap .update_btn").text('수정');
         getRecordData(record_id);
     }
@@ -36,7 +37,7 @@ function getRecordData(record_id) {
             console.log(data);
             if(data["code"] == "SUCCESS") {
                 var record_data = data["data"];
-                $(".myrecord_input_wrap.record_type .myrecord_select_wrap .select_list_wrap .select_list_btn").val(record_data["type"]).click();
+                $(".myrecord_input_wrap.record_type .myrecord_select_wrap .select_list_wrap .select_list_btn[value="+record_data["type"]+"]").click();
                 $("#record_weight").val(record_data["weight"]);
 
                 var fileRenderHtml = "";
