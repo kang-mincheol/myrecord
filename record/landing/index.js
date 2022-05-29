@@ -1,5 +1,5 @@
 function init() {
-    rankingMenuRemote('squat');
+    rankingMenuRemote('total');
 }
 
 function rankingMenuRemote(name) {
