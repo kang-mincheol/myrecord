@@ -153,6 +153,10 @@
     margin-right: 0;
 }
 
+.paging_wrap .paging_box .page_btn.select {
+    background-color: #303030; color: #FFF; font-weight: 700;
+}
+
 @media screen and (max-width: 1050px) {
     .paging_wrap {
         margin-bottom: 10px;
