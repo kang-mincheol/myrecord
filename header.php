@@ -77,12 +77,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                             <div class="sub_menu_box">
                                 <a href="/community/free_board/list/" class="sub_menu_btn">자유게시판</a>
                             </div>
+<!--
                             <div class="sub_menu_box">
                                 <a href="#" class="sub_menu_btn">자유게시판2</a>
                             </div>
                             <div class="sub_menu_box">
                                 <a href="#" class="sub_menu_btn">자유게시판3</a>
                             </div>
+-->
                         </div>
                     </div>
                 </div>
@@ -91,19 +93,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                 <div class="menu_box">
                     <a href="/record/landing/" class="menu_btn">마이레코드</a>
 
+<!--
                     <div class="sub_menu_container">
                         <div class="sub_menu_wrap" name="community">
                             <div class="sub_menu_box">
-                                <a href="/record/landing/" class="sub_menu_btn">랭킹</a>
-                            </div>
-                            <div class="sub_menu_box">
-                                <a href="/record/landing/" class="sub_menu_btn">랭킹</a>
-                            </div>
-                            <div class="sub_menu_box">
-                                <a href="/record/landing/" class="sub_menu_btn">랭킹</a>
+                                <a href="/record/landing/" class="sub_menu_btn">메뉴</a>
                             </div>
                         </div>
                     </div>
+-->
                 </div>
                 <div class="menu_box">
                     <a href="#" class="menu_btn">바디프로필</a>
