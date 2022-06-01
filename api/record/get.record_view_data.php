@@ -73,13 +73,7 @@ if($record_file_data) {
             "file_name" => $row["file_guid"]
         );
     }
-} else {
-    $returnArray["code"] = "ERROR";
-    $returnArray["msg"] = "올바르지 않은 값입니다";
-    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
-
-
 
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
