@@ -19,6 +19,8 @@ if (is_null($data) || !checkParams($data, ["record_id"])) {
     }
 }
 
+$data = cleansingParams($data);
+
 $record_id = preg_replace("/[^0-9]+/u", "", $data["record_id"]);
 
 $record_sql = "
