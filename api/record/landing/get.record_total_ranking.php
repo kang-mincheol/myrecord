@@ -64,7 +64,7 @@ foreach($total_ranking as $key => $value) {
         "sqaut_record_id" => $value["squat_id"],
         "benchpress" => $value["bench"],
         "benchpress_record_id" => $value["bench_id"],
-        "deadlift" => $value["deadlift"],
+        "deadlift" => $value["dead"],
         "deadlift_record_id" => $value["dead_id"],
         "nickname" => $value["user_nickname"]
     );
