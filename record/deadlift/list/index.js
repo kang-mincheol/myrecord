@@ -111,7 +111,7 @@ function pageMove(num) {
     var page_check = getParam('page');
     var next_param = '';
     if(page_check == '') {
-        next_param = prev_param + "&page="+num;
+        next_param = prev_param + "?page="+num;
     } else {
         next_param = prev_param.replace(/page=[0-9]/g, "page="+num);
     }
