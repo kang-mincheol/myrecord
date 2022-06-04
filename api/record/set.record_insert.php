@@ -116,7 +116,7 @@ if(!$_FILES) {
     $returnArray["msg"] = "파일을 등록해주세요";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
-test
+
 $total_file_size = 0;
 
 //파일 타입 검사
