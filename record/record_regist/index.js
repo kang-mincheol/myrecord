@@ -100,10 +100,12 @@ function insertData() {
     var fileCount = 0;
     for(var i = 1; i <= fileCheck; i++) {
         var thisFile = document.querySelector(".myrecord_input_wrap.file_wrap .file_add_wrap .file_row_box input[name=file_"+i+"]").files[0];
-        totalFileSize += thisFile.size;
-        if(thisFile != undefined) {
-            fileCount++;
-            recordData.append('record_file_'+i, thisFile);
+        if(thisFile != '') {
+            totalFileSize += parseInt(thisFile.size);
+            if(thisFile != undefined) {
+                fileCount++;
+                recordData.append('record_file_'+i, thisFile);
+            }
         }
     }
 
