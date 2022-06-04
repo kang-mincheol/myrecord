@@ -24,7 +24,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 
     <div class="nickname_row">
         <div class="nickname_box">닉네임 - <span class="value">-</span></div>
-        <div class="create_date"><span class="title">등록일자 - </span><span class="value">2022.05.22</span></div>
+        <div class="create_date"><span class="title">등록일자 - </span><span class="value">-</span></div>
     </div>
 
     <div class="record_info_row">
