@@ -16,6 +16,17 @@ function getRecordData() {
         success: function(data) {
             loadingOff();
             console.log(data);
+            if(data["code"] == "SUCCESS") {
+                $("#view_wrap .nickname_row .nickname_box .value").text(data["data"]["record_nickname"]);
+                $("#view_wrap .nickname_row .create_date .value").text(data["data"]["record_create"]);
+
+                $("#view_wrap .record_info_row .info_box.type_box .value_box .value").text(data["data"]["record_name"]);
+                $("#view_wrap .record_info_row .info_box.weight_box .value_box .value").text(data["data"]["record_weight"]);
+
+                if(data["file"]){
+                    //파일
+                }
+            }
             
         },
         error: function(error) {
