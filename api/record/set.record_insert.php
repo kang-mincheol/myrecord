@@ -172,12 +172,14 @@ foreach($_FILES as $key => $value) {
         Set
             request_id = :request_id,
             file_original_name = :file_original_name,
-            file_guid = :file_guid
+            file_guid = :file_guid,
+            file_type = :file_type
     ";
     $param = array(
         ":request_id" => $insert_result,
         ":file_original_name" => $value["name"],
-        ":file_guid" => $GUID
+        ":file_guid" => $GUID,
+        ":file_type" => $value["type"]
     );
     $PDO -> execute($file_insert_sql, $param);
 
