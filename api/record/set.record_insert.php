@@ -65,7 +65,7 @@ $param = array(
 $overlap_check = $PDO -> fetch($overlap_check_sql, $param);
 if($overlap_check) {
     $returnArray["code"] = "OVERLAP_REQUEST";
-    $returnArray["msg"] = "해당 종목으로 신청건이 존재합니다";
+    $returnArray["msg"] = "해당 종목으로 심사전 신청건이 존재합니다";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
@@ -163,9 +163,15 @@ $param = array(
 $insert_result = $PDO -> execute($insert_sql, $param);
 
 //파일 insert
+$videoType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "application/octet-stream");
 $upload_path = $_SERVER["DOCUMENT_ROOT"]."/data/record/";
 foreach($_FILES as $key => $value) {
     $GUID = makeGuid();
+    $file_type_text = "";
+    if(in_array($value["type"], $videoType)) {
+        $file_type_name = explode("/", $file_type);
+        $file_type_text = ".".$file_type_name[1];
+    }
 
     $file_insert_sql = "
         Insert Into tb_record_request_file
@@ -178,12 +184,12 @@ foreach($_FILES as $key => $value) {
     $param = array(
         ":request_id" => $insert_result,
         ":file_original_name" => $value["name"],
-        ":file_guid" => $GUID,
+        ":file_guid" => $GUID.$file_type_text,
         ":file_type" => $value["type"]
     );
     $PDO -> execute($file_insert_sql, $param);
 
-    $this_upload_path = $upload_path.$GUID;
+    $this_upload_path = $upload_path.$GUID.$file_type_text;
     move_uploaded_file($value["tmp_name"], $this_upload_path);
 }
 
