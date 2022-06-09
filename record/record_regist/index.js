@@ -36,6 +36,11 @@ function getRecordData(record_id) {
         success: function(data) {
             console.log(data);
             if(data["code"] == "SUCCESS") {
+                $("#record_type").attr('onclick', '');
+                $(".myrecord_input_wrap .myrecord_select_wrap .mobile_select_wrap .mobile_select option").prop('disabled', true);
+                $(".myrecord_input_wrap .myrecord_select_wrap .mobile_select_wrap .mobile_select option[value="+data["data"]["type"]+"]").prop('disabled', false);
+                $("#record_weight").attr('readonly', true);
+                
                 var record_data = data["data"];
                 $(".myrecord_input_wrap.record_type .myrecord_select_wrap .select_list_wrap .select_list_btn[value="+record_data["type"]+"]").click();
                 $("#record_weight").val(record_data["weight"]);
@@ -46,7 +51,7 @@ function getRecordData(record_id) {
                         '<div class="file_row" file_no="'+record_data["file"][key]["file_no"]+'">'+
                             '<div class="file_name_box">'+record_data["file"][key]["file_name"]+'</div>'+
                             '<div class="file_row_remote_box">'+
-                                '<button class="file_delete_btn" onclick="fileDelete(this);">삭제</button>'+
+                                '<a class="file_view_btn" href="/data/record/'+record_data["file"][key]["file_id"]+'" target="_blank">파일보기</a>'+
                             '</div>'+
                         '</div>';
                 }
@@ -222,4 +227,9 @@ function getParam(name) {
     }
 
     return value;
+}
+
+function fileView(obj) {
+    var file_id = $(obj).attr('file_id');
+    
 }

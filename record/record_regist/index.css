@@ -86,6 +86,10 @@
     display: flex; justify-content: center; align-items: center; width: 50px; height: 30px; color: #fff; font-size: 14px; font-weight: 400; background-color: #333; margin-right: 10px; border-radius: 4px;
 }
 
+.file_add_wrap .file_row_box .file_row .file_row_remote_box .file_view_btn {
+    display: flex; justify-content: center; align-items: center; width: 70px; height: 30px; color: #fff; font-size: 14px; font-weight: 400; background-color: #333; margin-right: 10px; border-radius: 4px;
+}
+
 .file_add_wrap .file_row_box .file_row .file_row_remote_box .file_delete_btn {
     display: flex; justify-content: center; align-items: center; width: 50px; height: 30px; color: #fff; font-size: 14px; font-weight: 400; background-color: #ff1300; border-radius: 4px;
 }

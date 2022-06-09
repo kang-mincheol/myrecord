@@ -91,7 +91,8 @@ if($record_file_data) {
         $returnArray["data"]["file"][] = array(
             "file_name" => $row["file_original_name"],
             "file_id" => $row["file_guid"],
-            "file_no" => $row["id"]
+            "file_no" => $row["id"],
+            "file_type" => $row["file_type"]
         );
     }
 }
