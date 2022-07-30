@@ -36,6 +36,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         </div>
     </div>
 
+    <div class="file_row">
+        
+    </div>
+    <!-- file_row -->
+<!--
     <div class="file_wrap">
         <div class="file_row">
             <div class="row_title">첨부파일_1</div>
@@ -49,6 +54,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
             <img class="file_img" src="/data/record/fdsafdsa"/>
         </div>
     </div>
+-->
 
 
 </div>
