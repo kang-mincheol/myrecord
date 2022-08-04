@@ -2,6 +2,7 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
+echo css_load('/assets/owlcarousel/owl.carousel.min.css');
 echo css_load('/record/record_view/index.css');
 ?>
 
@@ -28,33 +29,43 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
     </div>
 
     <div class="record_info_row">
-        <div class="info_box type_box">
-            <p class="value_box">Record 종목 - <span class="value">-</span></p>
+        <div class="left_box">
+            <div class="info_box type_box">
+                <p class="value_box">Record 종목 - <span class="value">-</span></p>
+            </div>
+            <div class="info_box weight_box">
+                <p class="value_box">Record 무게 - <span class="value">-</span>(kg)</p>
+            </div>
         </div>
-        <div class="info_box weight_box">
-            <p class="value_box">Record 무게 - <span class="value">-</span>(kg)</p>
+        <div class="right_box">
+            <div class="info_box status_box">
+                <i class="fa-solid fa-circle-check"></i><p class="status_text">신청</p>
+            </div>
         </div>
     </div>
 
     <div class="file_row">
-        
-    </div>
-    <!-- file_row -->
-<!--
-    <div class="file_wrap">
-        <div class="file_row">
-            <div class="row_title">첨부파일_1</div>
-            <video controls class="file_video">
-                <source src="/data/record/asdfasdfasdf.m4v" type="video/mp4">
-            </video>
+        <div class="owl-carousel owl-theme file_slide_wrap">
+            <div class="item">
+                <video controls class="file_video">
+                    <source src="/data/record/asdfasdfasdf.m4v" type="video/mp4">
+                </video>
+            </div>
+            <div class="item">
+                <img class="file_img" src="/data/record/fdsafdsa"/>
+            </div>
+            <div class="item">
+                <video controls class="file_video">
+                    <source src="/data/record/asdfasdfasdf.m4v" type="video/mp4">
+                </video>
+            </div>
+            <div class="item">
+                <img class="file_img" src="/data/record/fdsafdsa"/>
+            </div>
         </div>
+    </div>
 
-        <div class="file_row">
-            <div class="row_title">첨부파일_2</div>
-            <img class="file_img" src="/data/record/fdsafdsa"/>
-        </div>
-    </div>
--->
+    <a class="certificate_btn" href="">인증서 보기</a>
 
 
 </div>
@@ -64,11 +75,22 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 
 
 <?
+echo script_load('/assets/owlcarousel/owl.carousel.min.js');
 echo script_load('/record/record_view/index.js');
 ?>
+
 <script>
 $(function () {
     init();
+
+    $('.owl-carousel').owlCarousel({
+        loop: false,
+        margin: 10,
+        items: 1,
+        center: true,
+        autoHeight: true,
+        nav: true
+    })
 });
 </script>
 <?

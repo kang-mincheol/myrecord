@@ -29,10 +29,19 @@
 
 
 
-
 #view_wrap {
     width: 980px; margin: 30px auto 0; border: 3px solid #303030; box-sizing: border-box; border-radius: 5px; padding: 10px;
 }
+
+@media screen and (max-width: 1050px) {
+    #view_wrap {
+        width: auto;
+    }
+}
+
+
+
+
 
 #view_wrap .nickname_row {
     display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
@@ -46,11 +55,20 @@
     color: #303030; font-size: 14px; font-weight: 400;
 }
 
+@media screen and (max-width: 1050px) {
+    
+}
+
+
 
 
 
 #view_wrap .record_info_row {
-    display: flex; align-items: center; margin-bottom: 10px;
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+}
+
+#view_wrap .record_info_row .left_box {
+    display: flex; align-items: center;
 }
 
 #view_wrap .record_info_row .info_box {
@@ -62,26 +80,97 @@
 }
 
 
-
-
-
-/*
-#view_wrap .file_wrap .file_row {
-    padding-bottom: 10px; margin-bottom: 10px; border-bottom: 2px solid #303030; display: flex; flex-direction: column; justify-content: center;
+#view_wrap .record_info_row .right_box {
+    display: flex; align-items: center;
 }
 
-#view_wrap .file_wrap .file_row:last-child {
-    margin-bottom: 0; border-bottom: 0;
+#view_wrap .record_info_row .status_box {
+    display: flex; align-items: center; color: #303030;
 }
 
-#view_wrap .file_wrap .file_row .row_title {
-    border: 2px solid #303030; border-radius: 4px; padding: 5px; box-sizing: border-box; margin-bottom: 10px;
+#view_wrap .record_info_row .status_box i {
+    margin-right: 5px;
 }
 
-#view_wrap .file_wrap .file_row .file_video {
-    max-width: 500px; width: 100%; border: 2px solid #303030; box-sizing: border-box; border-radius: 4px; overflow: hidden; margin: 0 auto;
+#view_wrap .record_info_row .status_box .status_text {
+    font-size: 16px; font-weight: 700;
 }
 
-#view_wrap .file_wrap .file_row .file_img {
-    max-width: 500px; width: 100%; border: 2px solid #303030; box-sizing: border-box; border-radius: 4px; overflow: hidden; margin: 0 auto;
-}*/
+#view_wrap .record_info_row .status_box.request {
+    background-color: #FFF; color: #303030;
+}
+#view_wrap .record_info_row .status_box.audit {
+    background-color: #0096FF; color: #FFF; border-color: #0096FF;
+}
+#view_wrap .record_info_row .status_box.approval {
+    background-color: #303030; color: #FFF;
+}
+#view_wrap .record_info_row .status_box.reject {
+    background-color: #F00; color: #FFF; border-color: #F00;
+}
+
+@media screen and (max-width: 1050px) {
+    #view_wrap .record_info_row {
+        display: block;
+    }
+
+    #view_wrap .record_info_row .left_box {
+        margin-bottom: 10px;
+    }
+
+    #view_wrap .record_info_row .info_box {
+        width: calc(50% - 5px);
+    }
+
+    #view_wrap .record_info_row .info_box.status_box {
+        width: 100%; display: flex; justify-content: center; align-items: center;
+    }
+}
+
+
+
+
+
+#view_wrap .file_row {
+    display: flex; justify-content: center;
+}
+
+#view_wrap .file_row .file_slide_wrap {
+    max-width: 700px; border: 2px solid #303030; border-radius: 5px; overflow: hidden;
+}
+
+#view_wrap .file_row .file_slide_wrap .owl-nav .owl-prev {
+    position: absolute; top: 50%; left: 10px; transform: translate(0, -50%); -webkit-transform: translate(0, -50%); width: 60px; height: 60px; color: #FFF; font-size: 60px; background-color: rgba(0, 0, 0, 0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center;
+}
+
+#view_wrap .file_row .file_slide_wrap .owl-nav .owl-prev span {
+    display: flex; justify-content: center; align-items: center; padding-bottom: 6px; padding-right: 4px;
+}
+
+#view_wrap .file_row .file_slide_wrap .owl-nav .owl-next {
+    position: absolute; top: 50%; right: 10px; transform: translate(0, -50%); -webkit-transform: translate(0, -50%); width: 60px; height: 60px; color: #FFF; font-size: 60px; background-color: rgba(0, 0, 0, 0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center;
+}
+
+#view_wrap .file_row .file_slide_wrap .owl-nav .owl-next span {
+    display: flex; justify-content: center; align-items: center; padding-bottom: 6px; padding-left: 4px;
+}
+
+#view_wrap .file_row .file_slide_wrap .owl-dots {
+    display: none;
+}
+
+#view_wrap .file_row .file_slide_wrap .item video {
+    display: block; width: 100%; margin: 0 auto; padding: 0;
+}
+
+#view_wrap .file_row .file_slide_wrap .item img {
+    display: block; width: 100%; margin: 0 auto; padding: 0;
+}
+
+
+
+
+
+
+
+
