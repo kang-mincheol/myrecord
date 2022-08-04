@@ -65,11 +65,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         </div>
     </div>
 
-    <a class="certificate_btn" href="">인증서 보기</a>
-
 
 </div>
 <!-- view_wrap -->
+
+
+<a class="certificate_save" href="/">
+    마이레코드 인증서 보기&nbsp;<i class="fa-solid fa-file-arrow-down"></i>
+</a>
 
 
 

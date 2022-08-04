@@ -171,6 +171,13 @@
 
 
 
+.certificate_save {
+    display: flex; justify-content: center; align-items: center; width: 980px; margin: 20px auto; padding: 10px 0; box-sizing: border-box; border: 3px solid #0096FF; border-radius: 5px; background-color: #0096FF; color: #FFF; font-size: 18px; font-weight: 700; text-align: center; word-break: keep-all;
+}
 
-
+@media screen and (max-width: 1050px) {
+    .certificate_save {
+        width: 100%;
+    }
+}
 
