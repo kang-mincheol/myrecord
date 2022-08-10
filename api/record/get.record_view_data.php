@@ -24,7 +24,10 @@ $data = cleansingParams($data);
 $record_id = preg_replace("/[^0-9]+/u", "", $data["record_id"]);
 
 $record_sql = "
-    Select  T4.user_nickname, T2.record_name, T1.record_weight, T3.status_text, DATE_FORMAT(T1.create_date, '%Y.%m.%d') as create_date
+    Select  T4.id as account_id, T4.user_nickname,
+            T2.record_name, T2.record_name_ko, T1.record_weight,
+            T3.status_text, T3.status_value,
+            DATE_FORMAT(T1.create_date, '%Y.%m.%d') as create_date
     From    tb_record_request T1
 
     Inner Join	tb_record_master T2
@@ -51,11 +54,20 @@ if(!$record_data) {
 
 $returnArray["data"] = array(
     "record_nickname" => $record_data["user_nickname"],
-    "record_name" => $record_data["record_name"],
+    "record_name" => $record_data["record_name_ko"],
     "record_weight" => $record_data["record_weight"],
     "record_status" => $record_data["status_text"],
-    "record_create" => $record_data["create_date"]
+    "record_status_eng" => $record_data["status_value"],
+    "record_create" => $record_data["create_date"],
+    "is_recorder" => false
 );
+
+//신청자 본인인지 확인
+if($is_member){
+    if($record_data["account_id"] == $member["id"]) {
+        $returnArray["data"]["is_recorder"] = true;
+    }
+}
 
 $record_file_sql = "
     Select  *
@@ -70,7 +82,9 @@ $record_file_data = $PDO -> fetchAll($record_file_sql, $param);
 if($record_file_data) {
     foreach($record_file_data as $row) {
         $returnArray["file"][] = array(
-            "file_name" => $row["file_guid"]
+            "file_name" => $row["file_guid"],
+            "file_src" => RECORD_FILE_DIR.$row["file_guid"],
+            "file_type" => $row["file_type"]
         );
     }
 }

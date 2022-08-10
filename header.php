@@ -34,9 +34,11 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <![endif]-->
 
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
 
 <!-- swiper js -->
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
