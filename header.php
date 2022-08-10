@@ -67,7 +67,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
         <div class="left_box">
             <div class="logo_box">
                 <a class="logo_btn" href="/">
-                    <img class="logo_img" src="//via.placeholder.com/200x100"/>
+                    <img class="logo_img" src="/img/company/myrecord_logo.png"/>
                 </a>
             </div>
             <div class="menu_wrap">
@@ -147,7 +147,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
     <div class="mobile_header">
         <div class="logo_box">
             <a class="logo_link" href="/">
-                <img class="logo_img" src="//via.placeholder.com/100x50"/>
+                <img class="logo_img" src="/img/company/myrecord_logo_header.png"/>
             </a>
         </div>
 
