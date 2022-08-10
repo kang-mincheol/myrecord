@@ -88,6 +88,10 @@
     display: flex; align-items: center; color: #303030;
 }
 
+#view_wrap .record_info_row .status_box {
+    display: flex; justify-content: center; align-items: center;
+}
+
 #view_wrap .record_info_row .status_box i {
     margin-right: 5px;
 }
@@ -172,7 +176,11 @@
 
 
 .certificate_save {
-    display: flex; justify-content: center; align-items: center; width: 980px; margin: 20px auto; padding: 10px 0; box-sizing: border-box; border: 3px solid #0096FF; border-radius: 5px; background-color: #0096FF; color: #FFF; font-size: 18px; font-weight: 700; text-align: center; word-break: keep-all;
+    display: none; justify-content: center; align-items: center; width: 980px; margin: 20px auto; padding: 10px 0; box-sizing: border-box; border: 3px solid #0096FF; border-radius: 5px; background-color: #0096FF; color: #FFF; font-size: 18px; font-weight: 700; text-align: center; word-break: keep-all;
+}
+
+.certificate_save.on {
+    display: flex;
 }
 
 @media screen and (max-width: 1050px) {

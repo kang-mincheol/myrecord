@@ -39,13 +39,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         </div>
         <div class="right_box">
             <div class="info_box status_box">
-                <i class="fa-solid fa-circle-check"></i><p class="status_text">신청</p>
+                <p class="value_box">
+                    <i class="fa-solid fa-circle-check"></i><span class="value">-</span>
+                </p>
             </div>
         </div>
     </div>
 
     <div class="file_row">
         <div class="owl-carousel owl-theme file_slide_wrap">
+<!--
             <div class="item">
                 <video controls class="file_video">
                     <source src="/data/record/asdfasdfasdf.m4v" type="video/mp4">
@@ -62,6 +65,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
             <div class="item">
                 <img class="file_img" src="/data/record/fdsafdsa"/>
             </div>
+-->
         </div>
     </div>
 
@@ -70,7 +74,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 <!-- view_wrap -->
 
 
-<a class="certificate_save" href="/">
+<a id="certificate_save" class="certificate_save" href="/">
     마이레코드 인증서 보기&nbsp;<i class="fa-solid fa-file-arrow-down"></i>
 </a>
 
@@ -85,15 +89,6 @@ echo script_load('/record/record_view/index.js');
 <script>
 $(function () {
     init();
-
-    $('.owl-carousel').owlCarousel({
-        loop: false,
-        margin: 10,
-        items: 1,
-        center: true,
-        autoHeight: true,
-        nav: true
-    })
 });
 </script>
 <?
