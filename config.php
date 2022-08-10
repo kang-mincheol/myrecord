@@ -26,6 +26,8 @@ define('ALLOW_FILES', "jpg|png|jpeg|gif|pdf|hwp|xls|xlsx|doc|docx|mp4");
 
 define('BACK_URL', IS_LIVE ? "/" : "http://localhost:8080/");
 
+define('RECORD_FILE_DIR', "/data/record/");
+
 $con = sql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DB);
 
 sql_query("use myrecord");
