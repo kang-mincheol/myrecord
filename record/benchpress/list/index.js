@@ -60,6 +60,10 @@ function getRecordData() {
                 if(search_keyword != '') {
                     $("#search_keyword").val(decodeURI(search_keyword));
                 }
+            } else if(data["code"] == "EMPTY") {
+                //EMPTY
+                var alertEle = '<div class="empty_box">'+data["msg"]+'</div>';
+                $("#board_wrap .board_container .board_body_wrap").append(alertEle);
             } else {
                 myrecordAlert('on', data["msg"]);
             }

@@ -6,7 +6,7 @@ echo css_load('/record/benchpress/list/index.css');
 ?>
 
 
-<div id="page_title">마이레코드 ＞ BenchPress</div>
+<div id="page_title">마이레코드 - BenchPress</div>
 
 <?
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/record_sub_menu.php');

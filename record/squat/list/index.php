@@ -6,7 +6,7 @@ echo css_load('/record/squat/list/index.css');
 ?>
 
 
-<div id="page_title">마이레코드 ＞ Squat</div>
+<div id="page_title">마이레코드 - Squat</div>
 
 <?
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/record_sub_menu.php');
