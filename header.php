@@ -67,10 +67,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
         <div class="left_box">
             <div class="logo_box">
                 <a class="logo_btn" href="/">
-                    <img class="logo_img" src="/img/company/myrecord_logo.png"/>
+                    <img class="logo_img" src="/img/company/myrecord_logo.png?ver=20220924"/>
                 </a>
             </div>
             <div class="menu_wrap">
+<!--
                 <div class="menu_box">
                     <a href="/community/free_board/list/" class="menu_btn">커뮤니티</a>
 
@@ -79,38 +80,22 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                             <div class="sub_menu_box">
                                 <a href="/community/free_board/list/" class="sub_menu_btn">자유게시판</a>
                             </div>
-<!--
                             <div class="sub_menu_box">
                                 <a href="#" class="sub_menu_btn">자유게시판2</a>
                             </div>
                             <div class="sub_menu_box">
                                 <a href="#" class="sub_menu_btn">자유게시판3</a>
                             </div>
--->
                         </div>
                     </div>
                 </div>
+-->
                 <!-- 커뮤니티 -->
 
-                <div class="menu_box">
+                <div class="menu_box" name="record">
                     <a href="/record/landing/" class="menu_btn">마이레코드</a>
+                </div>
 
-<!--
-                    <div class="sub_menu_container">
-                        <div class="sub_menu_wrap" name="community">
-                            <div class="sub_menu_box">
-                                <a href="/record/landing/" class="sub_menu_btn">메뉴</a>
-                            </div>
-                        </div>
-                    </div>
--->
-                </div>
-                <div class="menu_box">
-                    <a href="#" class="menu_btn">바디프로필</a>
-                </div>
-                <div class="menu_box">
-                    <a href="#" class="menu_btn">브랜드 소개</a>
-                </div>
             </div>
             <!-- menu_wrap -->
         </div>
@@ -147,7 +132,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
     <div class="mobile_header">
         <div class="logo_box">
             <a class="logo_link" href="/">
-                <img class="logo_img" src="/img/company/myrecord_logo_header.png"/>
+                <img class="logo_img" src="/img/company/myrecord_logo_header.png?ver=20220924"/>
             </a>
         </div>
 
@@ -176,41 +161,21 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                 <div class="menu_list_container">
                     <div class="menu_wrap">
                         <div class="wrap_title">
-                            <a href="#" class="menu_title">커뮤니티</a>
+                            <a href="/record/landing/" class="menu_title">마이레코드</a>
                         </div>
                         <div class="wrap_body">
                             <div class="menu_row">
-                                <a href="#" class="menu_btn">자유게시판1</a>
+                                <a href="/record/landing/" class="menu_btn">랭킹</a>
                             </div>
                             <div class="menu_row">
-                                <a href="#" class="menu_btn">자유게시판1</a>
+                                <a href="/record/squat/list/" class="menu_btn">Squat</a>
                             </div>
                             <div class="menu_row">
-                                <a href="#" class="menu_btn">자유게시판1</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu_wrap">
-                        <div class="wrap_title">
-                            <a href="#" class="menu_title">커뮤니티</a>
-                        </div>
-                        <div class="wrap_body">
-                            <div class="menu_row">
-                                <a href="#" class="menu_btn">자유게시판1</a>
+                                <a href="/record/benchpress/list/" class="menu_btn">BenchPress</a>
                             </div>
                             <div class="menu_row">
-                                <a href="#" class="menu_btn">자유게시판1</a>
+                                <a href="/record/deadlift/list/" class="menu_btn">DeadLift</a>
                             </div>
-                            <div class="menu_row">
-                                <a href="#" class="menu_btn">자유게시판1</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu_wrap">
-                        <div class="wrap_title">
-                            <a href="#" class="menu_title">커뮤니티</a>
                         </div>
                     </div>
                 </div>
@@ -236,6 +201,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
 <?
 echo script_load('/common/header.js');    
 ?>
+<script>
+headerInit();
+</script>
 
 <div id="container">
 
