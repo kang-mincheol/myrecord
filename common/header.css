@@ -34,6 +34,10 @@
     border-bottom: 2px solid #303030;
 }
 
+#header .pc_header .left_box .menu_wrap .menu_box.on .menu_btn {
+    border-bottom: 2px solid #303030;
+}
+
 
 
 
@@ -106,7 +110,7 @@
     }
 
     #header .mobile_header .logo_box {
-        width: 100px;
+        width: 120px;
     }
 
     #header .mobile_header .logo_box .logo_img {
@@ -114,7 +118,7 @@
     }
 
     #header .mobile_header .menu_box {
-        display: flex; align-items: center;
+        display: flex; align-items: center; margin-top: -6px;
     }
 
     #header .mobile_header .menu_box .menu_btn {
