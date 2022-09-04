@@ -26,7 +26,7 @@ echo css_load('/account/create/index.css');
                 <label class="terms_label" for="terms_service">(필수) 서비스 이용약관 동의</label>
             </div>
             <div class="right_box">
-                <a class="view_btn" href="/document/">보기</a>
+                <a class="view_btn" href="/document/myrecord_service_terms_1.html" target="_blank">보기</a>
             </div>
         </div>
 
@@ -39,7 +39,7 @@ echo css_load('/account/create/index.css');
                 <label class="terms_label" for="terms_private">(필수) 개인정보 처리방침</label>
             </div>
             <div class="right_box">
-                <a class="view_btn" href="/document/">보기</a>
+                <a class="view_btn" href="/document/myrecord_personal_info_terms.html" target="_blank">보기</a>
             </div>
         </div>
 
@@ -49,10 +49,10 @@ echo css_load('/account/create/index.css');
                     <input id="terms_marketing" name="terms_marketing" type="checkbox"/>
                     <p class="checkbox_bg"></p>
                 </div>
-                <label class="terms_label" for="terms_marketing">(선택) 마케팅 동의</label>
+                <label class="terms_label" for="terms_marketing">(선택) 마케팅 수신 동의</label>
             </div>
             <div class="right_box">
-                <a class="view_btn" href="/document/">보기</a>
+                <a class="view_btn" href="/document/myrecord_marketing_terms.html" target="_blank">보기</a>
             </div>
         </div>
 
