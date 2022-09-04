@@ -26,8 +26,15 @@ function getTotalRankingData() {
         url: "/api/record/landing/get.record_total_ranking.php",
         success: function(data) {
             loadingOff();
-            console.log(data);
-            totalRankingRender(data["data"]);
+            if(data["code"] == "SUCCESS") {
+                totalRankingRender(data["data"]);
+            } else if (data["code"] == "EMPTY") {
+                //EMPTY
+                var ele = '<div class="empty_box">'+data["msg"]+'</div>';
+                $("#record_ranking .ranking_contents_box[name=total] .ranking_contents_body").html(ele);
+            } else {
+                myrecordAlert('on', data["msg"]);
+            }
         },
         error: function(error) {
             loadingOff();
@@ -79,11 +86,16 @@ function getRecordRanking(name) {
         url: "/api/record/landing/get.record_ranking.php",
         success: function(data) {
             loadingOff();
-            console.log(data);
             if(data["code"] == "SUCCESS") {
                 if(data["data"]) {
                     recordRankingRender(name, data["data"]);
                 }
+            } else if(data["code"] == "EMPTY") {
+                //EMPTY
+                var ele = '<div class="empty_box">'+data["msg"]+'</div>';
+                $("#record_ranking .ranking_contents_box[name="+name+"] .ranking_contents_body").html(ele);
+            } else {
+                myrecordAlert('on', data["msg"]);
             }
         },
         error: function(error) {

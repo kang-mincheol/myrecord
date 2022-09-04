@@ -147,6 +147,10 @@
 
 
 /***** ranking_contents_body *****/
+#record_ranking .ranking_contents_box .ranking_contents_body .empty_box {
+    display: flex; justify-content: center; align-items: center; color: #303030; font-size: 16px; font: 500; text-align: center; padding: 10px 0;
+}
+
 #record_ranking .ranking_contents_box .ranking_contents_body .body_row {
     display: flex; justify-content: center; align-items: center; margin-bottom: 5px;
 }

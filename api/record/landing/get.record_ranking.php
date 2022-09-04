@@ -59,12 +59,21 @@ $param = array(
 );
 $ranking = $PDO -> fetchAll($ranking_sql, $param);
 
-foreach($ranking as $key => $value) {
-    $returnArray["data"][] = array(
-        "weight" => $value["weight"],
-        "nickname" => $value["user_nickname"],
-        "record_id" => $value["id"]
+if($ranking) {
+    foreach($ranking as $key => $value) {
+        $returnArray["data"][] = array(
+            "weight" => $value["weight"],
+            "nickname" => $value["user_nickname"],
+            "record_id" => $value["id"]
+        );
+    }
+} else {
+    $returnArray = array(
+        "code" => "EMPTY",
+        "msg" => "데이터가 없습니다."
     );
+
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
 

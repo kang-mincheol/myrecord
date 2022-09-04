@@ -57,25 +57,26 @@ $ranking_sql = "
 ";
 $total_ranking = $PDO -> fetchAll($ranking_sql);
 
-foreach($total_ranking as $key => $value) {
-    $returnArray["data"][] = array(
-        "3대" => $value["total_sum"],
-        "squat" => $value["squat"],
-        "sqaut_record_id" => $value["squat_id"],
-        "benchpress" => $value["bench"],
-        "benchpress_record_id" => $value["bench_id"],
-        "deadlift" => $value["dead"],
-        "deadlift_record_id" => $value["dead_id"],
-        "nickname" => $value["user_nickname"]
+if($total_ranking) {
+    foreach($total_ranking as $key => $value) {
+        $returnArray["data"][] = array(
+            "3대" => $value["total_sum"],
+            "squat" => $value["squat"],
+            "sqaut_record_id" => $value["squat_id"],
+            "benchpress" => $value["bench"],
+            "benchpress_record_id" => $value["bench_id"],
+            "deadlift" => $value["dead"],
+            "deadlift_record_id" => $value["dead_id"],
+            "nickname" => $value["user_nickname"]
+        );
+    }
+} else {
+    $returnArray = array(
+        "code" => "EMPTY",
+        "msg" => "데이터가 없습니다"
     );
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
-
-
-
-
-
-
-
 
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
