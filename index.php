@@ -27,6 +27,7 @@ echo css_load('/common/index.css');
 
 
 
+<!--
 <div id="free_board_wrap">
     <div class="board_wrap">
         <div class="board_title_wrap">
@@ -37,19 +38,17 @@ echo css_load('/common/index.css');
                 <p class="contents_title"><a href="/">안녕하세요 자유게시판 입니다</a></p>
                 <p class="contents_date">2022-03-01</p>
             </div>
-            <div class="body_row">
-                <p class="contents_title"><a href="/">안녕하세요 자유게시판 입니다</a></p>
-                <p class="contents_date">2022-03-01</p>
-            </div>
         </div>
     </div>
 </div>
+-->
 <!-- free_board_wrap -->
 
 
 
 
 
+<!--
 <div id="myrecord_board_wrap">
     <div class="board_wrap">
         <div class="board_title_wrap">
@@ -75,7 +74,7 @@ echo css_load('/common/index.css');
                     </div>
                 </div>
             </div>
-            <!-- rank_wrap -->
+
             <div class="rank_wrap">
                 <div class="rank_title_box">
                     <p class="rank_title"><a href="/">Squat</a></p>
@@ -95,7 +94,7 @@ echo css_load('/common/index.css');
                     </div>
                 </div>
             </div>
-            <!-- rank_wrap -->
+
             <div class="rank_wrap">
                 <div class="rank_title_box">
                     <p class="rank_title"><a href="/">Bench Press</a></p>
@@ -115,7 +114,7 @@ echo css_load('/common/index.css');
                     </div>
                 </div>
             </div>
-            <!-- rank_wrap -->
+
             <div class="rank_wrap">
                 <div class="rank_title_box">
                     <p class="rank_title"><a href="/">Deadlift</a></p>
@@ -135,10 +134,11 @@ echo css_load('/common/index.css');
                     </div>
                 </div>
             </div>
-            <!-- rank_wrap -->
+
         </div>
     </div>
 </div>
+-->
 <!-- myrecord_board_wrap -->
 
 
