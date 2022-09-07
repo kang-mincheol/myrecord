@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+#myaccount_wrap {
+    width: 500px; margin: 0 auto; padding: 50px 0;
+}
+
+#myaccount_wrap .wrap_title {
+    color: #303030; font-size: 20px; font-weight: 700; margin-bottom: 20px;
+}
+
+#myaccount_wrap .myrecord_input_wrap {
+    margin-bottom: 20px;
+}
