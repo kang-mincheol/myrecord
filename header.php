@@ -109,7 +109,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                 <a href="/api/account/set.logout.php" class="menu_btn">로그아웃</a>
             </div>
             <div class="menu_box">
-                <a href="#" class="menu_btn">내 정보</a>
+                <a href="/account/myaccount" class="menu_btn">내 정보</a>
             </div>
             <?  
             } else {
@@ -148,7 +148,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                     if($is_member) {
                     ?>
                     <a href="/api/account/set.logout.php" class="account_btn login"><i class="fa-solid fa-right-from-bracket"></i>로그아웃</a>
-                    <a href="#" class="account_btn"><i class="fa-solid fa-user"></i>내 정보</a>
+                    <a href="/account/myaccount" class="account_btn"><i class="fa-solid fa-user"></i>내 정보</a>
                     <?
                     } else {
                     ?>
