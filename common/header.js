@@ -28,6 +28,8 @@ function urlMenuCheck() {
 
     if(menuName.length > 2) {
         const ele = document.querySelector('#header .pc_header .left_box .menu_wrap .menu_box[name='+menuName[1]+']');
-        ele.classList.add("on");
+        if(ele) {
+            ele.classList.add("on");
+        }
     }
 }

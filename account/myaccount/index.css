@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+#myaccount_wrap {
+    width: 500px; margin: 0 auto; padding: 50px 0;
+}
+
+#myaccount_wrap .wrap_title {
+    color: #303030; font-size: 20px; font-weight: 700; margin-bottom: 20px;
+}
+
+#myaccount_wrap .myrecord_input_wrap {
+    margin-bottom: 20px;
+}
+
+#myaccount_wrap .footer_btn_wrap {
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+#myaccount_wrap .footer_btn_wrap button {
+    width: calc(50% - 10px); height: 50px; border-radius: 6px; font-size: 15px; font-weight: 400; letter-spacing: -0.48px;
+}
+
+#myaccount_wrap .footer_btn_wrap .password_change_btn {
+    color: #FFF; background-color: #303030;
+}
+
+#myaccount_wrap .footer_btn_wrap .account_change_btn {
+    color: #FFF; background-color: #0096FF;
+}
