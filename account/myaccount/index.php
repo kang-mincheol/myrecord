@@ -32,7 +32,7 @@ exit;
             <label class="wrap_label" for="account_nickname">닉네임</label>
         </div>
         <div class="form_value_box">
-            <input id="account_nickname" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck()();" type="text" placeholder="영문 또는 한글 또는 숫자 2~10자리 (특수문자 불가)"/>
+            <input id="account_nickname" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="영문 또는 한글 또는 숫자 2~10자리 (특수문자 불가)"/>
         </div>
     </div>
 
@@ -50,7 +50,7 @@ exit;
             <label class="wrap_label" for="account_phone">(선택)핸드폰번호</label>
         </div>
         <div class="form_value_box">
-            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="number" placeholder="핸드폰번호를 입력해주세요"/>
+            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="number" placeholder="핸드폰번호를 입력해주세요 '-' 제외"/>
         </div>
     </div>
 
@@ -61,6 +61,11 @@ exit;
         <div class="form_value_box">
             <input id="account_email" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="이메일을 입력해주세요"/>
         </div>
+    </div>
+
+    <div class="footer_btn_wrap">
+        <button class="password_change_btn" onclick="passwordChangeView();">비밀번호 변경</button>
+        <button class="account_change_btn" onclick="myaccountChange();">내정보 수정</button>
     </div>
 
 </div>
