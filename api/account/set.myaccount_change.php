@@ -26,6 +26,24 @@ if(!$is_member) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+//닉네임 중복 체크
+$nickname_check_query = "
+    Select  *
+    From    Account
+    Where   user_nickname = :user_nickname
+    And     id != :id
+";
+$nickname_check_param = array(
+    ":user_nickname" => $data["nickname"],
+    ":id" => $member["id"]
+);
+$nickname_check = $PDO -> fetch($nickname_check_query, $nickname_check_param);
+if($nickname_check) {
+    $returnArray["code"] = "OVERLAP";
+    $returnArray["msg"] = "이미 사용중인 닉네임 입니다";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
+
 //닉네임 update 쿼리
 $update_query = "
     Update  Account
@@ -48,6 +66,25 @@ if($data["name"]) {
 
 //핸드폰번호 변경하는지 체크
 if($data["phone"]) {
+    //핸드폰번호 중복 체크
+    $phone_check_query = "
+        Select  *
+        From    Account
+        Where   user_phone = :user_phone
+        And     id != :id
+    ";
+    $phone_check_param = array(
+        ":user_phone" => $data["phone"],
+        ":id" => $member["id"]
+    );
+    $phone_check = $PDO -> fetch($phone_check_query, $phone_check_param);
+    if($phone_check) {
+        $returnArray["code"] = "OVERLAP";
+        $returnArray["msg"] = "이미 사용중인 핸드폰번호 입니다";
+        echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+    }
+
+
     $update_query .= "
         ,
         user_phone = :user_phone
@@ -58,6 +95,25 @@ if($data["phone"]) {
 
 //이메일 변경하는지 체크
 if($data["email"]) {
+    //이메일 중복 체크
+    $email_check_query = "
+        Select  *
+        From    Account
+        Where   user_email = :user_email
+        And     id != :id
+    ";
+    $email_check_param = array(
+        ":user_email" => $data["email"],
+        ":id" => $member["id"]
+    );
+    $email_check = $PDO -> fetch($email_check_query, $email_check_param);
+    if($email_check) {
+        $returnArray["code"] = "OVERLAP";
+        $returnArray["msg"] = "이미 사용중인 이메일 입니다";
+        echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+    }
+
+
     $update_query .= "
         ,
         user_email = :user_email
