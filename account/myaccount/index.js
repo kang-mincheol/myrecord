@@ -28,6 +28,10 @@ function getAccountData() {
     });
 }
 
+function passwordChangeView() {
+    myrecordAlert('on', '현재 준비중입니다');
+}
+
 function accountChangeCheck() {
     var nickname = $("#account_nickname").val();
     var name = $("#account_name").val();
