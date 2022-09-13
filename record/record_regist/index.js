@@ -153,7 +153,7 @@ function insertData() {
 }
 
 function updateData() {
-    
+    console.log('수정');
 }
 
 
