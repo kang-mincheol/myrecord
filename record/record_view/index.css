@@ -85,7 +85,7 @@
 }
 
 #view_wrap .record_info_row .status_box {
-    display: flex; align-items: center; color: #303030;
+    display: flex; align-items: center; color: #303030; font-size: 16px;
 }
 
 #view_wrap .record_info_row .status_box {
@@ -136,7 +136,7 @@
 
 
 #view_wrap .file_row {
-    display: flex; justify-content: center;
+    display: flex; justify-content: center; margin-bottom: 30px;
 }
 
 #view_wrap .file_row .file_slide_wrap {
@@ -169,6 +169,38 @@
 
 #view_wrap .file_row .file_slide_wrap .item img {
     display: block; width: 100%; margin: 0 auto; padding: 0;
+}
+
+
+
+
+
+#view_wrap .bottom_btn_wrap {
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+#view_wrap .bottom_btn_wrap .edit_btn {
+    color: #FFF; font-size: 16px; padding: 12px 20px; border-radius: 3px; background-color: #0096ff; margin: 0;
+}
+
+#view_wrap .bottom_btn_wrap .right_btn_wrap {
+    display: flex; align-items: center; display: none;
+}
+
+#view_wrap .bottom_btn_wrap .right_btn_wrap.on {
+    display: block;
+}
+
+#view_wrap .bottom_btn_wrap .right_btn_wrap .edit_btn {
+    margin-right: 10px;
+}
+
+#view_wrap .bottom_btn_wrap .right_btn_wrap .edit_btn:last-child {
+    margin-right: 0;
+}
+
+#view_wrap .bottom_btn_wrap .right_btn_wrap .edit_btn.delete {
+    background-color: #303030;
 }
 
 

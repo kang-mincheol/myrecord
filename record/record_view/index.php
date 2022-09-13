@@ -47,7 +47,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
     </div>
 
     <div class="file_row">
-        <div class="owl-carousel owl-theme file_slide_wrap">
+        <div class="owl-carousel file_slide_wrap">
 <!--
             <div class="item">
                 <video controls class="file_video">
@@ -69,10 +69,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         </div>
     </div>
 
+    <div class="bottom_btn_wrap">
+        <div class="left_btn_wrap">
+            <button class="edit_btn prev" onclick="prev();">이전</button>
+        </div>
+        <div class="right_btn_wrap">
+            <button class="edit_btn delete" onclick="">삭제</button>
+            <a class="edit_btn edit" href="">수정</a>
+        </div>
+    </div>
 
 </div>
 <!-- view_wrap -->
-
 
 <a id="certificate_save" class="certificate_save" href="/">
     마이레코드 인증서 보기&nbsp;<i class="fa-solid fa-file-arrow-down"></i>
