@@ -62,7 +62,7 @@ if($total_ranking) {
         $returnArray["data"][] = array(
             "3대" => $value["total_sum"],
             "squat" => $value["squat"],
-            "sqaut_record_id" => $value["squat_id"],
+            "squat_record_id" => $value["squat_id"],
             "benchpress" => $value["bench"],
             "benchpress_record_id" => $value["bench_id"],
             "deadlift" => $value["dead"],
