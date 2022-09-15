@@ -6,7 +6,9 @@ function init() {
     selectDeviceCheck();
 }
 
-
+function prev() {
+    history.back();
+}
 
 
 
