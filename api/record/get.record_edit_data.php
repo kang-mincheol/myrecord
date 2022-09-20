@@ -60,9 +60,13 @@ if($member["id"] != $record_data["account_id"]) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-if($record_data["status"] != '0') {
+if($record_data["status"] == '2') {
     $returnArray["code"] = "ERROR";
-    $returnArray["msg"] = "수정 불가능한 상태입니다.";
+    $returnArray["msg"] = "승인 완료된 마이레코드는 수정이 불가합니다.";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+} else if($record_data["status"] == '1') {
+    $returnArray["code"] = "ERROR";
+    $returnArray["msg"] = "현재 심사중으로 수정이 불가합니다.";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
