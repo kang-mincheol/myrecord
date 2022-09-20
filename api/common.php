@@ -35,37 +35,37 @@ function cleansingParams($params, $injection_check = false){
 
 
 //Log 기록
-$MEMBER_ID = $is_member ? $member["id"] : null;
-$METHOD = $_SERVER["REQUEST_METHOD"];
-$REQUEST_USER_AGENT = $_SERVER["HTTP_USER_AGENT"];
-$REQUEST_URL = $_SERVER["REQUEST_URI"];
-$REQUEST_BODY = $_POST ? $_POST : null;
-if($_POST) {
-    $REQUEST_BODY = "";
-    foreach($_POST as $key => $value) {
-        $REQUEST_BODY = $key;
-    }
-}
-$HTTP_REFERER = $_SERVER["HTTP_REFERER"];
-
-$log_query = "
-    Insert Into RequestLog
-    Set
-        request_member = :request_member,
-        method = :method,
-        user_agent = :user_agent,
-        request_url = :request_url,
-        request_body = :request_body,
-        http_referer = :http_referer
-";
-$log_param = array(
-    ":request_member" => $MEMBER_ID,
-    ":method" => $METHOD,
-    ":user_agent" => $REQUEST_USER_AGENT,
-    ":request_url" => $REQUEST_URL,
-    ":request_body" => $REQUEST_BODY,
-    ":http_referer" => $HTTP_REFERER
-);
-$PDO->execute($log_query, $log_param);
+//$MEMBER_ID = $is_member ? $member["id"] : null;
+//$METHOD = $_SERVER["REQUEST_METHOD"];
+//$REQUEST_USER_AGENT = $_SERVER["HTTP_USER_AGENT"];
+//$REQUEST_URL = $_SERVER["REQUEST_URI"];
+//$REQUEST_BODY = $_POST ? $_POST : null;
+//if($_POST) {
+//    $REQUEST_BODY = "";
+//    foreach($_POST as $key => $value) {
+//        $REQUEST_BODY = $key;
+//    }
+//}
+//$HTTP_REFERER = $_SERVER["HTTP_REFERER"];
+//
+//$log_query = "
+//    Insert Into RequestLog
+//    Set
+//        request_member = :request_member,
+//        method = :method,
+//        user_agent = :user_agent,
+//        request_url = :request_url,
+//        request_body = :request_body,
+//        http_referer = :http_referer
+//";
+//$log_param = array(
+//    ":request_member" => $MEMBER_ID,
+//    ":method" => $METHOD,
+//    ":user_agent" => $REQUEST_USER_AGENT,
+//    ":request_url" => $REQUEST_URL,
+//    ":request_body" => $REQUEST_BODY,
+//    ":http_referer" => $HTTP_REFERER
+//);
+//$PDO->execute($log_query, $log_param);
 
 ?>
