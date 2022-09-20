@@ -92,8 +92,12 @@ function getRecordData() {
 
                 //본인일 경우
                 if(data["data"]["is_recorder"]) {
+                    //심사완료 승인일경우
                     //인증서 view
-                    $("#certificate_save").addClass("on").attr('href', '/record/record_certificate/?record_id='+record_id);
+                    if(data["data"]["record_status_eng"] == "approval") {
+                        $("#certificate_save").addClass("on").attr('href', '/record/record_certificate/?record_id='+record_id);
+                    }
+
                     //bottom_btn view
                     $("#view_wrap .bottom_btn_wrap .right_btn_wrap").addClass("on");
                     //삭제 event

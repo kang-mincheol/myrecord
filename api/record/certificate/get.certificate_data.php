@@ -8,7 +8,6 @@ $returnArray = array(
     "msg"=>"정상 처리되었습니다"
 );
 
-
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (is_null($data) || !checkParams($data, ["record_id"])) {
@@ -23,7 +22,7 @@ $data = cleansingParams($data);
 
 if(!$is_member) {
     $returnArray["code"] = "MEMBER_ONLY";
-    $returnArray["msg"] = "로그인 후 이용해주세요.";
+    $returnArray["msg"] = "로그인 후 이용해주세요";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
@@ -36,9 +35,19 @@ if(!is_number($data["record_id"])) {
 $record_id = preg_replace("/[^0-9]+/u", "", $data["record_id"]);
 
 $query = "
-    Select  *
-    From    tb_record_request
-    Where   id = :id
+    Select  T1.account_id, T1.status, T2.user_nickname, T1.record_weight, T3.record_name_ko, T4.create_datetime
+    From    tb_record_request T1
+    Inner Join (
+        Select  id, user_nickname
+        From    Account
+    ) T2
+    On  T1.account_id = T2.id
+    Inner Join  tb_record_master T3
+    On  T1.record_type = T3.id
+    Left Outer Join tb_record_inspection T4
+    On  T1.id = T4.request_id
+    And     T4.change_status = '2'
+    Where   T1.id = :id
 ";
 
 $param = array(
@@ -53,53 +62,29 @@ if(!$record_data) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-//본인 글이 아닌경우 원본 데이터 get 불가
+//본인 글이 아닌경우 데이터 get 불가
 if($member["id"] != $record_data["account_id"]) {
     $returnArray["code"] = "ERROR";
     $returnArray["msg"] = "잘못된 값 입니다.<br/>-3";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-if($record_data["status"] == '2') {
+//승인 상태인지 확인
+if($record_data["status"] != 2) {
     $returnArray["code"] = "ERROR";
-    $returnArray["msg"] = "승인 완료된 마이레코드는 수정이 불가합니다.";
-    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
-} else if($record_data["status"] == '1') {
-    $returnArray["code"] = "ERROR";
-    $returnArray["msg"] = "현재 심사중으로 수정이 불가합니다.";
+    $returnArray["msg"] = "마이레코드 인증서는 승인 후 확인가능합니다";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
 
+
+//success
 $returnArray["data"] = array(
-    "type" => $record_data["record_type"],
-    "weight" => $record_data["record_weight"]
+    "nickname" => $record_data["user_nickname"],
+    "record_type" => $record_data["record_name_ko"],
+    "record_weight" => $record_data["record_weight"]."KG",
+    "date" => $record_data["create_datetime"] ? date("Y.m.d", $record_data["create_datetime"]) : "-"
 );
-
-
-// 파일 데이터 get
-$query = "
-    Select  *
-    From    tb_record_request_file
-    Where   request_id = :request_id
-";
-
-$param = array(
-    ":request_id" => $record_data["id"]
-);
-
-$record_file_data = $PDO -> fetchAll($query, $param);
-
-if($record_file_data) {
-    foreach($record_file_data as $row) {
-        $returnArray["data"]["file"][] = array(
-            "file_name" => $row["file_original_name"],
-            "file_id" => $row["file_guid"],
-            "file_no" => $row["id"],
-            "file_type" => $row["file_type"]
-        );
-    }
-}
 
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;

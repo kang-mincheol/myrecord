@@ -46,6 +46,23 @@
     width: calc(50% - 10px);
 }
 
+@media screen and (max-width: 1050px) {
+    .edit_wrap {
+        width: auto;
+    }
+
+    .edit_wrap .record_option_wrap {
+        flex-direction: column;
+    }
+
+    .edit_wrap .record_option_wrap .myrecord_input_wrap {
+        width: auto;
+    }
+
+    .edit_wrap .record_option_wrap .myrecord_input_wrap.record_type {
+        margin-bottom: 20px;
+    }
+}
 
 
 
@@ -75,7 +92,7 @@
 }
 
 .file_add_wrap .file_row_box .file_row .file_name_box {
-    width: calc(100% - 120px); margin-right: 10px; color: #303030; font-size: 14px; font-weight: 500;
+    width: calc(100% - 120px); margin-right: 10px; color: #303030; font-size: 14px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
 }
 
 .file_add_wrap .file_row_box .file_row .file_row_remote_box {
