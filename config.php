@@ -6,7 +6,7 @@ define('NO_ALONE', true);
 define('SERVER_IP', "49.50.167.241");
 
 //운영서버여부
-define('IS_LIVE' , gethostbyname($_SERVER["HTTP_HOST"]) == SERVER_IP);
+define('IS_LIVE' , gethostbyname($_SERVER["HTTP_HOST"]) == SERVER_IP ? true : false);
 
 //로컬여부
 define('IS_LOCAL' , strpos($_SERVER["HTTP_HOST"], "localhost") !== false);
