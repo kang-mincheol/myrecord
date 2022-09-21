@@ -3,7 +3,7 @@
 // 이 상수가 정의되지 않으면 각각의 개별 페이지는 별도로 실행될 수 없음
 define('NO_ALONE', true);
 
-define('SERVER_IP', "");
+define('SERVER_IP', "49.50.167.241");
 
 //운영서버여부
 define('IS_LIVE' , gethostbyname($_SERVER["HTTP_HOST"]) == SERVER_IP);
@@ -14,7 +14,7 @@ define('IS_LOCAL' , strpos($_SERVER["HTTP_HOST"], "localhost") !== false);
 //DB 연결
 define('MYSQL_HOST', IS_LIVE && IS_LOCAL ? SERVER_IP.':3306' : 'localhost');
 define('MYSQL_USER', IS_LIVE ? 'myrecord' : 'myrecord');
-define('MYSQL_PASSWORD', IS_LIVE ? 'myrecord2022!' : 'myrecord2022!');
+define('MYSQL_PASSWORD', IS_LIVE ? 'Akdlfpzhem2022!@' : 'myrecord2022!');
 define('MYSQL_DB', 'myrecord'); 
 
 define('SESSION_PATH', "/var/lib/php/sessions");
