@@ -54,6 +54,20 @@ if(password_verify($data["password"], $member["user_password"])) {
         Values
         ('{$ip_address}', '{$user_agent}', '{$data["id"]}', 1, Now())
     ");
+
+    // 로그인 일자 update
+    $login_date_sql = "
+        Update  Account
+        SET
+            login_date = :login_date
+        Where   id = :id
+    ";
+    $param = array(
+        ":login_date" => date("Y-m-d H:i:s"),
+        ":id" => $member["id"]
+    );
+
+    $PDO -> execute($login_date_sql, $param);
 } else {
     $returnArray["code"] = "LOGIN_FAIL";
     $returnArray["msg"] = "입력한 아이디와 비밀번호가 일치하지 않습니다. 아이디 또는 비밀번호를 확인 해주세요.";
