@@ -176,12 +176,17 @@ if(!empty($data["account_email"])) {
 //비빌번호 암호화
 $password = password_hash($data["account_password"], PASSWORD_BCRYPT);
 
+//수신동의 관련
+//마케팅
+$terms_marketing = $data["terms_marketing"] == true ? '1' : '0';
+
 $create = sql_query("
     Insert Into Account
     Set
         user_id = '{$data["account_id"]}',
         user_password = '{$password}',
-        user_nickname = '{$data["account_nickname"]}'
+        user_nickname = '{$data["account_nickname"]}',
+        terms_marketing = '{$terms_marketing}'
         {$add_query}
 ");
 

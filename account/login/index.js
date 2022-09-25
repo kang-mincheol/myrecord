@@ -32,11 +32,11 @@ function loginSubmit() {
         url: "/api/account/set.login_check.php",
         success: function(data) {
             loadingOff();
-            console.log(data);
             if(data["code"] == "SUCCESS") {
                 location.href = "/";
             } else {
-                return myrecordAlert('on', data["msg"]);
+                myrecordAlert('on', data["msg"]);
+                return $("#myrecord_alert .alert_box .alert_btn").focus();
             }
         },
         error: function(error) {
