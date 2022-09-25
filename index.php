@@ -41,7 +41,8 @@ echo css_load('/common/index.css');
         <div class="article_box" name="box_2">
             <p class="box_title">Step 2</p>
             <p class="box_text">
-                기록시 사용한 원판을 사진/영상으로 기록합니다
+                기록시 사용한 원판을</br>
+                사진/영상으로 기록합니다
             </p>
         </div>
         <div class="article_box" name="box_3">
@@ -53,7 +54,7 @@ echo css_load('/common/index.css');
         <div class="article_box" name="box_4">
             <p class="box_title">Step 4</p>
             <p class="box_text">
-                관리자 심사 대기
+                관리자 심사 대기</br>
                 (승인시 마이레코드 인증서 생성)
             </p>
         </div>
@@ -63,23 +64,10 @@ echo css_load('/common/index.css');
 
 
 
-
-
-<div id="slide_wrap">
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-        </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
-    </div>
+<div id="section_3">
+    <div class="section_wrap"></div>
 </div>
-<!-- slide_wrap -->
-
+<!-- section_3 -->
 
 
 
@@ -212,13 +200,12 @@ echo css_load('/common/index.css');
 
 
 
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <?
 echo script_load('/common/index.js');
 ?>
 <script>
 $(function () {
-    slideRender();
+    
 });
 </script>
 <?
