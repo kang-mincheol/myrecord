@@ -80,6 +80,7 @@ function setRecordData() {
 }
 
 function insertData() {
+    loadingOn();
     var record_type = $("#record_type").val();
     record_type = record_type.replace(/[^0-9]/g, "");
     var record_weight = $("#record_weight").val();
@@ -87,17 +88,20 @@ function insertData() {
 
     if(record_type == 'none' || record_type == '') {
         myrecordAlert('on', '등록할 종목을 선택해주세요');
+        loadingOff();
         return;
     }
 
     if(record_weight == '') {
         myrecordAlert('on', '무게를 입력해주세요');
+        loadingOff();
         return;
     }
 
     var fileCheck = $(".myrecord_input_wrap.file_wrap .file_add_wrap .file_row_box .file_row").length;
     if(fileCheck == 0) {
         myrecordAlert('on', '파일을 첨부해주세요');
+        loadingOff();
         return;
     }
 
@@ -121,11 +125,13 @@ function insertData() {
 
     if(totalFileSizeCal > fileLimitSize) {
         myrecordAlert('on', '파일은 총 100MB 이하로 업로드 해주세요');
+        loadingOff();
         return;
     }
 
     if(fileCount == 0) {
         myrecordAlert('on', '파일을 등록해주세요');
+        loadingOff();
         return;
     }
 
@@ -141,6 +147,7 @@ function insertData() {
         contentType: false,
         processData: false,
         success: function(data) {
+            loadingOff();
             console.log(data);
             if(data["code"] == "SUCCESS") {
                 myrecordAlert('on', '등록 완료', '알림', 'location.href=\'/record/my_record/\'');
