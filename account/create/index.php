@@ -112,7 +112,7 @@ echo css_load('/account/create/index.css');
             <label class="wrap_label" for="account_phone">(선택)핸드폰번호</label>
         </div>
         <div class="form_value_box">
-            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number" placeholder="핸드폰번호를 입력해주세요"/>
+            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number" placeholder="핸드폰번호를 입력해주세요 '-' 포함"/>
         </div>
     </div>
 

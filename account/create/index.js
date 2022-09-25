@@ -75,31 +75,63 @@ function createAccountCheck() {
     var email = $("#account_email").val();
 
     if(id.length < 5 || id.length > 20) {
-        $("#account_id").addClass("alert").after('<p class="caution_text">아이디는 5~20자리로 입력해주세요</p>');
+        var alert_check = $("#account_id").siblings(".caution_text").length;
+        if(alert_check == 0) {
+            $("#account_id").addClass("alert").after('<p class="caution_text">아이디는 5~20자리로 입력해주세요</p>');
+        }
+        $("#account_id").focus();
         return;
     }
 
     var password_reg = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^*&+=]).*$/;
     if(!password_reg.test(password)) {
-        $("#account_password").addClass("alert").after('<p class="caution_text">비밀번호 규칙에 맞게 입력해주세요</p>');
+        var alert_check = $("#account_password").siblings(".caution_text").length;
+        if(alert_check == 0) {
+            $("#account_password").addClass("alert").after('<p class="caution_text">비밀번호 규칙에 맞게 입력해주세요</p>');
+        }
+        $("#account_password").focus();
         return;
     }
 
     if(password != password_check) {
-        $("#account_password_check").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+        var alert_check = $("#account_password_check").siblings(".caution_text").length;
+        if(alert_check == 0) {
+            $("#account_password_check").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+        }
+        $("#account_password_check").focus();
         return;
     }
 
     var nickname_reg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,10}$/;
     if(!nickname_reg.test(nickname)) {
-        $("#account_nickname").addClass("alert").after('<p class="caution_text">닉네임 규칙에 맞게 입력해주세요</p>');
+        var alert_check = $("#account_nickname").siblings(".caution_text").length;
+        if(alert_check == 0) {
+            $("#account_nickname").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+        }
+        $("#account_nickname").focus();
         return;
     }
 
     if(name != "") {
         var name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
         if(!name_reg.test(name)) {
-            $("#account_name").addClass("alert").after('<p class="caution_text">이름 규칙에 맞게 입력해주세요</p>');
+            var alert_check = $("#account_name").siblings(".caution_text").length;
+            if(alert_check == 0) {
+                $("#account_name").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+            }
+            $("#account_name").focus();
+            return;
+        }
+    }
+
+    if(phone != "") {
+        var phone_reg = /^\d{3}-\d{3,4}-\d{4}$/;
+        if(!phone_reg.test(phone)) {
+            var alert_check = $("#account_phone").siblings(".caution_text").length;
+            if(alert_check == 0) {
+                $("#account_phone").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+            }
+            $("#account_phone").focus();
             return;
         }
     }
@@ -107,7 +139,11 @@ function createAccountCheck() {
     if(email != "") {
         var email_reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
         if(!email_reg.test(email)) {
-            $("#account_email").addClass("alert").after('<p class="caution_text">이메일을 정확하게 입력해주세요</p>');
+            var alert_check = $("#account_email").siblings(".caution_text").length;
+            if(alert_check == 0) {
+                $("#account_email").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+            }
+            $("#account_email").focus();
             return;
         }
     }
