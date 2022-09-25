@@ -119,11 +119,15 @@
     }
 
     #view_wrap .record_info_row .left_box {
-        margin-bottom: 10px;
+        display: block; margin-bottom: 10px;
     }
 
     #view_wrap .record_info_row .info_box {
-        width: calc(50% - 5px);
+        width: 100%;
+    }
+
+    #view_wrap .record_info_row .info_box:first-child {
+        margin-bottom: 10px;
     }
 
     #view_wrap .record_info_row .info_box.status_box {
