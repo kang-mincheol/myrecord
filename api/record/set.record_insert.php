@@ -108,7 +108,7 @@ if($record_weight > 9999) {
 }
 
 
-$accessType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "application/octet-stream", "image/jpeg", "image/jpg", "image/png");
+$accessType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "video/quicktime", "application/octet-stream", "image/jpeg", "image/jpg", "image/png");
 
 
 if(!$_FILES) {
