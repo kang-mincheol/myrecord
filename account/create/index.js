@@ -131,6 +131,7 @@ function createAccountSubmit() {
     var name = $("#account_name").val();
     var phone = $("#account_phone").val();
     var email = $("#account_email").val();
+    var terms_marketing = $("#terms_marketing").prop('checked');
 
     $.ajax({
         type: "POST",
@@ -141,7 +142,8 @@ function createAccountSubmit() {
             account_nickname: nickname,
             account_name: name,
             account_phone: phone,
-            account_email: email
+            account_email: email,
+            terms_marketing: terms_marketing
         }),
         url: "/api/account/set.create_account.php",
         success: function(data) {
