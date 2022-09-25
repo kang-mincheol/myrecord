@@ -4,6 +4,46 @@
 
 
 
+#section_1 {
+    background: url("/img/main/section_1.jpg") 50% 50% no-repeat; background-size: cover;
+}
+
+#section_1 .bg_layer {
+    background-color: rgba(0, 0, 0, 0.6); width: 100%; height: 100%;
+}
+
+#section_1 .section_text_wrap {
+    max-width: 980px; padding: 120px 20px; margin: 0 auto; display: flex; justify-content: center; align-items: center; flex-direction: column;
+}
+
+#section_1 .section_text_wrap .text_1 {
+    color: #FFF; font-size: 50px; font-weight: 700; margin-bottom: 30px; line-height: 1.4; text-align: center; text-shadow: 3px 4px 0px #000; word-break: keep-all;
+}
+
+#section_1 .section_text_wrap .record_btn {
+    display: flex; justify-content: center; align-content: center; padding: 20px; background-color: #1c1c1ce0; border-radius: 50px; color: #FFF; font-size: 18px; font-weight: 500;
+}
+
+#section_1 .section_text_wrap .record_btn i {
+    padding-top: 2px; padding-left: 4px;
+}
+
+@media screen and (max-width: 1050px) {
+    #section_1 .section_text_wrap {
+        padding: 60px 20px;
+    }
+
+    #section_1 .section_text_wrap .text_1 {
+        font-size: 30px;
+    }
+}
+
+
+
+
+
+
+
 #slide_wrap {
     margin-bottom: 10px;
 }
