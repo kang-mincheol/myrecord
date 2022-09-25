@@ -31,7 +31,7 @@ session_save_path(SESSION_PATH);
 @session_start();
 
 //member 전역 변수
-$member;
+$member = false;
 
 
 //로그인 설정
