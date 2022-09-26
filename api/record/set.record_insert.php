@@ -163,13 +163,18 @@ $param = array(
 $insert_result = $PDO -> execute($insert_sql, $param);
 
 //파일 insert
-$videoType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "application/octet-stream");
+$videoType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "video/quicktime", "application/octet-stream");
 $upload_path = $_SERVER["DOCUMENT_ROOT"]."/data/record/";
 foreach($_FILES as $key => $value) {
     $GUID = makeGuid();
     $file_type_text = "";
     if(in_array($value["type"], $videoType)) {
-        $file_type_name = explode("/", $file_type);
+        //quicktime 일경우 video/mp4 로 변환저장
+        //quicktime 의 경우 윈도우에 코덱이 없음
+        if($value["type"] == "video/quicktime") {
+            $value["type"] = "video/mp4";
+        }
+        $file_type_name = explode("/", $value["type"]);
         $file_type_text = ".".$file_type_name[1];
     }
 
