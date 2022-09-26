@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+
+
+
+.wrap_title {
+    color: #303030; font-size: 28px; font-weight: 700; line-height: 1.5; text-align: center; margin: 30px 0;
+}
+
+
+
+
+
+#util_wrap {
+    max-width: 980px; margin: 0 auto 50px; display: flex; flex-wrap: wrap; justify-content: space-between;
+}
+
+#util_wrap .util_box {
+    width: calc(50% - 10px); border-radius: 10px; background-color: #0096FF; margin-bottom: 20px;
+}
+
+#util_wrap .util_box .util_link {
+    padding: 20px; box-sizing: border-box;
+}
+
+#util_wrap .util_box .box_icon {
+    color: #FFF; font-size: 40px; text-align: center; margin-bottom: 10px;
+}
+
+#util_wrap .util_box .box_title {
+    color: #FFF; font-size: 20px; font-weight: 700; line-height: 1.5; text-align: center;
+}
