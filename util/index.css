@@ -15,6 +15,16 @@
     max-width: 980px; margin: 0 auto 50px; display: flex; flex-wrap: wrap; justify-content: space-between;
 }
 
+@media screen and (max-width: 1050px) {
+    #util_wrap {
+        max-width: none; width: auto; padding: 0 20px;
+    }
+}
+
+
+
+
+
 #util_wrap .util_box {
     width: calc(50% - 10px); border-radius: 10px; background-color: #0096FF; margin-bottom: 20px;
 }
@@ -29,4 +39,10 @@
 
 #util_wrap .util_box .box_title {
     color: #FFF; font-size: 20px; font-weight: 700; line-height: 1.5; text-align: center;
+}
+
+@media screen and (max-width: 1050px) {
+    #util_wrap .util_box {
+        width: 100%;
+    }
 }
