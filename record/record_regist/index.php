@@ -11,11 +11,23 @@ if(!$is_member) {
 }
 ?>
 
-
 <?
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/record_sub_menu.php');
 echo css_load('/record/record_regist/index.css');
 ?>
+
+
+<div id="notice_popup_wrap" class="on">
+    <div class="popup_box">
+        <div class="popup_header">알림</div>
+        <div class="popup_body">
+            Record 등록 후 삭제는 가능하나 수정이 불가합니다</br>
+            Record 종목/무게/첨부파일을 다시한번 확인 후 등록부탁드립니다
+        </div>
+        <button class="access_btn" onclick="noticePopupOff();">확인</button>
+    </div>
+</div>
+<!-- notice_popup_wrap -->
 
 
 <div class="edit_wrap">
@@ -88,7 +100,7 @@ echo css_load('/record/record_regist/index.css');
     <!-- file_wrap -->
 
     <div class="footer_btn_wrap">
-        <button class="list_btn" onclick="prev();">목록</button>
+        <button class="list_btn" onclick="prev();">이전</button>
         <button class="update_btn" onclick="setRecordData();">등록</button>
     </div>
     <!-- footer_btn_wrap -->

@@ -75,7 +75,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         </div>
         <div class="right_btn_wrap">
             <button class="edit_btn delete" onclick="">삭제</button>
-            <a class="edit_btn edit" href="">수정</a>
+<!--            <a class="edit_btn edit" href="">수정</a>-->
         </div>
     </div>
 

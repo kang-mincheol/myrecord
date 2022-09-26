@@ -1,6 +1,6 @@
 function init() {
     //등록 수정 체크
-    recordEditCheck();
+//    recordEditCheck();
 
     //셀렉트박스 사용시 아래함수를 호출할것
     selectDeviceCheck();
@@ -10,9 +10,14 @@ function prev() {
     history.back();
 }
 
+function noticePopupOff() {
+    $("#notice_popup_wrap").removeClass("on");
+}
+
 
 
 function recordEditCheck() {
+    return;
     var record_id = getParam('record_id');
     record_id = record_id.replace(/[^0-9]/g, "");
 
@@ -25,6 +30,7 @@ function recordEditCheck() {
 }
 
 function getRecordData(record_id) {
+    return;
     $.ajax({
         type: "POST",
         async: false,
@@ -75,7 +81,7 @@ function setRecordData() {
     if(record_id == '') {
         insertData();
     } else {
-        updateData();
+//        updateData();
     }
 }
 
@@ -162,24 +168,21 @@ function insertData() {
 }
 
 function updateData() {
-    loadingOn();
-    var record_id = getParam('record_id');
-    record_id = record_id.replace(/[^0-9]/g, "");
-
-    if(record_id == "") {
-        myrecordAlert('on', '올바르지 않은 값입니다');
-        loadingOff();
-        return;
-    }
-
-    var recordData = new FormData();
-    
-    
-    
-    
-    
-    
-    loadingOff();
+    myrecordAlert('on', '사용불가능한 기능입니다');
+    return;
+//    loadingOn();
+//    var record_id = getParam('record_id');
+//    record_id = record_id.replace(/[^0-9]/g, "");
+//
+//    if(record_id == "") {
+//        myrecordAlert('on', '올바르지 않은 값입니다');
+//        loadingOff();
+//        return;
+//    }
+//
+//    var recordData = new FormData();
+//
+//    loadingOff();
 }
 
 

@@ -30,6 +30,33 @@
 
 
 
+#notice_popup_wrap {
+    display: none; width: 100%; height: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.3); z-index: 9;
+}
+
+#notice_popup_wrap.on {
+    display: block;
+}
+
+#notice_popup_wrap .popup_box {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); width: 320px; border-radius: 10px; overflow: hidden;
+}
+
+#notice_popup_wrap .popup_box .popup_header {
+    color: #FFF; font-size: 20px; font-weight: 500; line-height: 1.5; background-color: #0096FF; padding: 15px 0; text-align: center;
+}
+
+#notice_popup_wrap .popup_box .popup_body {
+    color: #303030; font-size: 18px; font-weight: 500; line-height: 1.5; letter-spacing: -0.4px; padding: 20px; background-color: #FFF; text-align: center; word-break: keep-all;
+}
+
+#notice_popup_wrap .popup_box .access_btn {
+    display: block; width: 100%; padding: 15px 0; background-color: #0096FF; color: #FFF; font-size: 18px; font-weight: 700; line-height: 1.5;
+}
+
+
+
+
 .edit_wrap {
     width: 980px; margin: 0 auto;
 }
