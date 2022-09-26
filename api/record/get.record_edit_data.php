@@ -73,7 +73,8 @@ if($record_data["status"] == '2') {
 
 $returnArray["data"] = array(
     "type" => $record_data["record_type"],
-    "weight" => $record_data["record_weight"]
+    "weight" => $record_data["record_weight"],
+    "status" => $record_data["status"]
 );
 
 
