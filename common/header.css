@@ -23,7 +23,11 @@
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box {
-    display: flex; justify-content: center; align-items: center; height: 100px;
+    display: flex; justify-content: center; align-items: center; height: 100px; margin-right: 10px;
+}
+
+#header .pc_header .left_box .menu_wrap .menu_box:last-child {
+    margin-right: 0;
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .menu_btn {
@@ -60,7 +64,7 @@
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .sub_menu_container .sub_menu_wrap .sub_menu_box .sub_menu_btn {
-    color: #303030; font-size: 18px; font-weight: 400; transition: all 0.4s;
+    color: #303030; font-size: 18px; font-weight: 400; transition: all 0.3s;
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .sub_menu_container .sub_menu_wrap .sub_menu_box .sub_menu_btn:hover {
