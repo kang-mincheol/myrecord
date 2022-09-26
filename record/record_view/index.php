@@ -87,8 +87,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 </a>
 
 
-
-
 <?
 echo script_load('/assets/owlcarousel/owl.carousel.min.js');
 echo script_load('/record/record_view/index.js');

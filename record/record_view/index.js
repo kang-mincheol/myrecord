@@ -63,6 +63,7 @@ function getRecordData() {
                 if(data["file"]){
                     //파일
                     var fileHtml = "";
+
                     data["file"].forEach(function(data) {
                         if(data["file_type"].indexOf('image') !== -1) {
                             fileHtml +=
@@ -124,7 +125,7 @@ function fileSlideInit() {
         items: 1,
         center: true,
         autoHeight: true,
-        nav: false
+        nav: true
     });
 }
 
