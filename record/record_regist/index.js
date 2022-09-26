@@ -16,14 +16,11 @@ function recordEditCheck() {
     var record_id = getParam('record_id');
     record_id = record_id.replace(/[^0-9]/g, "");
 
-    if(record_id == '') {
-        //등록
-        
-    } else {
+    if(record_id != '') {
         //수정
         $(".edit_wrap .edit_title").text('Record 수정');
         $(".edit_wrap .footer_btn_wrap .update_btn").text('수정');
-        getRecordData(record_id);
+        getRecordData(record_id);   
     }
 }
 
@@ -41,8 +38,11 @@ function getRecordData(record_id) {
                 $("#record_type").attr('onclick', '');
                 $(".myrecord_input_wrap .myrecord_select_wrap .mobile_select_wrap .mobile_select option").prop('disabled', true);
                 $(".myrecord_input_wrap .myrecord_select_wrap .mobile_select_wrap .mobile_select option[value="+data["data"]["type"]+"]").prop('disabled', false);
-                $("#record_weight").attr('readonly', true);
-                
+
+                if(data["data"]["status"] != 0) {
+                    $("#record_weight").attr('readonly', true);
+                }
+
                 var record_data = data["data"];
                 $(".myrecord_input_wrap.record_type .myrecord_select_wrap .select_list_wrap .select_list_btn[value="+record_data["type"]+"]").click();
                 $("#record_weight").val(record_data["weight"]);
@@ -162,7 +162,24 @@ function insertData() {
 }
 
 function updateData() {
-    console.log('수정');
+    loadingOn();
+    var record_id = getParam('record_id');
+    record_id = record_id.replace(/[^0-9]/g, "");
+
+    if(record_id == "") {
+        myrecordAlert('on', '올바르지 않은 값입니다');
+        loadingOff();
+        return;
+    }
+
+    var recordData = new FormData();
+    
+    
+    
+    
+    
+    
+    loadingOff();
 }
 
 

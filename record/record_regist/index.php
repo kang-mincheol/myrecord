@@ -52,7 +52,7 @@ echo css_load('/record/record_regist/index.css');
                 <label class="wrap_label" for="record_weight">Record 무게(kg)</label>
             </div>
             <div class="form_value_box">
-                <input id="record_weight" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="text" placeholder="kg 단위로 입력해주세요"/>
+                <input id="record_weight" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number" placeholder="kg 단위로 입력해주세요"/>
             </div>
         </div>
 
