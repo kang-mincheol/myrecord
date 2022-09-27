@@ -164,7 +164,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                 </div>
                 <div class="menu_list_container">
                     <div class="menu_wrap">
-                        <div class="wrap_title">
+                        <div class="menu_wrap_title">
                             <a href="/record/landing/" class="menu_title">마이레코드</a>
                         </div>
                         <div class="wrap_body">
@@ -185,7 +185,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                     <!-- 마이레코드 -->
                     
                     <div class="menu_wrap">
-                        <div class="wrap_title">
+                        <div class="menu_wrap_title">
                             <a href="/util/" class="menu_title">도구</a>
                         </div>
                         <div class="wrap_body">
