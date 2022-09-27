@@ -96,6 +96,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                     <a href="/record/landing/" class="menu_btn">마이레코드</a>
                 </div>
 
+                <div class="menu_box" name="util">
+                    <a href="/util/" class="menu_btn">도구</a>
+                </div>
+
             </div>
             <!-- menu_wrap -->
         </div>
@@ -178,7 +182,21 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                             </div>
                         </div>
                     </div>
+                    <!-- 마이레코드 -->
+                    
+                    <div class="menu_wrap">
+                        <div class="wrap_title">
+                            <a href="/util/" class="menu_title">도구</a>
+                        </div>
+                        <div class="wrap_body">
+                            <div class="menu_row">
+                                <a href="/util/kg_lb/" class="menu_btn">무게 변환기</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 도구 -->
                 </div>
+                <!-- menu_list_container -->
             </div>
             <!-- mobile_menu_container -->
 
