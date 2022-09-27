@@ -89,7 +89,7 @@
 
 
 #section_3 {
-    height: 450px; background: url('/img/main/section_3.jpg') 50% no-repeat; background-size: cover; background-attachment: fixed;
+    height: 450px; background: url('/img/main/section_3.jpg') 50% no-repeat; background-size: cover; background-attachment: fixed; -webkit-background-attachment: fixed;
 }
 
 #section_3 .section_wrap {
