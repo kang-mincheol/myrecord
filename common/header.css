@@ -177,11 +177,11 @@
         margin-bottom: 0;
     }
 
-    #mobile_menu_container .menu_list_container .menu_wrap .wrap_title {
+    #mobile_menu_container .menu_list_container .menu_wrap .menu_wrap_title {
         display: flex; align-items: center; height: 34px; background-color: #303030; padding: 0 5px;
     }
 
-    #mobile_menu_container .menu_list_container .menu_wrap .wrap_title .menu_title {
+    #mobile_menu_container .menu_list_container .menu_wrap .menu_wrap_title .menu_title {
         color: #FFF; font-size: 16px; font-weight: 500;
     }
 
