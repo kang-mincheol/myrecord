@@ -16,7 +16,7 @@ echo css_load('/common/index.css');
             <p class="text_1">
                 스트롱맨 시청자 출신</br>
                 관리자가 직접 검증하는</br>
-                3대측정
+                3대측정 111
             </p>
             <a class="record_btn" href="/record/squat/list/">
                 3대 레코드 등록하기<i class="fa-solid fa-circle-arrow-right"></i>
