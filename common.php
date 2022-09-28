@@ -31,11 +31,11 @@ session_save_path(SESSION_PATH);
 @session_start();
 
 //member 전역 변수
-$member = "NULL";
+$member = false;
 
 
 //로그인 설정
-if ($_SESSION['user_id'] != undfined) { // 로그인중이라면
+if ($_SESSION['user_id']) { // 로그인중이라면
     $member = getMember($_SESSION['user_id']);
 }
 
