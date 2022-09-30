@@ -25,5 +25,5 @@
 }
 
 #myaccount_wrap .footer_btn_wrap .account_change_btn {
-    color: #FFF; background-color: #0096FF;
+    color: #FFF; background-color: var(--main-color-1);
 }

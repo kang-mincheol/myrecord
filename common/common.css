@@ -1,6 +1,10 @@
 @charset "UTF-8";
 
 /********** reset CSS **********/
+:root {
+    --main-color-1: #0123B4;
+}
+
 body, div, p, a, ul, ol, li, input, button {
     padding: 0; margin: 0;
 }

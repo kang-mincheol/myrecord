@@ -81,7 +81,7 @@
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box .record_status .blue {
-    color: #007eff;
+    color: var(--main-color-1);
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box .record_status .red {

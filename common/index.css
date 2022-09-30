@@ -47,7 +47,7 @@
 }
 
 #section_2 .section_wrap .article_box {
-    width: 200px; border: 6px solid #0096FF; border-radius: 10px; box-sizing: border-box; padding: 20px 10px; position: relative;
+    width: 200px; border: 6px solid var(--main-color-1); border-radius: 10px; box-sizing: border-box; padding: 20px 10px; position: relative;
 }
 
 #section_2 .section_wrap .article_box::after {
