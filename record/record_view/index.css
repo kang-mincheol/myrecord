@@ -104,7 +104,7 @@
     background-color: #FFF; color: #303030;
 }
 #view_wrap .record_info_row .status_box.audit {
-    background-color: #0096FF; color: #FFF; border-color: #0096FF;
+    background-color: var(--main-color-1); color: #FFF; border-color: var(--main-color-1);
 }
 #view_wrap .record_info_row .status_box.approval {
     background-color: #303030; color: #FFF;
@@ -184,7 +184,7 @@
 }
 
 #view_wrap .bottom_btn_wrap .edit_btn {
-    color: #FFF; font-size: 16px; padding: 12px 20px; border-radius: 3px; background-color: #0096ff; margin: 0;
+    color: #FFF; font-size: 16px; padding: 12px 20px; border-radius: 3px; background-color: var(--main-color-1); margin: 0;
 }
 
 #view_wrap .bottom_btn_wrap .right_btn_wrap {
@@ -212,7 +212,7 @@
 
 
 .certificate_save {
-    display: none; justify-content: center; align-items: center; width: 980px; margin: 20px auto; padding: 10px 0; box-sizing: border-box; border: 3px solid #0096FF; border-radius: 5px; background-color: #0096FF; color: #FFF; font-size: 18px; font-weight: 700; text-align: center; word-break: keep-all;
+    display: none; justify-content: center; align-items: center; width: 980px; margin: 20px auto; padding: 10px 0; box-sizing: border-box; border: 3px solid var(--main-color-1); border-radius: 5px; background-color: var(--main-color-1); color: #FFF; font-size: 18px; font-weight: 700; text-align: center; word-break: keep-all;
 }
 
 .certificate_save.on {

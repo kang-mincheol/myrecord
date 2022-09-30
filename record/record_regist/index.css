@@ -43,7 +43,7 @@
 }
 
 #notice_popup_wrap .popup_box .popup_header {
-    color: #FFF; font-size: 20px; font-weight: 500; line-height: 1.5; background-color: #0096FF; padding: 15px 0; text-align: center;
+    color: #FFF; font-size: 20px; font-weight: 500; line-height: 1.5; background-color: var(--main-color-1); padding: 15px 0; text-align: center;
 }
 
 #notice_popup_wrap .popup_box .popup_body {
@@ -51,7 +51,7 @@
 }
 
 #notice_popup_wrap .popup_box .access_btn {
-    display: block; width: 100%; padding: 15px 0; background-color: #0096FF; color: #FFF; font-size: 18px; font-weight: 700; line-height: 1.5;
+    display: block; width: 100%; padding: 15px 0; background-color: var(--main-color-1); color: #FFF; font-size: 18px; font-weight: 700; line-height: 1.5;
 }
 
 
