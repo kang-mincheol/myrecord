@@ -27,7 +27,7 @@
 
 
 #calculator_wrap .info_box {
-    padding: 20px; background-color: rgba(1, 35, 180, 0.4); margin-bottom: 30px;
+    padding: 20px; background-color: rgba(1, 35, 180, 0.4); margin-bottom: 30px; border-radius: 5px;
 }
 
 #calculator_wrap .info_box .result_info_wrap {

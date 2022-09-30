@@ -190,7 +190,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                         </div>
                         <div class="wrap_body">
                             <div class="menu_row">
-                                <a href="/util/kg_lb/" class="menu_btn">무게 변환기</a>
+                                <a href="/util/kg_lb/" class="menu_btn">KG <i class="fa-sharp fa-solid fa-repeat"></i> LB 변환기</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="/util/bmi/" class="menu_btn">BMI 계산기</a>
                             </div>
                         </div>
                     </div>
