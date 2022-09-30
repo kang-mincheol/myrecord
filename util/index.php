@@ -20,6 +20,18 @@ echo css_load('/util/index.css');
         </a>
     </div>
 
+    <div class="util_box">
+        <a href="/util/bmi/" class="util_link">
+            <div class="box_icon">
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+            <p class="box_title">
+                BMI 계산기</br>
+                (비만도 계산)
+            </p>
+        </a>
+    </div>
+
 <!--
     <div class="util_box">
         <div class="box_icon">
