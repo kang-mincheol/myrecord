@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+
+
+
+
+#header, #footer {
+    display: none;
+}
+
+.admin_wrap {
+    border-bottom: 3px solid #ddd; padding: 10px; box-sizing: border-box;
+}
+
+.admin_wrap .wrap_title {
+    color: #303030; font-size: 20px; font-weight: 500; margin-bottom: 20px;
+}
+
+.admin_wrap .remote_btn_wrap {
+    margin: 20px 0;
+}
+
+.admin_wrap .remote_btn_wrap .remote_btn,
+.admin_wrap .add_btn {
+    display: flex; justify-content: center; align-items: center; width: 100%; color: #FFF; background-color: #303030; font-size: 18px; font-weight: 700; border-radius: 5px; padding: 10px 0;
+}
+
+.admin_wrap .team_colum {
+    margin-bottom: 30px;
+}
+
+
+#team_person_delete .person_wrap {
+    display: flex; flex-wrap: wrap; justify-content: space-between;
+}
+
+#team_person_delete .person_wrap .person_box {
+    display: flex; justify-content: center; align-items: center; width: calc(50% - 5px); color: #FFF; padding: 10px 0; font-size: 16px; font-weight: 500; background-color: #303030; border-radius: 5px; margin-bottom: 10px; cursor: pointer;
+}
