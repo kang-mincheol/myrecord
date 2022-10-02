@@ -9,7 +9,7 @@
 }
 
 #team_wrap {
-    display: flex; justify-content: space-between;
+    width: 100%; display: flex; justify-content: space-between;
 }
 
 #team_wrap .team_colum {
@@ -38,4 +38,41 @@
 
 #team_wrap .team_colum .team_person_box .team_person_name {
     width: calc(50% - 10px); color: #FFF; font-size: 30px; font-weight: 700; padding: 10px; border-radius: 10px; background-color: #303030; text-align: center; box-sizing: border-box; margin-bottom: 10px;
+}
+
+
+
+
+@media screen and (max-width: 1050px) {
+    #team_wrap {
+        flex-direction: column;
+    }
+
+    #team_wrap .team_colum {
+        border-right: 0; border-bottom: 3px solid #ddd;
+    }
+
+    #team_wrap .team_colum:last-child {
+        border: 0;
+    }
+
+    #team_wrap .team_colum .team_score_name {
+        font-size: 28px;
+    }
+
+    #team_wrap .team_colum .team_score {
+        font-size: 64px;
+    }
+
+    #team_wrap .team_colum .team_name {
+        font-size: 58px;
+    }
+
+    #team_wrap .team_colum .team_person_box {
+        display: flex; flex-wrap: wrap; justify-content: space-between;
+    }
+
+    #team_wrap .team_colum .team_person_box .team_person_name {
+        width: calc(50% - 10px); color: #FFF; font-size: 18px; font-weight: 700; padding: 10px; border-radius: 10px; background-color: #303030; text-align: center; box-sizing: border-box; margin-bottom: 10px;
+    }
 }
