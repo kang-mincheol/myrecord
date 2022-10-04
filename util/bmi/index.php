@@ -24,7 +24,7 @@ echo css_load('/util/bmi/index.css');
         <div class="calc_value_wrap">
             <div class="myrecord_input_wrap">
                 <div class="label_box">
-                    <label class="wrap_label" for="bmi_height">신장</label>
+                    <label class="wrap_label" for="bmi_height">신장(키)</label>
                 </div>
                 <div class="form_value_box">
                     <input id="bmi_height" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number"/>

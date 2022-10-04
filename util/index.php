@@ -32,6 +32,17 @@ echo css_load('/util/index.css');
         </a>
     </div>
 
+    <div class="util_box">
+        <a href="/util/ffmi/" class="util_link">
+            <div class="box_icon">
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+            <p class="box_title">
+                FFMI 계산기
+            </p>
+        </a>
+    </div>
+
 <!--
     <div class="util_box">
         <div class="box_icon">
