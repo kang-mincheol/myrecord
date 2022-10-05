@@ -23,7 +23,7 @@ $returnArray["team"] = $team_data;
 $person_sql = "
     Select  *
     From    play_team_person
-    Order by id Asc
+    Order by person_name Asc
 ";
 
 $person_data = $PDO -> fetchAll($person_sql);
