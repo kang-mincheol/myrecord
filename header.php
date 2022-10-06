@@ -24,6 +24,11 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <meta property="og:image" content="URL:LOGO">
 <meta property="og:url" content="url">
 
+<link rel="apple-touch-icon" sizes="180x180" href="/img/company/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/company/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/company/favicon-16x16.png">
+<link rel="manifest" href="/img/company/site.webmanifest">
+
 
 <!-- safari 앵커태그 방지 -->
 <meta name="format-detection" content="telephone=no" />
