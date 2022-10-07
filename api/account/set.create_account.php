@@ -26,11 +26,15 @@ if (is_null($data) || !checkParams($data, ["terms_marketing", "account_id", "acc
 $data = cleansingParams($data);
 
 //아이디 중복확인
-$id_overlap = sql_fetch("
+$id_overlap_sql = "
     Select  count(*) as cnt
     From    Account
-    Where   user_id = '{$data["account_id"]}'
-")["cnt"];
+    Where   user_id = :user_id
+";
+$param = array(
+    ":user_id" => $data["account_id"]
+);
+$id_overlap = $PDO -> fetch($id_overlap_sql, $param)["cnt"];
 
 if($id_overlap > 0) {
     $returnArray["code"] = "ID_OVERLAP";
@@ -86,11 +90,15 @@ foreach($blockNickNameList as $value) {
 
 
 //닉네임 중복 체크
-$nickname_overlap = sql_fetch("
+$nickname_overlap_sql = "
     Select  count(*) as cnt
     From    Account
-    Where   user_nickname = '{$data["account_nickname"]}'
-")["cnt"];
+    Where   user_nickname = :user_nickname
+";
+$param = array(
+    ":user_nickname" => $data["account_nickname"]
+);
+$nickname_overlap = $PDO -> fetch($nickname_overlap_sql, $param)["cnt"];
 
 if($nickname_overlap > 0) {
     $returnArray["code"] = "NICKNAME_OVERLAP";
@@ -101,6 +109,7 @@ if($nickname_overlap > 0) {
 
 //비필수 입력 값 쿼리 변수 선언
 $add_query = "";
+$create_param = array();
 
 //이름 입력했을 경우 정규식 체크
 if(!empty($data["account_name"])) {
@@ -111,9 +120,14 @@ if(!empty($data["account_name"])) {
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 
+//    $add_query = "
+//        , user_name = '{$data["account_name"]}'
+//    ";
     $add_query = "
-        , user_name = '{$data["account_name"]}'
+        , user_name = :user_name
     ";
+    
+    $create_param[":user_name"] = $data["account_name"];
 
 }
 
@@ -139,9 +153,14 @@ if(!empty($data["account_phone"])) {
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 
-    $add_query = "
-        , user_phone = '{$data["account_phone"]}'
+//    $add_query = "
+//        , user_phone = '{$data["account_phone"]}'
+//    ";
+    $add_query .= "
+        , user_phone = :user_phone
     ";
+
+    $create_param[":user_phone"] = $data["account_phone"];
 }
 
 //이메일 입력했을 경우
@@ -155,20 +174,34 @@ if(!empty($data["account_email"])) {
     }
 
     //이메일 중복 체크
-    $email_overlap = sql_fetch("
+//    $email_overlap = sql_fetch("
+//        Select  count(*) as cnt
+//        From    Account
+//        Where   user_email = '{$data["account_email"]}'
+//    ")["cnt"];
+    $email_overlap_sql = "
         Select  count(*) as cnt
         From    Account
-        Where   user_email = '{$data["account_email"]}'
-    ")["cnt"];
+        Where   user_email = :user_email
+    ";
+    $param = array(
+        ":user_email" => $data["account_email"]
+    );
+    $email_overlap = $PDO -> fetch($email_overlap_sql, $param)["cnt"];
+
     if($email_overlap > 0) {
         $returnArray["code"] = "EMAIL_OVERLAP";
         $returnArray["msg"] = "이미 사용중인 이메일 입니다.";
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 
-    $add_query = "
-        , user_email = '{$data["account_email"]}'
+//    $add_query = "
+//        , user_email = '{$data["account_email"]}'
+//    ";
+    $add_query .= "
+        , user_email = :user_email
     ";
+    $create_param[":user_email"] = $data["account_email"];
 }
 
 //회원가입 처리
@@ -180,15 +213,30 @@ $password = password_hash($data["account_password"], PASSWORD_BCRYPT);
 //마케팅
 $terms_marketing = $data["terms_marketing"] == true ? '1' : '0';
 
-$create = sql_query("
+$create_sql = "
     Insert Into Account
     Set
-        user_id = '{$data["account_id"]}',
-        user_password = '{$password}',
-        user_nickname = '{$data["account_nickname"]}',
-        terms_marketing = '{$terms_marketing}'
+        user_id = :user_id,
+        user_password = :user_password,
+        user_nickname = :user_nickname,
+        terms_marketing = :terms_marketing
         {$add_query}
-");
+";
+$create_param[":user_id"] = $data["account_id"];
+$create_param[":user_password"] = $password;
+$create_param[":user_nickname"] = $data["account_nickname"];
+$create_param[":terms_marketing"] = $terms_marketing;
+
+$create = $PDO -> execute($create_sql, $create_param);
+//$create = sql_query("
+//    Insert Into Account
+//    Set
+//        user_id = '{$data["account_id"]}',
+//        user_password = '{$password}',
+//        user_nickname = '{$data["account_nickname"]}',
+//        terms_marketing = '{$terms_marketing}'
+//        {$add_query}
+//");
 
 if(!$create) {
     $returnArray["code"] = "ERROR";

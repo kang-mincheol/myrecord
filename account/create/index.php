@@ -109,10 +109,10 @@ echo css_load('/account/create/index.css');
 
     <div class="myrecord_input_wrap phone_wrap">
         <div class="label_box">
-            <label class="wrap_label" for="account_phone">(선택)핸드폰번호</label>
+            <label class="wrap_label" for="account_phone">(선택)휴대폰번호 '-'포함</label>
         </div>
         <div class="form_value_box">
-            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number" placeholder="핸드폰번호를 입력해주세요 '-' 포함"/>
+            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="text" placeholder="휴대폰번호를 입력해주세요 '-' 포함"/>
         </div>
     </div>
 
