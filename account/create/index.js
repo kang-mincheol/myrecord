@@ -106,7 +106,7 @@ function createAccountCheck() {
     if(!nickname_reg.test(nickname)) {
         var alert_check = $("#account_nickname").siblings(".caution_text").length;
         if(alert_check == 0) {
-            $("#account_nickname").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+            $("#account_nickname").addClass("alert").after('<p class="caution_text">닉네임 규칙에 맞게 입력해주세요</p>');
         }
         $("#account_nickname").focus();
         return;
@@ -117,7 +117,7 @@ function createAccountCheck() {
         if(!name_reg.test(name)) {
             var alert_check = $("#account_name").siblings(".caution_text").length;
             if(alert_check == 0) {
-                $("#account_name").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+                $("#account_name").addClass("alert").after('<p class="caution_text">이름을 올바르게 입력해주세요</p>');
             }
             $("#account_name").focus();
             return;
@@ -129,7 +129,7 @@ function createAccountCheck() {
         if(!phone_reg.test(phone)) {
             var alert_check = $("#account_phone").siblings(".caution_text").length;
             if(alert_check == 0) {
-                $("#account_phone").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+                $("#account_phone").addClass("alert").after('<p class="caution_text">휴대폰번호 규칙에 맞게 입력해주세요</p>');
             }
             $("#account_phone").focus();
             return;
@@ -141,7 +141,7 @@ function createAccountCheck() {
         if(!email_reg.test(email)) {
             var alert_check = $("#account_email").siblings(".caution_text").length;
             if(alert_check == 0) {
-                $("#account_email").addClass("alert").after('<p class="caution_text">비밀번호가 일치하지 않습니다</p>');
+                $("#account_email").addClass("alert").after('<p class="caution_text">이메일을 올바르게 입력해주세요</p>');
             }
             $("#account_email").focus();
             return;
