@@ -1,10 +1,5 @@
 <?
 if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
-
-$ogTitle = "마이레코드";
-$ogDescription = "3대 측정은 마이레코드";
-$ogImage = "/img/company/myrecord_og_image.png";
-$ogUrl = "https://myrecord.kr";
 ?>
 
 
@@ -14,7 +9,7 @@ $ogUrl = "https://myrecord.kr";
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="title" content="마이레코드">
+<meta name="title" content="<?=$pageTitle?>">
 <meta name="subject" content="마이레코드">
 <meta name="description" content="3대 측정은 마이레코드">
 <meta name="keywords" content="헬스, 운동, 맨몸운동, 크로스핏, 필라테스, 헬창, 3대, 3대운동">

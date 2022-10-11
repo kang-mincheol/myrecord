@@ -5,7 +5,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 echo css_load('/util/index.css');
 ?>
 
-
 <p class="wrap_title">도구</p>
 
 <div id="util_wrap">
