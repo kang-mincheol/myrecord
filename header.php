@@ -1,5 +1,10 @@
 <?
 if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
+
+$ogTitle = "마이레코드";
+$ogDescription = "3대 측정은 마이레코드";
+$ogImage = "/img/company/myrecord_logo.png";
+$ogUrl = "https://myrecord.kr";
 ?>
 
 
@@ -11,7 +16,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="title" content="마이레코드">
 <meta name="subject" content="마이레코드">
-<meta name="description" content="운동 커뮤니티 마이레코드 입니다.">
+<meta name="description" content="3대 측정은 마이레코드">
 <meta name="keywords" content="헬스, 운동, 맨몸운동, 크로스핏, 필라테스, 헬창, 3대, 3대운동">
 <meta name="writer" content="마이레코드">
 <meta name="author" content="마이레코드">
@@ -19,10 +24,10 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <meta name="robots" content="ALL">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="마이레코드">
-<meta property="og:description" content="운동 정보는 마이레코드">
-<meta property="og:image" content="URL:LOGO">
-<meta property="og:url" content="url">
+<meta property="og:title" content="<?=$ogTitle?>">
+<meta property="og:description" content="<?=$pageDescription?>">
+<meta property="og:image" content="<?=$ogImage?>">
+<meta property="og:url" content="<?=$ogUrl?>">
 
 <link rel="apple-touch-icon" sizes="180x180" href="/img/company/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/company/favicon-32x32.png">
