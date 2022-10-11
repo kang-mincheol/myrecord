@@ -3,7 +3,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 $ogTitle = "마이레코드";
 $ogDescription = "3대 측정은 마이레코드";
-$ogImage = "/img/company/myrecord_logo.png";
+$ogImage = "/img/company/myrecord_og_image.png";
 $ogUrl = "https://myrecord.kr";
 ?>
 
