@@ -1,5 +1,22 @@
 <?
 if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
+
+
+
+/***** 페이지별 meta data get *****/
+$pageTitle = "마이레코드";
+$ogTitle = "마이레코드";
+$ogDescription = "종합 운동 정보3대 측정은 마이레코드";
+$ogImage = "/img/company/myrecord_og_image.png";
+$ogUrl = "https://myrecord.kr";
+
+
+$url = $_SERVER["REQUEST_URI"];
+$url = explode("?", $url);
+$url_value = $url[0];
+$url_value = trim($url_value);
+
+
 ?>
 
 

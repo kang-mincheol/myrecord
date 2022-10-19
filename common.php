@@ -52,22 +52,4 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/log.php');   // 접속 로그 기록
 include_once($_SERVER['DOCUMENT_ROOT'].'/menu.php');   // Menu 파일 로드
 
 $relative_path = preg_replace("`\/[^/]*\.php$`i", "/", $_SERVER['PHP_SELF']);
-
-
-
-//og 정보 정리
-$pageTitle = "마이레코드";
-$ogTitle = "마이레코드";
-$ogDescription = "3대 측정은 마이레코드";
-$ogImage = "/img/company/myrecord_og_image.png";
-$ogUrl = "https://myrecord.kr";
-
-
-//var_dump($_SERVER);
-if(strpos($_SERVER["PHP_SELF"], "/util/") !== false) {
-    $pageTitle = "마이레코드 - 도구";
-    $ogTitle = "마이레코드 - 도구";
-} else {
-
-}
 ?>
