@@ -226,6 +226,7 @@ function fileChange(obj) {
         return;
     }
     var fileType = obj.files[0].type;
+    alert(fileType);
 
     var typeCheck = false;
     for(key in fileAccessType) {
