@@ -18,7 +18,7 @@ function noticePopupOff() {
 
 function recordEditCheck() {
     return;
-    var record_id = getParam('record_id');
+    let record_id = getParam('record_id');
     record_id = record_id.replace(/[^0-9]/g, "");
 
     if(record_id != '') {
@@ -49,11 +49,11 @@ function getRecordData(record_id) {
                     $("#record_weight").attr('readonly', true);
                 }
 
-                var record_data = data["data"];
+                let record_data = data["data"];
                 $(".myrecord_input_wrap.record_type .myrecord_select_wrap .select_list_wrap .select_list_btn[value="+record_data["type"]+"]").click();
                 $("#record_weight").val(record_data["weight"]);
 
-                var fileRenderHtml = "";
+                let fileRenderHtml = "";
                 for(key in record_data["file"]) {
                     fileRenderHtml +=
                         '<div class="file_row" file_no="'+record_data["file"][key]["file_no"]+'">'+
@@ -76,7 +76,7 @@ function getRecordData(record_id) {
 }
 
 function setRecordData() {
-    var record_id = getParam('record_id');
+    let record_id = getParam('record_id');
     record_id = record_id.replace(/[^0-9]/g, "");
     if(record_id == '') {
         insertData();
@@ -87,9 +87,9 @@ function setRecordData() {
 
 function insertData() {
     loadingOn();
-    var record_type = $("#record_type").val();
+    let record_type = $("#record_type").val();
     record_type = record_type.replace(/[^0-9]/g, "");
-    var record_weight = $("#record_weight").val();
+    let record_weight = $("#record_weight").val();
     record_weight = record_weight.replace(/[^0-9]/g, "");
 
     if(record_type == 'none' || record_type == '') {
@@ -104,19 +104,19 @@ function insertData() {
         return;
     }
 
-    var fileCheck = $(".myrecord_input_wrap.file_wrap .file_add_wrap .file_row_box .file_row").length;
+    let fileCheck = $(".myrecord_input_wrap.file_wrap .file_add_wrap .file_row_box .file_row").length;
     if(fileCheck == 0) {
         myrecordAlert('on', '파일을 첨부해주세요');
         loadingOff();
         return;
     }
 
-    var recordData = new FormData();
+    let recordData = new FormData();
 
-    var totalFileSize = 0;
-    var fileCount = 0;
-    for(var i = 1; i <= fileCheck; i++) {
-        var thisFile = document.querySelector(".myrecord_input_wrap.file_wrap .file_add_wrap .file_row_box input[name=file_"+i+"]").files[0];
+    let totalFileSize = 0;
+    let fileCount = 0;
+    for(let i = 1; i <= fileCheck; i++) {
+        let thisFile = document.querySelector(".myrecord_input_wrap.file_wrap .file_add_wrap .file_row_box input[name=file_"+i+"]").files[0];
         if(thisFile != '') {
             totalFileSize += parseInt(thisFile.size);
             if(thisFile != undefined) {
@@ -126,8 +126,8 @@ function insertData() {
         }
     }
 
-    var totalFileSizeCal = totalFileSize / 1024 / 1024;
-    var fileLimitSize = 100;
+    let totalFileSizeCal = totalFileSize / 1024 / 1024;
+    let fileLimitSize = 100;
 
     if(totalFileSizeCal > fileLimitSize) {
         myrecordAlert('on', '파일은 총 100MB 이하로 업로드 해주세요');
@@ -171,7 +171,7 @@ function updateData() {
     myrecordAlert('on', '사용불가능한 기능입니다');
     return;
 //    loadingOn();
-//    var record_id = getParam('record_id');
+//    let record_id = getParam('record_id');
 //    record_id = record_id.replace(/[^0-9]/g, "");
 //
 //    if(record_id == "") {
@@ -180,7 +180,7 @@ function updateData() {
 //        return;
 //    }
 //
-//    var recordData = new FormData();
+//    let recordData = new FormData();
 //
 //    loadingOff();
 }
@@ -191,10 +191,10 @@ function updateData() {
 
 
 function fileAdd() {
-    var fileLength = $(".file_wrap .file_add_wrap .file_row_box .file_row").length;
-    var rowNumber = fileLength + 1;
+    let fileLength = $(".file_wrap .file_add_wrap .file_row_box .file_row").length;
+    let rowNumber = fileLength + 1;
 
-    var rowHtml = 
+    let rowHtml = 
         '<div class="file_row">' +
             '<input name="file_'+rowNumber+'" type="file" onchange="fileChange(this)"/>'+
             '<div class="file_name_box">파일없음</div>'+
@@ -217,18 +217,17 @@ function fileDelete(obj) {
 }
 
 function fileChange(obj) {
-    var fileAccessType = ["mp4", "m4v", "avi", "wmv", "mwa", "asf", "mpg", "mpeg", "mkv", "mov", "3gp", "3g2", "webm", "jpeg", "jpg", "png", "HEIC", "HEIF", "HEVC", ""];
-    var fileSize = obj.files[0].size;
+    let fileAccessType = ["mp4", "m4v", "avi", "wmv", "mwa", "asf", "mpg", "mpeg", "mkv", "mov", "3gp", "3g2", "webm", "jpeg", "jpg", "png", "HEIC", "HEIF", "HEVC", "image/jpeg", "video/quicktime"];
+    let fileSize = obj.files[0].size;
     fileSize = fileSize / 1024 / 1024;
-    var fileLimit = 100;
+    let fileLimit = 100;
     if(fileSize > fileLimit) {
         myrecordAlert('on', '파일 크기는 100MB 이하로 업로드 해주세요');
         return;
     }
-    var fileType = obj.files[0].type;
-    alert(fileType);
+    let fileType = obj.files[0].type;
 
-    var typeCheck = false;
+    let typeCheck = false;
     for(key in fileAccessType) {
         if(fileType.includes(fileAccessType[key])) {
             typeCheck = true;
@@ -241,17 +240,17 @@ function fileChange(obj) {
         return;
     }
 
-    var fileName = obj.files[0].name;
+    let fileName = obj.files[0].name;
     $(obj).siblings('.file_name_box').text(fileName);
 }
 
 function getParam(name) {
 
-    var params = location.search.substr(location.search.indexOf("?") + 1);
-    var value = "";
+    let params = location.search.substr(location.search.indexOf("?") + 1);
+    let value = "";
     params = params.split("&");
 
-    for (var i = 0; i < params.length; i++) {
+    for (let i = 0; i < params.length; i++) {
         temp = params[i].split("=");
         if ([temp[0]] == name) { value = temp[1]; }
     }
@@ -260,6 +259,6 @@ function getParam(name) {
 }
 
 function fileView(obj) {
-    var file_id = $(obj).attr('file_id');
+    let file_id = $(obj).attr('file_id');
     
 }

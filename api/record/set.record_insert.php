@@ -127,7 +127,7 @@ foreach($_FILES as $key => $value) {
 
     if(!in_array($file_type, $accessType)) {
         $returnArray["code"] = "FILE_TYPE_LIMIT";
-        $returnArray["msg"] = "파일은 이미지 또는 동영상 파일만 업로드 가능합니다<br/>이미지 또는 동영상 파일이 업로드가 안될경우 고객센터에 문의부탁드립니다".$file_type;
+        $returnArray["msg"] = "파일은 이미지 또는 동영상 파일만 업로드 가능합니다<br/>이미지 또는 동영상 파일이 업로드가 안될경우 고객센터에 문의부탁드립니다";
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 }
