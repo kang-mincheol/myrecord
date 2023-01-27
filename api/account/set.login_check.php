@@ -21,58 +21,39 @@ if (is_null($data) || !checkParams($data, ["id", "password"])) {
 $data = cleansingParams($data);
 
 //아이디 존재하는지 체크
-$id_check = sql_fetch("
-    Select  count(*) as cnt
-    From    Account
-    Where   user_id = '{$data["id"]}'
-")["cnt"];
+$id_check = Account::hasAccountIdCheck($data["id"]);
 
-if($id_check == 0) {
+if(!$id_check) {
     $returnArray["code"] = "ERROR";
     $returnArray["msg"] = "존재하지 않는 아이디 입니다";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
 //회원정보 get
-$member = sql_fetch("
-    Select  *
-    From    Account
-    Where   user_id = '{$data["id"]}'
-");
+$member = Account::getAccountDataUserId($data["id"]);
 
-//비밀번호 맞는지 체크
-if(password_verify($data["password"], $member["user_password"])) {
-    //로그인 성공
-    // 회원아이디 세션 생성
-    set_session('user_id', $data["id"]);
-    
-    // 로그인 성공로그 생성
-    $user_agent = $_SERVER["HTTP_USER_AGENT"];
-    sql_query("
-        Insert into LoginLog
-        (ip_address, user_agent, user_id, is_success, create_date)
-        Values
-        ('{$ip_address}', '{$user_agent}', '{$data["id"]}', 1, Now())
-    ");
-
-    // 로그인 일자 update
-    $login_date_sql = "
-        Update  Account
-        SET
-            login_date = :login_date
-        Where   id = :id
-    ";
-    $param = array(
-        ":login_date" => date("Y-m-d H:i:s"),
-        ":id" => $member["id"]
-    );
-
-    $PDO -> execute($login_date_sql, $param);
-} else {
-    $returnArray["code"] = "LOGIN_FAIL";
-    $returnArray["msg"] = "입력한 아이디와 비밀번호가 일치하지 않습니다. 아이디 또는 비밀번호를 확인 해주세요.";
+if(!$member) {
+    $returnArray["code"] = "ERROR";
+    $returnArray["msg"] = "존재하지 않는 아이디 입니다";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+//비밀번호 맞는지 체크
+$password_check = Account::hasPasswordCheck($data["password"], $member["user_password"]);
+
+if(!$password_check) {
+    $returnArray["code"] = "LOGIN_FAIL";
+    $returnArray["msg"] = "입력한 아이디와 비밀번호가 일치하지 않습니다. 아이디 또는 비밀번호를 확인 해주세요.";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
+
+//로그인 성공 처리
+$login = Account::setLogin($member["user_id"]);
+if(!$login) {
+    $returnArray["code"] = "LOGIN_FAIL";
+    $returnArray["msg"] = "로그인에 실패했습니다";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
 
 
 
