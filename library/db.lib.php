@@ -40,3 +40,4 @@ class DB extends PDO {
         return $result;
     }
 }
+?>
