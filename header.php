@@ -107,6 +107,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                     <a href="/util/" class="menu_btn">도구</a>
                 </div>
 
+                <div class="menu_box" name="community">
+                    <a href="/community/free_board/list/" class="menu_btn">커뮤니티</a>
+
+                    <div class="sub_menu_container">
+                        <div class="sub_menu_wrap" name="free_board">
+                            <div class="sub_menu_box">
+                                <a href="/community/free_board/list/">자유게시판</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- menu_wrap -->
         </div>
