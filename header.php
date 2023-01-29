@@ -24,10 +24,12 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <meta property="og:image" content="<?=$ogImage?>">
 <meta property="og:url" content="<?=$ogUrl?>">
 
-<link rel="apple-touch-icon" sizes="180x180" href="/img/company/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/company/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/img/company/favicon-16x16.png">
-<link rel="manifest" href="/img/company/site.webmanifest">
+
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/img/company/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/company/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/company/favicon/favicon-16x16.png">
+<link rel="manifest" href="/img/company/favicon/site.webmanifest">
 
 
 <!-- safari 앵커태그 방지 -->
@@ -72,7 +74,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
         <div class="left_box">
             <div class="logo_box">
                 <a class="logo_btn" href="/">
-                    <img class="logo_img" src="/img/company/myrecord_logo.png?ver=20220924"/>
+                    <img class="logo_img" src="/img/company/myrecord_logo.png?ver=20230129"/>
                 </a>
             </div>
             <div class="menu_wrap">

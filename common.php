@@ -63,7 +63,7 @@ $relative_path = preg_replace("`\/[^/]*\.php$`i", "/", $_SERVER['PHP_SELF']);
 $pageTitle = "마이레코드";
 $ogTitle = "마이레코드";
 $ogDescription = "3대 측정은 마이레코드";
-$ogImage = "/img/company/myrecord_og_image.png";
+$ogImage = "/img/company/myrecord_og_image.png?ver=2";
 $ogUrl = "https://myrecord.kr";
 
 
