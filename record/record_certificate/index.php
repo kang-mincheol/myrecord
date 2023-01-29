@@ -20,7 +20,7 @@ echo css_load('/record/record_certificate/index.css');
 
     <div class="certificate_box">
         <div class="top_logo">
-            <img class="logo_img" src="/img/company/myrecord_logo.png"/>
+            <img class="logo_img" src="/img/company/myrecord_logo.png?ver=20230129"/>
         </div>
 
         <div class="record_info_wrap">
@@ -45,7 +45,7 @@ echo css_load('/record/record_certificate/index.css');
         <div class="myrecord_signature_wrap">
             <div class="certificate_date"></div>
             <div class="myrecord_signature">
-                <img class="signature_img" src="/img/company/myrecord_logo.png"/>
+                <img class="signature_img" src="/img/company/myrecord_logo.png?ver=20230129"/>
             </div>
         </div>
 
