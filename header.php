@@ -35,7 +35,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <!-- safari 앵커태그 방지 -->
 <meta name="format-detection" content="telephone=no" />
 <title>마이레코드</title>
-<link rel="shortcut icon" href="/favicon.ico">
+<link rel="shortcut icon" href="/img/company/favicon/favicon.ico">
 <!--[if lte IE 8]>
 
 <![endif]-->
