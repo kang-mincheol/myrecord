@@ -40,7 +40,7 @@ $member = false;
 
 //로그인 설정
 if ($_SESSION['user_id']) { // 로그인중이라면
-    $member = getMember($_SESSION['user_id']);
+    $member = Account::getAccount($_SESSION['user_id']);
 }
 
 $is_member = false;

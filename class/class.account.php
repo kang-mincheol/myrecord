@@ -42,7 +42,7 @@ class Account {
         }
     }
 
-    public static function getAccountDataUserId($user_id) {
+    public static function getAccount($user_id) {
         global $PDO;
 
         $sql = "
@@ -75,7 +75,7 @@ class Account {
         global $PDO;
 
         // 회원아이디 세션 생성
-        set_session('user_id', $data["id"]);
+        set_session('user_id', $member["user_id"]);
 
         // 로그인 성공로그 생성
         $user_agent = $_SERVER["HTTP_USER_AGENT"];

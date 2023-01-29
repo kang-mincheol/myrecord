@@ -30,7 +30,7 @@ if(!$id_check) {
 }
 
 //회원정보 get
-$member = Account::getAccountDataUserId($data["id"]);
+$member = Account::getAccount($data["id"]);
 
 if(!$member) {
     $returnArray["code"] = "ERROR";
@@ -48,7 +48,7 @@ if(!$password_check) {
 }
 
 //로그인 성공 처리
-$login = Account::setLogin($member["user_id"]);
+$login = Account::setLogin($member);
 if(!$login) {
     $returnArray["code"] = "LOGIN_FAIL";
     $returnArray["msg"] = "로그인에 실패했습니다";
