@@ -21,6 +21,13 @@ class Account {
 
     }
 
+    /**
+     * 아이디가 존재하는지 확인
+     * @param $user_id => 회원 아이디
+     * @return boolean
+     * true => 해당아이디가 존재
+     * false => 해당아이디 비존재
+     */
     public static function hasAccountIdCheck($user_id) {
         global $PDO;
 
@@ -42,6 +49,12 @@ class Account {
         }
     }
 
+    /**
+     * 아이디로 회원정보를 가져온다
+     * @param $user_id => 회원아이디
+     * @return void
+     * 회원정보가 있을
+     */
     public static function getAccount($user_id) {
         global $PDO;
 
@@ -49,6 +62,7 @@ class Account {
             Select  *
             From    Account
             Where   user_id = :user_id
+            And     is_withdraw = 0
         ";
         $param = array(
             ":user_id" => $user_id
@@ -65,6 +79,35 @@ class Account {
 
     public static function hasPasswordCheck($check_password, $real_password) {
         if(password_verify($check_password, $real_password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 회원 탈퇴 여부 확인
+     * @param $user_id => 회원 아이디
+     * @return boolean
+     * true => 탈퇴 회원
+     * false => 정상 회원
+     */
+    public static function hasWithdrawCheck($user_id) {
+        global $PDO;
+
+        $sql = "
+            Select  count(*) as cnt
+            From    Account
+            Where   user_id = :user_id
+            And     is_withdraw = 1
+        ";
+        $param = array(
+            ":user_id" => $user_id
+        );
+
+        $check = $PDO->fetch($sql, $param)["cnt"];
+
+        if($check) {
             return true;
         } else {
             return false;
