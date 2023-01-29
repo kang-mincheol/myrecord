@@ -22,16 +22,22 @@ $data = cleansingParams($data);
 
 //아이디 존재하는지 체크
 $id_check = Account::hasAccountIdCheck($data["id"]);
-
 if(!$id_check) {
     $returnArray["code"] = "ERROR";
     $returnArray["msg"] = "존재하지 않는 아이디 입니다";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+//탈퇴한 회원인지 체크
+$withdraw_check = Account::hasWithdrawCheck($data["id"]);
+if($withdraw_check) {
+    $returnArray["code"] = "ERROR";
+    $returnArray["msg"] = "회원탈퇴한 아이디 입니다";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
+
 //회원정보 get
 $member = Account::getAccount($data["id"]);
-
 if(!$member) {
     $returnArray["code"] = "ERROR";
     $returnArray["msg"] = "존재하지 않는 아이디 입니다";
