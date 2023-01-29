@@ -20,36 +20,6 @@ function getVersion($file_path)
     return date("YmdHis", filemtime($_SERVER['DOCUMENT_ROOT'] . $file_path));
 }
 
-//사용자 반환
-function getMember_admin($id)
-{
-    $member = sql_fetch("
-		Select  *
-		From	Account
-        Where	user_id = '{$id}'
-	");
-
-    return $member;
-}
-
-//사용자 반환
-function getMember($user_id)
-{
-    $member = sql_fetch("
-		Select  *
-		From	Account
-        Where	user_id = '{$user_id}'
-	");
-
-    return $member;
-}
-
-//사용자 정보 업데이트
-function refreshMember()
-{
-    global $member;
-    $member = getMember($member["id"]);
-}
 
 // 쿠키변수 생성
 function set_cookie($cookie_name, $value, $expire)
