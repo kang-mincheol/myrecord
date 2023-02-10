@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+
+
+
+
+/********** reset CSS **********/
+body, div, p, a, ul, ol, li, input, button {
+    padding: 0; margin: 0;
+}
+
+div, ul, ol, li, a, p, span, input, button {
+    /* font-family:'Pretendard', Dotum, Helvetica, AppleGothic, Sans-serif; */
+}
+
+ul, ol {
+    list-style:none;
+}
+
+a {
+    text-decoration:none; color:inherit;
+}
+
+button {
+    border: 0; background-color: unset; cursor: pointer;
+}
+
+button:focus, input:focus, a:focus, textarea:focus {
+    outline: none;
+}
+/********** reset CSS END **********/
+
+
+
+
+
+body {
+    background-color: #f8fafd;
+}
+
+#main_top_section {
+    display: flex; align-items: center; width: 1050px; margin: 0 auto;
+}
+
+#main_top_section .section_box {
+    flex: 1; background-color: #FFF; box-shadow: rgb(88 102 126 / 8%) 0px 4px 24px, rgb(88 102 126 / 12%) 0px 1px 2px; margin-right: 20px; padding: 16px; border-radius: 10px; box-sizing: border-box;
+}
+
+#main_top_section .section_box:last-child {
+    margin-right: 0;
+}
+
+#main_top_section .section_box .section_title_wrap {
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+#main_top_section .section_box .section_title_wrap .section_title {
+    color: #000; font-size: 16px; font-weight: 700;
+}
