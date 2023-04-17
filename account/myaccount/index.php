@@ -50,7 +50,7 @@ exit;
             <label class="wrap_label" for="account_phone">(선택)핸드폰번호</label>
         </div>
         <div class="form_value_box">
-            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="number" placeholder="핸드폰번호를 입력해주세요 '-' 포함"/>
+            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="핸드폰번호를 입력해주세요 '-' 포함"/>
         </div>
     </div>
 
