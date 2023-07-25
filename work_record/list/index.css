@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+
+
+
+
+.page_title_wrap {
+    background: url('/work_record/img/work_record_bg.jpg') 50% no-repeat; background-size: cover; background-attachment: fixed; margin-bottom: 100px;
+}
+
+.page_title_wrap .page_title {
+    display: flex; justify-content: center; align-items: center; width: 100%; height: 300px; background-color: rgba(0, 0, 0, 0.4); color: #FFF; font-size: 24px; font-weight: 700;
+}
+
+
+
+
+
+#work_record_sub_menu_wrap {
+    width: 980px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center;
+}
+
+#work_record_sub_menu_wrap .record_type_btn {
+    display: flex; justify-content: center; align-items: center; flex: 1; height: 30px; border: 1px solid #dbdfe2; border-radius: 5px; margin-right: 10px; color: #000; font-size: 16px; font-weight: 500;
+}
+
+#work_record_sub_menu_wrap .record_type_btn:last-child {
+    margin-right: 0;
+}
+
+#work_record_sub_menu_wrap .record_type_btn.on {
+    color: #FFF; font-weight: 700; background-color: var(--main-color-1); border-color: var(--main-color-1);
+}
