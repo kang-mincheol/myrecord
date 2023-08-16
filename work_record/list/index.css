@@ -17,7 +17,7 @@
 
 
 #work_record_sub_menu_wrap {
-    width: 980px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center;
+    width: 980px; margin: 0 auto 50px; display: flex; justify-content: space-around; align-items: center;
 }
 
 #work_record_sub_menu_wrap .record_type_btn {
@@ -30,4 +30,28 @@
 
 #work_record_sub_menu_wrap .record_type_btn.on {
     color: #FFF; font-weight: 700; background-color: var(--main-color-1); border-color: var(--main-color-1);
+}
+
+
+
+
+
+#work_reocrd_list_wrap {
+    width: 980px; margin: 0 auto;
+}
+
+#work_reocrd_list_wrap .work_record_list_box {
+    display: block; width: 100%; border: 1px solid var(--main-color-1); border-radius: 5px; padding: 10px; box-sizing: border-box;
+}
+
+#work_reocrd_list_wrap .work_record_list_box .list_box_top {
+    display: flex; align-items: center;
+}
+
+#work_reocrd_list_wrap .work_record_list_box .list_box_top .left_box {
+    display: flex; align-items: center; width: 40%;
+}
+
+#work_reocrd_list_wrap .work_record_list_box .list_box_top .right_box {
+    display: flex; align-items: center; width: 60%;
 }

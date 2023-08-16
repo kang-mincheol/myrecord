@@ -20,7 +20,20 @@ echo css_load('/work_record/list/index.css');
 
 <div id="work_reocrd_list_wrap">
     <a class="work_record_list_box">
-
+        <div class="list_box_top">
+            <div class="left_box">
+                <p class="workout_type">등</p>
+                <p class="total_volume">총볼륨 - 280kg</p>
+            </div>
+            <div class="right_box">
+                <p class="workout_count">종목수 - 4개</p>
+                <p class="workout_date">운동일자 2023.07.25</p>
+            </div>
+        </div>
+        <div class="list_box_bottom">
+            <div class="work_title">제목 - 화요일 하체 화체운동</div>
+            <div class="create_date">작성일자 2023.07.25</div>
+        </div>
     </a>
 </div>
 <!-- work_reocrd_list_wrap -->
