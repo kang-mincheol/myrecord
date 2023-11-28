@@ -39,7 +39,7 @@ $member = false;
 
 
 //로그인 설정
-if (empty($_SESSION['user_id'])) { // 로그인중이라면
+if (!empty($_SESSION['user_id'])) { // 로그인중이라면
     $member = Account::getAccount($_SESSION['user_id']);
 }
 
