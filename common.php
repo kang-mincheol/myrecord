@@ -22,7 +22,7 @@ try {
     $HOST = MYSQL_HOST;
     $DB = MYSQL_DB;
     //$PORT = IS_LIVE ? ($HOST == "SERVER_IP 를 넣어주세요" ? 4000 : 10000) : 3306;
-    $PORT = IS_LIVE ? ($HOST == "" ? 4000 : 10000) : 3306;
+    $PORT = "localhost";
     $PDO = new DB("mysql:host={$HOST};port={$PORT};dbname={$DB};charset=utf8", MYSQL_USER, MYSQL_PASSWORD);
 } catch (PDOException $Exception) {
     die($Exception->getMessage());
@@ -39,7 +39,7 @@ $member = false;
 
 
 //로그인 설정
-if ($_SESSION['user_id']) { // 로그인중이라면
+if (!empty($_SESSION['user_id'])) { // 로그인중이라면
     $member = Account::getAccount($_SESSION['user_id']);
 }
 
