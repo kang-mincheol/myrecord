@@ -46,7 +46,7 @@ if (!empty($_SESSION['user_id'])) { // 로그인중이라면
 $is_member = false;
 $is_admin = false;
 
-if($member['user_id']) {
+if(!empty($member['user_id'])) {
     $is_member = true;
     $is_admin = $member["is_admin"] == 1 ? true : false;
 }
