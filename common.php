@@ -1,6 +1,6 @@
 <?
 ini_set("memory_limit" , -1);
-
+ini_set("display_errors", 1);
 
 // 설정 파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
