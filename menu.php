@@ -30,7 +30,7 @@ if(!is_null($member)){
 }
 
 //관리자에게만 보여줄 메뉴를 추가 합니다.
-if(!is_null($member) && $member["is_admin"]){
+if(!empty($member) && $member["is_admin"]){
     array_push(
         $menuArr, array(
             "name"=>"관리자",
