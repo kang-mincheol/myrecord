@@ -36,20 +36,8 @@ echo css_load('/account/login/index.css');
     </div>
     <!-- login_box -->
 
-
-
-
-
-
-
-
-
-
-
 </div>
 <!-- login_wrap -->
-
-
 
 
 <?
