@@ -6,6 +6,14 @@ function init() {
 function loginInputOnkeyup() {
     if(window.event.keyCode == 13) {
         loginSubmit();
+    } else {
+        const login_id = $("#login_id").val();
+        const login_password = $("#login_password").val();
+        if(login_id.length >= 5 && login_password.length >= 8) {
+            $("#login_wrap .login_box .login_info_wrap .bottom_btn_wrap .login_btn").addClass("on");
+        } else {
+            $("#login_wrap .login_box .login_info_wrap .bottom_btn_wrap .login_btn").removeClass("on");
+        }
     }
 }
 
