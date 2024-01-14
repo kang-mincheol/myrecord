@@ -16,7 +16,7 @@ $user_agent = mysqli_real_escape_string($con, $user_agent);
 $referer = mysqli_real_escape_string($con, $referer);
 $params = mysqli_real_escape_string($con, $params);
 
-$id_users = is_null($member) ? "NULL" : $member["id"];
+$id_users = empty($member) ? "NULL" : $member["id"];
 $session_id = empty($_COOKIE["PHPSESSID"]) ? "" : $_COOKIE["PHPSESSID"];
 $sql = "
     Insert into AccessLog

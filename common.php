@@ -1,6 +1,6 @@
 <?
 ini_set("memory_limit" , -1);
-
+ini_set("display_errors", 1);
 
 // 설정 파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
@@ -13,6 +13,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/library/kmc.lib.php');
 
 // class 파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.account.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.regexp.php');
 
 
 
@@ -46,7 +47,7 @@ if (!empty($_SESSION['user_id'])) { // 로그인중이라면
 $is_member = false;
 $is_admin = false;
 
-if($member['user_id']) {
+if(!empty($member['user_id'])) {
     $is_member = true;
     $is_admin = $member["is_admin"] == 1 ? true : false;
 }
