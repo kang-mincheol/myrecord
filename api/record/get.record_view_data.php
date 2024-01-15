@@ -27,7 +27,7 @@ $record_sql = "
     Select  T4.id as account_id, T4.user_nickname,
             T2.record_name, T2.record_name_ko, T1.record_weight,
             T3.status_text, T3.status_value,
-            DATE_FORMAT(T1.create_date, '%Y.%m.%d') as create_date
+            DATE_FORMAT(T1.create_datetime, '%Y.%m.%d') as create_date
     From    tb_record_request T1
 
     Inner Join	tb_record_master T2

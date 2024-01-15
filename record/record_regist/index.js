@@ -127,10 +127,10 @@ function insertData() {
     }
 
     let totalFileSizeCal = totalFileSize / 1024 / 1024;
-    let fileLimitSize = 100;
+    let fileLimitSize = 8;
 
     if(totalFileSizeCal > fileLimitSize) {
-        myrecordAlert('on', '파일은 총 100MB 이하로 업로드 해주세요');
+        myrecordAlert('on', `파일은 총 ${fileLimitSize}MB 이하로 업로드 해주세요`);
         loadingOff();
         return;
     }
@@ -162,6 +162,8 @@ function insertData() {
             }
         },
         error: function(error) {
+            loadingOff();
+            myrecordAlert('on', 'Record 등록 중 에러가 발생했습니다.');
             console.log(error);
         }
     });
