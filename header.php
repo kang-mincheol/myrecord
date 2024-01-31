@@ -54,9 +54,6 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 <script src="https://kit.fontawesome.com/d56d6b9080.js" crossorigin="anonymous"></script>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3127050502858365"
-     crossorigin="anonymous"></script>
-
 <?
 echo css_load('/fonts/fonts.css');
 echo css_load('/common/common.css');
