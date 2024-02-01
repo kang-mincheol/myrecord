@@ -29,7 +29,6 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <link rel="apple-touch-icon" sizes="180x180" href="/img/company/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/img/company/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/img/company/favicon/favicon-16x16.png">
-<link rel="manifest" href="/img/company/favicon/site.webmanifest">
 
 
 <!-- safari 앵커태그 방지 -->
