@@ -14,6 +14,8 @@ function getCertificateData() {
         return;
     }
 
+    // $("#certificate_wrap").addClass("on");
+    // loadingOff();
     $.ajax({
         type: "POST",
         url: "/api/record/certificate/get.certificate_data.php",
@@ -36,6 +38,9 @@ function getCertificateData() {
             } else {
                 myrecordAlert('on', data["msg"]);
             }
+        },
+        error: function(err) {
+            console.log(err);
         }
     });
 }
