@@ -205,9 +205,7 @@ foreach($_FILES as $key => $value) {
     move_uploaded_file($value["tmp_name"], $this_upload_path);
 }
 
-
-
-
+Slack::send(SLACK_URL_RECORD_INSERT, "record 신규 신청\n{$_SERVER["REQUEST_SCHEME"]}://{$_SERVER["HTTP_HOST"]}/record/squat/list/");
 
 function makeGuid() {
     return sprintf('%08x-%04x-%04x-%04x-%04x%08x',
