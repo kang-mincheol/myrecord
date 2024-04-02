@@ -22,12 +22,14 @@ function loginSubmit() {
     var id = $("#login_id").val();
     if(id == '') {
         loadingOff();
-        return myrecordAlert('on', '아이디를 입력해주세요');
+        myrecordAlert('on', '아이디를 입력해주세요', '알림', `setTimeout(() => {$('#login_id').focus();}, 200);`);
+        return $("#myrecord_alert .alert_box .alert_btn").focus();
     }
     var password = $("#login_password").val();
     if(password == '') {
         loadingOff();
-        return myrecordAlert('on', '비밀번호를 입력해주세요');
+        myrecordAlert('on', '비밀번호를 입력해주세요', '알림', `setTimeout(() => {$('#login_password').focus();}, 200);`);
+        return $("#myrecord_alert .alert_box .alert_btn").focus();
     }
 
     $.ajax({
@@ -43,7 +45,14 @@ function loginSubmit() {
             if(data["code"] == "SUCCESS") {
                 location.href = "/";
             } else {
-                myrecordAlert('on', data["msg"]);
+                myrecordAlert(
+                    'on',
+                    data["msg"],
+                    '알림',
+                    `setTimeout(() => {
+                        $('#login_password').focus();
+                    }, 200);`
+                );
                 return $("#myrecord_alert .alert_box .alert_btn").focus();
             }
         },
