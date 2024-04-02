@@ -106,10 +106,10 @@ if($inspection_data) {
     foreach($inspection_data as $row) {
         $inspection_delete_query = "
             Delete From tb_record_inspection
-            Where   inspection_id = :inspection_id
+            Where   id = :id
         ";
         $param = array(
-            ":inspection_id" => $row["inspection_id"]
+            ":id" => $row["id"]
         );
         $PDO -> execute($inspection_delete_query, $param);
     }
