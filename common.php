@@ -10,7 +10,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/library/db.lib.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/library/common.lib.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/library/kmc.lib.php');
 
-
 // class 파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.account.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.regexp.php');
