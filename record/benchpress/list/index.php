@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
@@ -8,7 +8,7 @@ echo css_load('/record/benchpress/list/index.css');
 
 <div id="page_title">마이레코드 - BenchPress</div>
 
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/record_sub_menu.php');
 ?>
 
@@ -78,7 +78,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
 
 
 
-<?
+<?php
 echo script_load('/record/benchpress/list/index.js');
 ?>
 <script>
@@ -86,6 +86,6 @@ $(function () {
     init();
 });
 </script>
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');   // 푸터파일 로드
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
@@ -65,7 +65,7 @@ echo css_load('/mincheol/team/team.css');
 </div>
 
 
-<?
+<?php
 echo script_load('/mincheol/team/team.js');
 ?>
 <script>

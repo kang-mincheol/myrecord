@@ -1,4 +1,4 @@
-<?
+<?php
 if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 ?>
 
@@ -53,7 +53,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 <script src="https://kit.fontawesome.com/d56d6b9080.js" crossorigin="anonymous"></script>
 
-<?
+<?php
 echo css_load('/fonts/fonts.css');
 echo css_load('/common/common.css');
 echo css_load('/common/header.css');
@@ -63,7 +63,7 @@ echo css_load('/component/input/input.css');
 </head>
 
 <body>
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
 ?>
 
@@ -112,7 +112,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
         <!-- left_box -->
 
         <div class="right_box">
-            <?
+            <?php
             if($is_member) {
             ?>
             <div class="menu_box">
@@ -121,7 +121,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
             <div class="menu_box">
                 <a href="/account/myaccount" class="menu_btn">내 정보</a>
             </div>
-            <?  
+            <?php
             } else {
             ?>
             <div class="menu_box">
@@ -130,7 +130,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
             <div class="menu_box">
                 <a href="/account/create/" class="menu_btn">회원가입</a>
             </div>
-            <?
+            <?php
             }
             ?>
         </div>
@@ -154,17 +154,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
             <div id="mobile_menu_container">
                 <div class="account_box">
                     <button class="close_btn" title="닫기" onclick="mobileMenuRemote();"><i class="fa-solid fa-xmark"></i></button>
-                    <?
+                    <?php
                     if($is_member) {
                     ?>
                     <a href="/api/account/set.logout.php" class="account_btn login"><i class="fa-solid fa-right-from-bracket"></i>로그아웃</a>
                     <a href="/account/myaccount" class="account_btn"><i class="fa-solid fa-user"></i>내 정보</a>
-                    <?
+                    <?php
                     } else {
                     ?>
                     <a href="/account/login/" class="account_btn login"><i class="fa-solid fa-power-off"></i>로그인</a>
                     <a href="/account/create/" class="account_btn"><i class="fa-solid fa-right-to-bracket"></i>회원가입</a>
-                    <?
+                    <?php
                     }
                     ?>
                 </div>
@@ -225,7 +225,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
     </div>
 </div>
 
-<?
+<?php
 echo script_load('/common/header.js');    
 ?>
 <script>

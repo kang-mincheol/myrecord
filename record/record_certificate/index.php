@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
@@ -10,7 +10,7 @@ if(!$is_member) {
 ?>
 
 
-<?
+<?php
 echo css_load('/record/record_certificate/index.css');
 ?>
 
@@ -54,7 +54,7 @@ echo css_load('/record/record_certificate/index.css');
 <!-- certificate_wrap -->
 
 
-<?
+<?php
 echo script_load('/record/record_certificate/index.js');
 ?>
 <script>
@@ -62,6 +62,6 @@ $(function () {
     init();
 });
 </script>
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');   // 푸터파일 로드
 ?>

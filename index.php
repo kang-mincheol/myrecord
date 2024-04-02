@@ -1,9 +1,9 @@
-<?
+<?php
 include_once('common.php');   // 기본파일 로드
 include_once('header.php');   // 헤더파일 로드
 ?>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<?
+<?php
 echo css_load('/common/index.css');
 ?>
 
@@ -200,7 +200,7 @@ echo css_load('/common/index.css');
 
 
 
-<?
+<?php
 echo script_load('/common/index.js');
 ?>
 <script>
@@ -208,6 +208,6 @@ $(function () {
     
 });
 </script>
-<?
+<?php
 include_once('footer.php');   // 푸터파일 로드
 ?>
