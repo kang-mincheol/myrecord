@@ -66,7 +66,7 @@ $get_file_query = "
     Select  *
     From    tb_record_request_file
     Where   request_id = :request_id
-    Order by id Asc
+    Order by create_datetime Asc
 ";
 
 $param = array(
@@ -80,10 +80,10 @@ if($file_data) {
         unlink($_SERVER["DOCUMENT_ROOT"]."/data/record/".$row["file_guid"]);
         $file_delete_query = "
             Delete From tb_record_request_file
-            Where   id = :id
+            Where   file_guid = :file_guid
         ";
         $param = array(
-            ":id" => $row["id"]
+            ":file_guid" => $row["file_guid"]
         );
         $PDO -> execute($file_delete_query, $param);
     }
@@ -95,7 +95,7 @@ $get_inspection_query = "
     Select  *
     From    tb_record_inspection
     Where   request_id = :request_id
-    Order by inspection_id Asc
+    Order by id Asc
 ";
 $param = array(
     ":request_id" => $record_id

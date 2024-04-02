@@ -165,6 +165,13 @@ $insert_result = $PDO -> execute($insert_sql, $param);
 //파일 insert
 $videoType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "video/quicktime", "application/octet-stream");
 $upload_path = $_SERVER["DOCUMENT_ROOT"]."/data/record/";
+if(!is_dir($_SERVER["DOCUMENT_ROOT"]."/data")) {
+    @mkdir($_SERVER["DOCUMENT_ROOT"]."/data");
+}
+
+if(!is_dir($_SERVER["DOCUMENT_ROOT"]."/data/record")) {
+    @mkdir($_SERVER["DOCUMENT_ROOT"]."/data/record");
+}
 foreach($_FILES as $key => $value) {
     $GUID = makeGuid();
     $file_type_text = "";
