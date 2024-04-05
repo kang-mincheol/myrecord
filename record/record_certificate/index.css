@@ -6,7 +6,7 @@
 
 
 #certificate_wrap {
-    display: none; width: 980px; margin: 30px auto 0; box-sizing: border-box; border-radius: 5px; padding: 10px;
+    display: none; width: 600px; margin: 30px auto 0; box-sizing: border-box; border-radius: 5px; padding: 10px;
 }
 
 #certificate_wrap.on {
@@ -28,7 +28,7 @@
 
 
 #certificate_wrap .certificate_box {
-    border: 5px solid #303030; border-radius: 20px; padding: 50px 20px 20px 20px; position: relative;
+    border: 5px solid var(--main-color-1); border-radius: 20px; padding: 50px 20px 20px 20px; position: relative;
 }
 
 #certificate_wrap .certificate_box .top_logo {
