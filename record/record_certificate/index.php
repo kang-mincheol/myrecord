@@ -25,15 +25,15 @@ echo css_load('/record/record_certificate/index.css');
 
         <div class="record_info_wrap">
             <div class="info_row" name="record_nickname">
-                <p class="info_title">닉네임&nbsp;-&nbsp;</p>
+                <p class="info_title">닉네임</p>
                 <p class="info_value"></p>
             </div>
             <div class="info_row" name="record_master">
-                <p class="info_title">종목&nbsp;-&nbsp;</p>
+                <p class="info_title">종목</p>
                 <p class="info_value"></p>
             </div>
             <div class="info_row" name="record_weight">
-                <p class="info_title">무게&nbsp;-&nbsp;</p>
+                <p class="info_title">무게</p>
                 <p class="info_value"></p>
             </div>
         </div>
@@ -53,6 +53,9 @@ echo css_load('/record/record_certificate/index.css');
 </div>
 <!-- certificate_wrap -->
 
+<div class="img_btn_wrap">
+    <button class="certificate_down_btn">인증서 저장&nbsp;<i class="fa-solid fa-download"></i></button>
+</div>
 
 <?php
 echo script_load('/record/record_certificate/index.js');
