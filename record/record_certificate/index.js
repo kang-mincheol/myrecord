@@ -44,3 +44,10 @@ function getCertificateData() {
         }
     });
 }
+
+const certificateDownload = () => {
+    html2canvas(document.querySelector("#certificate_box")).then(canvas => {
+        canvas.id = "capture-canvas";
+        document.body.appendChild(canvas)
+    });
+}

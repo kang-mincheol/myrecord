@@ -18,7 +18,7 @@ echo css_load('/record/record_certificate/index.css');
 <div id="certificate_wrap">
     <div class="page_title">마이레코드 인증서</div>
 
-    <div class="certificate_box">
+    <div id="certificate_box" class="certificate_box">
         <div class="top_logo">
             <img class="logo_img" src="/img/company/myrecord_logo.png?ver=20230129"/>
         </div>
@@ -54,7 +54,7 @@ echo css_load('/record/record_certificate/index.css');
 <!-- certificate_wrap -->
 
 <div class="img_btn_wrap">
-    <button class="certificate_down_btn">인증서 저장&nbsp;<i class="fa-solid fa-download"></i></button>
+    <button class="certificate_down_btn" onclick="certificateDownload();">인증서 저장&nbsp;<i class="fa-solid fa-download"></i></button>
 </div>
 
 <?php
