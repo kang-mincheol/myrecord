@@ -246,20 +246,6 @@ function fileChange(obj) {
     $(obj).siblings('.file_name_box').text(fileName);
 }
 
-function getParam(name) {
-
-    let params = location.search.substr(location.search.indexOf("?") + 1);
-    let value = "";
-    params = params.split("&");
-
-    for (let i = 0; i < params.length; i++) {
-        temp = params[i].split("=");
-        if ([temp[0]] == name) { value = temp[1]; }
-    }
-
-    return value;
-}
-
 function fileView(obj) {
     let file_id = $(obj).attr('file_id');
     

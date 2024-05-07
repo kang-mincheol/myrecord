@@ -33,3 +33,17 @@ function urlMenuCheck() {
         }
     }
 }
+
+const getParam = (name) => {
+
+    var params = location.search.substr(location.search.indexOf("?") + 1);
+    var value = "";
+    params = params.split("&");
+
+    for (var i = 0; i < params.length; i++) {
+        temp = params[i].split("=");
+        if ([temp[0]] == name) { value = temp[1]; }
+    }
+
+    return value;
+}
