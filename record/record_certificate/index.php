@@ -58,6 +58,7 @@ echo css_load('/record/record_certificate/index.css');
 </div>
 
 <?php
+echo script_load('/assets/html2canvas.min.js');
 echo script_load('/record/record_certificate/index.js');
 ?>
 <script>

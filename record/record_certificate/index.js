@@ -38,6 +38,8 @@ function getCertificateData() {
             }
         },
         error: function(err) {
+            loadingOff();
+            myrecordAlert('on', '에러가 발생했습니다.');
             console.log(err);
         }
     });

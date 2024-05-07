@@ -75,9 +75,10 @@
 #certificate_wrap .certificate_box .record_info_wrap .info_row {
     display: flex; justify-content: space-between; align-items: center; 
     width: 300px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
     padding: 20px; border-radius: 10px;
     margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
 #certificate_wrap .certificate_box .record_info_wrap .info_row:last-child {
@@ -99,6 +100,16 @@
 
     #certificate_wrap .certificate_box .record_info_wrap .info_row .info_value {
         font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #certificate_wrap .certificate_box .record_info_wrap {
+        width: 100%;
+    }
+
+    #certificate_wrap .certificate_box .record_info_wrap .info_row {
+        width: 100%;
     }
 }
 
