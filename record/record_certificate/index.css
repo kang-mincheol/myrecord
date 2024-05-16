@@ -6,7 +6,7 @@
 
 
 #certificate_wrap {
-    display: none; width: 600px; margin: 30px auto 80px; box-sizing: border-box; border-radius: 5px; padding: 10px;
+    display: none; width: 320px; margin: 30px auto 80px; box-sizing: border-box; border-radius: 5px; padding: 10px; background-color: #fff;
 }
 
 #certificate_wrap.on {
@@ -23,45 +23,21 @@
     color: #303030; font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 100px;
 }
 
-@media screen and (max-width: 1050px) {
-    #certificate_wrap {
-        width: auto;
-    }
-}
-
 
 
 
 
 #certificate_wrap .certificate_box {
     display: flex; justify-content: center; align-items: center; flex-direction: column;
-    border: 5px solid var(--main-color-1); border-radius: 20px; padding: 50px 20px 20px 20px; position: relative;
+    border: 5px solid var(--main-color-1); padding: 40px 20px 20px; position: relative;
 }
 
-/* #certificate_wrap .certificate_box::before {
-    content: "";
-    position: absolute; top: 0; left: 0;
-    display: block; width: 100%; height: 100%;
-    opacity: 0.5;
-    background: url('/img/record/record_certificate/record_certificate_bg.png') 50% no-repeat; background-size: 400px;
-    z-index: -2;
-} */
-
 #certificate_wrap .certificate_box .top_logo {
-    position: absolute; top: -30px; left: 50%; width: 240px; transform: translate(-50%, 0); background-color: #FFF; padding: 10px;
+    width: 240px; background-color: #FFF; margin-bottom: 40px;
 }
 
 #certificate_wrap .certificate_box .top_logo .logo_img {
     display: block; width: 100%;
-}
-
-@media screen and (max-width: 1050px) {
-    #certificate_wrap .certificate_box {
-        padding: 30px 10px 10px 10px;
-    }
-    #certificate_wrap .certificate_box .top_logo {
-        width: 220px;
-    }
 }
 
 
@@ -74,7 +50,7 @@
 
 #certificate_wrap .certificate_box .record_info_wrap .info_row {
     display: flex; justify-content: space-between; align-items: center; 
-    width: 300px;
+    width: 260px;
     background-color: rgba(0, 0, 0, 0.1);
     padding: 20px; border-radius: 10px;
     margin-bottom: 10px;
@@ -93,38 +69,12 @@
     color: #303030; font-size: 18px; font-weight: 700;
 }
 
-@media screen and (max-width: 1050px) {
-    #certificate_wrap .certificate_box .record_info_wrap .info_row .info_title {
-        font-size: 16px;
-    }
-
-    #certificate_wrap .certificate_box .record_info_wrap .info_row .info_value {
-        font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 550px) {
-    #certificate_wrap .certificate_box .record_info_wrap {
-        width: 100%;
-    }
-
-    #certificate_wrap .certificate_box .record_info_wrap .info_row {
-        width: 100%;
-    }
-}
-
 
 
 
 
 #certificate_wrap .certificate_box .certificate_text {
-    color: #303030; font-size: 20px; font-weight: 500; text-align: center; margin-bottom: 100px;
-}
-
-@media screen and (max-width: 1050px) {
-    #certificate_wrap .certificate_box .certificate_text {
-        font-size: 18px; word-break: keep-all;
-    }
+    color: #303030; font-size: 20px; font-weight: 500; text-align: center; line-height: 1.5; margin-bottom: 20px; word-break: keep-all;
 }
 
 
@@ -132,12 +82,11 @@
 
 
 #certificate_wrap .certificate_box .myrecord_signature_wrap {
-    display: flex; justify-content: space-between; align-items: center;
-    width: 100%;
+    display: flex; justify-content: space-between; align-items: center; flex-direction: column; width: 100%;
 }
 
 #certificate_wrap .certificate_box .myrecord_signature_wrap .certificate_date {
-    color: #303030; font-size: 18px; font-weight: 700; margin-right: 20px;
+    color: #303030; font-size: 18px; font-weight: 700; margin-bottom: 20px;
 }
 
 #certificate_wrap .certificate_box .myrecord_signature_wrap .myrecord_signature {
@@ -148,16 +97,6 @@
     display: block; width: 100%;
 }
 
-@media screen and (max-width: 1050px) {
-    #certificate_wrap .certificate_box .myrecord_signature_wrap {
-        flex-direction: column;
-    }
-
-    #certificate_wrap .certificate_box .myrecord_signature_wrap .certificate_date {
-        margin-right: 0; margin-bottom: 10px;
-    }
-}
-
 
 
 
@@ -165,6 +104,10 @@
 .img_btn_wrap {
     display: flex; justify-content: center; align-items: center;
     margin-bottom: 50px;
+}
+
+.img_btn_wrap.off {
+    display: none;
 }
 
 @media screen and (max-width: 1050px) {
@@ -178,4 +121,11 @@
     width: 580px; height: 80px;
     color: #FFF; font-size: 18px; font-weight: 700; background-color: var(--main-color-1);
     border-radius: 10px;
+}
+
+
+
+
+#capture_wrapper {
+    position: fixed; left: 0; bottom: -99999px; width: 320px; opacity: 0;
 }

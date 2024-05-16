@@ -39,7 +39,7 @@ echo css_load('/record/record_certificate/index.css');
         </div>
 
         <div class="certificate_text">
-            위 회원의 마이레코드 기록을 인증합니다.
+            위 회원의<br>마이레코드 기록을<br>인증합니다.
         </div>
 
         <div class="myrecord_signature_wrap">
@@ -53,9 +53,11 @@ echo css_load('/record/record_certificate/index.css');
 </div>
 <!-- certificate_wrap -->
 
-<div class="img_btn_wrap">
+<div class="img_btn_wrap off">
     <button class="certificate_down_btn" onclick="certificateDownload();">인증서 저장&nbsp;<i class="fa-solid fa-download"></i></button>
 </div>
+
+<div id="capture_wrapper"></div>
 
 <?php
 echo script_load('/assets/html2canvas.min.js');
