@@ -1,4 +1,4 @@
-<?
+<?php
 if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 $menuArr = array();
@@ -30,7 +30,7 @@ if(!is_null($member)){
 }
 
 //관리자에게만 보여줄 메뉴를 추가 합니다.
-if(!is_null($member) && $member["is_admin"]){
+if(!empty($member) && $member["is_admin"]){
     array_push(
         $menuArr, array(
             "name"=>"관리자",

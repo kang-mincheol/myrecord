@@ -1,4 +1,4 @@
-<?
+<?php
 //if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 include_once($_SERVER['DOCUMENT_ROOT']."/common.php");
@@ -7,7 +7,7 @@ example 파일
 **************************************************/
 ?>
 
-<?
+<?php
 echo css_load("/component/input/input.css");
 echo css_load("/fonts/fonts.css");
 ?>
@@ -151,7 +151,7 @@ echo css_load("/fonts/fonts.css");
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
-<?=script_load("/component/input/input.js");?>
+<?php echo script_load("/component/input/input.js");?>
 <script>
 	//셀렉트박스 사용시 아래함수를 호출할것
     selectDeviceCheck();

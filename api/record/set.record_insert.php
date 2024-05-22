@@ -165,6 +165,13 @@ $insert_result = $PDO -> execute($insert_sql, $param);
 //파일 insert
 $videoType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "video/quicktime", "application/octet-stream");
 $upload_path = $_SERVER["DOCUMENT_ROOT"]."/data/record/";
+if(!is_dir($_SERVER["DOCUMENT_ROOT"]."/data")) {
+    @mkdir($_SERVER["DOCUMENT_ROOT"]."/data");
+}
+
+if(!is_dir($_SERVER["DOCUMENT_ROOT"]."/data/record")) {
+    @mkdir($_SERVER["DOCUMENT_ROOT"]."/data/record");
+}
 foreach($_FILES as $key => $value) {
     $GUID = makeGuid();
     $file_type_text = "";
@@ -198,9 +205,7 @@ foreach($_FILES as $key => $value) {
     move_uploaded_file($value["tmp_name"], $this_upload_path);
 }
 
-
-
-
+Slack::send(SLACK_URL_RECORD_INSERT, "record 신규 신청\n{$_SERVER["REQUEST_SCHEME"]}://{$_SERVER["HTTP_HOST"]}/record/squat/list/");
 
 function makeGuid() {
     return sprintf('%08x-%04x-%04x-%04x-%04x%08x',

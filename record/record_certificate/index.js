@@ -2,6 +2,8 @@ function init() {
     getCertificateData();
 }
 
+let certificate_date = "";
+let certificate_master = "";
 
 function getCertificateData() {
     loadingOn();
@@ -32,28 +34,38 @@ function getCertificateData() {
 
                 $("#certificate_wrap .certificate_box .myrecord_signature_wrap .certificate_date").text(record["date"]);
 
+                certificate_date = record["date"];
+                certificate_master = record["record_type"];
+
                 $("#certificate_wrap").addClass("on");
+                $(".img_btn_wrap").removeClass("off");
             } else {
                 myrecordAlert('on', data["msg"]);
             }
+        },
+        error: function(err) {
+            loadingOff();
+            myrecordAlert('on', '에러가 발생했습니다.');
+            console.log(err);
         }
     });
 }
 
+const certificateDownload = () => {
+    html2canvas(document.querySelector("#certificate_box")).then(canvas => {
+        canvas.id = "capture_canvas";
+        document.querySelector("#capture_wrapper").appendChild(canvas);
 
+        const image = canvas.toDataURL("image/png", 1.0);
 
+        const a_tag = document.createElement("a");
+        a_tag.href = image;
+        a_tag.download = `myrecord_certificate_${certificate_date}_${certificate_master}.png`;
+        a_tag.click();
 
-
-function getParam(name) {
-
-    var params = location.search.substr(location.search.indexOf("?") + 1);
-    var value = "";
-    params = params.split("&");
-
-    for (var i = 0; i < params.length; i++) {
-        temp = params[i].split("=");
-        if ([temp[0]] == name) { value = temp[1]; }
-    }
-
-    return value;
+        const capture_wrapper = document.querySelector("#capture_wrapper");
+        while(capture_wrapper.firstChild) {
+            capture_wrapper.removeChild(capture_wrapper.firstChild);
+        }
+    });
 }

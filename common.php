@@ -1,6 +1,6 @@
-<?
+<?php
 ini_set("memory_limit" , -1);
-
+ini_set("display_errors", 1);
 
 // 설정 파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
@@ -10,9 +10,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/library/db.lib.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/library/common.lib.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/library/kmc.lib.php');
 
-
 // class 파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.account.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.regexp.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.slack.php');
 
 
 
@@ -22,7 +23,7 @@ try {
     $HOST = MYSQL_HOST;
     $DB = MYSQL_DB;
     //$PORT = IS_LIVE ? ($HOST == "SERVER_IP 를 넣어주세요" ? 4000 : 10000) : 3306;
-    $PORT = IS_LIVE ? ($HOST == "" ? 4000 : 10000) : 3306;
+    $PORT = "localhost";
     $PDO = new DB("mysql:host={$HOST};port={$PORT};dbname={$DB};charset=utf8", MYSQL_USER, MYSQL_PASSWORD);
 } catch (PDOException $Exception) {
     die($Exception->getMessage());
@@ -39,14 +40,14 @@ $member = false;
 
 
 //로그인 설정
-if ($_SESSION['user_id']) { // 로그인중이라면
+if (!empty($_SESSION['user_id'])) { // 로그인중이라면
     $member = Account::getAccount($_SESSION['user_id']);
 }
 
 $is_member = false;
 $is_admin = false;
 
-if($member['user_id']) {
+if(!empty($member['user_id'])) {
     $is_member = true;
     $is_admin = $member["is_admin"] == 1 ? true : false;
 }

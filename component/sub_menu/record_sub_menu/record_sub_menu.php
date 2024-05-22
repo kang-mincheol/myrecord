@@ -1,4 +1,4 @@
-<?
+<?php
 if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 echo css_load('/component/sub_menu/record_sub_menu/record_sub_menu.css');
@@ -24,7 +24,7 @@ echo css_load('/component/sub_menu/record_sub_menu/record_sub_menu.css');
     </div>
 </div>
 
-<?
+<?php
 echo script_load('/component/sub_menu/record_sub_menu/record_sub_menu.js');
 ?>
 <script>

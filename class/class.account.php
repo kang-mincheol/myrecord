@@ -18,7 +18,62 @@ class Account {
     private $is_withdraw_date;
 
     public static function joinAccount($joinData) {
+        global $PDO;
 
+        $returnArray = array(
+            "code" => "SUCCESS",
+            "msg" => "회원가입이 완료되었습니다."
+        );
+
+        $sql = "
+            Insert Into Account
+            Set
+                user_id = :user_id,
+                user_password = :user_password,
+                user_nickname = :user_nickname,
+                terms_marketing = :terms_marketing
+        ";
+
+        $param = array(
+            ":user_id" => $joinData["account_id"],
+            ":user_password" => password_hash($joinData["account_password"], PASSWORD_BCRYPT),
+            ":user_nickname" => $joinData["account_nickname"],
+            ":terms_marketing" => $joinData["terms_marketing"]
+        );
+
+        // 선택 값 추가 처리
+        // 이름
+        if(!empty($joinData["account_name"])) {
+            $sql .= "
+                ,
+                user_name = :user_name
+            ";
+            $param[":user_name"] = $joinData["account_name"];
+        }
+        // 휴대폰번호
+        if(!empty($joinData["account_phone"])) {
+            $sql .= "
+                ,
+                user_phone = :user_phone
+            ";
+            $param[":user_phone"] = $joinData["account_phone"];
+        }
+        // 이메일
+        if(!empty($joinData["account_email"])) {
+            $sql .= "
+                ,
+                user_email = :user_email
+            ";
+            $param[":user_email"] = $joinData["account_email"];
+        }
+
+        $result = $PDO->execute($sql, $param);
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -77,8 +132,83 @@ class Account {
         }
     }
 
+    /**
+     * 동일한 비밀번호 인지 체크하는 함수
+     */
     public static function hasPasswordCheck($check_password, $real_password) {
         if(password_verify($check_password, $real_password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 닉네임 중복 체크 함수
+     */
+    public static function overlapCheckNickname($nickname) {
+        global $PDO;
+
+        $sql = "
+            Select  count(*) as cnt
+            From    Account
+            Where   user_nickname = :user_nickname
+        ";
+        $param = array(
+            ":user_nickname" => $nickname
+        );
+
+        $result = $PDO->fetch($sql, $param)["cnt"];
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 휴대폰번호 중복 체크 함수
+     */
+    public static function overlapCheckPhoneNumber($phone_number) {
+        global $PDO;
+
+        $sql = "
+            Select  count(*) as cnt
+            From    Account
+            Where   user_phone = :user_phone
+        ";
+        $param = array(
+            ":user_phone" => $phone_number
+        );
+
+        $result = $PDO->fetch($sql, $param)["cnt"];
+
+        if($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 이메일 중복 체크 함수
+     */
+    public static function overlapCheckEmail($email) {
+        global $PDO;
+
+        $sql = "
+            Select  count(*) as cnt
+            From    Account
+            Where   user_email = :user_email
+        ";
+        $param = array(
+            ":user_email" => $email
+        );
+
+        $result = $PDO->fetch($sql, $param)["cnt"];
+
+        if($result) {
             return true;
         } else {
             return false;
@@ -128,14 +258,12 @@ class Account {
                 ip_address = :ip_address,
                 user_agent = :user_agent,
                 user_id = :user_id,
-                is_success = 1,
-                create_date = :create_date
+                is_success = 1
         ";
         $param = array(
             ":ip_address" => getenv('REMOTE_ADDR'),
             ":user_agent" => $_SERVER['HTTP_USER_AGENT'],
-            ":user_id" => $member["user_id"],
-            ":create_date" => date("Y-m-d")
+            ":user_id" => $member["user_id"]
         );
         $PDO->execute($sql, $param);
 

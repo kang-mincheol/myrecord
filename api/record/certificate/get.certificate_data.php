@@ -83,7 +83,7 @@ $returnArray["data"] = array(
     "nickname" => $record_data["user_nickname"],
     "record_type" => $record_data["record_name_ko"],
     "record_weight" => $record_data["record_weight"]."KG",
-    "date" => $record_data["create_datetime"] ? date("Y.m.d", $record_data["create_datetime"]) : "-"
+    "date" => $record_data["create_datetime"] ? date("Y.m.d", strtotime($record_data["create_datetime"])) : "-"
 );
 
 

@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($_SERVER["DOCUMENT_ROOT"]."/api/common.php");
 
 header("Content-Type: application/json; charset=UTF-8");

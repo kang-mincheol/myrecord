@@ -94,17 +94,17 @@ if($data["search_key"] && $data["search_keyword"]) {
 }
 
 $get_record_list_sql = "
-    Select  T1.id, T1.record_type, T1.record_weight, T1.status, T1.create_date, T2.user_nickname, T3.status_text
+    Select  T1.id, T1.record_type, T1.record_weight, T1.status, T1.create_datetime, T2.user_nickname, T3.status_text
     From    tb_record_request T1
     Inner Join  Account T2
     On  T1.account_id = T2.id
     Inner Join  tb_record_status_master T3
     On  T1.status = T3.id
 
-    Where   record_type = :record_type
+    Where   T1.record_type = :record_type
     {$and_query}
-    And     is_delete = 0
-    Order by create_date Desc
+    And     T1.is_delete = 0
+    Order by T1.create_datetime Desc
     Limit   {$start_row}, {$rows}
 ";
 
@@ -125,7 +125,7 @@ foreach($get_record_list as $key => $value) {
         "nickname" => $value["user_nickname"],
         "record_weight" => $value["record_weight"],
         "record_status" => $value["status_text"],
-        "date" => date("Y.m.d", strtotime($value["create_date"]))
+        "date" => date("Y.m.d", strtotime($value["create_datetime"]))
     );
 }
 

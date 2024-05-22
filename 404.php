@@ -1,8 +1,8 @@
-<?
+<?php
 include_once('common.php');   // 기본파일 로드
 include_once('header.php');   // 헤더파일 로드
 ?>
-<?
+<?php
 echo css_load('/common/404.css');
 ?>
 
