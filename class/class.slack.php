@@ -1,5 +1,7 @@
 <?php
 
+define('SLACK_URL_RECORD_INSERT', "https://hooks.slack.com/services/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");
+
 class Slack {
     public static function send($url, $msg) {
         $params = $msg; // 보낼 메세지 내용
