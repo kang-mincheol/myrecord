@@ -2,6 +2,10 @@
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
+if(!$is_member) {
+    echo "<script>myrecordAlert('on', '로그인 후 이용해주세요.', '알림', 'location.href=\'/account/login\'');</script>"; exit;
+}
+
 echo css_load('/community/free_board/edit/index.css');
 ?>
 
@@ -39,27 +43,22 @@ echo css_load('/community/free_board/edit/index.css');
 
 
 
-
-
-
-
-
-
-
 <script src="/editor/js/HuskyEZCreator.js"></script>
 <?php
 echo script_load('/community/free_board/edit/index.js');
 ?>
 <script>
-var requestEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-    oAppRef: board_editor,
-    elPlaceHolder: "board_editor",
-    sSkinURI: "/editor/SmartEditor2Skin.html",
-    fCreator: "createSEditor2"
-});
+let requestEditors = [];
+smartEditor = () => {
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: requestEditors,
+        elPlaceHolder: "board_editor",
+        sSkinURI: "/editor/SmartEditor2Skin.html",
+        fCreator: "createSEditor2"
+    });
+};
 $(function () {
-    
+    smartEditor();
 });
 </script>
 <?php

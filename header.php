@@ -34,7 +34,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 <!-- safari 앵커태그 방지 -->
 <meta name="format-detection" content="telephone=no" />
 <title>마이레코드</title>
-<link rel="shortcut icon" href="/favicon.ico">
+<link rel="shortcut icon" href="/img/company/favicon/favicon.ico">
 <!--[if lte IE 8]>
 
 <![endif]-->
@@ -104,6 +104,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
 
                 <div class="menu_box" name="util">
                     <a href="/util/" class="menu_btn">도구</a>
+                </div>
+
+                <div class="menu_box" name="community">
+                    <a href="/community/free_board/list/" class="menu_btn">커뮤니티</a>
+
+                    <div class="sub_menu_container">
+                        <div class="sub_menu_wrap" name="free_board">
+                            <div class="sub_menu_box">
+                                <a href="/community/free_board/list/">자유게시판</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
