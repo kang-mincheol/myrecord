@@ -38,7 +38,7 @@ class Account {
             ":user_id" => $joinData["account_id"],
             ":user_password" => password_hash($joinData["account_password"], PASSWORD_BCRYPT),
             ":user_nickname" => $joinData["account_nickname"],
-            ":terms_marketing" => $joinData["terms_marketing"]
+            ":terms_marketing" => $joinData["terms_marketing"] ? 1 : 0
         );
 
         // 선택 값 추가 처리
