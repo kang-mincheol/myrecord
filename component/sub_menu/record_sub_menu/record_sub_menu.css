@@ -5,11 +5,18 @@
 
 
 #record_sub_menu_container {
-    display: flex; align-items: flex-start; max-width: 980px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; max-width: 980px; margin: 0 auto;
 }
 
 #record_sub_menu_container .record_sub_menu_btn {
-    display: block; justify-content: center; align-items: center; padding: 5px 10px; color: #303030; font-size: 16px; font-weight: 400; cursor: pointer; box-sizing: border-box;
+    display: block; justify-content: center; align-items: center;
+    margin-right: 10px; margin-bottom: 10px;
+    padding: 11px 16px;
+    background-color: #f9f9f8;
+    border: 3px solid #f9f9f8;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    color: #303030; font-size: 16px; font-weight: 400; cursor: pointer; box-sizing: border-box;
 }
 
 #record_sub_menu_container .record_sub_menu_btn:first-child {
@@ -17,7 +24,7 @@
 }
 
 #record_sub_menu_container .record_sub_menu_btn.on {
-    font-weight: 700; border-bottom: 3px solid #303030;
+    font-weight: 700; border: 3px solid #303030;
 }
 
 #record_sub_menu_container .swiper-wrapper .swiper-slide {
