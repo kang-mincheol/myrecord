@@ -5,23 +5,11 @@ echo css_load('/component/sub_menu/record_sub_menu/record_sub_menu.css');
 ?>
 
 <div id="record_sub_menu_container" class="swiper">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <a class="record_sub_menu_btn landing" href="/record/landing/">랭킹</a>
-        </div>
-        <div class="swiper-slide">
-            <a class="record_sub_menu_btn squat" href="/record/squat/list">Squat</a>
-        </div>
-        <div class="swiper-slide">
-            <a class="record_sub_menu_btn benchpress" href="/record/benchpress/list">BenchPress</a>
-        </div>
-        <div class="swiper-slide">
-            <a class="record_sub_menu_btn deadlift" href="/record/deadlift/list">DeadLift</a>
-        </div>
-        <div class="swiper-slide">
-            <a class="record_sub_menu_btn my_record" href="/record/my_record/">내 기록</a>
-        </div>
-    </div>
+    <a class="record_sub_menu_btn landing" href="/record/landing/">랭킹</a>
+    <a class="record_sub_menu_btn squat" href="/record/squat/list">Squat</a>
+    <a class="record_sub_menu_btn benchpress" href="/record/benchpress/list">BenchPress</a>
+    <a class="record_sub_menu_btn deadlift" href="/record/deadlift/list">DeadLift</a>
+    <a class="record_sub_menu_btn my_record" href="/record/my_record/">내 기록</a>
 </div>
 
 <?php
@@ -29,7 +17,6 @@ echo script_load('/component/sub_menu/record_sub_menu/record_sub_menu.js');
 ?>
 <script>
 $(function() {
-    recordSubMenuSwiper();
     recordSubMenuCheck();
 });
 </script>
