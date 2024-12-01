@@ -112,7 +112,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                     <div class="sub_menu_container">
                         <div class="sub_menu_wrap" name="free_board">
                             <div class="sub_menu_box">
-                                <a href="/community/free_board/list/">자유게시판</a>
+                                <a class="sub_menu_btn" href="/community/free_board/list/">자유게시판</a>
                             </div>
                         </div>
                     </div>
