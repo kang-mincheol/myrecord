@@ -73,6 +73,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
         <div class="left_box">
             <div class="logo_box">
                 <a class="logo_btn" href="/">
+                    커밋
                     <img class="logo_img" src="/img/company/myrecord_logo.png?ver=20230129"/>
                 </a>
             </div>
