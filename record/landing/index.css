@@ -39,7 +39,7 @@
 }
 
 #record_ranking .ranking_menu_wrap .ranking_menu_btn {
-    padding: 10px 20px; color: #FFF; font-size: 16px; font-weight: 400; transition: all 0.4s; -webkit-transition: all 0.4s; background-color: #303030; border-radius: 0 0 0 0;
+    padding: 10px 20px; color: #FFF; font-size: 16px; font-weight: 400; transition: all 0.3s ease; -webkit-transition: all 0.3s ease; background-color: #303030; border-radius: 0 0 0 0;
 }
 
 #record_ranking .ranking_menu_wrap .ranking_menu_btn.on {
