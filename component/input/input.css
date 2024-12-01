@@ -31,7 +31,7 @@
 }
 
 .myrecord_input_wrap .form_value_box .input_text {
-    display: block; width: 100%; color: #303030; font-size: 16px; font-weight: 400; line-height: 1.5; letter-spacing: -0.48px; border-radius: 6px; background-color: #EEEEEE; padding: 12px 18px 10px; box-sizing: border-box; border: 2px solid #EEEEEE; transition: all 0.4s; -webkit-transition: all 0.4s; -webkit-appearance: none;
+    display: block; width: 100%; color: #303030; font-size: 16px; font-weight: 400; line-height: 1.5; letter-spacing: -0.48px; border-radius: 6px; background-color: #EEEEEE; padding: 12px 18px 10px; box-sizing: border-box; border: 2px solid #EEEEEE; transition: all 0.3s ease; -webkit-transition: all 0.3s ease; -webkit-appearance: none;
 }
 
 .myrecord_input_wrap .form_value_box .input_text::-webkit-outer-spin-button,

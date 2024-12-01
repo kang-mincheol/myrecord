@@ -15,7 +15,7 @@
     background-color: #f9f9f8;
     border: 3px solid #f9f9f8;
     border-radius: 30px;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
     color: #303030; font-size: 16px; font-weight: 400; cursor: pointer; box-sizing: border-box;
 }
 
