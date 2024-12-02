@@ -27,116 +27,19 @@ echo css_load('/community/free_board/list/index.css');
         </div>
 
         <div class="board_body_wrap">
-            <div class="board_row">
+            <!-- <div class="board_row">
                 <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
+                    <div class="body_box title">제목</div>
                 </div>
                 <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
+                    <div class="body_box writer">닉네임</div>
                     <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
+                    <div class="body_box date">0000.00.00</div>
                 </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
-            <div class="board_row">
-                <div class="top_box">
-                    <div class="body_box title">제목입니다</div>
-                </div>
-                <div class="bottom_box">
-                    <div class="body_box writer">구스만</div>
-                    <div class="body_box view">1</div>
-                    <div class="body_box date">2022.03.04</div>
-                </div>
-            </div>
+            </div> -->
+            <!-- <div class="empty-text-box">
+                검색결과가 없습니다.
+            </div> -->
         </div>
         <!-- board_body_wrap -->
     </div>
@@ -198,8 +101,8 @@ echo css_load('/community/free_board/list/index.css');
 echo script_load('/community/free_board/list/index.js');
 ?>
 <script>
-$(function () {
-    
+window.addEventListener("DOMContentLoaded", () => {
+    pageInit();
 });
 </script>
 <?php

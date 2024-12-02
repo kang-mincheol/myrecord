@@ -28,7 +28,7 @@ class FreeBoard {
         $this->delete_date = $freeBoardData["delete_date"];
     }
 
-    public function insertFreeBoard() {
+    public static function insertFreeBoard() {
         global $PDO;
         global $member;
 
@@ -78,6 +78,23 @@ class FreeBoard {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 자유게시판 list data 함수
+     * $param
+     * pageIndex
+     * pageRow
+     * searchKey
+     * searchValue
+     */
+    public static function getFreeBoardList($param) {
+        $sql = "
+            Select  *
+            From    community_free_board
+            
+            Order by id Desc
+        ";
     }
 }
 
