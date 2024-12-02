@@ -71,7 +71,7 @@
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .sub_menu_container .sub_menu_wrap {
-    display: flex; max-width: 980px; margin: 0 auto; align-items: center; padding: 20px 0; box-sizing: border-box;
+    display: flex; max-width: 980px; margin: 0 auto; align-items: center; box-sizing: border-box;
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .sub_menu_container .sub_menu_wrap .sub_menu_box {
@@ -79,6 +79,7 @@
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .sub_menu_container .sub_menu_wrap .sub_menu_box .sub_menu_btn {
+    padding: 20px 0;
     color: #303030; font-size: 16px; font-weight: 400; transition: all 0.3s;
 }
 
