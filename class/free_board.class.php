@@ -83,18 +83,61 @@ class FreeBoard {
     /**
      * 자유게시판 list data 함수
      * $param
-     * pageIndex
-     * pageRow
+     * (필수) pageIndex
+     * (필수) pageRow
      * searchKey
      * searchValue
      */
     public static function getFreeBoardList($param) {
+        $sql_param = array();
+
+        $start_row = 0;
+        if (empty($param["pageIndex"])) {
+            $start_row = 0;
+        } else {
+            if ($param["pageIndex"] === 1) {
+                $start_row = 0;
+            } else {
+                $start_row = ($param["pageIndex"] - 1) * $param["pageRow"];
+            }
+        }
+
+        $and_query = "";
+        if ($param["searchKey"] && $param["searchValue"]) {
+            if ($param["searchKey"] === "title") {
+                $and_query = "
+                    And T1.title like :searchValue
+                ";
+                $sql_param[":searchValue"] = $param["searchValue"];
+            } else if ($param["searchKey"] === "contents") {
+                $and_query = "
+                    And T1.contents like :searchValue
+                ";
+                $sql_param[":searchValue"] = $param["searchValue"];
+            } else if ($param["searchKey"] === "writer") {
+                $and_query = "
+                    And Acc.nickname = :searchValue
+                ";
+                $sql_param[":searchValue"] = $param["searchValue"];
+            }
+        }
+
         $sql = "
-            Select  *
-            From    community_free_board
+            Select  T1.id, T1.account_no, T1.title, T1.create_date, T1.is_delete
+            From    community_free_board T1
+
+            Inner Join  Account Acc
+            On      T1.account_no = Acc.id
             
-            Order by id Desc
+            Where   T1.is_delete = 0
+            {$and_query}
+            Order by T1.id Desc
+            Limit   {$start_row}, {$param["pageRow"]}
         ";
+
+        $get_free_board_list = $PDO -> fetchAll($sql, $sql_param);
+
+        
     }
 }
 
