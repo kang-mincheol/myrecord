@@ -89,6 +89,8 @@ class FreeBoard {
      * searchValue
      */
     public static function getFreeBoardList($param) {
+        global $PDO;
+
         $sql_param = array();
 
         $start_row = 0;
@@ -103,7 +105,7 @@ class FreeBoard {
         }
 
         $and_query = "";
-        if ($param["searchKey"] && $param["searchValue"]) {
+        if (isset($param["searchKey"]) && isset($param["searchValue"])) {
             if ($param["searchKey"] === "title") {
                 $and_query = "
                     And T1.title like :searchValue
@@ -135,7 +137,7 @@ class FreeBoard {
             Limit   {$start_row}, {$param["pageRow"]}
         ";
 
-        $get_free_board_list = $PDO -> fetchAll($sql, $sql_param);
+        return $get_free_board_list = $PDO -> fetchAll($sql, $sql_param);
 
         
     }
