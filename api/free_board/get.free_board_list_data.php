@@ -8,7 +8,20 @@ $returnArray = array(
     "msg"=>"정상 처리되었습니다"
 );
 
-$recordListData = [];
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (is_null($data) || !checkParams($data, ["pageIndex", "pageRow"])) {
+    $returnArray["code"] = "PARAMS";
+    $returnArray["msg"] = "필수 파라미터가 존재하지 않습니다.";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
+
+$data = cleansingParams($data);
+
+$freeBoardListData = FreeBoard::getFreeBoardList($data);
+
+var_dump($freeBoardListData); exit;
+
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>
