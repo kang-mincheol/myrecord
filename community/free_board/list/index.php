@@ -101,6 +101,10 @@ echo css_load('/community/free_board/list/index.css');
 echo script_load('/community/free_board/list/index.js');
 ?>
 <script>
+const listInfo ={
+    pageIndex: 1,
+    pageRow: 10
+}
 window.addEventListener("DOMContentLoaded", () => {
     pageInit();
 });

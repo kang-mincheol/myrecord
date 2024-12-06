@@ -138,8 +138,6 @@ class FreeBoard {
         ";
 
         return $get_free_board_list = $PDO -> fetchAll($sql, $sql_param);
-
-        
     }
 }
 
