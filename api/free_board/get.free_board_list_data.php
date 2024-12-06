@@ -20,7 +20,18 @@ $data = cleansingParams($data);
 
 $freeBoardListData = FreeBoard::getFreeBoardList($data);
 
-var_dump($freeBoardListData); exit;
+if (count($freeBoardListData) === 0) {
+    $returnArray["code"] = "EMPTY";
+    $returnArray["msg"] = "검색결과가 없습니다.";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
+
+foreach($freeBoardListData as $key => $value) {
+    $returnArray["data"][] = array(
+        "id" => $value["id"],
+        "title" => $value["title"]
+    );
+}
 
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
