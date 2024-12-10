@@ -30,8 +30,8 @@ echo css_load('/community/free_board/edit/index.css');
     </div>
 
     <div class="bottom_btn_wrap">
-        <button class="list_btn" onclick="">목록</button>
-        <button class="edit_btn" onclick="">등록</button>
+        <button class="list_btn" onclick="goList();">목록</button>
+        <button class="edit_btn" onclick="submitPost();">등록</button>
     </div>
 </div>
 <!-- editor_wrap -->
@@ -57,7 +57,7 @@ smartEditor = () => {
         fCreator: "createSEditor2"
     });
 };
-$(function () {
+window.addEventListener("DOMContentLoaded", () => {
     smartEditor();
 });
 </script>
