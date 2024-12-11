@@ -35,7 +35,7 @@ if(!is_number($data["record_id"])) {
 $record_id = preg_replace("/[^0-9]+/u", "", $data["record_id"]);
 
 $query = "
-    Select  T1.account_id, T1.status, T2.user_nickname, T1.record_weight, T3.record_name_ko, T4.create_datetime
+    Select  T1.account_id, T1.status, T2.user_nickname, T1.record_weight, T3.record_name_ko, T1.create_datetime as request_datetime, T4.create_datetime as certificate_datetime
     From    tb_record_request T1
     Inner Join (
         Select  id, user_nickname
@@ -83,7 +83,7 @@ $returnArray["data"] = array(
     "nickname" => $record_data["user_nickname"],
     "record_type" => $record_data["record_name_ko"],
     "record_weight" => $record_data["record_weight"]."KG",
-    "date" => $record_data["create_datetime"] ? date("Y.m.d", strtotime($record_data["create_datetime"])) : "-"
+    "date" => $record_data["certificate_datetime"] ? date("Y.m.d", strtotime($record_data["certificate_datetime"])) : date("Y.m.d", strtotime($record_data["create_datetime"]))
 );
 
 
