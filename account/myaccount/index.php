@@ -70,8 +70,6 @@ exit;
 
 </div>
 
-
-
 <?php
 echo script_load('/account/myaccount/index.js');
 ?>
@@ -80,6 +78,8 @@ $(function () {
     init();
 });
 </script>
+
 <?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/component/passwordChangeModal/passwordChangeModal.php'); // 비밀번호 변경 모달 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');   // 푸터파일 로드
 ?>
