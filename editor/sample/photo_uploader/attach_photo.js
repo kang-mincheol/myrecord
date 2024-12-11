@@ -356,6 +356,7 @@
 			method : "post",
 			onload : function(res){ // 요청이 완료되면 실행될 콜백 함수
 				var sResString = res._response.responseText;
+				console.log("res => ", res);
 				if (res.readyState() == 4) {
 					if(sResString.indexOf("NOTALLOW_") > -1){
 						var sFileName = sResString.replace("NOTALLOW_", "");
@@ -467,9 +468,11 @@
       */
      function uploadImage (e){
     	 if(!bSupportDragAndDropAPI){
-    		 generalUpload();
+    		generalUpload();
+			console.log(1);
     	 }else{
-    		 html5Upload();
+			console.log(2);
+    		html5Upload();
     	 }
      }
      
