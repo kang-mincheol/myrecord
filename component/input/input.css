@@ -34,6 +34,11 @@
     display: block; width: 100%; color: #303030; font-size: 16px; font-weight: 400; line-height: 1.5; letter-spacing: -0.48px; border-radius: 6px; background-color: #EEEEEE; padding: 12px 18px 10px; box-sizing: border-box; border: 2px solid #EEEEEE; transition: all 0.3s ease; -webkit-transition: all 0.3s ease; -webkit-appearance: none;
 }
 
+.myrecord_input_wrap .form_value_box .input_text:disabled {
+    background-color: #c1c1c1;
+    border-color: #c1c1c1;
+}
+
 .myrecord_input_wrap .form_value_box .input_text::-webkit-outer-spin-button,
 .myrecord_input_wrap .form_value_box .input_text::-webkit-inner-spin-button {
     -webkit-appearance: none; margin: 0;
