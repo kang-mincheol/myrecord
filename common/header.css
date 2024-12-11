@@ -7,7 +7,7 @@
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 99;
+    z-index: 90;
     background-color: #ffffff;
     border-bottom: 1px solid #ddd;
 }
@@ -65,7 +65,7 @@
 }
 
 #header .pc_header .left_box .menu_wrap .menu_box .sub_menu_container {
-    display: none; position: fixed; top: 100px; left: 0; z-index: 101; width: 100%; background-color: #FFF;
+    display: none; position: fixed; top: 100px; left: 0; z-index: 91; width: 100%; background-color: #FFF;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
@@ -151,7 +151,7 @@
     }
 
     #mobile_menu_wrap {
-        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100;
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 91;
     }
 
     #mobile_menu_wrap.on {
