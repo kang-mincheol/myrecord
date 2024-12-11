@@ -1,24 +1,11 @@
 const submitPost = () => {
   const title = document.getElementById("board_title").value;
   requestEditors.getById["board_editor"].exec("UPDATE_CONTENTS_FIELD", []);
-  const content = document.getElementById("board_editor").value;
-
-  //   if (title === "") {
-  //     myrecordAlert("on", "제목을 입력해주세요.");
-  //     return;
-  //   } else if (content === "" || content === "<p>&nbsp;</p>") {
-  //     myrecordAlert(
-  //       "on",
-  //       "내용을 입력해주세요.",
-  //       "",
-  //       `requestEditors.getById["board_editor"].exec("FOCUS")`
-  //     );
-  //     return;
-  //   }
+  const contents = document.getElementById("board_editor").value;
 
   const data = {
     title,
-    content,
+    contents,
   };
 
   $.ajax({
@@ -29,6 +16,7 @@ const submitPost = () => {
     success: (data) => {
       console.log(data);
       if (data["code"] === "SUCCESS") {
+        myrecordAlert("on", data["msg"], "", `location.href='/community/free_board/view?board_id=${data["board_id"]}';`);
       } else {
         myrecordAlert("on", data["msg"]);
       }

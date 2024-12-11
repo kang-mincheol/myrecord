@@ -28,7 +28,7 @@ class FreeBoard {
         $this->delete_date = $freeBoardData["delete_date"];
     }
 
-    public static function insertFreeBoard() {
+    public static function insertFreeBoard($data) {
         global $PDO;
         global $member;
 
@@ -42,16 +42,13 @@ class FreeBoard {
         ";
         $param = array(
             ":account_no" => $member["id"],
-            ":title" => $this->title,
-            ":contents" => $this->contents
+            ":title" => $data["title"],
+            ":contents" => $data["contents"]
         );
 
         $insert = $PDO->execute($sql, $param);
-        if($insert) {
-            return true;
-        } else {
-            return false;
-        }
+        
+        return $insert;
     }
 
     public function updateFreeBoard() {

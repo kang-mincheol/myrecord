@@ -16,7 +16,7 @@ if(!$is_member) {
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (is_null($data) || !checkParams($data, ["title", "content"])) {
+if (is_null($data) || !checkParams($data, ["title", "contents"])) {
   $returnArray["code"] = "PARAMS";
   $returnArray["msg"] = "필수 파라미터가 존재하지 않습니다.";
   echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
@@ -29,12 +29,15 @@ if (empty($data["title"])) {
   $returnArray["code"] = "TITLE";
   $returnArray["msg"] = "제목을 입력해주세요.";
   echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
-} else if (empty($data["content"]) || $data["content"] === "<p> </p>") {
+} else if (empty($data["contents"]) || $data["contents"] === "<p> </p>") {
   $returnArray["code"] = "CONTENT";
   $returnArray["msg"] = "내용을 입력해주세요.";
   echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+$insert = FreeBoard::insertFreeBoard($data);
+
+$returnArray["board_id"] = $insert;
 
 
 
