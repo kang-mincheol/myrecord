@@ -27,11 +27,11 @@ $data = cleansingParams($data);
 // 빈값 체크
 if (empty($data["title"])) {
   $returnArray["code"] = "TITLE";
-  $returnArray["msg"] = "제목을 입력해주세요.";
+  $returnArray["msg"] = "제목을 입력해 주세요.";
   echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 } else if (empty($data["contents"]) || $data["contents"] === "<p> </p>") {
   $returnArray["code"] = "CONTENT";
-  $returnArray["msg"] = "내용을 입력해주세요.";
+  $returnArray["msg"] = "내용을 입력해 주세요.";
   echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
