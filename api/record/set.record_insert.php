@@ -97,7 +97,7 @@ $record_weight = $data['record_weight'];
 $record_weight = preg_replace('/[^0-9]+/u', '', $record_weight);
 if($record_weight == '') {
     $returnArray["code"] = "PARAM_ERROR";
-    $returnArray["msg"] = "등록할 무게를 입력해주세요";
+    $returnArray["msg"] = "등록할 무게를 입력해 주세요";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 

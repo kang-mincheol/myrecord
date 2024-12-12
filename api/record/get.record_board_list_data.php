@@ -66,7 +66,7 @@ $and_query = "";
 if($data["search_key"] && $data["search_keyword"]) {
     if(strlen($data["search_keyword"]) < 1) {
         $returnArray["code"] = "KEYWORD_ERROR";
-        $returnArray["msg"] = "검색시 두글자 이상 입력해주세요";
+        $returnArray["msg"] = "검색시 두글자 이상 입력해 주세요";
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 

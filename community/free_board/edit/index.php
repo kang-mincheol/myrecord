@@ -18,7 +18,7 @@ echo css_load('/community/free_board/edit/index.css');
     <div id="board_title_wrap">
         <label class="value_title" for="board_title">제목</label>
         <div class="value_box">
-            <input id="board_title" class="edit_input" type="text" placeholder="제목을 입력해주세요"/>
+            <input id="board_title" class="edit_input" type="text" placeholder="제목을 입력해 주세요"/>
         </div>
     </div>
 

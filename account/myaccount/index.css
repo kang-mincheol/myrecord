@@ -21,7 +21,7 @@
 }
 
 #myaccount_wrap .footer_btn_wrap .password_change_btn {
-    color: #FFF; background-color: #303030;
+    color: #FFF; background-color: var(--main-color-1);
 }
 
 #myaccount_wrap .footer_btn_wrap .account_change_btn {

@@ -24,7 +24,7 @@
 }
 
 #myrecord_alert .alert_box .alert_btn {
-    display: flex; justify-content: center; align-items: center; width: calc(100% - 20px); height: 40px; color: #FFF; font-size: 16px; font-weight: 500; background-color: #303030; margin: 0 auto 10px;
+    display: flex; justify-content: center; align-items: center; width: calc(100% - 20px); height: 40px; color: #FFF; font-size: 16px; font-weight: 500; background-color: #303030; margin: 0 auto 10px; border-radius: 5px;
 }
 
 

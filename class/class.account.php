@@ -144,6 +144,25 @@ class Account {
     }
 
     /**
+     * 비밀번호 변경 함수
+     */
+    public static function updatePassword($password) {
+        global $PDO;
+        global $member;
+
+        $sql = "
+            Update  Account
+            SET
+                user_password = :user_password
+            Where   id = :id
+        ";
+        $param = array(
+            ":user_password" => password_hash($password),
+            ":id" => $member["id"]
+        );
+    }
+
+    /**
      * 닉네임 중복 체크 함수
      */
     public static function overlapCheckNickname($nickname) {

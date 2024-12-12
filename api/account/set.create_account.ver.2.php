@@ -35,7 +35,7 @@ if($id_overlap_check) {
 $id_reg_check = Regexp::id_regexp($data["account_id"]);
 if(!$id_reg_check) {
     $returnArray["code"] = "ID_REGEXP";
-    $returnArray["msg"] = "아이디를 규칙에 맞게 입력해주세요";
+    $returnArray["msg"] = "아이디를 규칙에 맞게 입력해 주세요";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
@@ -47,7 +47,7 @@ if(!$id_reg_check) {
 $password_reg_check = Regexp::password_regexp($data["account_password"]);
 if(!$password_reg_check) {
     $returnArray["code"] = "PW_REGEXP";
-    $returnArray["msg"] = "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리를 입력해주세요.";
+    $returnArray["msg"] = "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리를 입력해 주세요.";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
@@ -60,7 +60,7 @@ if(!$password_reg_check) {
 $nickname_check = Regexp::nickname_regexp($data["account_nickname"]);
 if(!$nickname_check) {
     $returnArray["code"] = "NICKNAME_REGEXP";
-    $returnArray["msg"] = "닉네임은 영문 또는 한글 또는 숫자로 2~10자리로 입력해주세요.";
+    $returnArray["msg"] = "닉네임은 영문 또는 한글 또는 숫자로 2~10자리로 입력해 주세요.";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 $nickname_overlap_check = Account::overlapCheckNickname($data["account_nickname"]);
@@ -78,7 +78,7 @@ if(!empty($data["account_name"])) {
     $name_check = Regexp::name_regexp($data["account_name"]);
     if(!$name_check) {
         $returnArray["code"] = "NAME_REGEXP";
-        $returnArray["msg"] = "이름은 영문 또는 한글 2~17자리로 입력해주세요.";
+        $returnArray["msg"] = "이름은 영문 또는 한글 2~17자리로 입력해 주세요.";
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 }
@@ -112,7 +112,7 @@ if(!empty($data["account_email"])) {
     $email_check = Regexp::email_regexp($data["account_email"]);
     if(!$email_check) {
         $returnArray["code"] = "EMAIL_REGEXP";
-        $returnArray["msg"] = "이메일을 올바르게 입력해주세요.";
+        $returnArray["msg"] = "이메일을 올바르게 입력해 주세요.";
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 

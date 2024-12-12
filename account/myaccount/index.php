@@ -50,7 +50,7 @@ exit;
             <label class="wrap_label" for="account_phone">(선택)핸드폰번호</label>
         </div>
         <div class="form_value_box">
-            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="핸드폰번호를 입력해주세요 '-' 포함"/>
+            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="핸드폰번호를 입력해 주세요 '-' 포함"/>
         </div>
     </div>
 
@@ -59,7 +59,7 @@ exit;
             <label class="wrap_label" for="account_email">(선택)이메일</label>
         </div>
         <div class="form_value_box">
-            <input id="account_email" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="이메일을 입력해주세요"/>
+            <input id="account_email" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="이메일을 입력해 주세요"/>
         </div>
     </div>
 
