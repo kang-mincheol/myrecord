@@ -66,6 +66,10 @@ function makeGuid() {
 function resizeImage($filePath, $newWidth) {
     list($originalWidth, $originalHeight, $imageType) = getimagesize($filePath);
 
+    if ($originalWidth < $newWidth) {
+        return;
+    }
+
     $newHeight = ($originalHeight / $originalWidth) * $newWidth;
 
     switch ($imageType) {
