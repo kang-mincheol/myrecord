@@ -76,7 +76,9 @@ echo css_load('/community/free_board/list/index.css');
 
     <div class="search_keyword">
         <input id="search_keyword" type="text"/>
-        <button class="search_btn" title="검색"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="search_btn" onclick="listSearch();" title="검색">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
     </div>
 </div>
 <!-- board_search_wrap -->
@@ -101,10 +103,11 @@ echo css_load('/community/free_board/list/index.css');
 echo script_load('/community/free_board/list/index.js');
 ?>
 <script>
-const listInfo ={
+const listInfo = {
     pageIndex: 1,
-    pageRow: 10
-}
+    pageRow: 10,
+};
+
 window.addEventListener("DOMContentLoaded", () => {
     pageInit();
 });
