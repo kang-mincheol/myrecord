@@ -64,7 +64,7 @@ exit;
     </div>
 
     <div class="footer_btn_wrap">
-        <button class="password_change_btn" onclick="passwordChangeView();">비밀번호 변경</button>
+        <button class="password_change_btn" onclick="PasswordChangeModal.handler();">비밀번호 변경</button>
         <button class="account_change_btn" onclick="myaccountChange();">내정보 수정</button>
     </div>
 

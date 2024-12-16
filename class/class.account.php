@@ -157,9 +157,13 @@ class Account {
             Where   id = :id
         ";
         $param = array(
-            ":user_password" => password_hash($password),
+            ":user_password" => password_hash($password, PASSWORD_BCRYPT),
             ":id" => $member["id"]
         );
+
+        $result = $PDO->fetch($sql, $param);
+
+        return $result;
     }
 
     /**

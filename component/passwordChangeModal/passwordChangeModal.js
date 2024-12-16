@@ -1,9 +1,12 @@
 const PasswordChangeModal = {
-  handler: (action = ture) => {
+  handler: (action = true) => {
     if (action === true) {
       $("#passwordChangeModal").addClass("on");
     } else {
       $("#passwordChangeModal").removeClass("on");
+      $("#now_password").val('');
+      $("#new_password").val('');
+      $("#new_password_check").val('');
     }
   },
   setPassword: () => {
@@ -47,9 +50,14 @@ const PasswordChangeModal = {
         now_password: nowPassword,
         new_password: newPassword,
       }),
-      url: "",
+      url: "/api/account/set.password_change.php",
       success: (data) => {
         console.log(data);
+        if (data["code"] === "SUCCESS") {
+          myrecordAlert('on', data["msg"], '', `PasswordChangeModal.handler(false);`);
+        } else {
+          myrecordAlert('on', data["msg"]);
+        }
       },
       error: (error) => {
         console.log(error);

@@ -21,7 +21,23 @@ if (is_null($data) || !checkParams($data, ["now_password", "new_password"])) {
 $data = cleansingParams($data);
 
 // 현재 비밀번호 검증
+$nowPasswordCheck = Account::hasPasswordCheck($data["now_password"], $member["user_password"]);
+if ($nowPasswordCheck === false) {
+    $returnArray["code"] = "ERROR";
+    $returnArray["msg"] = "현재 비밀번호를 정확하게 입력해 주세요.";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
 
+// 새 비밀번호 정규식 검증
+$newPasswordValidate = Regexp::password_regexp($data["new_password"]);
+if ($newPasswordValidate === false) {
+    $returnArray["code"] = "ERROR";
+    $returnArray["msg"] = "새 비밀번호를 규칙에 맞게 입력해 주세요.";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
+
+// 비밀번호 업데이트
+$result = Account::updatePassword($data["new_password"]);
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>
