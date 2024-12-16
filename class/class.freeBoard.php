@@ -122,7 +122,8 @@ class FreeBoard {
         }
 
         $sql = "
-            Select  T1.id, T1.account_no, T1.title, T1.create_date, T1.is_delete
+            Select  T1.id, T1.account_no, T1.title, T1.create_date, T1.is_delete,
+                    Acc.user_nickname, T1.view_count
             From    community_free_board T1
 
             Inner Join  Account Acc

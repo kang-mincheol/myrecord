@@ -88,7 +88,7 @@
 
 
 #board_wrap .board_container .board_body_wrap .board_row {
-    display: flex; padding: 10px;
+    display: flex; padding: 10px; cursor: pointer;
 }
 
 #board_wrap .board_container .board_body_wrap .board_row .top_box {
