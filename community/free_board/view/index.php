@@ -42,8 +42,8 @@ echo css_load('/community/free_board/view/index.css');
 echo script_load('/community/free_board/view/index.js');
 ?>
 <script>
-$(function () {
-    
+window.addEventListener("DOMContentLoaded", () => {
+    init();
 });
 </script>
 <?php

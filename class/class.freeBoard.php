@@ -137,6 +137,22 @@ class FreeBoard {
 
         return $get_free_board_list = $PDO -> fetchAll($sql, $sql_param);
     }
+
+    /**
+     * 자유게시판 view data get 함수
+     */
+    public static function getFreeBoardViewData($boardId) {
+        global $PDO;
+
+        $sql = "
+            Select  *
+            From    community_free_board
+            Where   id = :id
+        ";
+        $sql_param[":id"] = $boardId;
+
+        return $PDO -> fetch($sql, $sql_param);
+    }
 }
 
 ?>
