@@ -32,7 +32,8 @@ foreach($freeBoardListData as $key => $value) {
         "title" => $value["title"],
         "nickname" => $value["user_nickname"],
         "view_count" => $value["view_count"],
-        "write_date" => date("Y.m.d", strtotime($value["create_date"]))
+        "write_date" => date("Y.m.d", strtotime($value["create_date"])),
+        "test_name" => "123"
     );
 }
 
