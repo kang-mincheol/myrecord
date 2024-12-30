@@ -145,9 +145,14 @@ class FreeBoard {
         global $PDO;
 
         $sql = "
-            Select  *
-            From    community_free_board
-            Where   id = :id
+            Select  T1.title, T1.contents, T1.create_date, T2.user_nickname
+            From    community_free_board T1
+
+            Inner Join Account T2
+            On      T1.account_no = T2.id
+
+            Where   T1.id = :id
+            And     T1.is_delete = 0
         ";
         $sql_param[":id"] = $boardId;
 

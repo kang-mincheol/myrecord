@@ -12,10 +12,10 @@ echo css_load('/community/free_board/view/index.css');
 <div id="view_wrap">
 
     <div id="view_header_wrap">
-        <div id="contents_title">제목입니다</div>
+        <div id="contents_title">제목</div>
         <div class="view_header_info_box">
-            <p class="info_value writer_value">작성자임</p>
-            <p class="info_value write_date">2022.03.13</p>
+            <p class="info_value writer_value">작성자</p>
+            <p class="info_value write_date">0000.00.00</p>
         </div>
     </div>
 
