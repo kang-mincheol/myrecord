@@ -22,7 +22,7 @@ echo css_load('/community/free_board/view/index.css');
     <div id="view_contents_wrap">내용</div>
 
     <div class="bottom_btn_wrap">
-        <button class="bottom_btn list_btn">목록</button>
+        <button class="bottom_btn list_btn" onclick="goFreeBoardList();">목록</button>
         <!-- on css -->
         <button class="bottom_btn edit_btn">수정</button>
         <!-- off css -->

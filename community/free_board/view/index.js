@@ -30,3 +30,11 @@ const getFreeBoardViewData = () => {
     },
   });
 };
+
+const goFreeBoardList = () => {
+  if (history.length > 1) {
+    history.back();
+  } else {
+    location.href = "/community/free_board/list";
+  }
+};
