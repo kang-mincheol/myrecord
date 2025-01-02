@@ -20,7 +20,12 @@ $data = cleansingParams($data);
 
 $freeBoardViewData = FreeBoard::getFreeBoardViewData($data["boardId"]);
 
-$returnArray["data"] = $freeBoardViewData;
+$returnArray["data"] = array(
+  "title" => $freeBoardViewData["title"],
+  "contents" => stripslashes($freeBoardViewData["contents"]),
+  "user_nickname" => $freeBoardViewData["user_nickname"],
+  "create_date" => $freeBoardViewData["create_date"]
+);
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>
