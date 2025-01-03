@@ -145,7 +145,7 @@ class FreeBoard {
         global $PDO;
 
         $sql = "
-            Select  T1.title, T1.contents, T1.create_date, T2.user_nickname
+            Select  T1.title, T1.contents, T1.create_date, T2.user_nickname, T2.id as account_id
             From    community_free_board T1
 
             Inner Join Account T2

@@ -24,7 +24,8 @@ $returnArray["data"] = array(
   "title" => $freeBoardViewData["title"],
   "contents" => stripslashes($freeBoardViewData["contents"]),
   "user_nickname" => $freeBoardViewData["user_nickname"],
-  "create_date" => $freeBoardViewData["create_date"]
+  "create_date" => $freeBoardViewData["create_date"],
+  "is_write" => $member["id"] === $freeBoardViewData["account_id"] ? true : false
 );
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;

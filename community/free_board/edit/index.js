@@ -16,7 +16,12 @@ const submitPost = () => {
     success: (data) => {
       console.log(data);
       if (data["code"] === "SUCCESS") {
-        myrecordAlert("on", data["msg"], "", `location.href='/community/free_board/view?board_id=${data["board_id"]}';`);
+        myrecordAlert(
+          "on",
+          data["msg"],
+          "",
+          `location.href='/community/free_board/view?id=${data["board_id"]}';`
+        );
       } else {
         myrecordAlert("on", data["msg"]);
       }
