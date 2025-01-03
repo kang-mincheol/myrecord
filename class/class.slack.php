@@ -1,6 +1,7 @@
 <?php
 
 define('SLACK_URL_RECORD_INSERT', "https://hooks.slack.com/services/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");
+define('SLACK_URL_ERROR', "https://hooks.slack.com/services/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");
 
 class Slack {
     public static function send($url, $msg) {
