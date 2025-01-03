@@ -128,6 +128,8 @@ if(!empty($data["account_email"])) {
 $join_account = Account::joinAccount($data);
 
 if(!$join_account) {
+    Slack::send(SLACK_URL_ERROR, "회원가입 실패\n{$_SERVER["REQUEST_URI"]}");
+
     $returnArray["code"] = "SYSTEM_ERROR";
     $returnArray["msg"] = "회원가입 실패<br>고객센터에 문의해 주세요.";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;

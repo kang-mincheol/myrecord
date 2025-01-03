@@ -37,9 +37,15 @@ if (empty($data["title"])) {
 
 $insert = FreeBoard::insertFreeBoard($data);
 
+if (!$insert) {
+  Slack::send(SLACK_URL_ERROR, "자유게시판 글 등록 실패\n{$_SERVER["REQUEST_URI"]}");
+
+  $returnArray["code"] = "ERROR";
+  $returnArray["msg"] = "글 등록에 실패했습니다.";
+  echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
+
 $returnArray["board_id"] = $insert;
-
-
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>
