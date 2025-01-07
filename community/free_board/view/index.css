@@ -37,7 +37,9 @@
 }
 
 #view_wrap #view_header_wrap #contents_title {
-    display: flex; align-items: center; height: 34px; color: #303030; font-size: 16px; padding: 0 10px; border: 2px solid #303030; border-radius: 4px; margin-bottom: 10px; box-sizing: border-box;
+    display: flex; align-items: center;
+    padding: 10px; border: 2px solid #303030; border-radius: 4px; margin-bottom: 10px; box-sizing: border-box;
+    color: #303030; font-size: 16px; font-weight: 700;
 }
 
 #view_wrap #view_header_wrap .view_header_info_box {
