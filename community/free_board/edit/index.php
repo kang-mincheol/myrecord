@@ -59,6 +59,7 @@ smartEditor = () => {
 };
 window.addEventListener("DOMContentLoaded", () => {
     smartEditor();
+    pageInit();
 });
 </script>
 <?php

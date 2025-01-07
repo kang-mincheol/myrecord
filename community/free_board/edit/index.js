@@ -1,3 +1,9 @@
+const pageInit = () => {
+  const id = getParam("id");
+
+  console.log("id => ", id);
+};
+
 const submitPost = () => {
   const title = document.getElementById("board_title").value;
   requestEditors.getById["board_editor"].exec("UPDATE_CONTENTS_FIELD", []);
