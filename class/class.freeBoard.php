@@ -78,6 +78,36 @@ class FreeBoard {
     }
 
     /**
+     * 자유게시판 작성자 본인인지 확인하는 함수
+     */
+    public static function writerVerify($boardId) {
+        global $PDO;
+        global $member;
+
+        if (is_null($member)) {
+            return false;
+        }
+        
+        $sql = "
+            Select  account_no
+            From    community_free_board
+            Where   id = :id
+        ";
+
+        $param = array(
+            ":id" => $boardId
+        );
+
+        $freeBoardData = $PDO->fetch($sql, $param);
+
+        if ($member["id"] === $freeBoardData["account_no"]) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * 자유게시판 list data 함수
      * $param
      * (필수) pageIndex
@@ -157,6 +187,27 @@ class FreeBoard {
         $sql_param[":id"] = $boardId;
 
         return $PDO -> fetch($sql, $sql_param);
+    }
+
+    /**
+     * 자유게시판 edit data get 함수
+     */
+    public static function getFreeBoardEditData($boardId) {
+        global $PDO;
+
+        $returnArray = array(
+            "code"=>"SUCCESS",
+            "msg"=>"정상 처리되었습니다"
+        );
+
+        // 작성자 본인인지 체크
+        $writerCheck = FreeBoard::writerVerify($boardId);
+
+        if ($writerCheck === false) {
+            $returnArray["code"] = "WRITER_ONLY";
+            $returnArray["msg"] = "작성자만 수정 가능합니다.";
+            return $returnArray;
+        }
     }
 }
 

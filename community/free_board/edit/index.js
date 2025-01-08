@@ -2,6 +2,27 @@ const pageInit = () => {
   const id = getParam("id");
 
   console.log("id => ", id);
+  if (id === "") {
+    // 등록
+  } else {
+    // 수정
+    getEditData(id);
+  }
+};
+
+const getEditData = async (id) => {
+  try {
+    const url = `/api/free_board/get.free_board_edit_data.php?id=${id}`;
+    const response = await fetch(url).then((response) => response);
+
+    console.log("response => ", response);
+  } catch (error) {
+    console.log(error);
+    myrecordAlert(
+      "on",
+      "자유게시판 수정 데이터를 불러오는 중 에러가 발생했습니다."
+    );
+  }
 };
 
 const submitPost = () => {
