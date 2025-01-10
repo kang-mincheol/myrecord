@@ -20,7 +20,7 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="<?=$ogTitle?>">
-<meta property="og:description" content="<?=$pageDescription?>">
+<meta property="og:description" content="<?=$ogDescription?>">
 <meta property="og:image" content="<?=$ogImage?>">
 <meta property="og:url" content="<?=$ogUrl?>">
 
