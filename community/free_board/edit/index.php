@@ -31,7 +31,7 @@ echo css_load('/community/free_board/edit/index.css');
 
     <div class="bottom_btn_wrap">
         <button class="list_btn" onclick="goList();">목록</button>
-        <button class="edit_btn" onclick="submitPost();">등록</button>
+        <button class="edit_btn" onclick="insertBoard();">등록</button>
     </div>
 </div>
 <!-- editor_wrap -->
@@ -54,12 +54,14 @@ smartEditor = () => {
         oAppRef: requestEditors,
         elPlaceHolder: "board_editor",
         sSkinURI: "/editor/SmartEditor2Skin.html",
-        fCreator: "createSEditor2"
+        fCreator: "createSEditor2",
+        fOnAppLoad: () => {
+            pageInit();
+        }
     });
 };
 window.addEventListener("DOMContentLoaded", () => {
     smartEditor();
-    pageInit();
 });
 </script>
 <?php

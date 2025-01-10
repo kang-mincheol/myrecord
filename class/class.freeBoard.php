@@ -92,6 +92,7 @@ class FreeBoard {
             Select  account_no
             From    community_free_board
             Where   id = :id
+            And     is_delete = 0
         ";
 
         $param = array(
@@ -208,6 +209,32 @@ class FreeBoard {
             $returnArray["msg"] = "작성자만 수정 가능합니다.";
             return $returnArray;
         }
+
+        $sql = "
+            Select  *
+            From    community_free_board
+            Where   id = :id
+            And     is_delete = 0
+        ";
+
+        $param = array(
+            ":id" => $boardId
+        );
+
+        $boardEditData = $PDO->fetch($sql, $param);
+
+        if ($boardEditData) {
+            $returnArray["data"] = array(
+                "title" => $boardEditData["title"],
+                "contents" => $boardEditData["contents"]
+            );
+
+            return $returnArray;
+        }
+
+        $returnArray["code"] = "EMPTY";
+        $returnArray["msg"] = "데이터가 없습니다.";
+        return $returnArray;
     }
 }
 

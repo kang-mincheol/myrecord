@@ -13,9 +13,32 @@ const pageInit = () => {
 const getEditData = async (id) => {
   try {
     const url = `/api/free_board/get.free_board_edit_data.php?id=${id}`;
-    const response = await fetch(url).then((response) => response);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    })
+      .then((response) => response)
+      .then((response) => response.json());
 
     console.log("response => ", response);
+    if (response["code"] === "SUCCESS") {
+      const data = response["data"];
+
+      $("#board_title").val(data.title);
+      requestEditors[0].exec("SET_CONTENTS", [data.contents]);
+
+      // 버튼 수정으로 변경
+      $("#editor_wrap .bottom_btn_wrap .edit_btn")
+        .attr("onclick", "updateBoard()")
+        .text("수정");
+    } else {
+      myrecordAlert("on", response["msg"]);
+    }
   } catch (error) {
     console.log(error);
     myrecordAlert(
@@ -25,7 +48,7 @@ const getEditData = async (id) => {
   }
 };
 
-const submitPost = () => {
+const insertBoard = () => {
   const title = document.getElementById("board_title").value;
   requestEditors.getById["board_editor"].exec("UPDATE_CONTENTS_FIELD", []);
   const contents = document.getElementById("board_editor").value;
@@ -61,6 +84,19 @@ const submitPost = () => {
       );
     },
   });
+};
+
+const updateBoard = () => {
+  const id = getParam("id");
+  const title = document.getElementById("board_title").value;
+  requestEditors.getById["board_editor"].exec("UPDATE_CONTENTS_FIELD", []);
+  const contents = document.getElementById("board_editor").value;
+
+  const data = {
+    id,
+    title,
+    contents,
+  };
 };
 
 const goList = () => {

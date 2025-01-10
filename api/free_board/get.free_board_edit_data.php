@@ -18,7 +18,9 @@ if (is_null($data) || !checkParams($data, ["id"])) {
 
 $data = cleansingParams($data);
 
+$boardEditData = FreeBoard::getFreeBoardEditData($data["id"]);
 
+$returnArray = $boardEditData;
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>
