@@ -30,7 +30,7 @@ echo css_load('/community/free_board/edit/index.css');
     </div>
 
     <div class="bottom_btn_wrap">
-        <button class="list_btn" onclick="goList();">목록</button>
+        <button class="list_btn" onclick="goFreeBoardList();">목록</button>
         <button class="edit_btn" onclick="insertBoard();">등록</button>
     </div>
 </div>

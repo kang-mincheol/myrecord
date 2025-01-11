@@ -31,6 +31,9 @@ const getEditData = async (id) => {
       $("#board_title").val(data.title);
       requestEditors[0].exec("SET_CONTENTS", [data.contents]);
 
+      // 목록 버튼 -> 취소 버튼 으로 변경
+      $("#editor_wrap .bottom_btn_wrap .list_btn").attr("onclick", "editCancel()").text("취소");
+
       // 버튼 수정으로 변경
       $("#editor_wrap .bottom_btn_wrap .edit_btn")
         .attr("onclick", "updateBoard()")
@@ -117,11 +120,15 @@ const updateBoard = () => {
   });
 };
 
-const goList = () => {
-  if (history) {
+const goFreeBoardList = () => {
+  if (document.referrer.includes("/community/free_board/list/")) {
     history.back();
-    return;
+  } else {
+      location.href = "/community/free_board/list/";
   }
-
-  location.href = "/community/free_board/edit";
 };
+
+const editCancel = () => {
+  const id = getParam("id");
+  location.href = `/community/free_board/view/?id=${id}`;
+}

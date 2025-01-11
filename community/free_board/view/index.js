@@ -37,10 +37,10 @@ const getFreeBoardViewData = () => {
 };
 
 const goFreeBoardList = () => {
-  if (history.length > 1) {
+  if (document.referrer.includes("/community/free_board/list/")) {
     history.back();
   } else {
-    location.href = "/community/free_board/list";
+      location.href = "/community/free_board/list/";
   }
 };
 
