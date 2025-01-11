@@ -17,32 +17,32 @@ if(!$is_member) {
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (is_null($data) || !checkParams($data, ["title", "contents"])) {
-  $returnArray["code"] = "PARAMS";
-  $returnArray["msg"] = "필수 파라미터가 존재하지 않습니다.";
-  echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+	$returnArray["code"] = "PARAMS";
+	$returnArray["msg"] = "필수 파라미터가 존재하지 않습니다.";
+	echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
 $data = cleansingParams($data);
 
 // 빈값 체크
 if (empty($data["title"])) {
-  $returnArray["code"] = "TITLE";
-  $returnArray["msg"] = "제목을 입력해 주세요.";
-  echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+	$returnArray["code"] = "TITLE";
+	$returnArray["msg"] = "제목을 입력해 주세요.";
+	echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 } else if (empty($data["contents"]) || $data["contents"] === "<p> </p>") {
-  $returnArray["code"] = "CONTENT";
-  $returnArray["msg"] = "내용을 입력해 주세요.";
-  echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+	$returnArray["code"] = "CONTENT";
+	$returnArray["msg"] = "내용을 입력해 주세요.";
+	echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
 $insert = FreeBoard::insertFreeBoard($data);
 
 if (!$insert) {
-  Slack::send(SLACK_URL_ERROR, "자유게시판 글 등록 실패\n{$_SERVER["REQUEST_URI"]}");
+	Slack::send(SLACK_URL_ERROR, "자유게시판 글 등록 실패\n{$_SERVER["REQUEST_URI"]}");
 
-  $returnArray["code"] = "ERROR";
-  $returnArray["msg"] = "글 등록에 실패했습니다.";
-  echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+	$returnArray["code"] = "ERROR";
+	$returnArray["msg"] = "글 등록에 실패했습니다.";
+	echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
 $returnArray["board_id"] = $insert;

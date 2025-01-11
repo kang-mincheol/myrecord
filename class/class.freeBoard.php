@@ -51,7 +51,14 @@ class FreeBoard {
         return $insert;
     }
 
-    public function updateFreeBoard() {
+    /**
+     * 자유게시판 update 함수
+     * $data
+     * id
+     * title
+     * contents
+     */
+    public static function updateFreeBoard($data) {
         global $PDO;
 
         $sql = "
@@ -63,14 +70,56 @@ class FreeBoard {
             Where   id = :id
         ";
         $param = array(
-            ":title" => $this->title,
-            ":contents" => $this->contents,
+            ":title" => $data["title"],
+            ":contents" => $data["contents"],
             ":update_date" => date("Y-m-d H:i:s"),
-            ":id" => $this->id
+            ":id" => $data["id"]
         );
         $update = $PDO->execute($sql, $param);
 
         if($update) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function getFreeBoard($boardId) {
+        global $PDO;
+
+        $sql = "
+            Select  *
+            From    community_free_board
+            Where   id = :id
+        ";
+
+        $param = array(
+            ":id" => $boardId
+        );
+
+        return $PDO->fetch($sql, $param);
+    }
+
+    /**
+     * 자유게시판 글이 존재하는지 확인
+     */
+    public static function hasFreeBoard($boardId) {
+        global $PDO;
+
+        $sql = "
+            Select  count(*) as cnt
+            From    community_free_board
+            Where   id = :id
+            And     is_delete = 0
+        ";
+
+        $param = array(
+            ":id" => $boardId
+        );
+
+        $check = $PDO->fetch($sql, $param)["cnt"];
+
+        if ($check > 0) {
             return true;
         } else {
             return false;

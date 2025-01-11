@@ -25,7 +25,6 @@ const getEditData = async (id) => {
       .then((response) => response)
       .then((response) => response.json());
 
-    console.log("response => ", response);
     if (response["code"] === "SUCCESS") {
       const data = response["data"];
 
@@ -97,6 +96,25 @@ const updateBoard = () => {
     title,
     contents,
   };
+
+  $.ajax({
+    async: false,
+    type: "POST",
+    data: JSON.stringify(data),
+    url: "/api/free_board/set.free_board_update.php",
+    success: (data) => {
+      console.log("data => ", data);
+      if (data["code"] === "SUCCESS") {
+        myrecordAlert('on', data["msg"], '알림', `location.href='/community/free_board/view/?id=${id}';`);
+      } else {
+        myrecordAlert('on', data["msg"]);
+      }
+    },
+    error: (error) => {
+      console.log("error => ", error);
+      myrecordAlert('on', '자유게시판 수정에 실패했습니다.');
+    }
+  });
 };
 
 const goList = () => {
