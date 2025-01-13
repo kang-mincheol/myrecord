@@ -10,6 +10,7 @@ const pageInit = async () => {
 };
 
 const getFreeBoardList = async () => {
+  loadingOn();
   const param = {
     pageIndex: listInfo.pageIndex,
     pageRow: listInfo.pageRow,
