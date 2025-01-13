@@ -8,18 +8,18 @@ function inputOnkeyupEvent(obj) {
 
 /********** email onkeyup event **********/
 function emailKeyEvent(obj) {
-    var length = $(obj).val().length;
-    var value = $(obj).val();
+    const length = $(obj).val().length;
+    const value = $(obj).val();
 
     if (length >= 3 && value.indexOf('@') == -1) {
 
-        var listLength = $(obj).siblings(".email_list_box").children(".email_list_btn").length;
+        const listLength = $(obj).siblings(".email_list_box").children(".email_list_btn").length;
 
-        for (var i = 1; i <= listLength; i++) {
-            var listElement = $(obj).siblings(".email_list_box").children(".email_list_btn:nth-child("+i+")");
+        for (let i = 1; i <= listLength; i++) {
+            const listElement = $(obj).siblings(".email_list_box").children(".email_list_btn:nth-child("+i+")");
 
-            var email = listElement.attr("value");
-            var html = value + "@" + email;
+            const email = listElement.attr("value");
+            const html = value + "@" + email;
             listElement.html(html);
         }
 
@@ -33,7 +33,7 @@ function emailKeyEvent(obj) {
 
 /********** email list click event **********/
 function emailListClick(obj) {
-    var html = $(obj).html();
+    const html = $(obj).html();
 
     $(obj).parent(".email_list_box").siblings("input[type=text]").val(html);
     $(obj).parent(".email_list_box").removeClass("on");
@@ -52,7 +52,7 @@ $('html').click(function(e) {
 function selectDeviceCheck() {
     // 커스텀 셀렉트박스 사용시 해당 함수를 꼭 호출해야함
     // custom select 사용할건지 일반 select태그 사용할건지 구분
-    var agent = navigator.userAgent.toLowerCase();
+    const agent = navigator.userAgent.toLowerCase();
     if (agent.indexOf("iphone") != -1 || agent.indexOf("ipad") != -1) {
         // IOS
         $(".myrecord_select_wrap").addClass("mobile");
@@ -66,8 +66,8 @@ function selectListRemote(obj) {
 }
 
 function optionClick(obj) {
-    var value = $(obj).attr("value");
-    var html = $(obj).html();
+    const value = $(obj).attr("value");
+    const html = $(obj).html();
 
     if (value == "none") {
         $(obj).parent(".select_list_wrap").siblings(".select_remote_btn").removeClass("on");
@@ -83,8 +83,8 @@ function optionClick(obj) {
 }
 
 function mobileOptionClick(obj) {
-    var value = $(obj).val();
-    var html = $(obj).children("option:selected").html();
+    const value = $(obj).val();
+    const html = $(obj).children("option:selected").html();
 
     if (value == "none") {
         $(obj).removeClass("active");

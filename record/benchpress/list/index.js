@@ -7,12 +7,12 @@ function init() {
 
 function getRecordData() {
     loadingOn();
-    var url = window.location.pathname;
+    let url = window.location.pathname;
     url = url.split('/');
-    var record_type = url[2];
-    var page = getParam('page');
-    var search_key = getParam('search_key');
-    var search_keyword = getParam('search_keyword');
+    const record_type = url[2];
+    const page = getParam('page');
+    const search_key = getParam('search_key');
+    const search_keyword = getParam('search_keyword');
 
     $.ajax({
         type: "POST",
@@ -26,8 +26,8 @@ function getRecordData() {
         success: function(data) {
             console.log(data);
             if(data["code"] == "SUCCESS") {
-                var renderHtml = "";
-                var listData = data["data"];
+                let renderHtml = "";
+                const listData = data["data"];
                 for(key in data["data"]) {
                     renderHtml +=
                     '<div class="board_row">'+
@@ -62,7 +62,7 @@ function getRecordData() {
                 }
             } else if(data["code"] == "EMPTY") {
                 //EMPTY
-                var alertEle = '<div class="empty_box">'+data["msg"]+'</div>';
+                const alertEle = '<div class="empty_box">'+data["msg"]+'</div>';
                 $("#board_wrap .board_container .board_body_wrap").append(alertEle);
             } else {
                 myrecordAlert('on', data["msg"]);
@@ -77,8 +77,8 @@ function getRecordData() {
 }
 
 function pageRender(data) {
-    var pageHtml = "";
-    var page = getParam('page');
+    let pageHtml = "";
+    let page = getParam('page');
     if(page == '') {
         page = 1;
     }

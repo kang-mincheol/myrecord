@@ -20,7 +20,7 @@ function loginInputOnkeyup() {
 
 function loginSubmit() {
   loadingOn();
-  var id = $("#login_id").val();
+  const id = $("#login_id").val();
   if (id == "") {
     loadingOff();
     myrecordAlert(
@@ -31,7 +31,7 @@ function loginSubmit() {
     );
     return $("#myrecord_alert .alert_box .alert_btn").focus();
   }
-  var password = $("#login_password").val();
+  const password = $("#login_password").val();
   if (password == "") {
     loadingOff();
     myrecordAlert(

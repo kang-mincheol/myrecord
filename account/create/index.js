@@ -23,8 +23,8 @@ function termsAll() {
 
 /***** step_1 검증 *****/
 function step1Verify() {
-  var service = $("#terms_service").prop("checked");
-  var private = $("#terms_private").prop("checked");
+  const service = $("#terms_service").prop("checked");
+  const private = $("#terms_private").prop("checked");
   if (service && private) {
     $(".create_wrap .step_box[name=step_1] .next_btn")
       .addClass("on")
@@ -43,10 +43,10 @@ function step1Verify() {
 
 /***** step_2 검증 onkeyup onchange *****/
 function step2Verify() {
-  var id = $("#account_id").val();
-  var password = $("#account_password").val();
-  var password_check = $("#account_password_check").val();
-  var nickname = $("#account_nickname").val();
+  const id = $("#account_id").val();
+  const password = $("#account_password").val();
+  const password_check = $("#account_password_check").val();
+  const nickname = $("#account_nickname").val();
 
   if (id && password && password && password_check && nickname) {
     $(".create_wrap .step_box[name=step_2] .next_btn")
@@ -62,16 +62,16 @@ function step2Verify() {
 
 /***** step_2 검사 *****/
 function createAccountCheck() {
-  var id = $("#account_id").val();
-  var password = $("#account_password").val();
-  var password_check = $("#account_password_check").val();
-  var nickname = $("#account_nickname").val();
-  var name = $("#account_name").val();
-  var phone = $("#account_phone").val();
-  var email = $("#account_email").val();
+  const id = $("#account_id").val();
+  const password = $("#account_password").val();
+  const password_check = $("#account_password_check").val();
+  const nickname = $("#account_nickname").val();
+  const name = $("#account_name").val();
+  const phone = $("#account_phone").val();
+  const email = $("#account_email").val();
 
   if (id.length < 5 || id.length > 20) {
-    var alert_check = $("#account_id").siblings(".caution_text").length;
+    const alert_check = $("#account_id").siblings(".caution_text").length;
     if (alert_check == 0) {
       $("#account_id")
         .addClass("alert")
@@ -81,10 +81,10 @@ function createAccountCheck() {
     return;
   }
 
-  var password_reg =
+  const password_reg =
     /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^*&+=]).*$/;
   if (!password_reg.test(password)) {
-    var alert_check = $("#account_password").siblings(".caution_text").length;
+    const alert_check = $("#account_password").siblings(".caution_text").length;
     if (alert_check == 0) {
       $("#account_password")
         .addClass("alert")
@@ -97,7 +97,7 @@ function createAccountCheck() {
   }
 
   if (password != password_check) {
-    var alert_check = $("#account_password_check").siblings(
+    const alert_check = $("#account_password_check").siblings(
       ".caution_text"
     ).length;
     if (alert_check == 0) {
@@ -109,9 +109,9 @@ function createAccountCheck() {
     return;
   }
 
-  var nickname_reg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,10}$/;
+  const nickname_reg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,10}$/;
   if (!nickname_reg.test(nickname)) {
-    var alert_check = $("#account_nickname").siblings(".caution_text").length;
+    const alert_check = $("#account_nickname").siblings(".caution_text").length;
     if (alert_check == 0) {
       $("#account_nickname")
         .addClass("alert")
@@ -122,9 +122,9 @@ function createAccountCheck() {
   }
 
   if (name != "") {
-    var name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
+    const name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
     if (!name_reg.test(name)) {
-      var alert_check = $("#account_name").siblings(".caution_text").length;
+      const alert_check = $("#account_name").siblings(".caution_text").length;
       if (alert_check == 0) {
         $("#account_name")
           .addClass("alert")
@@ -136,9 +136,9 @@ function createAccountCheck() {
   }
 
   if (phone != "") {
-    var phone_reg = /^\d{3}-\d{3,4}-\d{4}$/;
+    const phone_reg = /^\d{3}-\d{3,4}-\d{4}$/;
     if (!phone_reg.test(phone)) {
-      var alert_check = $("#account_phone").siblings(".caution_text").length;
+      const alert_check = $("#account_phone").siblings(".caution_text").length;
       if (alert_check == 0) {
         $("#account_phone")
           .addClass("alert")
@@ -152,10 +152,10 @@ function createAccountCheck() {
   }
 
   if (email != "") {
-    var email_reg =
+    const email_reg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     if (!email_reg.test(email)) {
-      var alert_check = $("#account_email").siblings(".caution_text").length;
+      const alert_check = $("#account_email").siblings(".caution_text").length;
       if (alert_check == 0) {
         $("#account_email")
           .addClass("alert")
@@ -173,19 +173,17 @@ function createAccountCheck() {
 /********** step_2 END **********/
 
 function createAccountSubmit() {
-  var terms_marketing = $("#terms_marketing").prop("checked");
-  var id = $("#account_id").val();
-  var password = $("#account_password").val();
-  var nickname = $("#account_nickname").val();
-  var name = $("#account_name").val();
-  var phone = $("#account_phone").val();
-  var email = $("#account_email").val();
-  var terms_marketing = $("#terms_marketing").prop("checked");
+  const id = $("#account_id").val();
+  const password = $("#account_password").val();
+  const nickname = $("#account_nickname").val();
+  const name = $("#account_name").val();
+  const phone = $("#account_phone").val();
+  const email = $("#account_email").val();
+  const terms_marketing = $("#terms_marketing").prop("checked");
 
   $.ajax({
     type: "POST",
     data: JSON.stringify({
-      terms_marketing: terms_marketing,
       account_id: id,
       account_password: password,
       account_nickname: nickname,

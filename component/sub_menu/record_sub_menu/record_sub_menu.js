@@ -1,5 +1,5 @@
 function recordSubMenuCheck() {
-  var url = window.location.href;
+  const url = window.location.href;
 
   if (url.indexOf("landing") != -1) {
     $("#record_sub_menu_container .record_sub_menu_btn.landing").addClass("on");

@@ -11,7 +11,7 @@ function getAccountData() {
     success: function (data) {
       loadingOff();
       if (data["code"] == "SUCCESS") {
-        var account_data = data["data"];
+        const account_data = data["data"];
         $("#account_id").val(account_data["account_id"]);
         $("#account_nickname").val(account_data["account_nickname"]);
         $("#account_name").val(account_data["account_name"]);
@@ -29,12 +29,12 @@ function getAccountData() {
 }
 
 function accountChangeCheck() {
-  var nickname = $("#account_nickname").val();
-  var name = $("#account_name").val();
-  var phone = $("#account_phone").val();
-  var email = $("#account_email").val();
+  const nickname = $("#account_nickname").val();
+  const name = $("#account_name").val();
+  const phone = $("#account_phone").val();
+  const email = $("#account_email").val();
 
-  var nickname_reg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,10}$/;
+  const nickname_reg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,10}$/;
   if (!nickname_reg.test(nickname)) {
     $("#account_nickname")
       .addClass("alert")
@@ -43,7 +43,7 @@ function accountChangeCheck() {
   }
 
   if (name != "") {
-    var name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
+    const name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
     if (!name_reg.test(name)) {
       $("#account_name")
         .addClass("alert")
@@ -53,7 +53,7 @@ function accountChangeCheck() {
   }
 
   if (phone != "") {
-    var phone_reg = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    const phone_reg = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     if (!phone_reg.test(phone)) {
       $("#account_phone")
         .addClass("alert")
@@ -65,7 +65,7 @@ function accountChangeCheck() {
   }
 
   if (email != "") {
-    var email_reg =
+    const email_reg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     if (!email_reg.test(email)) {
       $("#account_email")
@@ -77,12 +77,12 @@ function accountChangeCheck() {
 }
 
 function accountChangeCheck2() {
-  var nickname = $("#account_nickname").val();
-  var name = $("#account_name").val();
-  var phone = $("#account_phone").val();
-  var email = $("#account_email").val();
+  const nickname = $("#account_nickname").val();
+  const name = $("#account_name").val();
+  const phone = $("#account_phone").val();
+  const email = $("#account_email").val();
 
-  var nickname_reg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,10}$/;
+  const nickname_reg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,10}$/;
   if (!nickname_reg.test(nickname)) {
     $("#account_nickname")
       .addClass("alert")
@@ -91,7 +91,7 @@ function accountChangeCheck2() {
   }
 
   if (name != "") {
-    var name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
+    const name_reg = /^([a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,17}$/;
     if (!name_reg.test(name)) {
       $("#account_name")
         .addClass("alert")
@@ -101,7 +101,7 @@ function accountChangeCheck2() {
   }
 
   if (phone != "") {
-    var phone_reg = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+    const phone_reg = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
     if (!phone_reg.test(phone)) {
       $("#account_phone")
         .addClass("alert")
@@ -113,7 +113,7 @@ function accountChangeCheck2() {
   }
 
   if (email != "") {
-    var email_reg =
+    const email_reg =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     if (!email_reg.test(email)) {
       $("#account_email")
@@ -128,14 +128,14 @@ function accountChangeCheck2() {
 
 function myaccountChange() {
   loadingOn();
-  var check = accountChangeCheck2();
+  const check = accountChangeCheck2();
 
   if (check) {
-    var data = {};
-    var nickname = $("#account_nickname").val();
-    var name = $("#account_name").val();
-    var phone = $("#account_phone").val();
-    var email = $("#account_email").val();
+    let data = {};
+    const nickname = $("#account_nickname").val();
+    const name = $("#account_name").val();
+    const phone = $("#account_phone").val();
+    const email = $("#account_email").val();
     data.nickname = nickname;
     if (name != "") {
       data.name = name;
