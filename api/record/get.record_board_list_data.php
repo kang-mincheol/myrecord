@@ -141,7 +141,7 @@ if(empty($data["page"])) {
     if($start_page == 0) {
         $start_page = 0;
     } else {
-        $start_page = parseInt($start_page."0");
+        $start_page = (int)$start_page."0";
     }
 }
 
