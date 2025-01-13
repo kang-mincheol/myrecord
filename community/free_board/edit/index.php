@@ -50,6 +50,7 @@ echo script_load('/community/free_board/edit/index.js');
 <script>
 let requestEditors = [];
 smartEditor = () => {
+    loadingOn();
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: requestEditors,
         elPlaceHolder: "board_editor",

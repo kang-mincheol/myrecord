@@ -1,4 +1,4 @@
-const pageInit = () => {
+const pageInit = async () => {
   const id = getParam("id");
 
   console.log("id => ", id);
@@ -6,8 +6,10 @@ const pageInit = () => {
     // 등록
   } else {
     // 수정
-    getEditData(id);
+    await getEditData(id);
   }
+
+  loadingOff();
 };
 
 const getEditData = async (id) => {
