@@ -157,7 +157,7 @@ $param = array(
 $total_count = $PDO -> fetch($total_count_sql, $param);
 $total_count = $total_count["cnt"];
 
-$max_page = floor($total_count / 10) + 1;
+$max_page = ceil($total_count / 10);
 
 $page_arr = array();
 for ($i = 1; $i <= 10; $i++) {

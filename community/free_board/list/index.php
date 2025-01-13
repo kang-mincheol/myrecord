@@ -87,18 +87,6 @@ echo css_load('/community/free_board/list/index.css');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 echo script_load('/community/free_board/list/index.js');
 ?>

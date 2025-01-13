@@ -182,11 +182,7 @@
     }
 
     .paging_wrap .paging_box {
-        display: none;
-    }
-
-    .paging_wrap .prev_btn {
-        margin-right: 10px;
+        /* display: none; */
     }
 }
 

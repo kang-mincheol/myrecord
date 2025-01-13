@@ -26,8 +26,8 @@ if (count($freeBoardListData) === 0) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-foreach($freeBoardListData as $key => $value) {
-    $returnArray["data"][] = array(
+foreach($freeBoardListData["list"] as $key => $value) {
+    $returnArray["data"]["list"][] = array(
         "id" => $value["id"],
         "title" => $value["title"],
         "nickname" => $value["user_nickname"],
@@ -36,6 +36,7 @@ foreach($freeBoardListData as $key => $value) {
     );
 }
 
+$returnArray["data"]["page"] = $freeBoardListData["page"];
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>

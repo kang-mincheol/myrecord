@@ -214,8 +214,33 @@ class FreeBoard {
             Order by T1.id Desc
             Limit   {$start_row}, {$param["pageRow"]}
         ";
+        $listData = $PDO->fetchAll($sql, $sql_param);
 
-        return $get_free_board_list = $PDO -> fetchAll($sql, $sql_param);
+        $totalCountSql = "
+            Select  count(*) as cnt
+            From    community_free_board T1
+
+            Inner Join  Account Acc
+            On      T1.account_no = Acc.id
+
+            Where   T1.is_delete = 0
+            {$and_query}
+        ";
+        $totalCount = $PDO->fetch($totalCountSql, $sql_param)["cnt"];
+        $totalPage = ceil($totalCount / $param["pageRow"]);
+
+        $returnArray = array(
+            "list" => $listData,
+            "page" => array(
+                "totalPage" => $totalPage
+            )
+        );
+
+        return $returnArray;
+    }
+
+    public static function getFreeBoardListPage($data) {
+        
     }
 
     /**

@@ -1,5 +1,9 @@
-const pageInit = () => {
-  getFreeBoardList();
+const pageInit = async () => {
+  let pageIndex = getParam("page");
+  pageIndex = pageIndex === undefined ? 1 : pageIndex;
+  listInfo.pageIndex = pageIndex;
+
+  await getFreeBoardList();
 };
 
 const getFreeBoardList = async () => {
@@ -22,7 +26,8 @@ const getFreeBoardList = async () => {
     success: (data) => {
       loadingOff();
       if (data["code"] === "SUCCESS") {
-        renderFreeBoardList(data["data"]);
+        renderFreeBoardList(data["data"]["list"]);
+        renderFreeBoardPage(data["data"]["page"]);
       }
     },
     error: (error) => {
@@ -60,6 +65,16 @@ const renderFreeBoardList = (list) => {
 
   $("#board_wrap .board_container .board_body_wrap").html(renderHtml);
 };
+
+const renderFreeBoardPage = (page) => {
+  console.log("page => ", page);
+}
+
+const movePage = async (pageIndex) => {
+  listInfo.pageIndex = pageIndex;
+
+  await getFreeBoardList();
+}
 
 const listSearch = () => {
   getFreeBoardList();
