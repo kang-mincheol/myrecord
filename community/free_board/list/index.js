@@ -1,6 +1,9 @@
 const pageInit = async () => {
   let pageIndex = getParam("page");
-  pageIndex = pageIndex === undefined ? 1 : pageIndex;
+  if (pageIndex === undefined || pageIndex < 1) {
+    pageIndex = 1;
+  }
+
   listInfo.pageIndex = pageIndex;
 
   await getFreeBoardList();
@@ -40,7 +43,7 @@ const getFreeBoardList = async () => {
 const renderFreeBoardList = (list) => {
   console.log("list => ", list);
   let renderHtml = "";
-  if (list.length === 0) {
+  if (list === undefined || list.length === 0) {
     renderHtml = `
       <div class="empty-text-box">
         검색결과가 없습니다.
@@ -67,12 +70,23 @@ const renderFreeBoardList = (list) => {
 };
 
 const renderFreeBoardPage = (page) => {
-  console.log("page => ", page);
+  const blockSize = 5;
+
+  let currentPage = listInfo.pageIndex;
+
+  if (currentPage > page.totalPage) {
+    currentPage = page.totalPage;
+  }
+
+  const pages = getPageBlock(currentPage, page.totalPage, blockSize);
+  const pageRenderHtml = getPageBlockHtml(currentPage, page.totalPage, pages);
+
+  $("#pagingWrap").html(pageRenderHtml);
 }
 
 const movePage = async (pageIndex) => {
   listInfo.pageIndex = pageIndex;
-
+  updateParam("page", listInfo.pageIndex);
   await getFreeBoardList();
 }
 

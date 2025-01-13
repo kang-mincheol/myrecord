@@ -48,8 +48,8 @@ echo css_load('/community/free_board/list/index.css');
 <!-- board_wrap -->
 
 
-<div class="paging_wrap">
-    <button class="prev_btn" title="이전"><i class="fa-solid fa-angle-left"></i></button>
+<div id="pagingWrap" class="paging_wrap">
+    <!-- <button class="prev_btn" title="이전"><i class="fa-solid fa-angle-left"></i></button>
     <div class="paging_box">
         <button class="page_btn">1</button>
         <button class="page_btn">2</button>
@@ -62,7 +62,7 @@ echo css_load('/community/free_board/list/index.css');
         <button class="page_btn">9</button>
         <button class="page_btn">10</button>
     </div>
-    <button class="next_btn" title="다음"><i class="fa-solid fa-angle-right"></i></button>
+    <button class="next_btn" title="다음"><i class="fa-solid fa-angle-right"></i></button> -->
 </div>
 <!-- paging_wrap -->
 
