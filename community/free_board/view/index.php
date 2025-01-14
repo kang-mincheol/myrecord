@@ -6,7 +6,7 @@ echo css_load('/community/free_board/view/index.css');
 ?>
 
 
-<div id="page_title">커뮤니티 ＞ 자유게시판</div>
+<div id="page_title">커뮤니티 - 자유게시판</div>
 
 
 <div id="view_wrap">
