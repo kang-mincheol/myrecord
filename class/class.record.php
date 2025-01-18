@@ -34,8 +34,17 @@ class Record {
             "msg" => "정상 처리되었습니다"
         );
 
+        // 파일 사이즈 체크
+        $postMaxSize = ini_get("post_max_size");
+        $uploadFileMaxSize = ini_get("upload_max_filesize");
+        if ($file["size"] > $uploadFileMaxSize) {
+            $returnArray["code"] = "FILE_SIZE_LIMIT";
+            $returnArray["msg"] = "파일은 총 " + $uploadFileMaxSize + "MB 이하로 업로드 해주세요";
+            return $returnArray;
+        }
+
         // 해당 파일이 허용된 파일인지 확인
-        if (!strpos(ALLOW_VIDEO_FILES, $file["type"])) {
+        if (!strpos(ALLOW_RECORD_FILES, $file["type"])) {
             $returnArray["code"] = "FILE_NOT_ALLOWED";
             $returnArray["msg"] = "업로드 불가한 파일타입 입니다.";
             return $returnArray;
@@ -64,7 +73,9 @@ class Record {
             ":file_original_name" => $file["name"],
             ":file_guid" => $GUID,
             ":file_type" => $file["type"]
-        )
+        );
+
+
     }
 
     public static function hasAuditRecord($recordTypeId) {
