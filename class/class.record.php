@@ -35,8 +35,8 @@ class Record {
         );
 
         // 파일 사이즈 체크
-        $postMaxSize = ini_get("post_max_size");
-        $uploadFileMaxSize = ini_get("upload_max_filesize");
+        $postMaxSize = ini_get("post_max_size"); // @M
+        $uploadFileMaxSize = ini_get("upload_max_filesize"); // @M
         if ($file["size"] > $uploadFileMaxSize) {
             $returnArray["code"] = "FILE_SIZE_LIMIT";
             $returnArray["msg"] = "파일은 총 " + $uploadFileMaxSize + "MB 이하로 업로드 해주세요";
