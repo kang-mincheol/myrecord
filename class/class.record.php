@@ -3,6 +3,42 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 class Record {
 
+    /**
+     * 레코드 종류 가져오는 함수
+     */
+    public static function getRecordType() {
+        global $PDO;
+
+        $sql = "
+            Select  *
+            From    tb_record_master
+            Order by order_by Asc
+        ";
+        
+        return $PDO->fetchAll($sql);
+    }
+
+    /**
+     * 레코드 id 값으로 해당 종목이 존재하는지 확인
+     */
+    public static function hasRecordType($record_id) {
+        global $PDO;
+
+        $sql = "
+            Select  count(*) as cnt
+            From    tb_record_master
+            Where   id = :id
+        ";
+
+        $param = array(
+            ":id" => $record_id
+        );
+
+        $result = $PDO->fetch($sql, $param)["cnt"];
+
+        return $result > 0 ? true : false;
+    }
+
     public static function insertRecord($recordData) {
         global $PDO;
         global $member;
