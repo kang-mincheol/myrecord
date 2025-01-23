@@ -114,7 +114,11 @@ class Record {
 
     }
 
-    public static function hasAuditRecord($recordTypeId) {
+    /**
+     * 회원 아이디, 레코드 종목 id값, 심사 상태 id 값으로
+     * 현재 데이터가 존재하는지 확인하는 함수
+     */
+    public static function hasRecordDataByStatus($recordTypeId, $status) {
         global $member;
         global $PDO;
 
@@ -128,12 +132,22 @@ class Record {
         }
 
         $sql = "
-            Select  *
+            Select  count(*) as cnt
             From    tb_record_request
             Where   account_id = :account_id
             And     record_type = :record_type
             And     status = :status
         ";
+
+        $param = array(
+            ":account_id" => $member["id"],
+            ":record_type" => $recordTypeId,
+            ":status" => $status
+        )
+
+        $result = $PDO->fetch($sql, $param)["cnt"];
+
+        return $result > 0 ? true : false;
     }
 }
 

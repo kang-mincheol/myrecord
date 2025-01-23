@@ -32,5 +32,12 @@ if ($has_record_type === false) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+// 해당 종목으로 현재 심사 진행중인 레코드 내역이 있는지 확인
+// 심사중 status id 값
+$auditStatus = 2;
+
+$hasAuditResult = Record::hasRecordDataByStatus($record_type, $auditStatus);
+
+
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>
