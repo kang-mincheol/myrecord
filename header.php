@@ -216,6 +216,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                         </div>
                     </div>
                     <!-- 도구 -->
+
+                    <div class="menu_wrap">
+                        <div class="menu_wrap_title">
+                            <a href="/community/free_board/list/" class="menu_title">커뮤니티</a>
+                        </div>
+                        <div class="wrap_body">
+                            <div class="menu_row">
+                                <a href="/community/free_board/list/" class="menu_btn">자유게시판</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 커뮤니티 -->
                 </div>
                 <!-- menu_list_container -->
             </div>
