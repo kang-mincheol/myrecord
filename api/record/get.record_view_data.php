@@ -25,7 +25,7 @@ $record_id = preg_replace("/[^0-9]+/u", "", $data["record_id"]);
 
 $record_sql = "
     Select  T4.id as account_id, T4.user_nickname,
-            T2.record_name, T2.record_name_ko, T1.record_weight,
+            T2.record_name, T2.record_name_ko, T1.record_weight, T1.memo,
             T3.status_text, T3.status_value,
             DATE_FORMAT(T1.create_datetime, '%Y.%m.%d') as create_date
     From    tb_record_request T1
@@ -56,6 +56,7 @@ $returnArray["data"] = array(
     "record_nickname" => $record_data["user_nickname"],
     "record_name" => $record_data["record_name_ko"],
     "record_weight" => $record_data["record_weight"],
+    "record_memo" => $record_data["memo"] ?? '',
     "record_status" => $record_data["status_text"],
     "record_status_eng" => $record_data["status_value"],
     "record_create" => $record_data["create_date"],
