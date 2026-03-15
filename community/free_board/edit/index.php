@@ -10,37 +10,45 @@ echo css_load('/community/free_board/edit/index.css');
 ?>
 
 
-<div id="page_title">커뮤니티 - 자유게시판</div>
-
-
-<div id="editor_wrap">
-
-    <div id="board_title_wrap">
-        <label class="value_title" for="board_title">제목</label>
-        <div class="value_box">
-            <input id="board_title" class="edit_input" type="text" placeholder="제목을 입력해 주세요"/>
-        </div>
-    </div>
-
-    <div id="board_contents_wrap">
-        <label class="value_title" for="">내용</label>
-        <div class="value_box">
-            <textarea id="board_editor" name="board_editor" style="display: none;"></textarea>
-        </div>
-    </div>
-
-    <div class="bottom_btn_wrap">
-        <button class="list_btn" onclick="goFreeBoardList();">목록</button>
-        <button class="edit_btn" onclick="insertBoard();">등록</button>
+<div class="board_page_header">
+    <div class="page_header_inner">
+        <p class="page_title_text">자유게시판</p>
+        <p class="page_sub_text">자유롭게 이야기를 나눠보세요</p>
     </div>
 </div>
-<!-- editor_wrap -->
 
 
+<div class="editor_outer_wrap">
+    <div class="editor_card">
 
+        <div id="editor_wrap">
 
+            <div id="board_title_wrap">
+                <label class="value_title" for="board_title">제목</label>
+                <div class="value_box">
+                    <input id="board_title" class="edit_input" type="text" placeholder="제목을 입력해 주세요"/>
+                </div>
+            </div>
 
+            <div id="board_contents_wrap">
+                <label class="value_title" for="">내용</label>
+                <div class="value_box">
+                    <textarea id="board_editor" name="board_editor" style="display: none;"></textarea>
+                </div>
+            </div>
 
+            <div class="bottom_btn_wrap">
+                <button class="list_btn" onclick="goFreeBoardList();">목록</button>
+                <button class="edit_btn" onclick="insertBoard();">등록</button>
+            </div>
+
+        </div>
+        <!-- editor_wrap -->
+
+    </div>
+    <!-- editor_card -->
+</div>
+<!-- editor_outer_wrap -->
 
 
 <script src="/editor/js/HuskyEZCreator.js"></script>
