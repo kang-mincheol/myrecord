@@ -1,6 +1,14 @@
 <?php
 ini_set("memory_limit" , -1);
 
+function makeGuid() {
+    return sprintf('%08x-%04x-%04x-%04x-%04x%08x',
+        mt_rand(0, 0xffffffff),
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
+    );
+}
+
 // 설정 파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/config.php');
 // PDO 파일 로드
