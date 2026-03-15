@@ -12,55 +12,20 @@ $search_key = $_GET['search_key'] ?? 'all';
 $search_val = trim($_GET['search_val'] ?? '');
 $filter_st  = $_GET['status'] ?? 'all'; // all / normal / withdraw
 
-// ===== WHERE 조건 =====
-$where = "WHERE 1=1";
-
-if ($filter_st === 'normal') {
-    $where .= " AND (is_withdraw = 0 OR is_withdraw IS NULL)";
-} elseif ($filter_st === 'withdraw') {
-    $where .= " AND is_withdraw = 1";
-}
-
-if ($search_val !== '') {
-    global $conn;
-    $safe = mysqli_real_escape_string($conn, $search_val);
-    if ($search_key === 'user_id') {
-        $where .= " AND user_id LIKE '%{$safe}%'";
-    } elseif ($search_key === 'user_nickname') {
-        $where .= " AND user_nickname LIKE '%{$safe}%'";
-    } elseif ($search_key === 'user_email') {
-        $where .= " AND user_email LIKE '%{$safe}%'";
-    } else {
-        $where .= " AND (user_id LIKE '%{$safe}%' OR user_nickname LIKE '%{$safe}%' OR user_email LIKE '%{$safe}%')";
-    }
-}
-
 // ===== 통계 =====
-$stat_total    = (int)(sql_fetch("SELECT COUNT(*) AS cnt FROM Account")['cnt'] ?? 0);
-$stat_today    = (int)(sql_fetch("SELECT COUNT(*) AS cnt FROM Account WHERE DATE(create_datetime) = CURDATE()")['cnt'] ?? 0);
-$stat_mkt      = (int)(sql_fetch("SELECT COUNT(*) AS cnt FROM Account WHERE terms_marketing = 1 AND (is_withdraw = 0 OR is_withdraw IS NULL)")['cnt'] ?? 0);
-$stat_withdraw = (int)(sql_fetch("SELECT COUNT(*) AS cnt FROM Account WHERE is_withdraw = 1")['cnt'] ?? 0);
+$stats         = AdminAccount::getStats();
+$stat_total    = $stats['total'];
+$stat_today    = $stats['today'];
+$stat_mkt      = $stats['marketing'];
+$stat_withdraw = $stats['withdraw'];
 
 // ===== 페이지네이션용 총 건수 =====
-$total_count = (int)(sql_fetch("SELECT COUNT(*) AS cnt FROM Account {$where}")['cnt'] ?? 0);
+$total_count = AdminAccount::getTotalCount($filter_st, $search_key, $search_val);
 $total_pages = max(1, (int)ceil($total_count / $page_size));
 if ($page > $total_pages) $page = $total_pages;
 
 // ===== 목록 조회 =====
-$list = [];
-$result = sql_query("
-    SELECT
-        id, user_id, user_nickname, user_name,
-        user_email, user_phone, terms_marketing,
-        create_datetime, login_date, is_admin, is_withdraw
-    FROM Account
-    {$where}
-    ORDER BY create_datetime DESC
-    LIMIT {$page_size} OFFSET {$offset}
-");
-while ($row = sql_fetch_array($result)) {
-    $list[] = $row;
-}
+$list = AdminAccount::getList($page, $page_size, $filter_st, $search_key, $search_val);
 
 // ===== 검색 파라미터 → URL 쿼리 (페이지네이션 링크용) =====
 $base_query = http_build_query([

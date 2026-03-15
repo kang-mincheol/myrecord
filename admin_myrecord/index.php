@@ -3,76 +3,20 @@ include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/common.php");
 
 $admin_page_title = '대시보드';
 
-// ===== 통계 쿼리 =====
+// ===== 통계 & 최근 목록 =====
+$member_stats   = AdminDashboard::getMemberStats();
+$record_stats   = AdminDashboard::getRecordStats();
+$post_stats     = AdminDashboard::getPostStats();
+$today_access   = AdminDashboard::getTodayAccess();
+$recent_members = AdminDashboard::getRecentMembers(5);
+$recent_records = AdminDashboard::getRecentRecords(5);
 
-// 총 회원 수
-$total_members = 0;
-$row = sql_fetch("SELECT COUNT(*) AS cnt FROM Account WHERE is_withdraw = 0 OR is_withdraw IS NULL");
-if($row) $total_members = (int)$row['cnt'];
-
-// 오늘 신규 가입
-$today_join = 0;
-$row = sql_fetch("SELECT COUNT(*) AS cnt FROM Account WHERE DATE(create_datetime) = CURDATE()");
-if($row) $today_join = (int)$row['cnt'];
-
-// 총 기록 수
-$total_records = 0;
-$row = sql_fetch("SELECT COUNT(*) AS cnt FROM tb_record_request");
-if($row) $total_records = (int)$row['cnt'];
-
-// 오늘 기록 등록
-$today_records = 0;
-$row = sql_fetch("SELECT COUNT(*) AS cnt FROM tb_record_request WHERE DATE(create_datetime) = CURDATE()");
-if($row) $today_records = (int)$row['cnt'];
-
-// 총 게시글 수
-$total_posts = 0;
-$row = sql_fetch("SELECT COUNT(*) AS cnt FROM community_free_board");
-if($row) $total_posts = (int)$row['cnt'];
-
-// 오늘 게시글
-$today_posts = 0;
-$row = sql_fetch("SELECT COUNT(*) AS cnt FROM community_free_board WHERE DATE(create_date) = CURDATE()");
-if($row) $today_posts = (int)$row['cnt'];
-
-// 오늘 접속 수 (AccessLog)
-$today_access = 0;
-$row = sql_fetch("SELECT COUNT(*) AS cnt FROM AccessLog WHERE DATE(create_date) = CURDATE()");
-if($row) $today_access = (int)$row['cnt'];
-
-// 최근 가입 회원 5명
-$recent_members = array();
-$result = sql_query("
-    SELECT user_id, user_nickname, user_email, terms_marketing, create_datetime
-    FROM Account
-    ORDER BY create_datetime DESC
-    LIMIT 5
-");
-while($row = sql_fetch_array($result)) {
-    $recent_members[] = $row;
-}
-
-// 최근 기록 신청 5건
-$recent_records = array();
-$result = sql_query("
-    SELECT
-        T1.id,
-        T4.user_nickname  AS record_nickname,
-        T2.record_name,
-        T1.record_weight,
-        T3.status_text    AS record_status,
-        T3.status_value   AS status_eng,
-        T1.create_datetime
-    FROM tb_record_request T1
-    LEFT JOIN tb_record_master        T2 ON T1.record_type  = T2.id
-    LEFT JOIN tb_record_status_master T3 ON T1.status       = T3.id
-    LEFT JOIN Account                 T4 ON T1.account_id   = T4.id
-    ORDER BY T1.create_datetime DESC
-    LIMIT 5
-");
-while($row = sql_fetch_array($result)) {
-    $recent_records[] = $row;
-}
+$total_members = $member_stats['total'];
+$today_join    = $member_stats['today'];
+$total_records = $record_stats['total'];
+$today_records = $record_stats['today'];
+$total_posts   = $post_stats['total'];
+$today_posts   = $post_stats['today'];
 
 include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
 ?>
