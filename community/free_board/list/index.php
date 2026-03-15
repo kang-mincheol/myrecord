@@ -16,20 +16,8 @@ echo css_load('/community/free_board/list/index.css');
 
 <div class="free_board_wrap">
 
-    <div id="board_wrap">
-        <div class="board_container">
-            <div class="board_body_wrap">
-                <!-- JS renders board_row items here -->
-            </div>
-        </div>
-    </div>
-
-    <div id="pagingWrap" class="paging_wrap"></div>
-
-    <div class="board_footer_bar">
-        <a class="write_btn" href="/community/free_board/edit/">
-            <i class="fa-solid fa-pen-to-square"></i> 글쓰기
-        </a>
+    <!-- Top bar: search + write btn -->
+    <div class="board_top_bar">
         <div class="search_area">
             <select id="search_key" class="search_select">
                 <option value="title">제목</option>
@@ -43,7 +31,30 @@ echo css_load('/community/free_board/list/index.css');
                 </button>
             </div>
         </div>
+        <a class="write_btn" href="/community/free_board/edit/">
+            <i class="fa-solid fa-pen-to-square"></i> 글쓰기
+        </a>
     </div>
+
+    <!-- Board List -->
+    <div id="board_wrap">
+        <div class="board_container">
+
+            <!-- Column headers -->
+            <div class="board_head_row">
+                <div class="head_col title">제목</div>
+                <div class="head_col writer">작성자</div>
+                <div class="head_col view">조회</div>
+                <div class="head_col date">날짜</div>
+            </div>
+
+            <!-- JS renders board_row items here -->
+            <div class="board_body_wrap"></div>
+
+        </div>
+    </div>
+
+    <div id="pagingWrap" class="paging_wrap"></div>
 
 </div>
 <!-- free_board_wrap -->
