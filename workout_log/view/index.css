@@ -1,0 +1,294 @@
+/* ====================================
+   득근일지 상세보기 페이지
+   ==================================== */
+
+.workout_log_header {
+    background: linear-gradient(135deg, #0123B4 0%, #0a2fe0 100%);
+    padding: 36px 20px 32px;
+    text-align: center;
+    color: #fff;
+}
+
+.workout_log_header .header_inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.workout_log_header .page_title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.workout_log_header .page_subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.workout_log_header .page_subtitle i {
+    margin-right: 4px;
+}
+
+/* 메인 래퍼 */
+.workout_view_wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 16px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 종목 카드 */
+.exercise_card {
+    background: #fff;
+    border: 1px solid #eaeef5;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.exercise_card_title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: #f7f9ff;
+    border-bottom: 1px solid #eaeef5;
+}
+
+.exercise_order {
+    width: 26px;
+    height: 26px;
+    background: #0123B4;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.exercise_name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+/* 세트 테이블 */
+.set_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.set_table thead th {
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 1px solid #f0f2f9;
+    background: #fafbff;
+}
+
+.set_table tbody td {
+    padding: 10px 12px;
+    text-align: center;
+    color: #333;
+    border-bottom: 1px solid #f5f7fc;
+}
+
+.set_table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.set_table tbody tr:hover td {
+    background: #f7f9ff;
+}
+
+.set_no_cell {
+    font-weight: 700;
+    color: #0123B4 !important;
+    font-size: 13px;
+}
+
+.weight_cell,
+.reps_cell {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.volume_cell {
+    color: #555 !important;
+    font-size: 14px;
+}
+
+.td_unit {
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 400;
+    margin-left: 2px;
+}
+
+.set_table tfoot .total_row td {
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0123B4;
+    background: #eef0fc;
+    text-align: center;
+    border-top: 1px solid #dde2ee;
+}
+
+/* 메모 카드 */
+.memo_card {
+    background: #fff;
+    border: 1px solid #eaeef5;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    padding: 18px 20px;
+}
+
+.memo_card_title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.memo_card_title i {
+    color: #0123B4;
+}
+
+.memo_content {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    word-break: break-all;
+}
+
+/* 하단 버튼 */
+.view_footer {
+    display: flex;
+    gap: 10px;
+}
+
+.list_btn {
+    flex: 1;
+    height: 48px;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 12px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.list_btn:hover {
+    background: #e5e7eb;
+    color: #444;
+    text-decoration: none;
+}
+
+.edit_btn {
+    flex: 1;
+    height: 48px;
+    background: #eef0fc;
+    border: none;
+    border-radius: 12px;
+    color: #0123B4;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.edit_btn:hover {
+    background: #dce0f8;
+    color: #0123B4;
+    text-decoration: none;
+}
+
+.delete_btn {
+    flex: 1;
+    height: 48px;
+    background: #fee2e2;
+    border: none;
+    border-radius: 12px;
+    color: #e53e3e;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background 0.15s;
+}
+
+.delete_btn:hover {
+    background: #fecaca;
+}
+
+/* 반응형 */
+@media (max-width: 480px) {
+    .workout_log_header {
+        padding: 28px 16px 24px;
+    }
+
+    .workout_log_header .page_title {
+        font-size: 18px;
+    }
+
+    .workout_view_wrap {
+        padding: 14px 10px 70px;
+        gap: 12px;
+    }
+
+    .exercise_card_title {
+        padding: 12px 14px;
+    }
+
+    .exercise_name {
+        font-size: 15px;
+    }
+
+    .set_table {
+        font-size: 13px;
+    }
+
+    .weight_cell,
+    .reps_cell {
+        font-size: 14px;
+    }
+
+    .view_footer {
+        gap: 8px;
+    }
+
+    .list_btn,
+    .edit_btn,
+    .delete_btn {
+        font-size: 13px;
+        height: 44px;
+    }
+}
