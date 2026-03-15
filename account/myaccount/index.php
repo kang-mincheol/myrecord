@@ -14,61 +14,83 @@ exit;
 }
 ?>
 
-<div id="myaccount_wrap">
 
-    <p class="wrap_title">내 정보</p>
-
-    <div class="myrecord_input_wrap id_wrap">
-        <div class="label_box">
-            <label class="wrap_label" for="account_id">아이디</label>
-        </div>
-        <div class="form_value_box">
-            <input id="account_id" class="input_text" type="text" disabled/>
-        </div>
+<div class="account_page_header">
+    <div class="page_header_inner">
+        <p class="page_title_text">내 정보</p>
+        <p class="page_sub_text">계정 정보를 확인하고 수정하세요</p>
     </div>
-
-    <div class="myrecord_input_wrap name_wrap">
-        <div class="label_box">
-            <label class="wrap_label" for="account_nickname">닉네임</label>
-        </div>
-        <div class="form_value_box">
-            <input id="account_nickname" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="영문 또는 한글 또는 숫자 2~10자리 (특수문자 불가)"/>
-        </div>
-    </div>
-
-    <div class="myrecord_input_wrap name_wrap">
-        <div class="label_box">
-            <label class="wrap_label" for="account_name">(선택)이름</label>
-        </div>
-        <div class="form_value_box">
-            <input id="account_name" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="한글 또는 영문 2~17자리"/>
-        </div>
-    </div>
-
-    <div class="myrecord_input_wrap phone_wrap">
-        <div class="label_box">
-            <label class="wrap_label" for="account_phone">(선택)핸드폰번호</label>
-        </div>
-        <div class="form_value_box">
-            <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="핸드폰번호를 입력해 주세요 '-' 포함"/>
-        </div>
-    </div>
-
-    <div class="myrecord_input_wrap email_wrap">
-        <div class="label_box">
-            <label class="wrap_label" for="account_email">(선택)이메일</label>
-        </div>
-        <div class="form_value_box">
-            <input id="account_email" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="이메일을 입력해 주세요"/>
-        </div>
-    </div>
-
-    <div class="footer_btn_wrap">
-        <button class="password_change_btn" onclick="PasswordChangeModal.handler();">비밀번호 변경</button>
-        <button class="account_change_btn" onclick="myaccountChange();">내정보 수정</button>
-    </div>
-
 </div>
+
+
+<div id="myaccount_wrap">
+    <div class="account_card">
+
+        <!-- 프로필 상단 -->
+        <div class="profile_head">
+            <div class="avatar_circle">
+                <i class="fa-solid fa-user"></i>
+            </div>
+        </div>
+
+        <!-- 폼 필드 영역 -->
+        <div class="fields_wrap">
+
+            <div class="field_item">
+                <label class="field_label" for="account_id">
+                    아이디
+                    <span class="locked_tag"><i class="fa-solid fa-lock"></i> 변경불가</span>
+                </label>
+                <input id="account_id" class="input_text" type="text" disabled/>
+            </div>
+
+            <div class="field_item">
+                <label class="field_label" for="account_nickname">닉네임</label>
+                <input id="account_nickname" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="영문 또는 한글 또는 숫자 2~10자리 (특수문자 불가)"/>
+            </div>
+
+            <div class="field_item">
+                <label class="field_label" for="account_name">
+                    이름
+                    <span class="optional_tag">선택</span>
+                </label>
+                <input id="account_name" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="한글 또는 영문 2~17자리"/>
+            </div>
+
+            <div class="field_item">
+                <label class="field_label" for="account_phone">
+                    핸드폰번호
+                    <span class="optional_tag">선택</span>
+                </label>
+                <input id="account_phone" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="'-' 포함하여 입력해 주세요"/>
+            </div>
+
+            <div class="field_item">
+                <label class="field_label" for="account_email">
+                    이메일
+                    <span class="optional_tag">선택</span>
+                </label>
+                <input id="account_email" class="input_text" onkeyup="inputOnkeyupEvent(this); accountChangeCheck();" type="text" placeholder="이메일을 입력해 주세요"/>
+            </div>
+
+        </div>
+        <!-- fields_wrap -->
+
+        <!-- 하단 버튼 -->
+        <div class="footer_btn_wrap">
+            <button class="password_change_btn" onclick="PasswordChangeModal.handler();">
+                <i class="fa-solid fa-key"></i> 비밀번호 변경
+            </button>
+            <button class="account_change_btn" onclick="myaccountChange();">
+                내정보 수정
+            </button>
+        </div>
+
+    </div>
+    <!-- account_card -->
+</div>
+<!-- myaccount_wrap -->
+
 
 <?php
 echo script_load('/account/myaccount/index.js');

@@ -1,29 +1,264 @@
 @charset "UTF-8";
 
+
+#container {
+    padding: 0 0 80px;
+}
+
+
+/* ===== Page Header ===== */
+
+.account_page_header {
+    background: linear-gradient(135deg, #0123B4 0%, #0a2fe0 100%);
+    padding: 28px 0 24px;
+    margin-bottom: 28px;
+}
+
+.account_page_header .page_header_inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.account_page_header .page_title_text {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
+
+.account_page_header .page_sub_text {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+
+/* ===== Outer Wrap ===== */
+
 #myaccount_wrap {
-    width: 500px; margin: 0 auto; padding: 50px 0;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+    box-sizing: border-box;
 }
 
-#myaccount_wrap .wrap_title {
-    color: #303030; font-size: 20px; font-weight: 700; margin-bottom: 20px;
+
+/* ===== Card ===== */
+
+#myaccount_wrap .account_card {
+    background: #fff;
+    border: 1px solid #e8ecf5;
+    border-radius: 20px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
 }
 
-#myaccount_wrap .myrecord_input_wrap {
-    margin-bottom: 20px;
+
+/* ===== Profile Head ===== */
+
+#myaccount_wrap .profile_head {
+    display: flex;
+    justify-content: center;
+    padding: 32px 0 24px;
+    background: linear-gradient(180deg, #f0f3ff 0%, #fff 100%);
+    border-bottom: 1px solid #eef0f8;
 }
+
+#myaccount_wrap .profile_head .avatar_circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0123B4 0%, #0a2fe0 100%);
+    box-shadow: 0 4px 14px rgba(1, 35, 180, 0.3);
+    color: #fff;
+    font-size: 28px;
+}
+
+
+/* ===== Fields ===== */
+
+#myaccount_wrap .fields_wrap {
+    padding: 28px 28px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#myaccount_wrap .fields_wrap .field_item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+/* Label */
+
+#myaccount_wrap .fields_wrap .field_label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #444;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.1px;
+}
+
+#myaccount_wrap .fields_wrap .optional_tag {
+    display: inline-flex;
+    align-items: center;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: 4px;
+    background: #eef1fc;
+    color: var(--main-color-1);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+#myaccount_wrap .fields_wrap .locked_tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: 4px;
+    background: #f4f5f7;
+    color: #aaa;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+/* Input */
+
+#myaccount_wrap .fields_wrap .input_text {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    background: #fafbff;
+    border: 1.5px solid #e2e6f0;
+    border-radius: 12px;
+    color: #1a1a2e;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+#myaccount_wrap .fields_wrap .input_text::placeholder {
+    color: #c0c4d4;
+    font-size: 13px;
+}
+
+#myaccount_wrap .fields_wrap .input_text:focus {
+    border-color: var(--main-color-1);
+    box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.09);
+    background: #fff;
+}
+
+/* Disabled (아이디) */
+
+#myaccount_wrap .fields_wrap .input_text:disabled {
+    background: #f4f6fb;
+    border-color: #e8eaf2;
+    color: #8f96b0;
+    cursor: not-allowed;
+}
+
+/* Validation */
+
+#myaccount_wrap .fields_wrap .input_text.alert {
+    border-color: #e8504a;
+    box-shadow: 0 0 0 3px rgba(232, 80, 74, 0.1);
+    background: #fff8f7;
+}
+
+#myaccount_wrap .fields_wrap .caution_text {
+    color: #e8504a;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+    margin-top: -2px;
+}
+
+
+/* ===== Footer Buttons ===== */
 
 #myaccount_wrap .footer_btn_wrap {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex;
+    gap: 10px;
+    padding: 24px 28px 28px;
 }
 
 #myaccount_wrap .footer_btn_wrap button {
-    width: calc(50% - 10px); height: 50px; border-radius: 6px; font-size: 15px; font-weight: 400; letter-spacing: -0.48px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    flex: 1;
+    height: 50px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
 }
 
 #myaccount_wrap .footer_btn_wrap .password_change_btn {
-    color: #FFF; background-color: var(--main-color-1);
+    background: #fff;
+    border: 1.5px solid #dde2ee;
+    color: #555;
+}
+
+#myaccount_wrap .footer_btn_wrap .password_change_btn:hover {
+    border-color: var(--main-color-1);
+    color: var(--main-color-1);
+    background: #f0f3fc;
 }
 
 #myaccount_wrap .footer_btn_wrap .account_change_btn {
-    color: #FFF; background-color: var(--main-color-1);
+    background: var(--main-color-1);
+    color: #fff;
+    border: 1.5px solid var(--main-color-1);
+}
+
+#myaccount_wrap .footer_btn_wrap .account_change_btn:hover {
+    background: #0118a0;
+    border-color: #0118a0;
+    transform: translateY(-1px);
+}
+
+
+/* ===== Responsive ===== */
+
+@media screen and (max-width: 600px) {
+    #myaccount_wrap {
+        padding: 0 16px 40px;
+    }
+
+    #myaccount_wrap .account_card {
+        border-radius: 16px;
+    }
+
+    #myaccount_wrap .fields_wrap {
+        padding: 24px 20px 8px;
+    }
+
+    #myaccount_wrap .footer_btn_wrap {
+        flex-direction: column;
+        padding: 20px 20px 24px;
+    }
+
+    #myaccount_wrap .footer_btn_wrap button {
+        flex: none;
+        width: 100%;
+    }
 }
