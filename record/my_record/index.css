@@ -3,118 +3,164 @@
 
 
 
-
-#container {
-    padding: 0 0 50px 0;
-}
-
-@media screen and (max-width: 1050px) {
-    #container {
-        padding: 0 10px 50px;
-    }
-}
-
-
-#page_title {
-    max-width: 980px; margin: 30px auto; color: #303030; font-size: 28px; font-weight: 700;
-}
-
-@media screen and (max-width: 1050px) {
-    #page_title {
-        font-size: 20px;
-    }
-}
-
-
-
+/* ===== My Record Wrap ===== */
 
 #my_record_wrap {
-    max-width: 980px; margin: 30px auto;
+    max-width: 980px;
+    margin: 24px auto 60px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 #my_record_wrap .record_wrap {
-    display: flex; border: 10px solid #303030; border-radius: 8px; box-sizing: border-box; background-color: #303030;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
 }
+
+
+/* ===== Record Card ===== */
 
 #my_record_wrap .record_wrap .record_box {
-    background-color: #FFF; flex: 1; border-right: 2px solid #303030;
+    border: 1px solid #eaeef5;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    background-color: #fff;
+    transition: box-shadow 0.2s, transform 0.15s;
 }
 
-#my_record_wrap .record_wrap .record_box:first-child {
-    border-radius: 4px 0 0 4px;
-}
-
-#my_record_wrap .record_wrap .record_box:last-child {
-    border-radius: 0 4px 4px 0;
+#my_record_wrap .record_wrap .record_box:hover {
+    box-shadow: 0 6px 24px rgba(1, 35, 180, 0.1);
+    transform: translateY(-2px);
 }
 
 #my_record_wrap .record_wrap .record_box .box_title {
-    padding: 10px; color: #303030; font-size: 18px; font-weight: 700; text-align: center; border-bottom: 2px solid #303030; box-sizing: border-box;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #0123B4 0%, #0a2fe0 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box {
-    display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 28px 20px;
+    min-height: 100px;
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box .empty_line {
-    color: #303030; font-size: 16px; font-weight: 400;
+    color: #ccc;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box .record_weight {
-    color: #303030; font-size: 16px; font-weight: 700; margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--main-color-1);
+    letter-spacing: -0.5px;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_weight .record_link {
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box .record_weight .fa-arrow-up-right-from-square {
-    margin-left: 5px;
+    font-size: 14px;
+    opacity: 0.6;
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box .record_status {
-    display: flex; align-items: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background-color: #f7f8fc;
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box .record_status .fa-circle-check {
-    margin-right: 5px;
+    font-size: 13px;
 }
 
-#my_record_wrap .record_wrap .record_box .record_info_box .record_status .black {
-    color: #303030;
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .fa-circle-check.black {
+    color: #888;
 }
 
-#my_record_wrap .record_wrap .record_box .record_info_box .record_status .blue {
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .fa-circle-check.blue {
     color: var(--main-color-1);
 }
 
-#my_record_wrap .record_wrap .record_box .record_info_box .record_status .red {
-    color: #ff0000;
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .fa-circle-check.red {
+    color: #ff4040;
 }
 
 #my_record_wrap .record_wrap .record_box .record_info_box .record_status .status_text {
-    color: #303030; font-size: 16px; font-weight: 400;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: -0.1px;
+}
+
+#my_record_wrap .record_wrap .record_box .record_info_box .record_status .record_link {
+    color: inherit;
 }
 
 
-
-
+/* ===== Responsive ===== */
 
 @media screen and (max-width: 1050px) {
+    #my_record_wrap {
+        margin: 16px auto 40px;
+        padding: 0 16px;
+    }
+
     #my_record_wrap .record_wrap {
-        display: block;
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     #my_record_wrap .record_wrap .record_box {
-        border-bottom: 5px solid #303030; border-right: 0;
+        display: flex;
+        align-items: stretch;
     }
 
-    #my_record_wrap .record_wrap .record_box:first-child {
-        border-radius: 4px 4px 0 0;
+    #my_record_wrap .record_wrap .record_box .box_title {
+        display: flex;
+        align-items: center;
+        width: 100px;
+        flex-shrink: 0;
+        padding: 16px;
+        font-size: 14px;
+        border-radius: 0;
     }
 
-    #my_record_wrap .record_wrap .record_box:last-child {
-        border-radius: 0 0 4px 4px; border-bottom: 0;
+    #my_record_wrap .record_wrap .record_box .record_info_box {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        min-height: auto;
+    }
+
+    #my_record_wrap .record_wrap .record_box .record_info_box .record_weight {
+        font-size: 22px;
     }
 }
 
-
-
-
-
+@media screen and (max-width: 480px) {
+    #my_record_wrap .record_wrap .record_box .box_title {
+        width: 84px;
+        font-size: 13px;
+    }
+}
