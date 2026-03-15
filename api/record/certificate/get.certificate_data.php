@@ -32,29 +32,8 @@ if(!is_number($data["record_id"])) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-$record_id = preg_replace("/[^0-9]+/u", "", $data["record_id"]);
-
-$query = "
-    Select  T1.account_id, T1.status, T2.user_nickname, T1.record_weight, T3.record_name_ko, T1.create_datetime as request_datetime, T4.create_datetime as certificate_datetime
-    From    tb_record_request T1
-    Inner Join (
-        Select  id, user_nickname
-        From    Account
-    ) T2
-    On  T1.account_id = T2.id
-    Inner Join  tb_record_master T3
-    On  T1.record_type = T3.id
-    Left Outer Join tb_record_inspection T4
-    On  T1.id = T4.request_id
-    And     T4.change_status = '2'
-    Where   T1.id = :id
-";
-
-$param = array(
-    ":id" => $record_id
-);
-
-$record_data = $PDO -> fetch($query, $param);
+$record_id   = (int)preg_replace("/[^0-9]+/u", "", $data["record_id"]);
+$record_data = Record::getCertificateData($record_id);
 
 if(!$record_data) {
     $returnArray["code"] = "ERROR";
@@ -62,30 +41,28 @@ if(!$record_data) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-//본인 글이 아닌경우 데이터 get 불가
+// 본인 글이 아닌 경우 접근 불가
 if($member["id"] != $record_data["account_id"]) {
     $returnArray["code"] = "ERROR";
     $returnArray["msg"] = "잘못된 값 입니다.<br/>-3";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-//승인 상태인지 확인
+// 승인 상태 확인
 if($record_data["status"] != 2) {
     $returnArray["code"] = "ERROR";
     $returnArray["msg"] = "마이레코드 인증서는 승인 후 확인가능합니다";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-
-
-//success
 $returnArray["data"] = array(
-    "nickname" => $record_data["user_nickname"],
-    "record_type" => $record_data["record_name_ko"],
-    "record_weight" => $record_data["record_weight"]."KG",
-    "date" => $record_data["certificate_datetime"] ? date("Y.m.d", strtotime($record_data["certificate_datetime"])) : date("Y.m.d", strtotime($record_data["create_datetime"]))
+    "nickname"      => $record_data["user_nickname"],
+    "record_type"   => $record_data["record_name_ko"],
+    "record_weight" => $record_data["record_weight"] . "KG",
+    "date"          => $record_data["certificate_datetime"]
+        ? date("Y.m.d", strtotime($record_data["certificate_datetime"]))
+        : date("Y.m.d", strtotime($record_data["request_datetime"]))
 );
-
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>
