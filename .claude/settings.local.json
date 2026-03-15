@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Projects/myrecord_docker -name docker-compose*.yml -o -name .env*)",
+      "Bash(grep -v \"//\")",
+      "Bash(grep -rh \"SESSION_PATH\\\\|IS_LIVE\\\\|MYSQL_HOST\\\\|MYSQL_DB\\\\|MYSQL_USER\\\\|MYSQL_PASS\" /c/Projects/myrecord_docker/app/ --include=*.php)",
+      "Bash(grep -rh IS_LIVEb /c/Projects/myrecord_docker/app/ --include=*.php)",
+      "Bash(chmod +x /c/Projects/myrecord_docker/app/.git/hooks/post-checkout /c/Projects/myrecord_docker/app/.git/hooks/post-rewrite /c/Projects/myrecord_docker/app/.git/hooks/post-merge)"
+    ]
+  }
+}
