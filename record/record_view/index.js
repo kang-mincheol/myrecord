@@ -30,7 +30,7 @@ function requestDelete() {
         error: function(error) {
             console.log(error);
         }
-    })
+    });
 }
 
 function getRecordData() {
@@ -47,75 +47,72 @@ function getRecordData() {
         success: function(data) {
             console.log(data);
             if(data["code"] == "SUCCESS") {
-                //닉네임
-                $("#view_wrap .nickname_row .nickname_box .value").text(data["data"]["record_nickname"]);
-                //등록일자
-                $("#view_wrap .nickname_row .create_date .value").text(data["data"]["record_create"]);
+                // 닉네임
+                $("#view_nickname").text(data["data"]["record_nickname"]);
+                // 등록일자
+                $("#view_date").text(data["data"]["record_create"]);
+                // 종목
+                $("#view_record_name").text(data["data"]["record_name"]);
+                // 무게
+                $("#view_record_weight").text(data["data"]["record_weight"] + " kg");
+                // 상태 배지
+                var statusEng = data["data"]["record_status_eng"];
+                $("#view_status_badge").addClass(statusEng).text(data["data"]["record_status"]);
 
-                //종목
-                $("#view_wrap .record_info_row .info_box.type_box .value_box .value").text(data["data"]["record_name"]);
-                //무게
-                $("#view_wrap .record_info_row .info_box.weight_box .value_box .value").text(data["data"]["record_weight"]);
-                //상태
-                $("#view_wrap .record_info_row .info_box.status_box").addClass(data["data"]["record_status_eng"]);
-                $("#view_wrap .record_info_row .info_box.status_box .value_box .value").text(data["data"]["record_status"]);
+                // 메모
+                if(data["data"]["record_memo"]) {
+                    $("#view_memo_text").text(data["data"]["record_memo"]);
+                    $("#view_memo_wrap").show();
+                }
 
-                if(data["file"]){
-                    //파일
+                if(data["file"]) {
                     var fileHtml = "";
-
-                    data["file"].forEach(function(data) {
-                        if(data["file_type"].indexOf('image') !== -1) {
+                    data["file"].forEach(function(file) {
+                        if(file["file_type"].indexOf('image') !== -1) {
                             fileHtml +=
-                            '<div class="item">'+
-                                '<img class="file_img" src="'+data["file_src"]+'"/>'+
-                            '</div>';
-                        } else if(data["file_type"].indexOf('video') !== -1) {
+                                '<div class="item">' +
+                                    '<img class="file_img" src="' + file["file_src"] + '"/>' +
+                                '</div>';
+                        } else if(file["file_type"].indexOf('video') !== -1) {
                             fileHtml +=
-                            '<div class="item">'+
-                                '<video controls class="file_video">'+
-                                    '<source src="'+data["file_src"]+'" type="'+data["file_type"]+'">'+
-                                '</video>'+
-                            '</div>';
+                                '<div class="item">' +
+                                    '<video controls class="file_video">' +
+                                        '<source src="' + file["file_src"] + '" type="' + file["file_type"] + '">' +
+                                    '</video>' +
+                                '</div>';
                         }
                     });
 
-                    $(".file_row .file_slide_wrap").html(fileHtml);
-
-                    setTimeout(
-                        function() {
-                            fileSlideInit();
-                            loadingOff();
-                        },
-                        500
-                    );
+                    $(".file_slide_wrap").html(fileHtml);
+                    setTimeout(function() {
+                        fileSlideInit();
+                        loadingOff();
+                    }, 500);
+                } else {
+                    loadingOff();
                 }
 
-                //본인일 경우
+                // 본인일 경우
                 if(data["data"]["is_recorder"]) {
-                    //심사완료 승인일경우
-                    //인증서 view
-                    if(data["data"]["record_status_eng"] == "approval") {
-                        $("#certificate_save").addClass("on").attr('href', '/record/record_certificate/?record_id='+record_id);
+                    // 승인 완료 - 인증서 버튼 표시
+                    if(statusEng == "approval") {
+                        $("#certificate_wrap").show();
+                        $("#certificate_save").attr('href', '/record/record_certificate/?record_id=' + record_id);
                     }
-
-                    //bottom_btn view
-                    $("#view_wrap .bottom_btn_wrap .right_btn_wrap").addClass("on");
-                    //삭제 event
-                    $("#view_wrap .bottom_btn_wrap .right_btn_wrap .edit_btn.delete").attr('onclick', 'requestDelete();');
-                    //수정 버튼 링크
-                    $("#view_wrap .bottom_btn_wrap .right_btn_wrap .edit_btn.edit").attr('href', '/record/record_regist/?record_id='+record_id);
+                    // 삭제 버튼 표시
+                    $("#right_btn_wrap").show();
+                    $("#delete_btn").attr('onclick', 'requestDelete();');
                 }
             } else {
                 loadingOff();
-                myrecordAlert('on', data["msg"]);1
+                myrecordAlert('on', data["msg"]);
             }
         },
         error: function(error) {
             loadingOff();
             console.log(error);
         }
-    })
+    });
 }
 
 function fileSlideInit() {

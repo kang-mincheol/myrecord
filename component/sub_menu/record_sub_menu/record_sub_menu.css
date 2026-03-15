@@ -3,30 +3,58 @@
 
 
 
+#record_sub_menu_band {
+    background-color: #fff;
+    border-bottom: 1px solid #eaeef5;
+}
 
 #record_sub_menu_container {
-    display: flex; flex-wrap: wrap; max-width: 980px; margin: 0 auto;
+    display: flex;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+#record_sub_menu_container::-webkit-scrollbar {
+    display: none;
 }
 
 #record_sub_menu_container .record_sub_menu_btn {
-    display: block; justify-content: center; align-items: center;
-    margin-right: 10px; margin-bottom: 10px;
-    padding: 11px 16px;
-    background-color: #f9f9f8;
-    border: 3px solid #f9f9f8;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-    color: #303030; font-size: 16px; font-weight: 400; cursor: pointer; box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 16px 13px;
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    cursor: pointer;
+    flex-shrink: 0;
+    letter-spacing: -0.2px;
 }
 
-#record_sub_menu_container .record_sub_menu_btn:first-child {
-    
+#record_sub_menu_container .record_sub_menu_btn:hover {
+    color: #333;
 }
 
 #record_sub_menu_container .record_sub_menu_btn.on {
-    font-weight: 700; border: 3px solid #303030;
+    color: var(--main-color-1);
+    border-bottom-color: var(--main-color-1);
+    font-weight: 700;
 }
 
-#record_sub_menu_container .swiper-wrapper .swiper-slide {
-    width: auto;
+@media screen and (max-width: 1050px) {
+    #record_sub_menu_container {
+        padding: 0 16px;
+    }
+
+    #record_sub_menu_container .record_sub_menu_btn {
+        font-size: 13px;
+        padding: 12px 12px 11px;
+    }
 }

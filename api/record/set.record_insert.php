@@ -107,6 +107,11 @@ if($record_weight > 9999) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+$record_memo = isset($data['record_memo']) ? trim($data['record_memo']) : '';
+if(mb_strlen($record_memo) > 500) {
+    $record_memo = mb_substr($record_memo, 0, 500);
+}
+
 
 $accessType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "video/quicktime", "application/octet-stream", "image/jpeg", "image/jpg", "image/png");
 
@@ -152,12 +157,14 @@ $insert_sql = "
         account_id = :account_id,
         record_type = :record_type,
         record_weight = :record_weight,
+        memo = :memo,
         status = :status
 ";
 $param = array(
     ":account_id" => $member["id"],
     ":record_type" => $record_type,
     ":record_weight" => $record_weight,
+    ":memo" => $record_memo,
     ":status" => 0
 );
 $insert_result = $PDO -> execute($insert_sql, $param);
@@ -206,15 +213,6 @@ foreach($_FILES as $key => $value) {
 }
 
 Slack::send(SLACK_URL_RECORD_INSERT, "record 신규 신청\n{$_SERVER["REQUEST_SCHEME"]}://{$_SERVER["HTTP_HOST"]}/record/squat/list/");
-
-function makeGuid() {
-    return sprintf('%08x-%04x-%04x-%04x-%04x%08x',
-        mt_rand(0, 0xffffffff),
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-        mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
-    );
-}
-
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>

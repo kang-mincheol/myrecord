@@ -164,7 +164,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
 
         <div id="mobile_menu_wrap" onclick="mobileMenuRemote();">
             <div id="mobile_menu_container">
-                <div class="account_box">
+                <div class="account_box <?= $is_member ? 'is_member' : '' ?>">
                     <button class="close_btn" title="닫기" onclick="mobileMenuRemote();"><i class="fa-solid fa-xmark"></i></button>
                     <?php
                     if($is_member) {

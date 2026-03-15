@@ -168,8 +168,11 @@ function insertData() {
     return;
   }
 
+  let record_memo = $("#record_memo").val().trim();
+
   recordData.append("record_type", record_type);
   recordData.append("record_weight", record_weight);
+  recordData.append("record_memo", record_memo);
 
   $.ajax({
     async: false,
@@ -216,6 +219,11 @@ function updateData() {
   //    let recordData = new FormData();
   //
   //    loadingOff();
+}
+
+function memoCountUpdate(obj) {
+  let len = $(obj).val().length;
+  $("#memo_count_num").text(len);
 }
 
 function fileAdd() {

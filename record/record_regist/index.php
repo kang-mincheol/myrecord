@@ -1,9 +1,10 @@
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');   // 헤더파일 로드
 
-
-echo css_load("/component/input/input.css");
+echo css_load('/common/record_pages.css');
+echo css_load('/component/input/input.css');
+echo css_load('/record/record_regist/index.css');
 
 if(!$is_member) {
     echo '<script>myrecordAlert(\'on\', \'로그인 후 이용해주세요\', \'알림\', \'location.href="/account/login/"\');</script>';
@@ -11,18 +12,28 @@ if(!$is_member) {
 }
 ?>
 
-<?
+
+<div class="record_page_header">
+    <div class="page_header_inner">
+        <p class="page_title_text">기록 등록</p>
+        <p class="page_sub_text">종목과 무게를 선택하고 인증 파일을 첨부해 주세요</p>
+    </div>
+</div>
+
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/record_sub_menu.php');
-echo css_load('/record/record_regist/index.css');
 ?>
 
 
 <div id="notice_popup_wrap" class="on">
     <div class="popup_box">
-        <div class="popup_header">알림</div>
+        <div class="popup_header">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            알림
+        </div>
         <div class="popup_body">
-            Record 등록 후 삭제는 가능하나 수정이 불가합니다</br>
-            Record 종목/무게/첨부파일을 다시한번 확인 후 등록부탁드립니다
+            Record 등록 후 삭제는 가능하나 수정이 불가합니다.<br/>
+            Record 종목 / 무게 / 첨부파일을 다시 한번 확인 후 등록해 주세요.
         </div>
         <button class="access_btn" onclick="noticePopupOff();">확인</button>
     </div>
@@ -32,85 +43,86 @@ echo css_load('/record/record_regist/index.css');
 
 <div class="edit_wrap">
 
-    <div class="edit_title">Record 등록</div>
+    <div class="form_card">
 
-    <div class="record_option_wrap">
+        <div class="record_option_wrap">
 
-        <div class="myrecord_input_wrap record_type">
-            <div class="label_box">
-                <label class="wrap_label">Record 종목 선택</label>
-            </div>
-            <div class="myrecord_select_wrap">
-                <button id="record_type" class="select_remote_btn" value="none" onclick="selectListRemote(this);">선택하세요</button>
-                <div class="select_list_wrap">
-                    <button class="select_list_btn" value="none" onclick="optionClick(this);">선택하세요</button>
-                    <button class="select_list_btn" value="1" onclick="optionClick(this);">Squat</button>
-                    <button class="select_list_btn" value="2" onclick="optionClick(this);">BenchPress</button>
-                    <button class="select_list_btn" value="3" onclick="optionClick(this);">DeadLift</button>
+            <div class="myrecord_input_wrap record_type">
+                <div class="label_box">
+                    <label class="wrap_label">종목 선택</label>
                 </div>
-                <div class="mobile_select_wrap">
-                    <select class="mobile_select" onchange="mobileOptionClick(this);">
-                        <option value="none">선택하세요</option>
-                        <option value="1">Squat</option>
-                        <option value="2">BenchPress</option>
-                        <option value="3">DeadLift</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="myrecord_input_wrap">
-            <div class="label_box">
-                <label class="wrap_label" for="record_weight">Record 무게(kg)</label>
-            </div>
-            <div class="form_value_box">
-                <input id="record_weight" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number" placeholder="kg 단위로 입력해 주세요"/>
-            </div>
-        </div>
-
-    </div>
-    <!-- record_option_wrap -->
-    
-    
-
-    <div class="myrecord_input_wrap file_wrap">
-        <div class="label_box">
-            <label class="wrap_label">파일 첨부</label>
-        </div>
-        <div class="file_add_wrap">
-            <div class="file_add_wrap_header">
-                <button class="add_btn" onclick="fileAdd();">추가</button>
-            </div>
-
-            <div class="file_row_box">
-<!--
-                <div class="file_row">
-                    <input name="file_1" type="file" onchange="fileChange(this);"/>
-                    <div class="file_name_box">파일없음</div>
-                    <div class="file_row_remote_box">
-                        <button class="file_select_btn" onclick="fileSelect(this);">선택</button>
-                        <button class="file_delete_btn" onclick="fileDelete(this);">삭제</button>
+                <div class="myrecord_select_wrap">
+                    <button id="record_type" class="select_remote_btn" value="none" onclick="selectListRemote(this);">선택하세요</button>
+                    <div class="select_list_wrap">
+                        <button class="select_list_btn" value="none" onclick="optionClick(this);">선택하세요</button>
+                        <button class="select_list_btn" value="1" onclick="optionClick(this);">Squat</button>
+                        <button class="select_list_btn" value="2" onclick="optionClick(this);">BenchPress</button>
+                        <button class="select_list_btn" value="3" onclick="optionClick(this);">DeadLift</button>
+                    </div>
+                    <div class="mobile_select_wrap">
+                        <select class="mobile_select" onchange="mobileOptionClick(this);">
+                            <option value="none">선택하세요</option>
+                            <option value="1">Squat</option>
+                            <option value="2">BenchPress</option>
+                            <option value="3">DeadLift</option>
+                        </select>
                     </div>
                 </div>
--->
             </div>
-            <!-- file_row_box -->
-        </div>
-    </div>
-    <!-- file_wrap -->
 
-    <div class="footer_btn_wrap">
-        <button class="list_btn" onclick="prev();">이전</button>
-        <button class="update_btn" onclick="setRecordData();">등록</button>
+            <div class="myrecord_input_wrap weight_wrap">
+                <div class="label_box">
+                    <label class="wrap_label" for="record_weight">무게 (kg)</label>
+                </div>
+                <div class="form_value_box">
+                    <input id="record_weight" class="input_text" onkeyup="inputOnkeyupEvent(this);" type="number" placeholder="kg 단위로 입력해 주세요"/>
+                </div>
+            </div>
+
+        </div>
+        <!-- record_option_wrap -->
+
+
+        <div class="myrecord_input_wrap file_wrap">
+            <div class="label_box">
+                <label class="wrap_label">인증 파일 첨부</label>
+            </div>
+            <div class="file_add_wrap">
+                <div class="file_add_wrap_header">
+                    <button class="add_btn" onclick="fileAdd();"><i class="fa-solid fa-plus"></i> 파일 추가</button>
+                    <p class="file_guide_text">동영상 · 이미지 파일, 개당 최대 100MB / 총 8MB</p>
+                </div>
+                <div class="file_row_box"></div>
+            </div>
+        </div>
+        <!-- file_wrap -->
+
+
+        <div class="myrecord_input_wrap memo_wrap">
+            <div class="label_box">
+                <label class="wrap_label" for="record_memo">한마디 <span class="memo_optional_tag">선택</span></label>
+            </div>
+            <div class="form_value_box">
+                <textarea id="record_memo" class="memo_textarea" placeholder="상황 설명이나 남기고 싶은 말을 자유롭게 적어주세요 (최대 500자)" maxlength="500" oninput="memoCountUpdate(this);"></textarea>
+                <div class="memo_count"><span id="memo_count_num">0</span> / 500</div>
+            </div>
+        </div>
+        <!-- memo_wrap -->
+
+
+        <div class="footer_btn_wrap">
+            <button class="list_btn" onclick="prev();"><i class="fa-solid fa-angle-left"></i> 이전</button>
+            <button class="update_btn" onclick="setRecordData();">등록하기</button>
+        </div>
+
     </div>
-    <!-- footer_btn_wrap -->
+    <!-- form_card -->
 
 </div>
 <!-- edit_wrap -->
 
 
-
-<?
+<?php
 echo script_load("/component/input/input.js");
 echo script_load('/record/record_regist/index.js');
 ?>
@@ -119,6 +131,6 @@ $(function () {
     init();
 });
 </script>
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');   // 푸터파일 로드
 ?>
