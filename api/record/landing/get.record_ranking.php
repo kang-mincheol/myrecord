@@ -21,16 +21,7 @@ if (is_null($data) || !checkParams($data, ["record_type"])) {
 $data = cleansingParams($data);
 
 $record_type = preg_replace("/[^A-Za-z]+/u", "", $data["record_type"]);
-
-$record_id_sql = "
-    Select  id
-    From    tb_record_master
-    Where   record_name = :record_name
-";
-$param = array(
-    ":record_name" => $record_type
-);
-$record_id = $PDO -> fetch($record_id_sql, $param);
+$record_id   = Record::getMasterIdByName($record_type);
 
 if(!$record_id) {
     $returnArray["code"] = "ERROR";
@@ -38,44 +29,23 @@ if(!$record_id) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-$record_id = $record_id["id"];
+$ranking = Record::getRankingByTypeId($record_id);
 
-
-$ranking_sql = "
-    Select	max(T1.record_weight) as weight, T1.account_id, T1.id, T2.user_nickname
-    From	tb_record_request T1
-    Inner Join Account T2
-    On  T1.account_id = T2.id
-    Where	T1.record_type = :record_type
-    And		T1.status = 2
-
-    Group by T1.account_id, T1.id
-
-    Order by weight Desc
-    Limit 0, 10
-";
-$param = array(
-    ":record_type" => $record_id
-);
-$ranking = $PDO -> fetchAll($ranking_sql, $param);
-
-if($ranking) {
-    foreach($ranking as $key => $value) {
-        $returnArray["data"][] = array(
-            "weight" => $value["weight"],
-            "nickname" => $value["user_nickname"],
-            "record_id" => $value["id"]
-        );
-    }
-} else {
+if(!$ranking) {
     $returnArray = array(
         "code" => "EMPTY",
-        "msg" => "데이터가 없습니다."
+        "msg"  => "데이터가 없습니다."
     );
-
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+foreach($ranking as $value) {
+    $returnArray["data"][] = array(
+        "weight"    => $value["weight"],
+        "nickname"  => $value["user_nickname"],
+        "record_id" => $value["id"]
+    );
+}
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>

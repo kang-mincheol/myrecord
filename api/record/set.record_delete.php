@@ -32,19 +32,8 @@ if(!is_number($data["record_id"])) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-$record_id = preg_replace("/[^0-9]+/u", "", $data["record_id"]);
-
-$query = "
-    Select  *
-    From    tb_record_request
-    Where   id = :id
-";
-
-$param = array(
-    ":id" => $record_id
-);
-
-$record_data = $PDO -> fetch($query, $param);
+$record_id   = (int)preg_replace("/[^0-9]+/u", "", $data["record_id"]);
+$record_data = Record::getRecordById($record_id);
 
 if(!$record_data) {
     $returnArray["code"] = "ERROR";
@@ -52,82 +41,15 @@ if(!$record_data) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-//본인 글이 아닌경우 삭제 불가
+// 본인 글이 아닌 경우 삭제 불가
 if($member["id"] != $record_data["account_id"]) {
     $returnArray["code"] = "ERROR";
     $returnArray["msg"] = "잘못된 값 입니다.<br/>-3";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-//본인일경우 삭제
-
-//등록한 파일 삭제
-$get_file_query = "
-    Select  *
-    From    tb_record_request_file
-    Where   request_id = :request_id
-    Order by create_datetime Asc
-";
-
-$param = array(
-    ":request_id" => $record_id
-);
-
-$file_data = $PDO -> fetchAll($get_file_query, $param);
-
-if($file_data) {
-    foreach($file_data as $row) {
-        unlink($_SERVER["DOCUMENT_ROOT"]."/data/record/".$row["file_guid"]);
-        $file_delete_query = "
-            Delete From tb_record_request_file
-            Where   file_guid = :file_guid
-        ";
-        $param = array(
-            ":file_guid" => $row["file_guid"]
-        );
-        $PDO -> execute($file_delete_query, $param);
-    }
-}
-
-
-//심사 데이터 삭제
-$get_inspection_query = "
-    Select  *
-    From    tb_record_inspection
-    Where   request_id = :request_id
-    Order by id Asc
-";
-$param = array(
-    ":request_id" => $record_id
-);
-$inspection_data = $PDO -> fetchAll($get_inspection_query, $param);
-
-if($inspection_data) {
-    foreach($inspection_data as $row) {
-        $inspection_delete_query = "
-            Delete From tb_record_inspection
-            Where   id = :id
-        ";
-        $param = array(
-            ":id" => $row["id"]
-        );
-        $PDO -> execute($inspection_delete_query, $param);
-    }
-}
-
-
-//등록한 데이터 삭제
-$request_delete_query = "
-    Delete From tb_record_request
-    Where   id = :id
-";
-$param = array(
-    ":id" => $record_id
-);
-$PDO -> execute($request_delete_query, $param);
-
-
-
+// 기록 삭제 (파일 + 검증이력 + 요청)
+Record::deleteRecord($record_id);
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 ?>

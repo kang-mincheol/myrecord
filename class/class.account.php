@@ -267,6 +267,79 @@ class Account {
         }
     }
 
+    /**
+     * 내 정보 수정 시 닉네임 중복 체크 (자신 제외)
+     */
+    public static function checkNicknameForUpdate(string $nickname, int $excludeId): bool {
+        global $PDO;
+        $sql = "
+            Select  count(*) as cnt
+            From    Account
+            Where   user_nickname = :nickname
+            And     id != :id
+        ";
+        $param = [":nickname" => $nickname, ":id" => $excludeId];
+        return (int)($PDO->fetch($sql, $param)["cnt"] ?? 0) > 0;
+    }
+
+    /**
+     * 내 정보 수정 시 핸드폰 중복 체크 (자신 제외)
+     */
+    public static function checkPhoneForUpdate(string $phone, int $excludeId): bool {
+        global $PDO;
+        $sql = "
+            Select  count(*) as cnt
+            From    Account
+            Where   user_phone = :phone
+            And     id != :id
+        ";
+        $param = [":phone" => $phone, ":id" => $excludeId];
+        return (int)($PDO->fetch($sql, $param)["cnt"] ?? 0) > 0;
+    }
+
+    /**
+     * 내 정보 수정 시 이메일 중복 체크 (자신 제외)
+     */
+    public static function checkEmailForUpdate(string $email, int $excludeId): bool {
+        global $PDO;
+        $sql = "
+            Select  count(*) as cnt
+            From    Account
+            Where   user_email = :email
+            And     id != :id
+        ";
+        $param = [":email" => $email, ":id" => $excludeId];
+        return (int)($PDO->fetch($sql, $param)["cnt"] ?? 0) > 0;
+    }
+
+    /**
+     * 내 정보(닉네임/이름/전화/이메일) 업데이트
+     */
+    public static function updateMyAccount(array $data, int $memberId): bool {
+        global $PDO;
+
+        $sql   = "Update Account Set user_nickname = :nickname";
+        $param = [":nickname" => $data["nickname"]];
+
+        if (!empty($data["name"])) {
+            $sql .= ", user_name = :user_name";
+            $param[":user_name"] = $data["name"];
+        }
+        if (!empty($data["phone"])) {
+            $sql .= ", user_phone = :user_phone";
+            $param[":user_phone"] = $data["phone"];
+        }
+        if (!empty($data["email"])) {
+            $sql .= ", user_email = :user_email";
+            $param[":user_email"] = $data["email"];
+        }
+
+        $sql .= " Where id = :id";
+        $param[":id"] = $memberId;
+
+        return (bool)$PDO->execute($sql, $param);
+    }
+
     public static function setLogin($member) {
         global $PDO;
 

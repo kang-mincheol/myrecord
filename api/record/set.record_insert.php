@@ -14,93 +14,42 @@ if(!$is_member) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+$data        = $_POST;
+$record_type = preg_replace('/[^0-9]+/u', '', $data['record_type'] ?? '');
 
-
-
-$data = $_POST;
-$record_type = $data['record_type'];
-
-$record_type = preg_replace('/[^0-9]+/u', '', $record_type);
-
-if($record_type == '') {
+if($record_type === '') {
     $returnArray["code"] = "PARAM_ERROR";
     $returnArray["msg"] = "등록할 기록을 선택해주세요";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-
-$record_type_sql = "
-    Select  *
-    From    tb_record_master
-";
-
-$record_type_arr = array();
-$record_type_data = $PDO -> fetchAll($record_type_sql);
-
-foreach($record_type_data as $key => $value) {
-    $record_type_arr[] = $value["id"];
-}
-
-if(!in_array($record_type, $record_type_arr)) {
+// 유효한 종목인지 확인
+$valid_ids = array_column(Record::getRecordType(), 'id');
+if(!in_array($record_type, $valid_ids)) {
     $returnArray["code"] = "PARAM_ERROR";
     $returnArray["msg"] = "잘못된 파라미터입니다";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-
-//해당 회원 해당 종목으로 심사전 상태 데이터가 존재하는지 확인
-$overlap_check_sql = "
-    Select  *
-    From    tb_record_request
-    Where   account_id = :account_id
-    And     record_type = :record_type
-    And     status = :status
-";
-$param = array(
-    ":account_id" => $member["id"],
-    ":record_type" => $record_type,
-    ":status" => 0
-);
-
-$overlap_check = $PDO -> fetch($overlap_check_sql, $param);
-if($overlap_check) {
+// 동일 종목 심사전/심사중 중복 신청 확인
+if(Record::checkOverlapRequest($member["id"], $record_type, 0)) {
     $returnArray["code"] = "OVERLAP_REQUEST";
     $returnArray["msg"] = "해당 종목으로 심사전 신청건이 존재합니다";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
-
-$overlap_check_sql = "
-    Select  *
-    From    tb_record_request
-    Where   account_id = :account_id
-    And     record_type = :record_type
-    And     status = :status
-";
-$param = array(
-    ":account_id" => $member["id"],
-    ":record_type" => $record_type,
-    ":status" => 1
-);
-
-$overlap_check = $PDO -> fetch($overlap_check_sql, $param);
-if($overlap_check) {
+if(Record::checkOverlapRequest($member["id"], $record_type, 1)) {
     $returnArray["code"] = "OVERLAP_REQUEST";
     $returnArray["msg"] = "해당 종목으로 관리자가 심사중인 건이 존재합니다";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-
-
-
-
-$record_weight = $data['record_weight'];
-$record_weight = preg_replace('/[^0-9]+/u', '', $record_weight);
-if($record_weight == '') {
+// 무게 검증
+$record_weight = preg_replace('/[^0-9]+/u', '', $data['record_weight'] ?? '');
+if($record_weight === '') {
     $returnArray["code"] = "PARAM_ERROR";
     $returnArray["msg"] = "등록할 무게를 입력해 주세요";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
-
 if($record_weight > 9999) {
     $returnArray["code"] = "PARAM_ERROR";
     $returnArray["msg"] = "Record 무게를 확인해 주세요";
@@ -112,9 +61,8 @@ if(mb_strlen($record_memo) > 500) {
     $record_memo = mb_substr($record_memo, 0, 500);
 }
 
-
-$accessType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "video/quicktime", "application/octet-stream", "image/jpeg", "image/jpg", "image/png");
-
+// 파일 검증
+$accessType = ["video/mp4","video/m4v","video/avi","video/wmv","video/mwa","video/asf","video/mpg","video/mpeg","video/mkv","video/mov","video/3gp","video/3g2","video/webm","video/quicktime","application/octet-stream","image/jpeg","image/jpg","image/png"];
 
 if(!$_FILES) {
     $returnArray["code"] = "FILE_EMPTY";
@@ -123,93 +71,42 @@ if(!$_FILES) {
 }
 
 $total_file_size = 0;
-
-//파일 타입 검사
 foreach($_FILES as $key => $value) {
-    $file_type = $value["type"];
-    $file_size = $value["size"];
-    $total_file_size += $file_size;
-
-    if(!in_array($file_type, $accessType)) {
+    if(!in_array($value["type"], $accessType)) {
         $returnArray["code"] = "FILE_TYPE_LIMIT";
         $returnArray["msg"] = "파일은 이미지 또는 동영상 파일만 업로드 가능합니다<br/>이미지 또는 동영상 파일이 업로드가 안될경우 고객센터에 문의부탁드립니다";
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
+    $total_file_size += $value["size"];
 }
 
-
-$total_file_size = $total_file_size / 1024 / 1024;
-$limit_file_size = 100;
-
-//파일 용량 검사
-if($total_file_size > $limit_file_size) {
+if(($total_file_size / 1024 / 1024) > 100) {
     $returnArray["code"] = "FILE_SIZE_LIMIT";
     $returnArray["msg"] = "파일은 총 100MB 이하로 업로드 해주세요";
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+// 기록 신청 Insert
+$request_id = Record::insertRecordRequest($member["id"], (int)$record_type, (int)$record_weight, $record_memo);
 
+// 파일 Insert + 물리 저장
+$videoType   = ["video/mp4","video/m4v","video/avi","video/wmv","video/mwa","video/asf","video/mpg","video/mpeg","video/mkv","video/mov","video/3gp","video/3g2","video/webm","video/quicktime","application/octet-stream"];
+$upload_path = $_SERVER["DOCUMENT_ROOT"] . "/data/record/";
 
-//데이터 insert
-$insert_sql = "
-    Insert Into tb_record_request
-    Set
-        account_id = :account_id,
-        record_type = :record_type,
-        record_weight = :record_weight,
-        memo = :memo,
-        status = :status
-";
-$param = array(
-    ":account_id" => $member["id"],
-    ":record_type" => $record_type,
-    ":record_weight" => $record_weight,
-    ":memo" => $record_memo,
-    ":status" => 0
-);
-$insert_result = $PDO -> execute($insert_sql, $param);
+if(!is_dir($_SERVER["DOCUMENT_ROOT"] . "/data"))        @mkdir($_SERVER["DOCUMENT_ROOT"] . "/data");
+if(!is_dir($_SERVER["DOCUMENT_ROOT"] . "/data/record")) @mkdir($_SERVER["DOCUMENT_ROOT"] . "/data/record");
 
-//파일 insert
-$videoType = array("video/mp4", "video/m4v", "video/avi", "video/wmv", "video/mwa", "video/asf", "video/mpg", "video/mpeg", "video/mkv", "video/mov", "video/3gp", "video/3g2", "video/webm", "video/quicktime", "application/octet-stream");
-$upload_path = $_SERVER["DOCUMENT_ROOT"]."/data/record/";
-if(!is_dir($_SERVER["DOCUMENT_ROOT"]."/data")) {
-    @mkdir($_SERVER["DOCUMENT_ROOT"]."/data");
-}
-
-if(!is_dir($_SERVER["DOCUMENT_ROOT"]."/data/record")) {
-    @mkdir($_SERVER["DOCUMENT_ROOT"]."/data/record");
-}
-foreach($_FILES as $key => $value) {
+foreach($_FILES as $value) {
     $GUID = makeGuid();
-    $file_type_text = "";
+    $ext  = "";
     if(in_array($value["type"], $videoType)) {
-        //quicktime 일경우 video/mp4 로 변환저장
-        //quicktime 의 경우 윈도우에 코덱이 없음
-        if($value["type"] == "video/quicktime") {
-            $value["type"] = "video/mp4";
-        }
-        $file_type_name = explode("/", $value["type"]);
-        $file_type_text = ".".$file_type_name[1];
+        if($value["type"] === "video/quicktime") $value["type"] = "video/mp4";
+        $ext = "." . explode("/", $value["type"])[1];
     }
+    $file_guid = $GUID . $ext;
 
-    $file_insert_sql = "
-        Insert Into tb_record_request_file
-        Set
-            request_id = :request_id,
-            file_original_name = :file_original_name,
-            file_guid = :file_guid,
-            file_type = :file_type
-    ";
-    $param = array(
-        ":request_id" => $insert_result,
-        ":file_original_name" => $value["name"],
-        ":file_guid" => $GUID.$file_type_text,
-        ":file_type" => $value["type"]
-    );
-    $PDO -> execute($file_insert_sql, $param);
-
-    $this_upload_path = $upload_path.$GUID.$file_type_text;
-    move_uploaded_file($value["tmp_name"], $this_upload_path);
+    Record::insertRecordFile($request_id, $value["name"], $file_guid, $value["type"]);
+    move_uploaded_file($value["tmp_name"], $upload_path . $file_guid);
 }
 
 Slack::send(SLACK_URL_RECORD_INSERT, "record 신규 신청\n{$_SERVER["REQUEST_SCHEME"]}://{$_SERVER["HTTP_HOST"]}/record/squat/list/");

@@ -22,6 +22,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.account.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.regexp.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.slack.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.freeBoard.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/class/class.record.php');
 
 
 
