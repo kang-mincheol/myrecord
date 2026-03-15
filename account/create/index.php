@@ -38,7 +38,7 @@ echo css_load('/account/create/index.css');
                 </label>
             </div>
             <div class="right_box">
-                <a class="view_btn" href="/document/myrecord_service_terms_1.html" target="_blank">보기</a>
+                <a class="view_btn" href="/policy/terms/" target="_blank">보기</a>
             </div>
         </div>
 
@@ -54,7 +54,7 @@ echo css_load('/account/create/index.css');
                 </label>
             </div>
             <div class="right_box">
-                <a class="view_btn" href="/document/myrecord_personal_info_terms.html" target="_blank">보기</a>
+                <a class="view_btn" href="/policy/privacy/" target="_blank">보기</a>
             </div>
         </div>
 
@@ -70,7 +70,7 @@ echo css_load('/account/create/index.css');
                 </label>
             </div>
             <div class="right_box">
-                <a class="view_btn" href="/document/myrecord_marketing_terms.html" target="_blank">보기</a>
+                <a class="view_btn" href="/policy/marketing/" target="_blank">보기</a>
             </div>
         </div>
 
