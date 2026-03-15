@@ -359,6 +359,75 @@
 }
 
 
+/* ===== Memo Wrap ===== */
+
+.edit_wrap .myrecord_input_wrap.memo_wrap {
+    margin-bottom: 28px;
+}
+
+.edit_wrap .myrecord_input_wrap.memo_wrap .wrap_label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.edit_wrap .myrecord_input_wrap.memo_wrap .memo_optional_tag {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 20px;
+    background-color: #f0f3fa;
+    color: #888;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.edit_wrap .myrecord_input_wrap.memo_wrap .memo_textarea {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    background-color: #fafbff;
+    border: 1.5px solid #dde2ee;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #222;
+    line-height: 1.65;
+    letter-spacing: -0.2px;
+    resize: vertical;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    font-family: inherit;
+}
+
+.edit_wrap .myrecord_input_wrap.memo_wrap .memo_textarea::placeholder {
+    color: #bbb;
+    font-size: 13px;
+}
+
+.edit_wrap .myrecord_input_wrap.memo_wrap .memo_textarea:focus {
+    background-color: #fff;
+    border-color: var(--main-color-1);
+    box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
+    outline: none;
+}
+
+.edit_wrap .myrecord_input_wrap.memo_wrap .memo_count {
+    margin-top: 6px;
+    text-align: right;
+    font-size: 12px;
+    color: #aaa;
+    font-weight: 400;
+    letter-spacing: -0.1px;
+}
+
+.edit_wrap .myrecord_input_wrap.memo_wrap .memo_count span {
+    color: #666;
+    font-weight: 600;
+}
+
+
 /* ===== Footer Buttons ===== */
 
 .edit_wrap .footer_btn_wrap {

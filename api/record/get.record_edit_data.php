@@ -74,6 +74,7 @@ if($record_data["status"] == '2') {
 $returnArray["data"] = array(
     "type" => $record_data["record_type"],
     "weight" => $record_data["record_weight"],
+    "memo" => $record_data["memo"] ?? '',
     "status" => $record_data["status"]
 );
 

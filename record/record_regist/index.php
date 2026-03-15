@@ -98,6 +98,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/sub_menu/record_sub_menu/reco
         <!-- file_wrap -->
 
 
+        <div class="myrecord_input_wrap memo_wrap">
+            <div class="label_box">
+                <label class="wrap_label" for="record_memo">한마디 <span class="memo_optional_tag">선택</span></label>
+            </div>
+            <div class="form_value_box">
+                <textarea id="record_memo" class="memo_textarea" placeholder="상황 설명이나 남기고 싶은 말을 자유롭게 적어주세요 (최대 500자)" maxlength="500" oninput="memoCountUpdate(this);"></textarea>
+                <div class="memo_count"><span id="memo_count_num">0</span> / 500</div>
+            </div>
+        </div>
+        <!-- memo_wrap -->
+
+
         <div class="footer_btn_wrap">
             <button class="list_btn" onclick="prev();"><i class="fa-solid fa-angle-left"></i> 이전</button>
             <button class="update_btn" onclick="setRecordData();">등록하기</button>
