@@ -113,19 +113,12 @@ function recordRankingRender(type, data) {
         if(key >= 0 && key <= 2) {
             addClass = " top";
         }
+        var recordId = data[key]["record_id"];
         renderHtml +=
-            '<div class="body_row'+addClass+'">'+
+            '<div class="body_row'+addClass+' clickable" onclick="location.href=\'/record/record_view/?record_id='+recordId+'\';">'+
                 '<div class="body_box rank"><p class="number">'+(parseInt(key) + 1)+'</p></div>'+
-                '<div class="body_box weight">'+
-                    '<a href="/record/record_view/?record_id='+data[key]["record_id"]+'">'+
-                        data[key]['weight']+
-                    '</a>'+
-                '</div>'+
-                '<div class="body_box name">'+
-                    '<a href="/record/record_view/?record_id='+data[key]["record_id"]+'">'+
-                        data[key]['nickname']+
-                    '</a>'+
-                '</div>'+
+                '<div class="body_box weight">'+data[key]['weight']+'</div>'+
+                '<div class="body_box name">'+data[key]['nickname']+'</div>'+
             '</div>';
     }
 

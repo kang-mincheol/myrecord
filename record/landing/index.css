@@ -123,6 +123,10 @@
     border-bottom: none;
 }
 
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row.clickable {
+    cursor: pointer;
+}
+
 #record_ranking .ranking_contents_box .ranking_contents_body .body_row:hover {
     background-color: #f5f7ff;
 }
