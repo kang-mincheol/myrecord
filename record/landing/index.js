@@ -50,24 +50,32 @@ function totalRankingRender(data) {
         if(key >= 0 && key <= 2) {
             addClass = " top";
         }
+
+        var squatVal =
+            '<span class="col_label">S</span>' +
+            (data[key]["squat_record_id"] != '-' ? '<a href="/record/record_view/?record_id='+data[key]["squat_record_id"]+'">' : '') +
+                (data[key]["squat"] > 0 ? data[key]["squat"] + ' kg' : '-') +
+            (data[key]["squat_record_id"] != '-' ? '</a>' : '');
+
+        var benchVal =
+            '<span class="col_label">B</span>' +
+            (data[key]["benchpress_record_id"] != '-' ? '<a href="/record/record_view/?record_id='+data[key]["benchpress_record_id"]+'">' : '') +
+                (data[key]["benchpress"] > 0 ? data[key]["benchpress"] + ' kg' : '-') +
+            (data[key]["benchpress_record_id"] != '-' ? '</a>' : '');
+
+        var deadVal =
+            '<span class="col_label">D</span>' +
+            (data[key]["deadlift_record_id"] != '-' ? '<a href="/record/record_view/?record_id='+data[key]["deadlift_record_id"]+'">' : '') +
+                (data[key]["deadlift"] > 0 ? data[key]["deadlift"] + ' kg' : '-') +
+            (data[key]["deadlift_record_id"] != '-' ? '</a>' : '');
+
         renderHtml +=
             '<div class="body_row'+addClass+'">'+
                 '<div class="body_box rank"><p class="number">'+(parseInt(key) + 1)+'</p></div>'+
-                '<div class="body_box total">'+data[key]["3대"]+'</div>'+
-                '<div class="body_box squat">'+
-                    (data[key]["squat_record_id"] != '-' ? '<a href="/record/record_view/?record_id='+data[key]["squat_record_id"]+'">' : '')+
-                        data[key]["squat"]+
-                    (data[key]["squat_record_id"] != '-' ? '</a>' : '')+
-                '</div>'+
-                '<div class="body_box benchpress">'+
-                    (data[key]["benchpress_record_id"] != '-' ? '<a href="/record/record_view/?record_id='+data[key]["benchpress_record_id"]+'">' : '')+
-                        data[key]["benchpress"]+
-                    (data[key]["benchpress_record_id"] != '-' ? '</a>' : '')+
-                '</div>'+
-                '<div class="body_box deadlift">'+
-                    (data[key]["deadlift_record_id"] != '-' ? '<a href="/record/record_view/?record_id='+data[key]["deadlift_record_id"]+'">' : '')+
-                        data[key]["deadlift"]+'</div>'+
-                    (data[key]["deadlift_record_id"] != '-' ? '</a>' : '')+
+                '<div class="body_box total">'+data[key]["3대"]+' kg</div>'+
+                '<div class="body_box squat">'+squatVal+'</div>'+
+                '<div class="body_box benchpress">'+benchVal+'</div>'+
+                '<div class="body_box deadlift">'+deadVal+'</div>'+
                 '<div class="body_box name">'+data[key]["nickname"]+'</div>'+
             '</div>';
     }
@@ -113,19 +121,12 @@ function recordRankingRender(type, data) {
         if(key >= 0 && key <= 2) {
             addClass = " top";
         }
+        var recordId = data[key]["record_id"];
         renderHtml +=
-            '<div class="body_row'+addClass+'">'+
+            '<div class="body_row'+addClass+' clickable" onclick="location.href=\'/record/record_view/?record_id='+recordId+'\';">'+
                 '<div class="body_box rank"><p class="number">'+(parseInt(key) + 1)+'</p></div>'+
-                '<div class="body_box weight">'+
-                    '<a href="/record/record_view/?record_id='+data[key]["record_id"]+'">'+
-                        data[key]['weight']+
-                    '</a>'+
-                '</div>'+
-                '<div class="body_box name">'+
-                    '<a href="/record/record_view/?record_id='+data[key]["record_id"]+'">'+
-                        data[key]['nickname']+
-                    '</a>'+
-                '</div>'+
+                '<div class="body_box weight">'+data[key]['weight']+' kg</div>'+
+                '<div class="body_box name">'+data[key]['nickname']+'<i class="fa-solid fa-chevron-right row_arrow"></i></div>'+
             '</div>';
     }
 

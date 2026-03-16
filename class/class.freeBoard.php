@@ -240,8 +240,111 @@ class FreeBoard {
     }
 
     public static function getFreeBoardListPage($data) {
-        
+
     }
+
+    // =============================================
+    // 댓글
+    // =============================================
+
+    /**
+     * 댓글 목록 조회
+     */
+    public static function getComments(int $boardId): array {
+        global $PDO;
+
+        $sql = "
+            Select  C.id, C.contents, C.account_no, C.create_datetime,
+                    A.user_nickname
+            From    community_free_board_comment C
+            Inner Join Account A On C.account_no = A.id
+            Where   C.board_id = :board_id
+            And     C.is_delete = 0
+            Order by C.id Asc
+        ";
+        $param = [":board_id" => $boardId];
+
+        return $PDO->fetchAll($sql, $param);
+    }
+
+    /**
+     * 댓글 수 조회
+     */
+    public static function getCommentCount(int $boardId): int {
+        global $PDO;
+
+        $sql = "
+            Select count(*) as cnt
+            From   community_free_board_comment
+            Where  board_id = :board_id
+            And    is_delete = 0
+        ";
+        $param = [":board_id" => $boardId];
+
+        return (int)$PDO->fetch($sql, $param)["cnt"];
+    }
+
+    /**
+     * 댓글 작성
+     */
+    public static function insertComment(int $boardId, string $contents): int {
+        global $PDO;
+        global $member;
+
+        $sql = "
+            Insert Into community_free_board_comment
+            Set board_id   = :board_id,
+                account_no = :account_no,
+                contents   = :contents
+        ";
+        $param = [
+            ":board_id"   => $boardId,
+            ":account_no" => $member["id"],
+            ":contents"   => $contents
+        ];
+
+        return $PDO->execute($sql, $param);
+    }
+
+    /**
+     * 댓글 존재 + 본인 여부 확인
+     */
+    public static function isCommentOwner(int $commentId): bool {
+        global $PDO;
+        global $member;
+
+        if (is_null($member)) return false;
+
+        $sql = "
+            Select account_no
+            From   community_free_board_comment
+            Where  id = :id
+            And    is_delete = 0
+        ";
+        $param = [":id" => $commentId];
+
+        $row = $PDO->fetch($sql, $param);
+        if (!$row) return false;
+
+        return (int)$member["id"] === (int)$row["account_no"];
+    }
+
+    /**
+     * 댓글 소프트 삭제
+     */
+    public static function deleteComment(int $commentId): void {
+        global $PDO;
+
+        $sql = "
+            Update community_free_board_comment
+            Set    is_delete = 1
+            Where  id = :id
+        ";
+        $param = [":id" => $commentId];
+
+        $PDO->execute($sql, $param);
+    }
+
 
     /**
      * 자유게시판 view data get 함수

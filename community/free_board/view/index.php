@@ -39,6 +39,36 @@ echo css_load('/community/free_board/view/index.css');
     </div>
     <!-- view_card -->
 
+
+    <!-- 댓글 -->
+    <div class="comment_card">
+
+        <div class="comment_card_head">
+            <p class="comment_title"><i class="fa-regular fa-comment-dots"></i> 댓글 <span id="comment_count">0</span></p>
+        </div>
+
+        <!-- 댓글 목록 -->
+        <div id="comment_list"></div>
+
+        <!-- 댓글 입력 -->
+        <?php if ($is_member): ?>
+        <div class="comment_input_wrap">
+            <textarea id="comment_textarea" class="comment_textarea" placeholder="댓글을 입력해주세요 (최대 500자)" maxlength="500" oninput="commentInputCount(this);"></textarea>
+            <div class="comment_input_bottom">
+                <span class="comment_char_count"><span id="comment_input_count">0</span> / 500</span>
+                <button class="comment_submit_btn" onclick="submitComment();"><i class="fa-solid fa-paper-plane"></i> 등록</button>
+            </div>
+        </div>
+        <?php else: ?>
+        <div class="comment_login_notice">
+            <i class="fa-solid fa-lock"></i>
+            <p>댓글은 <a href="/account/login/">로그인</a> 후 작성할 수 있습니다.</p>
+        </div>
+        <?php endif; ?>
+
+    </div>
+    <!-- comment_card -->
+
 </div>
 <!-- view_wrap -->
 

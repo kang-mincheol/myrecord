@@ -2,8 +2,10 @@ function init() {
     getCertificateData();
 }
 
-let certificate_date = "";
-let certificate_master = "";
+let certificate_date      = "";
+let certificate_master    = "";
+let certificate_cert_code = "";
+let certificate_record_id = "";
 
 function getCertificateData() {
     loadingOn();
@@ -29,12 +31,17 @@ function getCertificateData() {
                 $(".cert_info_row[name=record_master] .cert_info_value").text(record["record_type"]);
                 $(".cert_info_row[name=record_weight] .cert_info_value").text(record["record_weight"]);
                 $(".cert_date").text(record["date"]);
+                $(".cert_code_text").text(record["cert_code"]);
 
-                certificate_date   = record["date"];
-                certificate_master = record["record_type"];
+                certificate_date      = record["date"];
+                certificate_master    = record["record_type"];
+                certificate_cert_code = record["cert_code"];
+                certificate_record_id = record["record_id"];
 
                 $("#certificate_box").addClass("on");
                 $(".cert_btn_wrap").removeClass("off");
+
+                renderQRCode(record["record_id"], record["cert_code"]);
             } else {
                 myrecordAlert('on', data["msg"]);
             }
@@ -44,6 +51,21 @@ function getCertificateData() {
             myrecordAlert('on', '에러가 발생했습니다.');
             console.log(err);
         }
+    });
+}
+
+function renderQRCode(recordId, certCode) {
+    var codeRaw   = certCode.replace(/-/g, '');
+    var verifyUrl = location.protocol + '//' + location.host
+        + '/record/record_certificate/verify/?id=' + recordId + '&code=' + codeRaw;
+
+    new QRCode(document.getElementById("cert_qr_code"), {
+        text          : verifyUrl,
+        width         : 80,
+        height        : 80,
+        colorDark     : "#0123B4",
+        colorLight    : "#ffffff",
+        correctLevel  : QRCode.CorrectLevel.M
     });
 }
 

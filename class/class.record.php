@@ -344,4 +344,106 @@ class Record {
         ";
         return $PDO->fetchAll($sql) ?: [];
     }
+
+    // =============================================
+    // 댓글
+    // =============================================
+
+    /**
+     * 댓글 목록 조회
+     */
+    public static function getComments(int $recordId): array {
+        global $PDO;
+
+        $sql = "
+            Select  C.id, C.contents, C.account_no, C.create_datetime,
+                    A.user_nickname
+            From    record_comment C
+            Inner Join Account A On C.account_no = A.id
+            Where   C.record_id = :record_id
+            And     C.is_delete = 0
+            Order by C.id Asc
+        ";
+        $param = [":record_id" => $recordId];
+
+        return $PDO->fetchAll($sql, $param);
+    }
+
+    /**
+     * 댓글 수 조회
+     */
+    public static function getCommentCount(int $recordId): int {
+        global $PDO;
+
+        $sql = "
+            Select count(*) as cnt
+            From   record_comment
+            Where  record_id = :record_id
+            And    is_delete = 0
+        ";
+        $param = [":record_id" => $recordId];
+
+        return (int)$PDO->fetch($sql, $param)["cnt"];
+    }
+
+    /**
+     * 댓글 작성
+     */
+    public static function insertComment(int $recordId, string $contents): int {
+        global $PDO;
+        global $member;
+
+        $sql = "
+            Insert Into record_comment
+            Set record_id  = :record_id,
+                account_no = :account_no,
+                contents   = :contents
+        ";
+        $param = [
+            ":record_id"  => $recordId,
+            ":account_no" => $member["id"],
+            ":contents"   => $contents
+        ];
+
+        return $PDO->execute($sql, $param);
+    }
+
+    /**
+     * 댓글 본인 여부 확인
+     */
+    public static function isCommentOwner(int $commentId): bool {
+        global $PDO;
+        global $member;
+
+        if (is_null($member)) return false;
+
+        $sql = "
+            Select account_no
+            From   record_comment
+            Where  id = :id
+            And    is_delete = 0
+        ";
+        $param = [":id" => $commentId];
+
+        $row = $PDO->fetch($sql, $param);
+        if (!$row) return false;
+
+        return (int)$member["id"] === (int)$row["account_no"];
+    }
+
+    /**
+     * 댓글 소프트 삭제
+     */
+    public static function deleteComment(int $commentId): void {
+        global $PDO;
+
+        $sql = "
+            Update record_comment
+            Set    is_delete = 1
+            Where  id = :id
+        ";
+        $param = [":id" => $commentId];
+
+        $PDO->execute($sql, $param);
+    }
 }

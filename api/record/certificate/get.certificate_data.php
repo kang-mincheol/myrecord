@@ -1,6 +1,11 @@
 <?php
 include_once($_SERVER["DOCUMENT_ROOT"]."/api/common.php");
 
+function generateCertCode(int $id): string {
+    $raw = strtoupper(substr(hash('sha256', 'mr_cert_f7e2_' . $id), 0, 16));
+    return implode('-', str_split($raw, 4));
+}
+
 header("Content-Type: application/json; charset=UTF-8");
 
 $returnArray = array(
@@ -55,13 +60,17 @@ if($record_data["status"] != 2) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+$cert_code = generateCertCode($record_id);
+
 $returnArray["data"] = array(
+    "record_id"     => $record_id,
     "nickname"      => $record_data["user_nickname"],
     "record_type"   => $record_data["record_name_ko"],
     "record_weight" => $record_data["record_weight"] . "KG",
     "date"          => $record_data["certificate_datetime"]
         ? date("Y.m.d", strtotime($record_data["certificate_datetime"]))
-        : date("Y.m.d", strtotime($record_data["request_datetime"]))
+        : date("Y.m.d", strtotime($record_data["request_datetime"])),
+    "cert_code"     => $cert_code
 );
 
 echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;

@@ -123,6 +123,10 @@
     border-bottom: none;
 }
 
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row.clickable {
+    cursor: pointer;
+}
+
 #record_ranking .ranking_contents_box .ranking_contents_body .body_row:hover {
     background-color: #f5f7ff;
 }
@@ -136,8 +140,35 @@
     font-weight: 500;
 }
 
+/* 종합 탭 개별 종목 링크 */
 #record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box a {
-    color: inherit;
+    color: var(--main-color-1);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(1, 35, 180, 0.25);
+    transition: border-color 0.15s;
+}
+
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box a:hover {
+    border-bottom-color: var(--main-color-1);
+}
+
+/* 개별 탭 클릭 행 우측 화살표 */
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box.name {
+    display: flex;
+    align-items: center;
+}
+
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row.clickable .row_arrow {
+    margin-left: auto;
+    color: #d4d9ea;
+    font-size: 11px;
+    flex-shrink: 0;
+    transition: color 0.15s, transform 0.15s;
+}
+
+#record_ranking .ranking_contents_box .ranking_contents_body .body_row.clickable:hover .row_arrow {
+    color: var(--main-color-1);
+    transform: translateX(2px);
 }
 
 /* single event body columns */
@@ -161,6 +192,12 @@
 #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.benchpress { width: 17%; font-size: 13px; color: #666; }
 #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.deadlift   { width: 17%; font-size: 13px; color: #666; }
 #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.name       { width: 19%; justify-content: flex-start; font-weight: 600; color: #1a1a1a; }
+
+
+/* col_label — 데스크톱에서 숨김, 모바일에서만 표시 */
+#record_ranking .col_label {
+    display: none;
+}
 
 
 /* top 3 rank number badge */
@@ -201,18 +238,51 @@
     #record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box.weight { width: 30%; }
     #record_ranking .ranking_contents_box .ranking_contents_body .body_row .body_box.name   { width: 50%; }
 
-    /* total mobile — hide individual events */
-    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.rank  { width: 15%; }
-    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.total { width: 25%; }
+    /* total mobile — 2줄 카드 레이아웃 */
+
+    /* 헤더: 순위 / 닉네임 / 3대합계만 표시 */
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header {
+        flex-wrap: wrap;
+    }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.rank       { width: 12%; order: 1; }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.name       { width: 50%; order: 2; text-align: left; }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.total      { width: 38%; order: 3; }
     #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.squat,
     #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.benchpress,
-    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.deadlift { display: none; }
-    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.name  { width: 60%; }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_header .header_box.deadlift   { display: none; }
 
-    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.rank  { width: 15%; }
-    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.total { width: 25%; }
+    /* 바디: flex-wrap으로 2줄 */
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row {
+        flex-wrap: wrap;
+        padding: 10px 16px 0;
+    }
+
+    /* Row 1: 순위(12%) + 닉네임(50%) + 3대(38%) */
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.rank  { width: 12%; order: 1; }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.name  { width: 50%; order: 2; justify-content: flex-start; }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.total { width: 38%; order: 3; }
+
+    /* Row 2: S · B · D 개별 기록 */
     #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.squat,
     #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.benchpress,
-    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.deadlift { display: none; }
-    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.name  { width: 60%; }
+    #record_ranking .ranking_contents_box[name="total"] .ranking_contents_body .body_row .body_box.deadlift {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        width: 33.33%;
+        order: 4;
+        font-size: 12px;
+        color: #888;
+        padding: 5px 0 10px;
+        justify-content: center;
+    }
+
+    /* col_label (S / B / D) */
+    #record_ranking .ranking_contents_box[name="total"] .col_label {
+        display: inline;
+        font-size: 10px;
+        font-weight: 700;
+        color: #bbb;
+        margin-right: 2px;
+    }
 }

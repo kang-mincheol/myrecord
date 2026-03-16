@@ -1,5 +1,6 @@
 function init() {
     getRecordData();
+    loadComments();
 }
 
 function prev() {
@@ -124,4 +125,128 @@ function fileSlideInit() {
         autoHeight: true,
         nav: true
     });
+}
+
+
+/* ── 댓글 ── */
+
+function loadComments() {
+    var recordId = getParam('record_id');
+
+    $.ajax({
+        type: "GET",
+        url: "/api/record/get.record_comment_list.php",
+        data: { record_id: recordId },
+        success: function(res) {
+            if (res.code === "SUCCESS") {
+                $("#comment_count").text(res.data.count);
+                renderComments(res.data.list);
+            }
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
+
+function renderComments(list) {
+    if (!list || list.length === 0) {
+        $("#comment_list").html(
+            '<div class="comment_empty"><i class="fa-regular fa-comment-dots"></i>아직 댓글이 없습니다.</div>'
+        );
+        return;
+    }
+
+    var html = "";
+    list.forEach(function(c) {
+        html +=
+            '<div class="comment_item">' +
+                '<div class="comment_avatar"><i class="fa-solid fa-user"></i></div>' +
+                '<div class="comment_body">' +
+                    '<div class="comment_meta">' +
+                        '<span class="comment_nickname">' + escHtml(c.user_nickname) + '</span>' +
+                        '<span class="comment_date">' + c.create_datetime + '</span>' +
+                    '</div>' +
+                    '<p class="comment_contents">' + escHtml(c.contents) + '</p>' +
+                '</div>' +
+                (c.is_mine
+                    ? '<button class="comment_delete_btn" onclick="deleteComment(' + c.id + ');" title="삭제"><i class="fa-solid fa-xmark"></i></button>'
+                    : '') +
+            '</div>';
+    });
+
+    $("#comment_list").html(html);
+}
+
+function submitComment() {
+    var recordId = getParam('record_id');
+    var contents = $("#comment_textarea").val().trim();
+
+    if (!contents) {
+        myrecordAlert('on', '댓글 내용을 입력해주세요.', '알림', '');
+        return;
+    }
+
+    var $btn = $(".comment_submit_btn");
+    $btn.prop("disabled", true);
+
+    $.ajax({
+        type: "POST",
+        url: "/api/record/set.record_comment_insert.php",
+        contentType: "application/json",
+        data: JSON.stringify({ record_id: recordId, contents: contents }),
+        success: function(res) {
+            $btn.prop("disabled", false);
+            if (res.code === "SUCCESS") {
+                $("#comment_textarea").val("");
+                $("#comment_input_count").text("0");
+                loadComments();
+            } else {
+                myrecordAlert('on', res.msg || '오류가 발생했습니다.', '알림', '');
+            }
+        },
+        error: function() {
+            $btn.prop("disabled", false);
+            myrecordAlert('on', '서버 오류가 발생했습니다.', '알림', '');
+        }
+    });
+}
+
+function deleteComment(commentId) {
+    myrecordConfirm(
+        "on",
+        "댓글을 삭제하시겠습니까?",
+        function() {
+            $.ajax({
+                type: "POST",
+                url: "/api/record/set.record_comment_delete.php",
+                contentType: "application/json",
+                data: JSON.stringify({ comment_id: commentId }),
+                success: function(res) {
+                    if (res.code === "SUCCESS") {
+                        loadComments();
+                    } else {
+                        myrecordAlert('on', res.msg || '오류가 발생했습니다.', '알림', '');
+                    }
+                },
+                error: function() {
+                    myrecordAlert('on', '서버 오류가 발생했습니다.', '알림', '');
+                }
+            });
+        },
+        "삭제 확인"
+    );
+}
+
+function commentInputCount(el) {
+    $("#comment_input_count").text(el.value.length);
+}
+
+function escHtml(str) {
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/\n/g, "<br>");
 }
