@@ -16,8 +16,13 @@ echo css_load('/component/alert/alert.css');
 
 <div id="myrecord_confirm" class="">
     <div class="confirm_box">
-        <div class="confirm_header">확인</div>
-        <div class="confirm_body"></div>
+        <div class="confirm_scroll_area">
+            <div class="confirm_icon_wrap">
+                <i class="fa-solid fa-circle-question"></i>
+            </div>
+            <div class="confirm_header">확인</div>
+            <div class="confirm_body"></div>
+        </div>
         <div class="confirm_btn_wrap">
             <button class="cancel_btn" onclick="myrecordConfirm();">취소</button>
             <button class="confirm_btn" onclick="myrecordConfirm();">확인</button>
