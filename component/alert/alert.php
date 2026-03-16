@@ -31,8 +31,8 @@ echo css_load('/component/alert/alert.css');
             <div class="confirm_body"></div>
         </div>
         <div class="confirm_btn_wrap">
-            <button class="cancel_btn" onclick="myrecordConfirm();">취소</button>
-            <button class="confirm_btn" onclick="myrecordConfirm();">확인</button>
+            <button class="cancel_btn">취소</button>
+            <button class="confirm_btn">확인</button>
         </div>
     </div>
 </div>
