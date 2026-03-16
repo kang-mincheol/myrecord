@@ -4,9 +4,12 @@ const PasswordChangeModal = {
       $("#passwordChangeModal").addClass("on");
     } else {
       $("#passwordChangeModal").removeClass("on");
-      $("#now_password").val('');
-      $("#new_password").val('');
-      $("#new_password_check").val('');
+      $("#now_password").val("");
+      $("#new_password").val("");
+      $("#new_password_check").val("");
+      // 에러 메시지 초기화
+      $("#passwordChangeModal .pcm_input").removeClass("alert");
+      $("#passwordChangeModal .caution_text").remove();
     }
   },
   setPassword: () => {
@@ -52,16 +55,26 @@ const PasswordChangeModal = {
       }),
       url: "/api/account/set.password_change.php",
       success: (data) => {
-        console.log(data);
         if (data["code"] === "SUCCESS") {
-          myrecordAlert('on', data["msg"], '', `PasswordChangeModal.handler(false);`);
+          myrecordAlert(
+            "on",
+            data["msg"],
+            "",
+            `PasswordChangeModal.handler(false);`
+          );
         } else {
-          myrecordAlert('on', data["msg"]);
+          myrecordAlert("on", data["msg"]);
         }
       },
       error: (error) => {
         console.log(error);
+        myrecordAlert("on", "서버 오류가 발생했습니다", "알림", "");
       },
     });
   },
 };
+
+// 배경 클릭 시 모달 닫기
+$(document).on("click", "#passwordChangeModal .pcm_overlay", function () {
+  PasswordChangeModal.handler(false);
+});

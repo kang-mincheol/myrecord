@@ -19,26 +19,22 @@ function getCertificateData() {
     $.ajax({
         type: "POST",
         url: "/api/record/certificate/get.certificate_data.php",
-        data: JSON.stringify({
-            record_id: record_id
-        }),
+        data: JSON.stringify({ record_id: record_id }),
         success: function(data) {
-            console.log(data);
             loadingOff();
             if(data["code"] == "SUCCESS") {
                 var record = data["data"];
 
-                $("#certificate_wrap .certificate_box .record_info_wrap .info_row[name=record_nickname] .info_value").text(record["nickname"]);
-                $("#certificate_wrap .certificate_box .record_info_wrap .info_row[name=record_master] .info_value").text(record["record_type"]);
-                $("#certificate_wrap .certificate_box .record_info_wrap .info_row[name=record_weight] .info_value").text(record["record_weight"]);
+                $(".cert_info_row[name=record_nickname] .cert_info_value").text(record["nickname"]);
+                $(".cert_info_row[name=record_master] .cert_info_value").text(record["record_type"]);
+                $(".cert_info_row[name=record_weight] .cert_info_value").text(record["record_weight"]);
+                $(".cert_date").text(record["date"]);
 
-                $("#certificate_wrap .certificate_box .myrecord_signature_wrap .certificate_date").text(record["date"]);
-
-                certificate_date = record["date"];
+                certificate_date   = record["date"];
                 certificate_master = record["record_type"];
 
-                $("#certificate_wrap").addClass("on");
-                $(".img_btn_wrap").removeClass("off");
+                $("#certificate_box").addClass("on");
+                $(".cert_btn_wrap").removeClass("off");
             } else {
                 myrecordAlert('on', data["msg"]);
             }
@@ -52,20 +48,25 @@ function getCertificateData() {
 }
 
 const certificateDownload = () => {
-    html2canvas(document.querySelector("#certificate_box")).then(canvas => {
-        canvas.id = "capture_canvas";
-        document.querySelector("#capture_wrapper").appendChild(canvas);
+    var $btn = $('.cert_download_btn');
+    $btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> 저장 중...');
 
+    html2canvas(document.querySelector("#certificate_box"), {
+        scale: 2,           // 고화질 (2x retina)
+        useCORS: true,      // 크로스오리진 이미지 허용
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+    }).then(canvas => {
         const image = canvas.toDataURL("image/png", 1.0);
-
         const a_tag = document.createElement("a");
         a_tag.href = image;
         a_tag.download = `myrecord_certificate_${certificate_date}_${certificate_master}.png`;
         a_tag.click();
 
-        const capture_wrapper = document.querySelector("#capture_wrapper");
-        while(capture_wrapper.firstChild) {
-            capture_wrapper.removeChild(capture_wrapper.firstChild);
-        }
+        $btn.prop('disabled', false).html('<i class="fa-solid fa-download"></i> 인증서 저장');
+    }).catch(function() {
+        $btn.prop('disabled', false).html('<i class="fa-solid fa-download"></i> 인증서 저장');
+        myrecordAlert('on', '저장 중 오류가 발생했습니다.');
     });
-}
+};
