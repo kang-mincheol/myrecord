@@ -29,10 +29,6 @@ function myrecordAlert(action, body, header, after, btnText) {
   }
 }
 
-function tempRelease() {
-  console.log(1);
-}
-
 function myrecordConfirm(action, body, confirm, confirmText, header) {
   if (action == undefined) {
     $("#myrecord_confirm").removeClass("on");
