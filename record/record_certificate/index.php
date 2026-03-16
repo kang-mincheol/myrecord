@@ -71,6 +71,19 @@ echo css_load('/record/record_certificate/index.css');
                 </div>
             </div>
 
+            <!-- 인증번호 + QR코드 -->
+            <div class="cert_verify_area">
+                <div class="cert_qr_wrap">
+                    <div id="cert_qr_code"></div>
+                    <p class="cert_qr_label">스캔하여 검증</p>
+                </div>
+                <div class="cert_code_wrap">
+                    <p class="cert_code_label">인 증 번 호</p>
+                    <p class="cert_code_text"></p>
+                    <p class="cert_code_desc">QR코드를 스캔하거나 myrecord.kr에서<br>인증번호로 진위를 확인하세요</p>
+                </div>
+            </div>
+
             <!-- 하단 바 -->
             <div class="cert_footer_bar">
                 <span>myrecord.kr</span>
@@ -98,6 +111,9 @@ echo css_load('/record/record_certificate/index.css');
 
 <?php
 echo script_load('/assets/html2canvas.min.js');
+?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<?php
 echo script_load('/record/record_certificate/index.js');
 ?>
 <script>
