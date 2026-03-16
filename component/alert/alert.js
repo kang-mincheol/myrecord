@@ -29,6 +29,10 @@ function myrecordAlert(action, body, header, after, btnText) {
   }
 }
 
+function tempRelease() {
+  console.log(1);
+}
+
 function myrecordConfirm(action, body, confirm, confirmText, header) {
   if (action == undefined) {
     $("#myrecord_confirm").removeClass("on");
@@ -37,10 +41,14 @@ function myrecordConfirm(action, body, confirm, confirmText, header) {
     $("#myrecord_confirm .confirm_box .confirm_btn")
       .html("확인")
       .off("click")
-      .on("click", function() { myrecordConfirm(); });
+      .on("click", function () {
+        myrecordConfirm();
+      });
     $("#myrecord_confirm .confirm_box .confirm_btn_wrap .cancel_btn")
       .off("click")
-      .on("click", function() { myrecordConfirm(); });
+      .on("click", function () {
+        myrecordConfirm();
+      });
   } else {
     if (body != undefined) {
       $("#myrecord_confirm .confirm_box .confirm_body").html(body);
@@ -49,24 +57,34 @@ function myrecordConfirm(action, body, confirm, confirmText, header) {
       $("#myrecord_confirm .confirm_box .confirm_header").html(header);
     }
     if (confirmText != undefined) {
-      $("#myrecord_confirm .confirm_box .confirm_btn_wrap .confirm_btn").html(confirmText);
+      $("#myrecord_confirm .confirm_box .confirm_btn_wrap .confirm_btn").html(
+        confirmText,
+      );
     }
 
     var $confirmBtn = $("#myrecord_confirm .confirm_box .confirm_btn");
     $confirmBtn.off("click");
     if (typeof confirm === "function") {
-      $confirmBtn.on("click", function() { myrecordConfirm(); confirm(); });
+      $confirmBtn.on("click", function () {
+        myrecordConfirm();
+        confirm();
+      });
     } else if (confirm != undefined) {
-      $confirmBtn.on("click", function() { myrecordConfirm(); eval(confirm); });
+      $confirmBtn.on("click", function () {
+        myrecordConfirm();
+        eval(confirm);
+      });
     } else {
-      $confirmBtn.on("click", function() { myrecordConfirm(); });
+      $confirmBtn.on("click", function () {
+        myrecordConfirm();
+      });
     }
 
     $("#myrecord_confirm").addClass("on");
   }
 }
 
-$(document).on("click", "#myrecord_confirm", function(e) {
+$(document).on("click", "#myrecord_confirm", function (e) {
   if (!$(e.target).closest(".confirm_box").length) {
     myrecordConfirm();
   }
