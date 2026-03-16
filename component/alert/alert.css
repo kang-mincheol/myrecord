@@ -10,7 +10,7 @@
   background: rgba(15, 20, 50, 0.45);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  z-index: 1000;
+  z-index: 300;
   align-items: center;
   justify-content: center;
 }
@@ -126,7 +126,7 @@
   background: rgba(15, 20, 50, 0.45);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  z-index: 1000;
+  z-index: 300;
   align-items: center;
   justify-content: center;
 }
