@@ -21,9 +21,13 @@ echo css_load('/common/footer.css');
             <!-- 네비게이션 -->
             <nav class="footer_nav">
                 <div class="nav_col">
+                    <p class="nav_col_title">득근일지</p>
+                    <a href="/workout_log/list/" class="nav_link">내 운동 기록</a>
+                    <a href="/workout_log/write/" class="nav_link">기록 추가</a>
+                </div>
+                <div class="nav_col">
                     <p class="nav_col_title">커뮤니티</p>
                     <a href="/community/free_board/" class="nav_link">자유게시판</a>
-                    <a href="/community/muscle_gain/" class="nav_link">득근일지</a>
                 </div>
                 <div class="nav_col">
                     <p class="nav_col_title">마이레코드</p>
