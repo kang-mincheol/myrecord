@@ -102,6 +102,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                     <a href="/record/landing/" class="menu_btn">마이레코드</a>
                 </div>
 
+                <div class="menu_box" name="workout_log">
+                    <a href="/workout_log/list/" class="menu_btn">득근일지</a>
+                </div>
+
                 <div class="menu_box" name="util">
                     <a href="/util/" class="menu_btn">도구</a>
                 </div>
@@ -216,6 +220,21 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                         </div>
                     </div>
                     <!-- 도구 -->
+
+                    <div class="menu_wrap">
+                        <div class="menu_wrap_title">
+                            <a href="/workout_log/list/" class="menu_title">득근일지</a>
+                        </div>
+                        <div class="wrap_body">
+                            <div class="menu_row">
+                                <a href="/workout_log/list/" class="menu_btn">내 운동 기록</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="/workout_log/write/" class="menu_btn">기록 추가</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 득근일지 -->
 
                     <div class="menu_wrap">
                         <div class="menu_wrap_title">
