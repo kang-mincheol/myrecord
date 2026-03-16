@@ -312,3 +312,244 @@
     align-items: flex-start;
   }
 }
+
+
+/* ===== Comment Card ===== */
+
+.comment_card {
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #eaeef5;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.comment_card_head {
+  padding: 18px 28px 16px;
+  border-bottom: 1px solid #eaeef5;
+}
+
+.comment_title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.comment_title i {
+  color: #0123B4;
+  font-size: 16px;
+}
+
+.comment_title span {
+  color: #0123B4;
+}
+
+/* 댓글 목록 */
+
+#comment_list .comment_empty {
+  padding: 40px 0;
+  text-align: center;
+  color: #bbb;
+  font-size: 14px;
+}
+
+#comment_list .comment_empty i {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #dde2ee;
+}
+
+.comment_item {
+  display: flex;
+  gap: 12px;
+  padding: 16px 28px;
+  border-bottom: 1px solid #f3f5fb;
+}
+
+.comment_item:last-child {
+  border-bottom: none;
+}
+
+.comment_avatar {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0123B4 0%, #0a2fe0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+}
+
+.comment_body {
+  flex: 1;
+  min-width: 0;
+}
+
+.comment_meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.comment_nickname {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.comment_date {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.comment_contents {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.65;
+  word-break: break-word;
+}
+
+.comment_delete_btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.comment_delete_btn:hover {
+  background: #fee2e2;
+  color: #e53e3e;
+}
+
+/* 댓글 입력 */
+
+.comment_input_wrap {
+  padding: 16px 28px 20px;
+  border-top: 1px solid #eaeef5;
+}
+
+.comment_textarea {
+  display: block;
+  width: 100%;
+  min-height: 80px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  background: #fafbff;
+  border: 1.5px solid #e2e6f0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #333;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.comment_textarea::placeholder {
+  color: #c0c4d4;
+}
+
+.comment_textarea:focus {
+  border-color: #0123B4;
+  box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
+  background: #fff;
+}
+
+.comment_input_bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.comment_char_count {
+  font-size: 12px;
+  color: #bbb;
+}
+
+.comment_submit_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 16px;
+  background: #0123B4;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.comment_submit_btn:hover {
+  background: #0a2fe0;
+}
+
+.comment_submit_btn:disabled {
+  background: #a0aacc;
+  cursor: not-allowed;
+}
+
+/* 로그인 안내 */
+
+.comment_login_notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 28px;
+  border-top: 1px solid #eaeef5;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.comment_login_notice i {
+  font-size: 15px;
+}
+
+.comment_login_notice a {
+  color: #0123B4;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.comment_login_notice a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1050px) {
+  .comment_card_head {
+    padding: 16px 20px 14px;
+  }
+
+  .comment_item {
+    padding: 14px 20px;
+  }
+
+  .comment_input_wrap {
+    padding: 14px 20px 18px;
+  }
+}
