@@ -61,7 +61,7 @@ echo css_load('/community/free_board/view/index.css');
         </div>
         <?php else: ?>
         <div class="comment_login_notice">
-            <i class="fa-regular fa-lock"></i>
+            <i class="fa-solid fa-lock"></i>
             <p>댓글은 <a href="/account/login/">로그인</a> 후 작성할 수 있습니다.</p>
         </div>
         <?php endif; ?>
