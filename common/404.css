@@ -1,17 +1,116 @@
 @charset "UTF-8";
 
-#section_1 {
-    max-width: 980px; margin: 30px auto; background-color: var(--main-color-1); color: #FFF; border-radius: 20px; padding: 20px; box-sizing: border-box;
+#not_found_wrap {
+    min-height: calc(100vh - 300px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
 }
 
-#section_1 .text_0 {
-    font-size: 42px; font-weight: 700; text-align: center;
+.not_found_inner {
+    text-align: center;
+    max-width: 440px;
+    width: 100%;
 }
 
-#section_1 .text_1 {
-    font-size: 42px; font-weight: 700; text-align: center;
+.error_code {
+    font-size: 100px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -4px;
+    background: linear-gradient(135deg, #0123B4 0%, #0a2fe0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
 }
 
-#section_1 .text_2 {
-    font-size: 42px; font-weight: 700; text-align: center;
+.error_icon {
+    margin-bottom: 24px;
+}
+
+.error_icon i {
+    font-size: 48px;
+    color: #dde2ee;
+}
+
+.error_title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a2e;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+}
+
+.error_desc {
+    font-size: 15px;
+    color: #888;
+    line-height: 1.7;
+    margin-bottom: 36px;
+}
+
+.error_btn_wrap {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.home_btn,
+.back_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+}
+
+.home_btn {
+    background: #0123B4;
+    color: #fff;
+}
+
+.home_btn:hover {
+    background: #0a2fe0;
+    color: #fff;
+    text-decoration: none;
+}
+
+.back_btn {
+    background: #f3f4f6;
+    color: #555;
+}
+
+.back_btn:hover {
+    background: #e5e7eb;
+    color: #333;
+    text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    .error_code {
+        font-size: 80px;
+    }
+
+    .error_title {
+        font-size: 19px;
+    }
+
+    .error_btn_wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .home_btn,
+    .back_btn {
+        width: 100%;
+        max-width: 280px;
+    }
 }
