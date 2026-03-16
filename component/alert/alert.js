@@ -13,7 +13,7 @@ function myrecordAlert(action, body, header, after, btnText) {
       $("#myrecord_alert .alert_box .alert_body").html(body);
     }
     if (header != undefined) {
-      $("#myrecord_alert .alert_box .alert_heder").html(header);
+      $("#myrecord_alert .alert_box .alert_header").html(header);
     }
     if (after != undefined) {
       $("#myrecord_alert .alert_box .alert_btn").attr(

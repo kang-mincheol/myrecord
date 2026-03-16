@@ -6,9 +6,16 @@ echo css_load('/component/alert/alert.css');
 
 <div id="myrecord_alert" class="">
     <div class="alert_box">
-        <div class="alert_header">알림</div>
-        <div class="alert_body"></div>
-        <button class="alert_btn" onclick="myrecordAlert();">확인</button>
+        <div class="alert_scroll_area">
+            <div class="alert_icon_wrap">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div class="alert_header">알림</div>
+            <div class="alert_body"></div>
+        </div>
+        <div class="alert_btn_wrap">
+            <button class="alert_btn" onclick="myrecordAlert();">확인</button>
+        </div>
     </div>
 </div>
 
