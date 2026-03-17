@@ -168,7 +168,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
         </div>
 
         <div id="mobile_menu_wrap" onclick="mobileMenuRemote();">
-            <div id="mobile_menu_container">
+            <div id="mobile_menu_container" onclick="event.stopPropagation();">
                 <div class="account_box <?= $is_member ? 'is_member' : '' ?>">
                     <button class="close_btn" title="닫기" onclick="mobileMenuRemote();"><i class="fa-solid fa-xmark"></i></button>
                     <?php
@@ -186,10 +186,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
                     ?>
                 </div>
                 <div class="menu_list_container">
-                    <div class="menu_wrap">
-                        <div class="menu_wrap_title">
-                            <a href="/record/landing/" class="menu_title">마이레코드</a>
-                        </div>
+                    <div class="menu_wrap" data-section="record">
+                        <button class="menu_wrap_title" onclick="toggleMobileSection(this);">
+                            <span class="menu_title">마이레코드</span>
+                            <i class="fa-solid fa-chevron-down section_chevron"></i>
+                        </button>
                         <div class="wrap_body">
                             <div class="menu_row">
                                 <a href="/record/landing/" class="menu_btn">랭킹</a>
@@ -207,10 +208,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
                     </div>
                     <!-- 마이레코드 -->
 
-                    <div class="menu_wrap">
-                        <div class="menu_wrap_title">
-                            <a href="/community/free_board/list/" class="menu_title">커뮤니티</a>
-                        </div>
+                    <div class="menu_wrap" data-section="community">
+                        <button class="menu_wrap_title" onclick="toggleMobileSection(this);">
+                            <span class="menu_title">커뮤니티</span>
+                            <i class="fa-solid fa-chevron-down section_chevron"></i>
+                        </button>
                         <div class="wrap_body">
                             <div class="menu_row">
                                 <a href="/community/free_board/list/" class="menu_btn">자유게시판</a>
@@ -219,10 +221,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
                     </div>
                     <!-- 커뮤니티 -->
 
-                    <div class="menu_wrap">
-                        <div class="menu_wrap_title">
-                            <a href="/workout_log/list/" class="menu_title">득근일지</a>
-                        </div>
+                    <div class="menu_wrap" data-section="workout_log">
+                        <button class="menu_wrap_title" onclick="toggleMobileSection(this);">
+                            <span class="menu_title">득근일지</span>
+                            <i class="fa-solid fa-chevron-down section_chevron"></i>
+                        </button>
                         <div class="wrap_body">
                             <div class="menu_row">
                                 <a href="/workout_log/list/" class="menu_btn">내 운동 기록</a>
@@ -234,13 +237,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
                     </div>
                     <!-- 득근일지 -->
 
-                    <div class="menu_wrap">
-                        <div class="menu_wrap_title">
-                            <a href="/util/" class="menu_title">도구</a>
-                        </div>
+                    <div class="menu_wrap" data-section="util">
+                        <button class="menu_wrap_title" onclick="toggleMobileSection(this);">
+                            <span class="menu_title">도구</span>
+                            <i class="fa-solid fa-chevron-down section_chevron"></i>
+                        </button>
                         <div class="wrap_body">
                             <div class="menu_row">
-                                <a href="/util/kg_lb/" class="menu_btn">KG  ↔  LB 변환기</a>
+                                <a href="/util/kg_lb/" class="menu_btn">KG ↔ LB 변환기</a>
                             </div>
                             <div class="menu_row">
                                 <a href="/util/bmi/" class="menu_btn">BMI 계산기</a>

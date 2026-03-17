@@ -396,41 +396,78 @@
 
     #mobile_menu_container .menu_list_container {
         flex: 1;
-        padding: 16px 14px;
+        padding: 12px;
         overflow-y: auto;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
     }
 
     #mobile_menu_container .menu_list_container .menu_wrap {
         background-color: #f7f8fc;
         border-radius: 12px;
         overflow: hidden;
-        margin-bottom: 10px;
+        border: 1px solid #eaeef5;
     }
 
-    #mobile_menu_container .menu_list_container .menu_wrap:last-child {
-        margin-bottom: 0;
-    }
-
+    /* 섹션 타이틀 (버튼) */
     #mobile_menu_container .menu_list_container .menu_wrap .menu_wrap_title {
         display: flex;
         align-items: center;
-        height: 38px;
+        justify-content: space-between;
+        width: 100%;
+        height: 44px;
         padding: 0 14px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        transition: background-color 0.15s;
+    }
+
+    #mobile_menu_container .menu_list_container .menu_wrap .menu_wrap_title:active {
+        background-color: #eef1fc;
+    }
+
+    #mobile_menu_container .menu_list_container .menu_wrap.open .menu_wrap_title {
         border-bottom: 1px solid #eaeef5;
     }
 
     #mobile_menu_container .menu_list_container .menu_wrap .menu_wrap_title .menu_title {
-        color: var(--main-color-1);
-        font-size: 12px;
+        color: #1a1a2e;
+        font-size: 14px;
         font-weight: 700;
-        letter-spacing: 0.3px;
-        text-transform: uppercase;
+        letter-spacing: -0.2px;
     }
 
+    #mobile_menu_container .menu_list_container .menu_wrap.open .menu_wrap_title .menu_title {
+        color: var(--main-color-1);
+    }
+
+    #mobile_menu_container .menu_list_container .menu_wrap .menu_wrap_title .section_chevron {
+        color: #ccc;
+        font-size: 11px;
+        transition: transform 0.22s ease, color 0.15s;
+    }
+
+    #mobile_menu_container .menu_list_container .menu_wrap.open .menu_wrap_title .section_chevron {
+        transform: rotate(180deg);
+        color: var(--main-color-1);
+    }
+
+    /* 아코디언 바디 */
     #mobile_menu_container .menu_list_container .menu_wrap .wrap_body {
-        padding: 6px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.28s ease;
+        padding: 0;
         box-sizing: border-box;
+    }
+
+    #mobile_menu_container .menu_list_container .menu_wrap.open .wrap_body {
+        max-height: 400px;
+        padding: 6px;
     }
 
     #mobile_menu_container .menu_list_container .menu_wrap .wrap_body .menu_row {
@@ -457,8 +494,9 @@
         content: '\f054';
         font-family: 'Font Awesome 6 Free';
         font-weight: 900;
-        font-size: 10px;
+        font-size: 9px;
         color: #ccc;
+        flex-shrink: 0;
     }
 }
 
