@@ -65,6 +65,7 @@ echo css_load('/component/input/input.css');
 <body>
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
 ?>
 
 <div id="header">
@@ -102,14 +103,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                     <a href="/record/landing/" class="menu_btn">마이레코드</a>
                 </div>
 
-                <div class="menu_box" name="workout_log">
-                    <a href="/workout_log/list/" class="menu_btn">득근일지</a>
-                </div>
-
-                <div class="menu_box" name="util">
-                    <a href="/util/" class="menu_btn">도구</a>
-                </div>
-
                 <div class="menu_box" name="community">
                     <a href="/community/free_board/list/" class="menu_btn">커뮤니티</a>
 
@@ -120,6 +113,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="menu_box" name="workout_log">
+                    <a href="/workout_log/list/" class="menu_btn">득근일지</a>
+                </div>
+
+                <div class="menu_box" name="util">
+                    <a href="/util/" class="menu_btn">도구</a>
                 </div>
 
             </div>
@@ -205,21 +206,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
                         </div>
                     </div>
                     <!-- 마이레코드 -->
-                    
+
                     <div class="menu_wrap">
                         <div class="menu_wrap_title">
-                            <a href="/util/" class="menu_title">도구</a>
+                            <a href="/community/free_board/list/" class="menu_title">커뮤니티</a>
                         </div>
                         <div class="wrap_body">
                             <div class="menu_row">
-                                <a href="/util/kg_lb/" class="menu_btn">KG  ↔  LB 변환기</a>
-                            </div>
-                            <div class="menu_row">
-                                <a href="/util/bmi/" class="menu_btn">BMI 계산기</a>
+                                <a href="/community/free_board/list/" class="menu_btn">자유게시판</a>
                             </div>
                         </div>
                     </div>
-                    <!-- 도구 -->
+                    <!-- 커뮤니티 -->
 
                     <div class="menu_wrap">
                         <div class="menu_wrap_title">
@@ -238,15 +236,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
 
                     <div class="menu_wrap">
                         <div class="menu_wrap_title">
-                            <a href="/community/free_board/list/" class="menu_title">커뮤니티</a>
+                            <a href="/util/" class="menu_title">도구</a>
                         </div>
                         <div class="wrap_body">
                             <div class="menu_row">
-                                <a href="/community/free_board/list/" class="menu_btn">자유게시판</a>
+                                <a href="/util/kg_lb/" class="menu_btn">KG  ↔  LB 변환기</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="/util/bmi/" class="menu_btn">BMI 계산기</a>
                             </div>
                         </div>
                     </div>
-                    <!-- 커뮤니티 -->
+                    <!-- 도구 -->
                 </div>
                 <!-- menu_list_container -->
             </div>

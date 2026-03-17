@@ -38,6 +38,14 @@ if(!$is_member) {
                 <span class="unit_label">분</span>
             </div>
         </div>
+
+        <div class="form_row">
+            <label class="form_label">무게 단위</label>
+            <div class="unit_toggle_wrap">
+                <button type="button" class="unit_toggle_btn active" data-unit="kg" onclick="setWeightUnit('kg', this);">KG</button>
+                <button type="button" class="unit_toggle_btn" data-unit="lb" onclick="setWeightUnit('lb', this);">LB</button>
+            </div>
+        </div>
     </div>
     <!-- form_card -->
 
@@ -110,7 +118,7 @@ if(!$is_member) {
         <div class="set_input_group">
             <div class="set_input_wrap">
                 <input type="number" class="set_weight_input" placeholder="0" min="0" max="9999" step="0.5" />
-                <span class="set_unit">kg</span>
+                <span class="set_unit set_weight_unit">kg</span>
             </div>
             <span class="set_x">×</span>
             <div class="set_input_wrap">

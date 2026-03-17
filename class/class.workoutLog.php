@@ -123,17 +123,18 @@ class WorkoutLog {
      * 일지 신규 등록
      * @return int 생성된 log ID
      */
-    public static function insertLog(int $accountId, string $workoutDate, ?int $duration, string $memo): int {
+    public static function insertLog(int $accountId, string $workoutDate, ?int $duration, string $memo, string $weightUnit = 'kg'): int {
         global $PDO;
         $sql = "
-            Insert Into WorkoutLog (account_id, workout_date, workout_duration, memo)
-            Values (:account_id, :workout_date, :workout_duration, :memo)
+            Insert Into WorkoutLog (account_id, workout_date, workout_duration, memo, weight_unit)
+            Values (:account_id, :workout_date, :workout_duration, :memo, :weight_unit)
         ";
         $param = [
             ":account_id"       => $accountId,
             ":workout_date"     => $workoutDate,
             ":workout_duration" => $duration,
             ":memo"             => $memo,
+            ":weight_unit"      => in_array($weightUnit, ['kg', 'lb']) ? $weightUnit : 'kg',
         ];
         return (int)$PDO->execute($sql, $param);
     }
@@ -141,19 +142,21 @@ class WorkoutLog {
     /**
      * 일지 기본 정보 수정
      */
-    public static function updateLog(int $logId, string $workoutDate, ?int $duration, string $memo): void {
+    public static function updateLog(int $logId, string $workoutDate, ?int $duration, string $memo, string $weightUnit = 'kg'): void {
         global $PDO;
         $sql = "
             Update WorkoutLog
             Set workout_date     = :workout_date,
                 workout_duration = :workout_duration,
-                memo             = :memo
+                memo             = :memo,
+                weight_unit      = :weight_unit
             Where id = :id
         ";
         $param = [
             ":workout_date"     => $workoutDate,
             ":workout_duration" => $duration,
             ":memo"             => $memo,
+            ":weight_unit"      => in_array($weightUnit, ['kg', 'lb']) ? $weightUnit : 'kg',
             ":id"               => $logId,
         ];
         $PDO->execute($sql, $param);

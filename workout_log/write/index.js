@@ -1,4 +1,31 @@
 var exerciseIndex = 0;
+var weightUnit = 'kg';
+var KG_TO_LB = 2.20462;
+var autoSavedLogId = null;
+var AUTO_SAVE_INTERVAL = 10 * 60 * 1000; // 10분
+
+/* ── 무게 단위 선택 ── */
+function setWeightUnit(unit, btn) {
+    if (weightUnit === unit) return;
+
+    // 기존 입력값 환산
+    document.querySelectorAll('.set_weight_input').forEach(function(input) {
+        var val = parseFloat(input.value);
+        if (!isNaN(val) && val > 0) {
+            input.value = unit === 'lb'
+                ? (val * KG_TO_LB).toFixed(1)
+                : (val / KG_TO_LB).toFixed(1);
+        }
+    });
+
+    weightUnit = unit;
+    document.querySelectorAll('.unit_toggle_btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.unit === unit);
+    });
+    document.querySelectorAll('.set_weight_unit').forEach(function(span) {
+        span.textContent = unit;
+    });
+}
 
 function init() {
     // 오늘 날짜 기본값
@@ -10,6 +37,65 @@ function init() {
 
     // 첫 번째 종목 자동 추가
     addExercise();
+
+    // 10분마다 자동 저장 시작
+    setInterval(autoSave, AUTO_SAVE_INTERVAL);
+}
+
+/* ── 자동 저장 (서버) ── */
+function autoSave() {
+    var workout_date = $('#workout_date').val().trim();
+    if (!workout_date) return; // 날짜 없으면 스킵
+
+    // 유효한 종목만 수집 (이름 있는 것)
+    var exercises = [];
+    document.querySelectorAll('#exercise_list .exercise_block').forEach(function(block) {
+        var exName = block.querySelector('.exercise_name_input').value.trim();
+        if (!exName) return;
+        var sets = [];
+        block.querySelectorAll('.set_row').forEach(function(row) {
+            var w = row.querySelector('.set_weight_input').value.trim();
+            var r = row.querySelector('.set_reps_input').value.trim();
+            if (w !== '' && r !== '') {
+                sets.push({ weight: parseFloat(w) || 0, reps: parseInt(r) || 0 });
+            }
+        });
+        if (sets.length > 0) {
+            exercises.push({ exercise_name: exName, sets: sets });
+        }
+    });
+
+    if (exercises.length === 0) return; // 저장할 종목 없으면 스킵
+
+    var payload = {
+        workout_date:     workout_date,
+        workout_duration: $('#workout_duration').val().trim() !== '' ? parseInt($('#workout_duration').val().trim()) : null,
+        memo:             $('#workout_memo').val().trim(),
+        weight_unit:      weightUnit,
+        exercises:        exercises
+    };
+
+    if (autoSavedLogId) {
+        payload.log_id = autoSavedLogId;
+    }
+
+    $.ajax({
+        url: '/api/workout_log/set.workout_log_save.php',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(payload),
+        success: function(res) {
+            if (res.code === 'SUCCESS') {
+                autoSavedLogId = res.log_id;
+                showToast('자동 저장되었습니다', 'success');
+            } else {
+                showToast('자동 저장에 실패했습니다', 'error');
+            }
+        },
+        error: function() {
+            showToast('자동 저장에 실패했습니다', 'error');
+        }
+    });
 }
 
 /* ── 종목 추가 ── */
@@ -44,6 +130,10 @@ function addSetToBlock(addBtn) {
 
     var tpl   = document.getElementById('set_tpl');
     var clone = tpl.content.cloneNode(true);
+
+    // 현재 선택된 단위 반영
+    clone.querySelector('.set_weight_unit').textContent = weightUnit;
+
     setList.appendChild(clone);
 
     // 세트 번호 업데이트
@@ -84,6 +174,9 @@ function memoCount(el) {
 
 /* ── 저장 ── */
 function saveLog(logId) {
+    if (!logId && autoSavedLogId) {
+        logId = autoSavedLogId;
+    }
     var workout_date = $('#workout_date').val().trim();
     if(!workout_date) {
         myrecordAlert('on', '운동 날짜를 입력해주세요', '알림', '');
@@ -143,6 +236,7 @@ function saveLog(logId) {
         workout_date:     workout_date,
         workout_duration: workout_duration,
         memo:             memo,
+        weight_unit:      weightUnit,
         exercises:        exercises
     };
 

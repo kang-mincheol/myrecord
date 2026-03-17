@@ -4,478 +4,575 @@
 
 /* 페이지 헤더 */
 .workout_log_header {
-    background: linear-gradient(135deg, #0123B4 0%, #0a2fe0 100%);
-    padding: 36px 20px 32px;
-    text-align: center;
-    color: #fff;
+  background: linear-gradient(135deg, #0123b4 0%, #0a2fe0 100%);
+  padding: 36px 20px 32px;
+  text-align: center;
+  color: #fff;
 }
 
 .workout_log_header .header_inner {
-    max-width: 700px;
-    margin: 0 auto;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .workout_log_header .page_title {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 6px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
 }
 
 .workout_log_header .page_subtitle {
-    font-size: 14px;
-    opacity: 0.85;
+  font-size: 14px;
+  opacity: 0.85;
 }
 
 /* 메인 래퍼 */
 .workout_write_wrap {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 20px 16px 80px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px 16px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /* 공통 카드 */
 .form_card {
-    background: #fff;
-    border: 1px solid #eaeef5;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-    padding: 20px;
+  background: #fff;
+  border: 1px solid #eaeef5;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
 }
 
 /* 섹션 타이틀 */
 .form_section_title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 15px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
 }
 
 .form_section_title i {
-    color: #0123B4;
-    font-size: 16px;
+  color: #0123b4;
+  font-size: 16px;
 }
 
 /* 폼 행 */
 .form_row {
-    margin-bottom: 14px;
+  margin-bottom: 14px;
 }
 
 .form_row:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .form_label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: #444;
-    margin-bottom: 6px;
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
 }
 
 .required_mark {
-    color: #e53e3e;
-    margin-left: 2px;
+  color: #e53e3e;
+  margin-left: 2px;
 }
 
 .optional_tag {
-    font-size: 11px;
-    font-weight: 500;
-    color: #888;
-    background: #f0f2f9;
-    padding: 2px 7px;
-    border-radius: 6px;
-    margin-left: 4px;
-    vertical-align: middle;
+  font-size: 11px;
+  font-weight: 500;
+  color: #888;
+  background: #f0f2f9;
+  padding: 2px 7px;
+  border-radius: 6px;
+  margin-left: 4px;
+  vertical-align: middle;
 }
 
 /* 입력 필드 */
 .form_input {
-    width: 100%;
-    height: 44px;
-    background: #fafbff;
-    border: 1.5px solid #dde2ee;
-    border-radius: 10px;
-    padding: 0 14px;
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    -webkit-appearance: none;
+  width: 100%;
+  height: 44px;
+  background: #fafbff;
+  border: 1.5px solid #dde2ee;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  -webkit-appearance: none;
 }
 
 .form_input:focus {
-    outline: none;
-    background: #fff;
-    border-color: #0123B4;
-    box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
+  outline: none;
+  background: #fff;
+  border-color: #0123b4;
+  box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
 }
 
 /* 단위 포함 입력 */
 .input_with_unit {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .input_with_unit .form_input {
-    flex: 1;
+  flex: 1;
 }
 
 .unit_label {
-    font-size: 14px;
-    color: #666;
-    white-space: nowrap;
-    font-weight: 600;
+  font-size: 14px;
+  color: #666;
+  white-space: nowrap;
+  font-weight: 600;
 }
 
 /* 텍스트에어리어 */
 .form_textarea {
-    width: 100%;
-    min-height: 90px;
-    background: #fafbff;
-    border: 1.5px solid #dde2ee;
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    resize: vertical;
-    line-height: 1.6;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    font-family: inherit;
+  width: 100%;
+  min-height: 90px;
+  background: #fafbff;
+  border: 1.5px solid #dde2ee;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  resize: vertical;
+  line-height: 1.6;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  font-family: inherit;
 }
 
 .form_textarea:focus {
-    outline: none;
-    background: #fff;
-    border-color: #0123B4;
-    box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
+  outline: none;
+  background: #fff;
+  border-color: #0123b4;
+  box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
 }
 
 .memo_count_wrap {
-    text-align: right;
-    font-size: 12px;
-    color: #aaa;
-    margin-top: 5px;
+  text-align: right;
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 5px;
 }
 
 /* 종목 블록 */
 .exercise_block {
-    background: #f7f9ff;
-    border: 1px solid #e0e6f5;
-    border-radius: 12px;
-    padding: 14px 14px 10px;
-    margin-bottom: 12px;
+  background: #f7f9ff;
+  border: 1px solid #e0e6f5;
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
 }
 
 .exercise_block_header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .exercise_name_wrap {
-    flex: 1;
+  flex: 1;
 }
 
 .exercise_name_input {
-    width: 100%;
-    height: 40px;
-    background: #fff;
-    border: 1.5px solid #dde2ee;
-    border-radius: 8px;
-    padding: 0 12px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #222;
-    box-sizing: border-box;
-    transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  height: 40px;
+  background: #fff;
+  border: 1.5px solid #dde2ee;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .exercise_name_input:focus {
-    outline: none;
-    border-color: #0123B4;
-    box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
+  outline: none;
+  border-color: #0123b4;
+  box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
 }
 
 .exercise_name_input::placeholder {
-    font-weight: 400;
-    color: #aaa;
+  font-weight: 400;
+  color: #aaa;
 }
 
 .exercise_delete_btn {
-    width: 36px;
-    height: 36px;
-    background: #fee2e2;
-    color: #e53e3e;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.15s;
+  width: 36px;
+  height: 36px;
+  background: #fee2e2;
+  color: #e53e3e;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
 }
 
 .exercise_delete_btn:hover {
-    background: #fecaca;
+  background: #fecaca;
 }
 
 /* 세트 행 */
 .set_list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
 }
 
 .set_row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .set_no_label {
-    font-size: 13px;
-    font-weight: 700;
-    color: #0123B4;
-    min-width: 30px;
-    text-align: center;
-    flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0123b4;
+  min-width: 30px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .set_input_group {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .set_input_wrap {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    background: #fff;
-    border: 1.5px solid #dde2ee;
-    border-radius: 8px;
-    padding: 0 10px;
-    transition: border-color 0.15s, box-shadow 0.15s;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border: 1.5px solid #dde2ee;
+  border-radius: 8px;
+  padding: 0 10px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .set_input_wrap:focus-within {
-    border-color: #0123B4;
-    box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
+  border-color: #0123b4;
+  box-shadow: 0 0 0 3px rgba(1, 35, 180, 0.08);
 }
 
 .set_weight_input,
 .set_reps_input {
-    flex: 1;
-    height: 36px;
-    border: none;
-    background: transparent;
-    font-size: 14px;
-    color: #333;
-    text-align: center;
-    min-width: 0;
-    -moz-appearance: textfield;
+  flex: 1;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  min-width: 0;
+  -moz-appearance: textfield;
 }
 
 .set_weight_input::-webkit-outer-spin-button,
 .set_weight_input::-webkit-inner-spin-button,
 .set_reps_input::-webkit-outer-spin-button,
 .set_reps_input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 .set_weight_input:focus,
 .set_reps_input:focus {
-    outline: none;
+  outline: none;
 }
 
 .set_unit {
-    font-size: 12px;
-    color: #888;
-    white-space: nowrap;
-    flex-shrink: 0;
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .set_x {
-    font-size: 16px;
-    color: #bbb;
-    font-weight: 700;
-    flex-shrink: 0;
+  font-size: 16px;
+  color: #bbb;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .set_delete_btn {
-    width: 32px;
-    height: 32px;
-    background: #f3f4f6;
-    color: #aaa;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.15s, color 0.15s;
+  width: 32px;
+  height: 32px;
+  background: #f3f4f6;
+  color: #aaa;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .set_delete_btn:hover {
-    background: #fee2e2;
-    color: #e53e3e;
+  background: #fee2e2;
+  color: #e53e3e;
 }
 
 /* 세트 추가 버튼 */
 .add_set_btn {
-    width: 100%;
-    height: 34px;
-    background: transparent;
-    border: 1.5px dashed #b0c0e0;
-    border-radius: 8px;
-    color: #6680b0;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  width: 100%;
+  height: 34px;
+  background: transparent;
+  border: 1.5px dashed #b0c0e0;
+  border-radius: 8px;
+  color: #6680b0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
 }
 
 .add_set_btn:hover {
-    background: #eef0fc;
-    border-color: #0123B4;
-    color: #0123B4;
+  background: #eef0fc;
+  border-color: #0123b4;
+  color: #0123b4;
 }
 
 /* 종목 추가 버튼 */
 .add_exercise_btn {
-    width: 100%;
-    height: 44px;
-    background: #eef0fc;
-    border: none;
-    border-radius: 10px;
-    color: #0123B4;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    margin-top: 4px;
-    transition: background 0.15s;
+  width: 100%;
+  height: 44px;
+  background: #eef0fc;
+  border: none;
+  border-radius: 10px;
+  color: #0123b4;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 4px;
+  transition: background 0.15s;
 }
 
 .add_exercise_btn:hover {
-    background: #dce0f8;
+  background: #dce0f8;
 }
 
 /* 하단 버튼 */
 .form_footer {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .cancel_btn {
-    flex: 0 0 auto;
-    height: 50px;
-    padding: 0 20px;
-    background: #f3f4f6;
-    border: none;
-    border-radius: 12px;
-    color: #666;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: background 0.15s;
+  flex: 0 0 auto;
+  height: 50px;
+  padding: 0 20px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 12px;
+  color: #666;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s;
 }
 
 .cancel_btn:hover {
-    background: #e5e7eb;
+  background: #e5e7eb;
 }
 
 .save_btn {
-    flex: 1;
-    height: 50px;
-    background: #0123B4;
-    border: none;
-    border-radius: 12px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    transition: background 0.15s;
+  flex: 1;
+  height: 50px;
+  background: #0123b4;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: background 0.15s;
 }
 
 .save_btn:hover {
-    background: #0a2fe0;
+  background: #0a2fe0;
 }
 
 .save_btn:disabled {
-    background: #a0aacc;
-    cursor: not-allowed;
+  background: #a0aacc;
+  cursor: not-allowed;
 }
 
 /* 반응형 */
 @media (max-width: 480px) {
-    .workout_log_header {
-        padding: 28px 16px 24px;
-    }
+  .workout_log_header {
+    padding: 28px 16px 24px;
+  }
 
-    .workout_log_header .page_title {
-        font-size: 20px;
-    }
+  .workout_log_header .page_title {
+    font-size: 20px;
+  }
 
-    .workout_write_wrap {
-        padding: 14px 10px 70px;
-        gap: 12px;
-    }
+  .workout_write_wrap {
+    padding: 14px 10px 70px;
+    gap: 12px;
+  }
 
-    .form_card {
-        padding: 16px 14px;
-    }
+  .form_card {
+    padding: 16px 14px;
+  }
 
-    .set_no_label {
-        min-width: 24px;
-        font-size: 12px;
-    }
+  .set_no_label {
+    min-width: 24px;
+    font-size: 12px;
+  }
 
-    .set_unit {
-        font-size: 11px;
-    }
+  .set_unit {
+    font-size: 11px;
+  }
 
-    .form_footer {
-        gap: 8px;
-    }
+  .form_footer {
+    gap: 8px;
+  }
 
-    .cancel_btn {
-        padding: 0 14px;
-        font-size: 14px;
-    }
+  .cancel_btn {
+    padding: 0 14px;
+    font-size: 14px;
+  }
 
-    .save_btn {
-        font-size: 14px;
-    }
+  .save_btn {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .workout_write_wrap {
+    padding: 10px 6px 70px;
+    gap: 10px;
+  }
+
+  .form_card {
+    padding: 14px 10px;
+  }
+
+  .exercise_block {
+    padding: 10px 8px 8px;
+  }
+
+  .set_row {
+    gap: 5px;
+  }
+
+  .set_no_label {
+    min-width: 20px;
+    font-size: 11px;
+  }
+
+  .set_input_group {
+    gap: 3px;
+  }
+
+  .set_input_wrap {
+    padding: 0 6px;
+  }
+
+  .set_x {
+    font-size: 13px;
+  }
+
+  .set_weight_input,
+  .set_reps_input {
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .set_unit {
+    font-size: 10px;
+  }
+
+  .set_delete_btn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+}
+
+/* ── 무게 단위 토글 ── */
+.unit_toggle_wrap {
+  display: flex;
+  gap: 6px;
+}
+
+.unit_toggle_btn {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: 1.5px solid #e2e6f0;
+  background: #fff;
+  color: #aaa;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.unit_toggle_btn.active {
+  background: #0123b4;
+  color: #fff;
+  border-color: #0123b4;
 }

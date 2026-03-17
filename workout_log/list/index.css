@@ -290,3 +290,22 @@
         padding: 8px 14px;
     }
 }
+
+@media (max-width: 360px) {
+    .workout_log_list_wrap {
+        padding: 12px 8px 50px;
+    }
+
+    .log_card {
+        padding: 12px 12px;
+    }
+
+    .log_date {
+        font-size: 14px;
+    }
+
+    .log_duration {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
+}

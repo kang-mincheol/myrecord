@@ -292,3 +292,53 @@
         height: 44px;
     }
 }
+
+/* ── 뷰 단위 토글 ── */
+.view_unit_toggle_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid #eaeef5;
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.view_unit_label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.view_unit_label i {
+    color: #0123B4;
+}
+
+.unit_toggle_wrap {
+    display: flex;
+    gap: 6px;
+}
+
+.unit_toggle_btn {
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border: 1.5px solid #e2e6f0;
+    background: #fff;
+    color: #aaa;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.unit_toggle_btn.active {
+    background: #0123B4;
+    color: #fff;
+    border-color: #0123B4;
+}

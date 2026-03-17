@@ -47,6 +47,9 @@ if(mb_strlen($memo) > 500) {
     $memo = mb_substr($memo, 0, 500);
 }
 
+// 무게 단위 (선택, 기본 kg)
+$weight_unit = isset($data["weight_unit"]) && $data["weight_unit"] === 'lb' ? 'lb' : 'kg';
+
 // 종목 검증
 $exercises = $data["exercises"] ?? [];
 if(empty($exercises) || !is_array($exercises)) {
@@ -102,11 +105,11 @@ if($log_id > 0) {
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 
-    WorkoutLog::updateLog($log_id, $workout_date, $workout_duration, $memo);
+    WorkoutLog::updateLog($log_id, $workout_date, $workout_duration, $memo, $weight_unit);
     WorkoutLog::deleteExercisesAndSets($log_id);
 } else {
     // 신규
-    $log_id = WorkoutLog::insertLog($member["id"], $workout_date, $workout_duration, $memo);
+    $log_id = WorkoutLog::insertLog($member["id"], $workout_date, $workout_duration, $memo, $weight_unit);
 }
 
 // 종목 + 세트 저장

@@ -27,6 +27,7 @@ $exercises = WorkoutLog::getDetail($log_id);
 $workoutDate = new DateTime($log['workout_date']);
 $days = ['일', '월', '화', '수', '목', '금', '토'];
 $dateFormatted = $workoutDate->format('Y년 n월 j일') . ' (' . $days[(int)$workoutDate->format('w')] . ')';
+$weightUnit = $log['weight_unit'] ?? 'kg';
 ?>
 
 <div class="workout_log_header">
@@ -39,6 +40,15 @@ $dateFormatted = $workoutDate->format('Y년 n월 j일') . ' (' . $days[(int)$wor
 </div>
 
 <div class="workout_view_wrap">
+
+    <!-- 단위 토글 -->
+    <div class="view_unit_toggle_wrap">
+        <span class="view_unit_label"><i class="fa-solid fa-weight-hanging"></i> 무게 단위</span>
+        <div class="unit_toggle_wrap">
+            <button type="button" class="unit_toggle_btn <?= $weightUnit === 'kg' ? 'active' : '' ?>" data-unit="kg" onclick="toggleUnit('kg', this);">KG</button>
+            <button type="button" class="unit_toggle_btn <?= $weightUnit === 'lb' ? 'active' : '' ?>" data-unit="lb" onclick="toggleUnit('lb', this);">LB</button>
+        </div>
+    </div>
 
     <!-- 종목 카드들 -->
     <?php foreach($exercises as $idx => $ex): ?>
@@ -66,16 +76,20 @@ $dateFormatted = $workoutDate->format('Y년 n월 j일') . ' (' . $days[(int)$wor
                 ?>
                 <tr>
                     <td class="set_no_cell"><?= (int)$set['set_no'] ?>set</td>
-                    <td class="weight_cell"><?= number_format((float)$set['weight'], 1) ?><span class="td_unit">kg</span></td>
+                    <td class="weight_cell" data-weight="<?= (float)$set['weight'] ?>">
+                        <span class="weight_val"><?= number_format((float)$set['weight'], 1) ?></span><span class="td_unit"><?= $weightUnit ?></span>
+                    </td>
                     <td class="reps_cell"><?= (int)$set['reps'] ?><span class="td_unit">회</span></td>
-                    <td class="volume_cell"><?= number_format($volume, 1) ?><span class="td_unit">kg</span></td>
+                    <td class="volume_cell" data-weight="<?= (float)$set['weight'] ?>" data-reps="<?= (int)$set['reps'] ?>">
+                        <span class="volume_val"><?= number_format($volume, 1) ?></span><span class="td_unit"><?= $weightUnit ?></span>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
             <tfoot>
-                <tr class="total_row">
+                <tr class="total_row" data-total-volume="<?= $totalVolume ?>">
                     <td colspan="3">총 볼륨</td>
-                    <td><?= number_format($totalVolume, 1) ?><span class="td_unit">kg</span></td>
+                    <td><span class="total_vol_val"><?= number_format($totalVolume, 1) ?></span><span class="td_unit"><?= $weightUnit ?></span></td>
                 </tr>
             </tfoot>
         </table>
@@ -105,6 +119,7 @@ $dateFormatted = $workoutDate->format('Y년 n월 j일') . ' (' . $days[(int)$wor
 
 <?php echo script_load('/workout_log/view/index.js'); ?>
 <script>
-$(function () {});
+var savedUnit = '<?= $weightUnit ?>';
+$(function () { currentUnit = savedUnit; });
 </script>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php'); ?>

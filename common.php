@@ -43,6 +43,8 @@ try {
 
 //Session 설정
 session_save_path(SESSION_PATH);
+ini_set('session.gc_maxlifetime', 1800);
+session_set_cookie_params(1800);
 @session_start();
 
 //member 전역 변수
