@@ -65,6 +65,7 @@ echo css_load('/component/input/input.css');
 <body>
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/component/alert/alert.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
 ?>
 
 <div id="header">
