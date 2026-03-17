@@ -55,6 +55,19 @@ echo css_load('/util/index.css');
         </div>
     </a>
 
+    <a href="/util/1rm/" class="util_card">
+        <div class="card_icon_wrap">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        </div>
+        <div class="card_info">
+            <p class="card_title">1RM 계산기</p>
+            <p class="card_desc">무게와 횟수로 최대 중량(1RM)을 예측합니다</p>
+        </div>
+        <div class="card_arrow">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </a>
+
 </div>
 <!-- util_wrap -->
 

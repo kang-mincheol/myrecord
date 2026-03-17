@@ -245,6 +245,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
                             <div class="menu_row">
                                 <a href="/util/bmi/" class="menu_btn">BMI 계산기</a>
                             </div>
+                            <div class="menu_row">
+                                <a href="/util/ffmi/" class="menu_btn">FFMI 계산기</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="/util/1rm/" class="menu_btn">1RM 계산기</a>
+                            </div>
                         </div>
                     </div>
                     <!-- 도구 -->
