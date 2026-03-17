@@ -53,6 +53,15 @@ $exercises = WorkoutLog::getDetail($log_id);
                 <span class="unit_label">분</span>
             </div>
         </div>
+
+        <div class="form_row">
+            <label class="form_label">무게 단위</label>
+            <div class="unit_toggle_wrap">
+                <?php $savedUnit = $log['weight_unit'] ?? 'kg'; ?>
+                <button type="button" class="unit_toggle_btn <?= $savedUnit === 'kg' ? 'active' : '' ?>" data-unit="kg" onclick="setWeightUnit('kg', this);">KG</button>
+                <button type="button" class="unit_toggle_btn <?= $savedUnit === 'lb' ? 'active' : '' ?>" data-unit="lb" onclick="setWeightUnit('lb', this);">LB</button>
+            </div>
+        </div>
     </div>
 
 
@@ -87,7 +96,7 @@ $exercises = WorkoutLog::getDetail($log_id);
                                 <input type="number" class="set_weight_input"
                                        placeholder="0" min="0" max="9999" step="0.5"
                                        value="<?= htmlspecialchars($set['weight']) ?>" />
-                                <span class="set_unit">kg</span>
+                                <span class="set_unit set_weight_unit"><?= $savedUnit ?></span>
                             </div>
                             <span class="set_x">×</span>
                             <div class="set_input_wrap">
@@ -184,10 +193,10 @@ $exercises = WorkoutLog::getDetail($log_id);
 <?php echo script_load('/workout_log/write/index.js'); ?>
 <script>
 var exerciseIndex = <?= count($exercises) ?>;
+var weightUnit = '<?= $savedUnit ?>';
 
 $(function () {
     // 수정 페이지는 init() 호출 안 함 (날짜/종목 이미 채워짐)
-    // 단, exerciseIndex 초기값은 PHP에서 설정
 });
 </script>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php'); ?>

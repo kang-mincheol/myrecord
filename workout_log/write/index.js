@@ -1,4 +1,29 @@
 var exerciseIndex = 0;
+var weightUnit = 'kg';
+var KG_TO_LB = 2.20462;
+
+/* ── 무게 단위 선택 ── */
+function setWeightUnit(unit, btn) {
+    if (weightUnit === unit) return;
+
+    // 기존 입력값 환산
+    document.querySelectorAll('.set_weight_input').forEach(function(input) {
+        var val = parseFloat(input.value);
+        if (!isNaN(val) && val > 0) {
+            input.value = unit === 'lb'
+                ? (val * KG_TO_LB).toFixed(1)
+                : (val / KG_TO_LB).toFixed(1);
+        }
+    });
+
+    weightUnit = unit;
+    document.querySelectorAll('.unit_toggle_btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.unit === unit);
+    });
+    document.querySelectorAll('.set_weight_unit').forEach(function(span) {
+        span.textContent = unit;
+    });
+}
 
 function init() {
     // 오늘 날짜 기본값
@@ -44,6 +69,10 @@ function addSetToBlock(addBtn) {
 
     var tpl   = document.getElementById('set_tpl');
     var clone = tpl.content.cloneNode(true);
+
+    // 현재 선택된 단위 반영
+    clone.querySelector('.set_weight_unit').textContent = weightUnit;
+
     setList.appendChild(clone);
 
     // 세트 번호 업데이트
@@ -143,6 +172,7 @@ function saveLog(logId) {
         workout_date:     workout_date,
         workout_duration: workout_duration,
         memo:             memo,
+        weight_unit:      weightUnit,
         exercises:        exercises
     };
 
