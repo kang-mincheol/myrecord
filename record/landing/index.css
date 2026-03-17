@@ -224,6 +224,10 @@
         margin-top: 0;
     }
 
+    #record_ranking .ranking_menu_wrap {
+        flex-wrap: wrap;
+    }
+
     #record_ranking .ranking_menu_wrap .ranking_menu_btn {
         font-size: 12px;
         padding: 6px 12px;

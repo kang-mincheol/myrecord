@@ -815,4 +815,28 @@ img { display: block; max-width: 100%; }
     .hero_title { font-size: 30px; }
     .hero_badge { font-size: 11px; padding: 6px 14px; }
     .lp_section_title { font-size: 23px; letter-spacing: -0.5px; }
+
+    .hero_btn_wrap {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .hero_btn_primary,
+    .hero_btn_secondary {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .hero_inner { padding: 72px 16px 56px; }
+    .hero_title { font-size: 26px; letter-spacing: -0.8px; }
+    .hero_sub   { font-size: 14px; }
+    .hero_btn_primary   { font-size: 14px; padding: 12px 22px; }
+    .hero_btn_secondary { font-size: 13px; padding: 11px 18px; }
+    .lp_section_inner   { padding: 56px 16px; }
+    .lp_section_title   { font-size: 20px; }
+    .lp_section_sub     { font-size: 13px; }
 }
