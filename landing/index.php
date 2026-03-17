@@ -5,8 +5,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="스쿼트, 벤치프레스, 데드리프트 3대 기록을 관리자가 직접 검증하고 공식 인증서를 발급해드립니다. 마이레코드에서 나의 기록을 공식으로 인증받으세요.">
-    <title>마이레코드 — 3대 측정 공식 인증 서비스</title>
+    <meta name="description" content="스쿼트, 벤치프레스, 데드리프트 3대 기록을 관리자가 직접 검증하고 기록서를 발급해드립니다. 마이레코드에서 나의 기록을 남기고 전국 랭킹을 확인하세요.">
+    <title>마이레코드 — 3대 측정 기록 서비스</title>
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/img/company/favicon/apple-touch-icon.png">
@@ -48,10 +48,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 <section id="lp_hero">
     <div class="hero_overlay"></div>
     <div class="hero_inner">
-        <span class="hero_badge"><i class="fa-solid fa-shield-check"></i> 관리자 직접 검증 · 공식 인증 서비스</span>
+        <span class="hero_badge"><i class="fa-solid fa-shield-check"></i> 관리자 직접 검증 · 전문가 심사 서비스</span>
         <h1 class="hero_title">
             3대 기록을<br>
-            <span class="hero_title_point">공식으로</span> 인증받으세요
+            <span class="hero_title_point">전문가에게</span> 검증받으세요
         </h1>
         <p class="hero_sub">
             스쿼트 · 벤치프레스 · 데드리프트<br>
@@ -77,7 +77,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
     <div class="lp_section_inner">
         <p class="lp_section_badge">Why MyRecord</p>
         <h2 class="lp_section_title">마이레코드를 선택하는 이유</h2>
-        <p class="lp_section_sub">단순한 기록 저장이 아닌, 공식 인증이 필요한 이유가 있습니다</p>
+        <p class="lp_section_sub">단순한 기록 저장이 아닌, 전문가 검증이 필요한 이유가 있습니다</p>
 
         <div class="feature_grid">
 
@@ -86,15 +86,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
                     <i class="fa-solid fa-user-check"></i>
                 </div>
                 <h3 class="feature_title">관리자 직접 검증</h3>
-                <p class="feature_desc">모든 기록은 스트롱맨 전문가가 직접 영상을 확인하고 승인합니다. 체계적인 검증 절차로 신뢰할 수 있는 공식 기록을 만들어드립니다.</p>
+                <p class="feature_desc">모든 기록은 스트롱맨 전문가가 직접 영상을 확인하고 승인합니다. 체계적인 검증 절차로 신뢰할 수 있는 기록을 만들어드립니다.</p>
             </div>
 
             <div class="feature_card reveal">
                 <div class="feature_icon_wrap">
                     <i class="fa-solid fa-certificate"></i>
                 </div>
-                <h3 class="feature_title">위조방지 인증서 발급</h3>
-                <p class="feature_desc">승인된 기록에는 고유 인증번호와 QR코드가 포함된 디지털 인증서가 발급됩니다. 언제 어디서나 인증서의 진위를 검증할 수 있습니다.</p>
+                <h3 class="feature_title">위조방지 기록서 발급</h3>
+                <p class="feature_desc">승인된 기록에는 고유 번호와 QR코드가 포함된 디지털 기록서가 발급됩니다. 언제 어디서나 기록서의 진위를 확인할 수 있습니다.</p>
                 <span class="feature_new_badge">NEW</span>
             </div>
 
@@ -115,8 +115,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 <section id="lp_records">
     <div class="lp_section_inner">
         <p class="lp_section_badge">Record Types</p>
-        <h2 class="lp_section_title">3대 종목 기록 인증</h2>
-        <p class="lp_section_sub">3가지 핵심 종목의 최고 기록을 공식으로 등록하고 인증서를 받으세요</p>
+        <h2 class="lp_section_title">3대 종목 기록 등록</h2>
+        <p class="lp_section_sub">3가지 핵심 종목의 최고 기록을 등록하고 기록서를 받으세요</p>
 
         <div class="record_card_grid">
 
@@ -139,7 +139,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
                     <span class="record_card_name_ko">벤치프레스</span>
                 </div>
                 <div class="record_card_bottom">
-                    <p class="record_card_desc">상체 파워의 기준, 벤치프레스 공식 기록을 등록하고 인증서를 발급받으세요.</p>
+                    <p class="record_card_desc">상체 파워의 기준, 벤치프레스 기록을 등록하고 기록서를 발급받으세요.</p>
                     <a href="/record/benchpress/list/" class="record_card_btn">기록 보기 <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
@@ -151,7 +151,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
                     <span class="record_card_name_ko">데드리프트</span>
                 </div>
                 <div class="record_card_bottom">
-                    <p class="record_card_desc">전신 근력의 총합, 데드리프트 최고 기록을 마이레코드에서 공식으로 증명하세요.</p>
+                    <p class="record_card_desc">전신 근력의 총합, 데드리프트 최고 기록을 마이레코드에서 검증받으세요.</p>
                     <a href="/record/deadlift/list/" class="record_card_btn">기록 보기 <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
@@ -165,8 +165,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 <section id="lp_steps">
     <div class="lp_section_inner">
         <p class="lp_section_badge">How It Works</p>
-        <h2 class="lp_section_title">간단한 4단계로 인증 완료</h2>
-        <p class="lp_section_sub">복잡한 절차 없이 누구나 쉽게 기록을 등록하고 인증받을 수 있습니다</p>
+        <h2 class="lp_section_title">간단한 4단계로 검증 완료</h2>
+        <p class="lp_section_sub">복잡한 절차 없이 누구나 쉽게 기록을 등록하고 검증받을 수 있습니다</p>
 
         <div class="steps_wrap">
 
@@ -186,8 +186,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
                 <div class="step_icon_wrap">
                     <i class="fa-solid fa-camera"></i>
                 </div>
-                <h3 class="step_title">원판 인증</h3>
-                <p class="step_desc">사용한 원판을 사진 또는 영상으로 기록해 정확한 무게를 증명하세요.</p>
+                <h3 class="step_title">원판 촬영</h3>
+                <p class="step_desc">사용한 원판을 사진 또는 영상으로 기록해 정확한 무게를 확인시켜주세요.</p>
             </div>
 
             <div class="step_arrow reveal"><i class="fa-solid fa-arrow-right"></i></div>
@@ -208,8 +208,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
                 <div class="step_icon_wrap">
                     <i class="fa-solid fa-award"></i>
                 </div>
-                <h3 class="step_title">인증서 수령</h3>
-                <p class="step_desc">관리자 검토 후 승인되면 공식 인증서가 자동으로 발급됩니다.</p>
+                <h3 class="step_title">기록서 수령</h3>
+                <p class="step_desc">관리자 검토 후 승인되면 기록서가 자동으로 발급됩니다.</p>
             </div>
 
         </div>
@@ -221,8 +221,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 <section id="lp_more">
     <div class="lp_section_inner">
         <p class="lp_section_badge" style="color: rgba(255,255,255,0.55);">More Features</p>
-        <h2 class="lp_section_title" style="color: #fff;">기록 인증 그 이상의 경험</h2>
-        <p class="lp_section_sub" style="color: rgba(255,255,255,0.6);">마이레코드는 기록 인증 외에도 다양한 기능을 제공합니다</p>
+        <h2 class="lp_section_title" style="color: #fff;">기록 그 이상의 경험</h2>
+        <p class="lp_section_sub" style="color: rgba(255,255,255,0.6);">마이레코드는 기록 등록 외에도 다양한 기능을 제공합니다</p>
 
         <div class="more_grid">
 
@@ -256,8 +256,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 <section id="lp_cta">
     <div class="lp_cta_overlay"></div>
     <div class="lp_cta_inner">
-        <h2 class="lp_cta_title">지금 바로 나의 기록을<br>공식으로 인증받으세요</h2>
-        <p class="lp_cta_sub">무료로 가입하고 3대 기록 인증서를 발급받으세요</p>
+        <h2 class="lp_cta_title">지금 바로 나의 기록을<br>전문가에게 검증받으세요</h2>
+        <p class="lp_cta_sub">무료로 가입하고 3대 기록서를 발급받으세요</p>
         <a href="/account/create/" class="lp_cta_btn">
             <i class="fa-solid fa-dumbbell"></i> 무료로 시작하기
         </a>
