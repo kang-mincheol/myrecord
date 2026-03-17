@@ -9,7 +9,20 @@ function mobileMenuRemote(remote) {
   } else {
     $("#mobile_menu_wrap").fadeIn("fast");
     $("#mobile_menu_container").addClass("on");
+    // 현재 URL에 해당하는 섹션 자동 열기
+    var section = window.location.pathname.split('/')[1];
+    if (section) {
+      var target = document.querySelector('#mobile_menu_container .menu_wrap[data-section="' + section + '"]');
+      if (target && !target.classList.contains('open')) {
+        target.classList.add('open');
+      }
+    }
   }
+}
+
+function toggleMobileSection(btn) {
+  var wrap = btn.closest('.menu_wrap');
+  wrap.classList.toggle('open');
 }
 
 
