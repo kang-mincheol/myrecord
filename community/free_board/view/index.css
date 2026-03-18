@@ -122,6 +122,15 @@
     font-family: 'Pretendard', Dotum, Helvetica, AppleGothic, Sans-serif;
 }
 
+#view_contents_wrap img {
+    display: block;
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    margin: 8px auto;
+    border-radius: 6px;
+}
+
 
 /* ===== Bottom Buttons ===== */
 

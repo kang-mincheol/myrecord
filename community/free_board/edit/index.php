@@ -57,6 +57,7 @@ echo script_load('/community/free_board/edit/index.js');
 ?>
 <script>
 let requestEditors = [];
+
 smartEditor = () => {
     loadingOn();
     nhn.husky.EZCreator.createInIFrame({
@@ -66,9 +67,53 @@ smartEditor = () => {
         fCreator: "createSEditor2",
         fOnAppLoad: () => {
             pageInit();
+            initEditorResize();
         }
     });
 };
+
+function resizeEditor() {
+    var skinIframe = nhn.husky.EZCreator && nhn.husky.EZCreator.elIFrame;
+    if (!skinIframe) return;
+
+    // 스킨 iframe 자체를 100% 너비로
+    skinIframe.style.width = '100%';
+
+    try {
+        var skinDoc = skinIframe.contentDocument || (skinIframe.contentWindow && skinIframe.contentWindow.document);
+        if (!skinDoc) return;
+
+        // 스킨 iframe 내부 주요 요소들을 100% 너비로 설정
+        var selectors = ['#smart_editor2', '#smart_editor2_content', '.se2_input_area', '#se2_iframe'];
+        selectors.forEach(function (sel) {
+            var el = skinDoc.querySelector(sel);
+            if (el) el.style.width = '100%';
+        });
+    } catch (e) {}
+}
+
+function initEditorResize() {
+    // 초기 적용
+    resizeEditor();
+
+    // 브라우저 너비 변경 시 디바운스 적용
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resizeEditor, 50);
+    });
+
+    // ResizeObserver로 컨테이너 변화도 감지
+    if (window.ResizeObserver) {
+        var ro = new ResizeObserver(function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(resizeEditor, 50);
+        });
+        var wrap = document.getElementById('board_contents_wrap');
+        if (wrap) ro.observe(wrap);
+    }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     smartEditor();
 });

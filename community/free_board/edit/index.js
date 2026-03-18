@@ -1,7 +1,6 @@
 const pageInit = async () => {
   const id = getParam("id");
 
-  console.log("id => ", id);
   if (id === "") {
     // 등록
   } else {

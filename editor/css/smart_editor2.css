@@ -173,3 +173,35 @@ body,#smart_editor2,#smart_editor2 p,#smart_editor2 h1,#smart_editor2 h2,#smart_
 #smart_editor2 .se2_text_tool .se2_text_tool_more span.tool_bg{background:none}
 #smart_editor2 .se2_text_tool .hover .se2_text_tool_more{background-position:-13px -41px}
 #smart_editor2 .se2_text_tool .active .se2_text_tool_more{background-position:-26px -41px}
+
+/* ===== Responsive (20260319) ===== */
+@media screen and (max-width: 768px) {
+
+    /* 툴바 가로 스크롤 */
+    #smart_editor2 .se2_text_tool {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+    }
+    #smart_editor2 .se2_text_tool::-webkit-scrollbar { display: none; }
+
+    /* 사진·지도 버튼 영역: absolute → 인라인 두 번째 줄 */
+    #smart_editor2 .se2_text_tool .se2_multy {
+        position: static !important;
+        display: block !important;
+        border-left: none !important;
+        border-top: 1px solid #e0dedf;
+        padding: 2px 3px;
+        white-space: nowrap;
+        background: #f4f4f4;
+    }
+    #smart_editor2 .se2_text_tool .se2_multy .se2_mn { float: left; }
+
+    /* 편집 영역 높이 */
+    #smart_editor2 .se2_input_area { height: 260px !important; }
+
+    /* 에디터 전체 너비 100% */
+    #smart_editor2,
+    #smart_editor2 #smart_editor2_content { width: 100% !important; }
+}

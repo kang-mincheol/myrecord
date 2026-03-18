@@ -1,5 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');   // 기본파일 로드
+define('SKIP_ACCESS_LOG', true); // 바이너리 body 로그 방지
+include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 ini_set('gd.jpeg_ignore_warning', 1);
 $sFileInfo = '';
 $headers = array();
@@ -11,8 +12,9 @@ foreach($_SERVER as $k => $v) {
 	} 
 }
 
-$filename = rawurldecode($headers['file_name']);
-$filename_ext = strtolower(array_pop(explode('.',$filename)));
+$filename     = rawurldecode($headers['file_name']);
+$filename_parts = explode('.', $filename);
+$filename_ext = strtolower(array_pop($filename_parts));
 $allow_file = array("jpg", "jpeg", "png", "bmp", "gif"); 
 
 if(!in_array($filename_ext, $allow_file)) {
@@ -22,45 +24,37 @@ if(!in_array($filename_ext, $allow_file)) {
 	$file->name = date("YmdHis").mt_rand().".".$filename_ext;
 	$file->content = file_get_contents("php://input");
 
-	$uploadDir = '../../../data/community_free_board/';
+	$uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/data/community_free_board/';
 	if(!is_dir($uploadDir)){
-		mkdir($uploadDir, 0777);
+		mkdir($uploadDir, 0777, true);
 	}
-	
+
 	$newPath = $uploadDir.$file->name;
 
 	if(file_put_contents($newPath, $file->content)) {
-		// 이미지 리사이징 추가
-		resizeImage($newPath, 1000); // 1000px로 리사이즈
+		try { resizeImage($newPath, 1000); } catch (Throwable $e) {}
 
-		// echo "1"; exit;
 		$sFileInfo .= "&bNewLine=true";
 		$sFileInfo .= "&sFileName=".$filename;
 		$sFileInfo .= "&sFileURL=/data/community_free_board/".$file->name;
 
-		$insert_sql = "
-			Insert Into	community_free_board_file
-			Set
-				account_no = :account_no,
-				file_guid = :file_guid
-		";
-
-		$param = array(
-			":account_no" => $member["id"],
-			":file_guid" => makeGuid()
-		);
-		$PDO -> execute($insert_sql, $param);
+		// DB 기록 (실패해도 업로드 응답에 영향 없음)
+		try {
+			if(!empty($member['id'])) {
+				$insert_sql = "
+					Insert Into community_free_board_file
+					Set account_no = :account_no,
+					    file_guid  = :file_guid
+				";
+				$PDO->execute($insert_sql, [
+					':account_no' => $member['id'],
+					':file_guid'  => makeGuid()
+				]);
+			}
+		} catch (Exception $e) {}
 	}
-	
-	echo $sFileInfo;
-}
 
-function makeGuid() {
-    return sprintf('%08x-%04x-%04x-%04x-%04x%08x',
-        mt_rand(0, 0xffffffff),
-        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-        mt_rand(0, 0xffff), mt_rand(0, 0xffffffff)
-    );
+	echo $sFileInfo;
 }
 
 function resizeImage($filePath, $newWidth) {

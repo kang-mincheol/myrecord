@@ -96,6 +96,7 @@ const getPageBlock = (currentPage, totalPage, blockSize) => {
 }
   
 const getPageBlockHtml = (currentPage, totalPage, pages) => {
+  currentPage = parseInt(currentPage, 10);
   let prevPage = pages[0] - 1;
   if (prevPage <= 0) {
     prevPage = 1;
@@ -110,7 +111,7 @@ const getPageBlockHtml = (currentPage, totalPage, pages) => {
 
   renderHtml += pages.reduce((acc, page) => {
     acc += `
-      <button class="page_btn" onclick="movePage(${page})">${page}</button>
+      <button class="page_btn${page === currentPage ? ' on' : ''}" onclick="movePage(${page})">${page}</button>
     `;
 
     return acc;
