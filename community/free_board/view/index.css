@@ -186,6 +186,22 @@
     display: none;
 }
 
+#view_wrap .bottom_btn_wrap .bottom_btn.delete_btn {
+    background: #fff;
+    color: #e53935;
+    border: 1.5px solid #e53935;
+}
+
+#view_wrap .bottom_btn_wrap .bottom_btn.delete_btn:hover {
+    background: #e53935;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+#view_wrap .bottom_btn_wrap .bottom_btn.delete_btn.off {
+    display: none;
+}
+
 
 /* ===== Comment Card ===== */
 

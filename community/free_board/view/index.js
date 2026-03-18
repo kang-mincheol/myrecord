@@ -26,6 +26,9 @@ const getFreeBoardViewData = () => {
           $("#view_wrap .bottom_btn_wrap .edit_btn")
             .removeClass("off")
             .attr("onclick", `goFreeBoardEdit(${boardId})`);
+          $("#view_wrap .bottom_btn_wrap .delete_btn")
+            .removeClass("off")
+            .attr("onclick", `deleteBoard(${boardId})`);
         }
       } else {
         myrecordAlert("on", response["msg"]);
@@ -47,6 +50,32 @@ const goFreeBoardList = () => {
 
 const goFreeBoardEdit = (id) => {
   location.href = `/community/free_board/edit/?id=${id}`;
+};
+
+const deleteBoard = (boardId) => {
+  myrecordConfirm(
+    "on",
+    "게시글을 삭제하시겠습니까?",
+    () => {
+      $.ajax({
+        type: "POST",
+        url: "/api/free_board/set.free_board_delete.php",
+        contentType: "application/json",
+        data: JSON.stringify({ board_id: boardId }),
+        success: (res) => {
+          if (res.code === "SUCCESS") {
+            myrecordAlert("on", "게시글이 삭제되었습니다.", "알림", "location.href='/community/free_board/list/';");
+          } else {
+            myrecordAlert("on", res.msg || "오류가 발생했습니다.", "알림", "");
+          }
+        },
+        error: () => {
+          myrecordAlert("on", "서버 오류가 발생했습니다.", "알림", "");
+        },
+      });
+    },
+    "삭제 확인"
+  );
 };
 
 

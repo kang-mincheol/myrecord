@@ -20,8 +20,9 @@ $allow_file = array("jpg", "jpeg", "png", "bmp", "gif");
 if(!in_array($filename_ext, $allow_file)) {
 	echo "NOTALLOW_".$filename;
 } else {
+	$file_guid    = makeGuid();
 	$file = new stdClass;
-	$file->name = date("YmdHis").mt_rand().".".$filename_ext;
+	$file->name   = $file_guid . '.' . $filename_ext;
 	$file->content = file_get_contents("php://input");
 
 	$uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/data/community_free_board/';
@@ -39,16 +40,21 @@ if(!in_array($filename_ext, $allow_file)) {
 		$sFileInfo .= "&sFileURL=/data/community_free_board/".$file->name;
 
 		// DB 기록 (실패해도 업로드 응답에 영향 없음)
+		// board_id는 게시글 저장 시점에 linkFilesToBoard()로 업데이트됨
 		try {
 			if(!empty($member['id'])) {
 				$insert_sql = "
 					Insert Into community_free_board_file
 					Set account_no = :account_no,
-					    file_guid  = :file_guid
+					    file_guid  = :file_guid,
+					    file_name  = :file_name,
+					    file_ext   = :file_ext
 				";
 				$PDO->execute($insert_sql, [
 					':account_no' => $member['id'],
-					':file_guid'  => makeGuid()
+					':file_guid'  => $file_guid,
+					':file_name'  => $filename,
+					':file_ext'   => $filename_ext,
 				]);
 			}
 		} catch (Exception $e) {}
