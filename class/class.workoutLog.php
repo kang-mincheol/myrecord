@@ -38,6 +38,33 @@ class WorkoutLog {
     }
 
     /**
+     * 특정 연월의 운동 날짜 목록 조회 (달력용)
+     * 반환: [ ['id' => ..., 'workout_date' => 'YYYY-MM-DD', 'exercise_summary' => '...'], ... ]
+     */
+    public static function getMonthDates(int $accountId, int $year, int $month): array {
+        global $PDO;
+        $ym = sprintf('%04d-%02d', $year, $month);
+        $sql = "
+            Select
+                wl.id,
+                wl.workout_date,
+                wl.workout_duration,
+                Group_Concat(we.exercise_name Order by we.order_no Separator ', ') as exercise_summary
+            From WorkoutLog wl
+            Left Join WorkoutLogExercise we On we.log_id = wl.id
+            Where wl.account_id = :account_id
+              And wl.is_delete = 0
+              And wl.workout_date Like :ym
+            Group By wl.id
+            Order By wl.workout_date Asc
+        ";
+        return $PDO->fetchAll($sql, [
+            ':account_id' => $accountId,
+            ':ym'         => $ym . '-%',
+        ]) ?: [];
+    }
+
+    /**
      * 득근일지 총 개수
      */
     public static function getCount(int $accountId): int {
