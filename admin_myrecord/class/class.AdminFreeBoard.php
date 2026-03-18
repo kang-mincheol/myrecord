@@ -26,6 +26,8 @@ class AdminFreeBoard {
             $safe = mysqli_real_escape_string($con, $searchVal);
             if ($searchKey === 'title') {
                 $where .= " AND T1.title LIKE '%{$safe}%'";
+            } elseif ($searchKey === 'contents') {
+                $where .= " AND T1.contents LIKE '%{$safe}%'";
             } else {
                 $where .= " AND A.user_nickname LIKE '%{$safe}%'";
             }

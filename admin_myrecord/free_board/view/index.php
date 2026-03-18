@@ -37,6 +37,16 @@ $admin_extra_css = '<style>
     margin-bottom: 20px;
 }
 .back_btn:hover { background: #e2e8f0; color: var(--text-primary); border-color: #c8d0e0; }
+.view_link_btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    height: 36px; padding: 0 16px; border-radius: 8px;
+    background: #f1f5f9; color: var(--text-secondary);
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    border: 1.5px solid var(--border-color); transition: all 0.15s;
+    margin-bottom: 20px;
+}
+.view_link_btn:hover { background: #e8f0ff; color: var(--accent); border-color: var(--accent); }
+.top_btn_wrap { display: flex; gap: 8px; }
 
 /* 카드 섹션 */
 .view_section { margin-bottom: 20px; }
@@ -105,9 +115,14 @@ $admin_extra_css = '<style>
 include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
 ?>
 
-<a href="<?= htmlspecialchars($back_url) ?>" class="back_btn">
-    <i class="fa-solid fa-chevron-left"></i> 목록으로
-</a>
+<div class="top_btn_wrap">
+    <a href="<?= htmlspecialchars($back_url) ?>" class="back_btn">
+        <i class="fa-solid fa-chevron-left"></i> 목록으로
+    </a>
+    <a href="/community/free_board/view/?id=<?= $id ?>" target="_blank" class="view_link_btn">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> 글 보기
+    </a>
+</div>
 
 <!-- ===== 기본 정보 ===== -->
 <div class="admin_card" style="margin-bottom:20px;">
@@ -156,7 +171,7 @@ include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
         <div class="view_section">
             <p class="view_section_title">게시글 내용</p>
             <p class="post_title"><?= htmlspecialchars($post['title']) ?></p>
-            <div class="post_contents"><?= $post['contents'] ?></div>
+            <div class="post_contents"><?= stripslashes($post['contents']) ?></div>
         </div>
     </div>
 </div>
