@@ -12,3 +12,5 @@ include_once($_admin_class_dir . 'class.AdminDashboard.php');
 include_once($_admin_class_dir . 'class.AdminAccount.php');
 include_once($_admin_class_dir . 'class.AdminRecord.php');
 include_once($_admin_class_dir . 'class.AdminFreeBoard.php');
+include_once($_admin_class_dir . 'class.AdminSystem.php');
+include_once($_admin_class_dir . 'class.AdminAccessLog.php');
