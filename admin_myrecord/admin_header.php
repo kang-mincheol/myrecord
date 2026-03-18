@@ -75,6 +75,9 @@ function admin_nav_class($path) {
                 <a href="/admin_myrecord/access_log/" class="<?= admin_nav_class('/admin_myrecord/access_log') ?>">
                     <i class="fa-solid fa-list-check"></i> 접속 로그
                 </a>
+                <a href="/admin_myrecord/system/" class="<?= admin_nav_class('/admin_myrecord/system') ?>">
+                    <i class="fa-solid fa-gear"></i> 시스템 설정
+                </a>
             </div>
 
         </nav>

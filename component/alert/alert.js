@@ -76,6 +76,12 @@ function myrecordConfirm(action, body, confirm, confirmText, header) {
       });
     }
 
+    $("#myrecord_confirm .confirm_box .confirm_btn_wrap .cancel_btn")
+      .off("click")
+      .on("click", function () {
+        myrecordConfirm();
+      });
+
     $("#myrecord_confirm").addClass("on");
   }
 }

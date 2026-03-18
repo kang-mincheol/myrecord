@@ -11,7 +11,7 @@ $filter_status = $_GET['status']     ?? 'all';
 $search_key    = $_GET['search_key'] ?? 'title';
 $search_val    = trim($_GET['search_val'] ?? '');
 
-if (!in_array($search_key, ['title', 'writer'])) $search_key = 'title';
+if (!in_array($search_key, ['title', 'contents', 'writer'])) $search_key = 'title';
 
 // ===== 통계 =====
 $stats = AdminFreeBoard::getStats();
@@ -154,8 +154,9 @@ $qp = function($status) use ($search_key, $search_val) {
     <input type="hidden" name="status" value="<?= htmlspecialchars($filter_status) ?>"/>
     <div class="fb_filter_card">
         <select name="search_key">
-            <option value="title"  <?= $search_key === 'title'  ? 'selected' : '' ?>>제목</option>
-            <option value="writer" <?= $search_key === 'writer' ? 'selected' : '' ?>>닉네임</option>
+            <option value="title"    <?= $search_key === 'title'    ? 'selected' : '' ?>>제목</option>
+            <option value="contents" <?= $search_key === 'contents' ? 'selected' : '' ?>>내용</option>
+            <option value="writer"   <?= $search_key === 'writer'   ? 'selected' : '' ?>>닉네임</option>
         </select>
         <input type="text" name="search_val" value="<?= htmlspecialchars($search_val) ?>" placeholder="검색어를 입력하세요"/>
         <button type="submit" class="filter_btn"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>

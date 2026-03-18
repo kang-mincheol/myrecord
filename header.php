@@ -117,6 +117,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
 
                 <div class="menu_box" name="workout_log">
                     <a href="/workout_log/list/" class="menu_btn">득근일지</a>
+
+                    <div class="sub_menu_container">
+                        <div class="sub_menu_wrap" name="workout_log">
+                            <div class="sub_menu_box">
+                                <a class="sub_menu_btn" href="/workout_log/list/">내 운동 기록</a>
+                            </div>
+                            <div class="sub_menu_box">
+                                <a class="sub_menu_btn" href="/workout_log/write/">기록 추가</a>
+                            </div>
+                            <div class="sub_menu_box">
+                                <a class="sub_menu_btn" href="/muscle_gain/calendar/">득근달력</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="menu_box" name="util">
@@ -232,6 +246,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
                             </div>
                             <div class="menu_row">
                                 <a href="/workout_log/write/" class="menu_btn">기록 추가</a>
+                            </div>
+                            <div class="menu_row">
+                                <a href="/muscle_gain/calendar/" class="menu_btn">득근달력</a>
                             </div>
                         </div>
                     </div>

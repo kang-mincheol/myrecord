@@ -28,6 +28,31 @@ class FreeBoard {
         $this->delete_date = $freeBoardData["delete_date"];
     }
 
+    /**
+     * 본문 HTML에서 GUID를 추출하여 community_free_board_file.board_id 업데이트
+     */
+    private static function linkFilesToBoard(int $boardId, string $contents): void {
+        global $PDO;
+
+        preg_match_all(
+            '#/data/community_free_board/([0-9a-f\-]{36})\.[a-z]+#i',
+            $contents,
+            $matches
+        );
+
+        if (empty($matches[1])) return;
+
+        foreach (array_unique($matches[1]) as $guid) {
+            $PDO->execute(
+                "Update community_free_board_file
+                 Set    board_id = :board_id
+                 Where  file_guid = :file_guid
+                 And    board_id IS NULL",
+                [':board_id' => $boardId, ':file_guid' => $guid]
+            );
+        }
+    }
+
     public static function insertFreeBoard($data) {
         global $PDO;
         global $member;
@@ -46,9 +71,13 @@ class FreeBoard {
             ":contents" => $data["contents"]
         );
 
-        $insert = $PDO->execute($sql, $param);
-        
-        return $insert;
+        $boardId = $PDO->execute($sql, $param);
+
+        if ($boardId) {
+            FreeBoard::linkFilesToBoard((int)$boardId, $data["contents"]);
+        }
+
+        return $boardId;
     }
 
     /**
@@ -77,7 +106,8 @@ class FreeBoard {
         );
         $update = $PDO->execute($sql, $param);
 
-        if($update) {
+        if ($update) {
+            FreeBoard::linkFilesToBoard((int)$data["id"], $data["contents"]);
             return true;
         } else {
             return false;
@@ -365,6 +395,42 @@ class FreeBoard {
         $sql_param[":id"] = $boardId;
 
         return $PDO -> fetch($sql, $sql_param);
+    }
+
+    /**
+     * 자유게시판 글 삭제
+     * - 작성자 본인만 가능
+     * - 관련 댓글 소프트 삭제
+     * - 게시글 소프트 삭제
+     * ※ 물리 파일 삭제는 삭제 후 1년 경과 게시글 일괄 배치 처리에서 수행
+     */
+    public static function deleteBoard(int $boardId): array {
+        global $PDO;
+
+        $returnArray = [
+            "code" => "SUCCESS",
+            "msg"  => "삭제되었습니다."
+        ];
+
+        if (!FreeBoard::writerVerify($boardId)) {
+            $returnArray["code"] = "WRITER_ONLY";
+            $returnArray["msg"]  = "작성자만 삭제할 수 있습니다.";
+            return $returnArray;
+        }
+
+        // 1. 관련 댓글 소프트 삭제
+        $PDO->execute(
+            "Update community_free_board_comment Set is_delete = 1 Where board_id = :board_id",
+            [":board_id" => $boardId]
+        );
+
+        // 2. 게시글 소프트 삭제
+        $PDO->execute(
+            "Update community_free_board Set is_delete = 1, delete_date = Now() Where id = :id And is_delete = 0",
+            [":id" => $boardId]
+        );
+
+        return $returnArray;
     }
 
     /**

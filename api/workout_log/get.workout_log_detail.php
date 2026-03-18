@@ -46,6 +46,7 @@ $returnArray["data"] = array(
     "id"               => $log["id"],
     "workout_date"     => $log["workout_date"],
     "workout_duration" => $log["workout_duration"],
+    "weight_unit"      => $log["weight_unit"] ?? 'kg',
     "memo"             => $log["memo"] ?? '',
     "exercises"        => $exercises,
 );
