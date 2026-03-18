@@ -1,100 +1,351 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Script-Type" content="text/javascript">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<title>사진 첨부하기 :: SmartEditor2</title>
-<style type="text/css">
-/* NHN Web Standard 1Team JJS 120106 */ 
-/* Common */
-body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
-body,input,textarea,select,button,table{font-family:'돋움',Dotum,Helvetica,sans-serif;font-size:12px}
-img,fieldset{border:0}
-ul,ol{list-style:none}
-em,address{font-style:normal}
-a{text-decoration:none}
-a:hover,a:active,a:focus{text-decoration:underline}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사진 첨부하기</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #fff; color: #1a1a2e; font-size: 13px;
+    width: 100%; min-width: 280px;
+}
 
-/* Contents */
-.blind{visibility:hidden;position:absolute;line-height:0}
-#pop_wrap{width:383px}
-#pop_header{height:26px;padding:14px 0 0 20px;border-bottom:1px solid #ededeb;background:#f4f4f3}
-.pop_container{padding:11px 20px 0}
-#pop_footer{margin:21px 20px 0;padding:10px 0 16px;border-top:1px solid #e5e5e5;text-align:center}
-h1{color:#333;font-size:14px;letter-spacing:-1px}
-.btn_area{word-spacing:2px}
-.pop_container .drag_area{overflow:hidden;overflow-y:auto;position:relative;width:341px;height:129px;margin-top:4px;border:1px solid #eceff2}
-.pop_container .drag_area .bg{display:block;position:absolute;top:0;left:0;width:341px;height:129px;background:#fdfdfd url(./img/bg_drag_image.png) 0 0 no-repeat}
-.pop_container .nobg{background:none}
-.pop_container .bar{color:#e0e0e0}
-.pop_container .lst_type li{overflow:hidden;position:relative;padding:7px 0 6px 8px;border-bottom:1px solid #f4f4f4;vertical-align:top}
-.pop_container :root .lst_type li{padding:6px 0 5px 8px}
-.pop_container .lst_type li span{float:left;color:#222}
-.pop_container .lst_type li em{float:right;margin-top:1px;padding-right:22px;color:#a1a1a1;font-size:11px}
-.pop_container .lst_type li a{position:absolute;top:6px;right:5px}
-.pop_container .dsc{margin-top:6px;color:#666;line-height:18px}
-.pop_container .dsc_v1{margin-top:12px}
-.pop_container .dsc em{color:#13b72a}
-.pop_container2{padding:46px 60px 20px}
-.pop_container2 .dsc{margin-top:6px;color:#666;line-height:18px}
-.pop_container2 .dsc strong{color:#13b72a}
-.upload{margin:0 4px 0 0;_margin:0;padding:6px 0 4px 6px;border:solid 1px #d5d5d5;color:#a1a1a1;font-size:12px;border-right-color:#efefef;border-bottom-color:#efefef;length:300px;}
-:root  .upload{padding:6px 0 2px 6px;}
+/* Header */
+.up_header {
+    padding: 4% 5% 3%;
+    border-bottom: 1px solid #e8eaf0;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.up_header h1 { font-size: clamp(13px, 3.5vw, 15px); font-weight: 700; color: #1a1a2e; }
+
+/* Upload Zone */
+.upload_zone {
+    margin: 4% 5% 0;
+    border: 2px dashed #c8d0e0;
+    border-radius: 12px;
+    padding: 6% 5%;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f8fafc;
+}
+.upload_zone:hover, .upload_zone.dragover {
+    border-color: #0123b4;
+    background: #eef1fc;
+}
+.upload_zone .zone_icon {
+    font-size: clamp(24px, 7vw, 32px); color: #c8d0e0; margin-bottom: 8px;
+    transition: color 0.2s;
+}
+.upload_zone:hover .zone_icon, .upload_zone.dragover .zone_icon { color: #0123b4; }
+.upload_zone .zone_text { font-size: clamp(12px, 3vw, 14px); font-weight: 600; color: #555; margin-bottom: 4px; }
+.upload_zone .zone_sub  { font-size: clamp(10px, 2.5vw, 11px); color: #aaa; }
+.upload_zone .zone_btn {
+    display: inline-block; margin-top: 10px;
+    padding: 6px 16px; background: #0123b4; color: #fff;
+    border-radius: 7px; font-size: clamp(11px, 2.5vw, 12px); font-weight: 700;
+}
+
+/* File List */
+.file_list {
+    margin: 3% 5% 0;
+    display: flex; flex-direction: column; gap: 6px;
+    max-height: 35vh; overflow-y: auto;
+}
+.file_item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; background: #f8fafc;
+    border: 1px solid #e8eaf0; border-radius: 8px;
+}
+.file_item .fi_thumb {
+    width: clamp(28px, 8vw, 36px); height: clamp(28px, 8vw, 36px);
+    border-radius: 6px; object-fit: cover; flex-shrink: 0; background: #e8eaf0;
+}
+.file_item .fi_info { flex: 1; min-width: 0; }
+.file_item .fi_name {
+    font-size: clamp(11px, 2.8vw, 12px); font-weight: 600; color: #1a1a2e;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.file_item .fi_size { font-size: clamp(10px, 2.5vw, 11px); color: #aaa; margin-top: 2px; }
+.file_item .fi_status { font-size: clamp(10px, 2.5vw, 11px); font-weight: 700; flex-shrink: 0; }
+.fi_status.ready    { color: #0123b4; }
+.fi_status.uploading{ color: #c47a00; }
+.fi_status.done     { color: #1a8a4a; }
+.fi_status.error    { color: #c0392b; }
+.file_item .fi_del {
+    width: clamp(20px, 5vw, 22px); height: clamp(20px, 5vw, 22px);
+    border: none; background: #fee2e2; border-radius: 5px;
+    cursor: pointer; color: #c0392b; font-size: 11px; flex-shrink: 0;
+    transition: background 0.15s; display: flex; align-items: center; justify-content: center;
+}
+.file_item .fi_del:hover { background: #fca5a5; }
+
+.file_hint {
+    margin: 2% 5% 0;
+    font-size: clamp(10px, 2.5vw, 11px); color: #aaa; line-height: 1.6;
+}
+
+/* Footer */
+.up_footer {
+    padding: 3.5% 5% 4%;
+    display: flex; justify-content: flex-end; gap: 8px;
+    border-top: 1px solid #e8eaf0; margin-top: 3.5%;
+}
+.btn_cancel {
+    height: clamp(32px, 8vw, 36px); padding: 0 4%;
+    border-radius: 8px; border: 1.5px solid #e0e3ef; background: #f1f5f9;
+    color: #555; font-size: clamp(11px, 3vw, 13px); font-weight: 600;
+    cursor: pointer; transition: background 0.15s;
+}
+.btn_cancel:hover { background: #e2e8f0; }
+.btn_confirm {
+    height: clamp(32px, 8vw, 36px); padding: 0 5%;
+    border-radius: 8px; border: none; background: #0123b4;
+    color: #fff; font-size: clamp(11px, 3vw, 13px); font-weight: 700;
+    cursor: pointer; transition: background 0.15s;
+}
+.btn_confirm:hover { background: #0118a0; }
+.btn_confirm:disabled { background: #c0c4d4; cursor: not-allowed; }
 </style>
 </head>
 <body>
-<div id="pop_wrap">
-	<!-- header -->
-    <div id="pop_header">
-        <h1>사진 첨부하기</h1>
-    </div>
-    <!-- //header -->
-    <!-- container -->
-	
-    <!-- [D] HTML5인 경우 pop_container 클래스와 하위 HTML 적용
-	    	 그밖의 경우 pop_container2 클래스와 하위 HTML 적용      -->
-	<div id="pop_container2" class="pop_container2">
-    	<!-- content -->
-		<form id="editor_upimage" name="editor_upimage" action="FileUploader.php" method="post" enctype="multipart/form-data" onSubmit="return false;">
-        <div id="pop_content2">
-			<input type="file" class="upload" id="uploadInputBox" name="Filedata">
-            <p class="dsc" id="info"><strong>10MB</strong>이하의 이미지 파일만 등록할 수 있습니다.<br>(JPG, GIF, PNG, BMP)</p>
-        </div>
-		</form>
-        <!-- //content -->
-    </div>
-    <div id="pop_container" class="pop_container" style="display:none;">
-    	<!-- content -->
-        <div id="pop_content">
-	        <p class="dsc"><em id="imageCountTxt">0장</em>/10장 <span class="bar">|</span> <em id="totalSizeTxt">0MB</em>/50MB</p>
-        	<!-- [D] 첨부 이미지 여부에 따른 Class 변화 
-            	 첨부 이미지가 있는 경우 : em에 "bg" 클래스 적용 //첨부 이미지가 없는 경우 : em에 "nobg" 클래스 적용   -->
-				 
-            <div class="drag_area" id="drag_area">
-				<ul class="lst_type" >
-				</ul>
-            	<em class="blind">마우스로 드래그해서 이미지를 추가해주세요.</em><span id="guide_text" class="bg"></span>
-            </div>
-			<div style="display:none;" id="divImageList"></div>
-            <p class="dsc dsc_v1"><em>한 장당 10MB, 1회에 50MB까지, 10개</em>의 이미지 파일을<br>등록할 수 있습니다. (JPG, GIF, PNG, BMP)</p>
-        </div>
-        <!-- //content -->
-    </div>
 
-    <!-- //container -->
-    <!-- footer -->
-    <div id="pop_footer">
-	    <div class="btn_area">
-            <a href="#"><img src="./img/btn_confirm.png" width="49" height="28" alt="확인" id="btn_confirm"></a>
-            <a href="#"><img src="./img/btn_cancel.png" width="48" height="28" alt="취소" id="btn_cancel"></a>
-        </div>
-    </div>
-    <!-- //footer -->
+<div class="up_header">
+    <h1>📷 사진 첨부하기</h1>
 </div>
-<script type="text/javascript" src="jindo.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="jindo.fileuploader.js" charset="utf-8"></script>
-<script type="text/javascript" src="attach_photo.js" charset="utf-8"></script>
+
+<div class="upload_zone" id="uploadZone" onclick="triggerFileInput()">
+    <div class="zone_icon">🖼</div>
+    <p class="zone_text">클릭하거나 사진을 여기에 끌어다 놓으세요</p>
+    <p class="zone_sub">JPG, PNG, GIF, BMP · 파일당 최대 10MB</p>
+    <span class="zone_btn">파일 선택</span>
+</div>
+<input type="file" id="fileInput" accept="image/jpeg,image/png,image/gif,image/bmp"
+       multiple style="display:none;" onchange="onFileSelect(this.files)">
+
+<div class="file_list" id="fileList"></div>
+<p class="file_hint" id="fileHint"></p>
+
+<div class="up_footer">
+    <button class="btn_cancel" onclick="cancelUpload()">취소</button>
+    <button class="btn_confirm" id="btnConfirm" disabled onclick="startUpload()">첨부하기</button>
+</div>
+
+<script>
+var MAX_SIZE       = 10 * 1024 * 1024; // 10MB
+var MAX_COUNT      = 10;
+var UPLOAD_URL     = 'file_uploader_html5.php';
+var fileQueue      = []; // { id, file, status, resultUrl, resultName }
+var idCounter      = 0;
+
+/* ── 파일 선택 ── */
+function triggerFileInput() {
+    document.getElementById('fileInput').click();
+}
+
+function onFileSelect(files) {
+    addFiles(files);
+    document.getElementById('fileInput').value = '';
+}
+
+function addFiles(files) {
+    for (var i = 0; i < files.length; i++) {
+        var f = files[i];
+        if (fileQueue.length >= MAX_COUNT) {
+            alert('최대 ' + MAX_COUNT + '장까지만 등록할 수 있습니다.');
+            break;
+        }
+        if (!f.type.match(/^image\/(jpeg|jpg|png|gif|bmp)$/i)) {
+            alert('"' + f.name + '"\nJPG, PNG, GIF, BMP 파일만 등록할 수 있습니다.');
+            continue;
+        }
+        if (f.size > MAX_SIZE) {
+            alert('"' + f.name + '"\n파일 크기가 10MB를 초과합니다.');
+            continue;
+        }
+        fileQueue.push({ id: idCounter++, file: f, status: 'ready', resultUrl: null, resultName: null });
+    }
+    renderList();
+    updateConfirmBtn();
+}
+
+/* ── 렌더링 ── */
+function renderList() {
+    var el   = document.getElementById('fileList');
+    var hint = document.getElementById('fileHint');
+    if (fileQueue.length === 0) {
+        el.innerHTML = '';
+        hint.textContent = '';
+        return;
+    }
+
+    var html = '';
+    fileQueue.forEach(function(item) {
+        var url = item.file ? URL.createObjectURL(item.file) : '';
+        var statusText = { ready: '대기중', uploading: '업로드중...', done: '완료', error: '실패' }[item.status] || '';
+        html += '<div class="file_item" id="fi_' + item.id + '">';
+        html += '  <img class="fi_thumb" src="' + url + '" alt="">';
+        html += '  <div class="fi_info">';
+        html += '    <p class="fi_name">' + escHtml(item.file.name) + '</p>';
+        html += '    <p class="fi_size">' + formatSize(item.file.size) + '</p>';
+        html += '  </div>';
+        html += '  <span class="fi_status ' + item.status + '">' + statusText + '</span>';
+        if (item.status === 'ready' || item.status === 'error') {
+            html += '  <button class="fi_del" onclick="removeFile(' + item.id + ')">✕</button>';
+        }
+        html += '</div>';
+    });
+    el.innerHTML = html;
+    hint.textContent = fileQueue.length + '장 선택됨 (최대 ' + MAX_COUNT + '장)';
+}
+
+function updateConfirmBtn() {
+    var btn  = document.getElementById('btnConfirm');
+    var hasReady = fileQueue.some(function(i) { return i.status === 'ready'; });
+    btn.disabled = !hasReady;
+}
+
+function removeFile(id) {
+    fileQueue = fileQueue.filter(function(i) { return i.id !== id; });
+    renderList();
+    updateConfirmBtn();
+}
+
+/* ── 업로드 ── */
+function startUpload() {
+    var readyItems = fileQueue.filter(function(i) { return i.status === 'ready'; });
+    if (readyItems.length === 0) return;
+
+    document.getElementById('btnConfirm').disabled = true;
+
+    var doneCount  = 0;
+    var totalReady = readyItems.length;
+
+    readyItems.forEach(function(item) {
+        setStatus(item.id, 'uploading');
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', UPLOAD_URL, true);
+        xhr.setRequestHeader('file-name', encodeURIComponent(item.file.name));
+        xhr.setRequestHeader('file-size', item.file.size);
+        xhr.setRequestHeader('file-Type', item.file.type);
+
+        xhr.onload = function() {
+            var res = xhr.responseText;
+            console.log('[uploader] status=' + xhr.status + ' response=' + res.substring(0, 300));
+            if (xhr.status !== 200) {
+                console.error('[uploader] HTTP error', xhr.status);
+                setStatus(item.id, 'error');
+            } else if (res.indexOf('NOTALLOW_') > -1) {
+                setStatus(item.id, 'error');
+            } else {
+                var parsed = parseResponse(res);
+                if (parsed && parsed.sFileURL) {
+                    item.resultUrl  = parsed.sFileURL;
+                    item.resultName = parsed.sFileName || item.file.name;
+                    setStatus(item.id, 'done');
+                } else {
+                    console.error('[uploader] parseResponse failed, raw:', res.substring(0, 300));
+                    setStatus(item.id, 'error');
+                }
+            }
+            doneCount++;
+            if (doneCount === totalReady) {
+                onAllDone();
+            }
+        };
+
+        xhr.onerror = function() {
+            setStatus(item.id, 'error');
+            doneCount++;
+            if (doneCount === totalReady) {
+                onAllDone();
+            }
+        };
+
+        xhr.send(item.file);
+    });
+}
+
+function setStatus(id, status) {
+    var item = fileQueue.find(function(i) { return i.id === id; });
+    if (item) item.status = status;
+    renderList();
+}
+
+function onAllDone() {
+    var results = fileQueue
+        .filter(function(i) { return i.status === 'done'; })
+        .map(function(i) {
+            return { sFileURL: i.resultUrl, sFileName: i.resultName, bNewLine: true };
+        });
+
+    if (results.length > 0) {
+        setPhotoToEditor(results);
+        window.close();
+    } else {
+        alert('업로드에 실패했습니다. 다시 시도해주세요.');
+        updateConfirmBtn();
+    }
+}
+
+/* ── 드래그&드롭 ── */
+var zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover',  function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', function(e) { zone.classList.remove('dragover'); });
+zone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    zone.classList.remove('dragover');
+    if (e.dataTransfer && e.dataTransfer.files) {
+        addFiles(e.dataTransfer.files);
+    }
+});
+
+/* ── 취소 ── */
+function cancelUpload() {
+    window.close();
+}
+
+/* ── SmartEditor 콜백 ── */
+function setPhotoToEditor(oFileInfo) {
+    if (!!opener && !!opener.nhn && !!opener.nhn.husky && !!opener.nhn.husky.PopUpManager) {
+        opener.nhn.husky.PopUpManager.setCallback(window, 'SET_PHOTO', [oFileInfo]);
+    }
+}
+
+/* ── Helpers ── */
+function parseResponse(str) {
+    if (!str || str.indexOf('sFileURL') < 0) return null;
+    var result = {};
+    str.split('&').forEach(function(part) {
+        var idx = part.indexOf('=');
+        if (idx > 0) {
+            result[part.substring(0, idx)] = part.substring(idx + 1);
+        }
+    });
+    return result;
+}
+
+function formatSize(bytes) {
+    if (bytes < 1024)       return bytes + 'B';
+    if (bytes < 1024*1024)  return (bytes / 1024).toFixed(0) + 'KB';
+    return (bytes / (1024*1024)).toFixed(1) + 'MB';
+}
+
+function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+Array.prototype.find = Array.prototype.find || function(fn) {
+    for (var i = 0; i < this.length; i++) if (fn(this[i])) return this[i];
+};
+Array.prototype.some = Array.prototype.some || function(fn) {
+    for (var i = 0; i < this.length; i++) if (fn(this[i])) return true;
+    return false;
+};
+</script>
 
 </body>
 </html>

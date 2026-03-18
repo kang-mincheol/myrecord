@@ -1,5 +1,6 @@
 <?php
 if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
+if (defined('SKIP_ACCESS_LOG') && SKIP_ACCESS_LOG) return; // 파일 업로드 등 바이너리 요청 제외
 
 $ip_address = getenv('REMOTE_ADDR');
 
