@@ -42,6 +42,7 @@ try {
 
 
 //Session 설정
+if(IS_LIVE && !is_dir(SESSION_PATH)) mkdir(SESSION_PATH, 0777, true);
 session_save_path(SESSION_PATH);
 ini_set('session.gc_maxlifetime', 1800);
 session_set_cookie_params(1800);

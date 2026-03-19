@@ -71,6 +71,11 @@ const renderFreeBoardList = (list) => {
 };
 
 const renderFreeBoardPage = (page) => {
+  if (page.totalPage === 0) {
+    $("#pagingWrap").html("");
+    return;
+  }
+
   const blockSize = 5;
 
   let currentPage = listInfo.pageIndex;
