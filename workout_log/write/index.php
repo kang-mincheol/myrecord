@@ -82,6 +82,7 @@ if(!$is_member) {
     <!-- 버튼 -->
     <div class="form_footer">
         <button class="cancel_btn" onclick="history.back();"><i class="fa-solid fa-angle-left"></i> 취소</button>
+        <button class="temp_save_btn" onclick="intermediateSave();"><i class="fa-regular fa-floppy-disk"></i> 중간저장</button>
         <button class="save_btn" onclick="saveLog();"><i class="fa-solid fa-check"></i> 저장하기</button>
     </div>
 

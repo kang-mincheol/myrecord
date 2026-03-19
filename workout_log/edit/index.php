@@ -143,6 +143,7 @@ $exercises = WorkoutLog::getDetail($log_id);
     <!-- 버튼 -->
     <div class="form_footer">
         <button class="cancel_btn" onclick="history.back();"><i class="fa-solid fa-angle-left"></i> 취소</button>
+        <button class="temp_save_btn" onclick="intermediateSave(<?= $log_id ?>);"><i class="fa-regular fa-floppy-disk"></i> 중간저장</button>
         <button class="save_btn" onclick="saveLog(<?= $log_id ?>);"><i class="fa-solid fa-check"></i> 수정하기</button>
     </div>
 
@@ -175,7 +176,7 @@ $exercises = WorkoutLog::getDetail($log_id);
         <div class="set_input_group">
             <div class="set_input_wrap">
                 <input type="number" class="set_weight_input" placeholder="0" min="0" max="9999" step="0.5" />
-                <span class="set_unit">kg</span>
+                <span class="set_unit set_weight_unit">kg</span>
             </div>
             <span class="set_x">×</span>
             <div class="set_input_wrap">
