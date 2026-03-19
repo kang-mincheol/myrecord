@@ -42,6 +42,7 @@ function renderPage(data) {
         '<div class="workout_view_wrap">' +
             renderUnitToggle(data.weight_unit) +
             renderExercises(data.exercises, data.weight_unit) +
+            renderTotalVolume(data.exercises, data.weight_unit) +
             renderMemo(data.memo) +
             renderFooter(data.id) +
         '</div>';
@@ -126,6 +127,40 @@ function renderExerciseCard(ex, idx, unit) {
     '</div>';
 }
 
+/* ── 총 볼륨 카드 ── */
+function renderTotalVolume(exercises, unit) {
+    if (!exercises || exercises.length === 0) return '';
+
+    var grandTotalKg = 0;
+    var rows = exercises.map(function(ex) {
+        var exVolKg = 0;
+        (ex.sets || []).forEach(function(set) {
+            exVolKg += parseFloat(set.weight) * parseInt(set.reps);
+        });
+        grandTotalKg += exVolKg;
+        var exDisplay = unit === 'lb' ? exVolKg * KG_TO_LB : exVolKg;
+        return '<div class="total_vol_row">' +
+            '<span class="total_vol_ex_name">' + escHtml(ex.exercise_name) + '</span>' +
+            '<span class="total_vol_ex_val" data-vol-kg="' + exVolKg + '">' +
+                exDisplay.toFixed(1) + '<span class="grand_total_unit"> ' + unit + '</span>' +
+            '</span>' +
+        '</div>';
+    }).join('');
+
+    var grandDisplay = unit === 'lb' ? grandTotalKg * KG_TO_LB : grandTotalKg;
+
+    return '<div class="total_volume_card">' +
+        '<div class="total_volume_header">' +
+            '<span class="total_volume_title"><i class="fa-solid fa-fire-flame-curved"></i> 오늘의 총 볼륨</span>' +
+            '<span class="total_volume_value" data-total-kg="' + grandTotalKg + '">' +
+                '<span class="grand_total_val">' + grandDisplay.toFixed(1) + '</span>' +
+                '<span class="grand_total_unit"> ' + unit + '</span>' +
+            '</span>' +
+        '</div>' +
+        '<div class="total_vol_breakdown">' + rows + '</div>' +
+    '</div>';
+}
+
 /* ── 메모 ── */
 function renderMemo(memo) {
     if (!memo) return '';
@@ -175,6 +210,21 @@ function toggleUnit(unit, btn) {
         var val     = unit === 'lb' ? totalKg * KG_TO_LB : totalKg;
         tr.querySelector('.total_vol_val').textContent = val.toFixed(1);
         tr.querySelector('.td_unit').textContent       = unit;
+    });
+
+    var grandTotalEl = document.querySelector('.total_volume_value[data-total-kg]');
+    if (grandTotalEl) {
+        var totalKg = parseFloat(grandTotalEl.dataset.totalKg);
+        var val     = unit === 'lb' ? totalKg * KG_TO_LB : totalKg;
+        grandTotalEl.querySelector('.grand_total_val').textContent = val.toFixed(1);
+    }
+    document.querySelectorAll('.total_vol_ex_val[data-vol-kg]').forEach(function(el) {
+        var kg  = parseFloat(el.dataset.volKg);
+        var val = unit === 'lb' ? kg * KG_TO_LB : kg;
+        el.childNodes[0].textContent = val.toFixed(1);
+    });
+    document.querySelectorAll('.grand_total_unit').forEach(function(el) {
+        el.textContent = ' ' + unit;
     });
 }
 

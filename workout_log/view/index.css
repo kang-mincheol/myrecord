@@ -144,6 +144,73 @@
     border-top: 1px solid #dde2ee;
 }
 
+/* 총 볼륨 카드 */
+.total_volume_card {
+    background: linear-gradient(135deg, #0123B4 0%, #0a2fe0 100%);
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 16px rgba(1, 35, 180, 0.2);
+    color: #fff;
+}
+
+.total_volume_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.total_volume_title {
+    font-size: 14px;
+    font-weight: 700;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.total_volume_value {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.total_volume_value .grand_total_unit {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.75;
+}
+
+.total_vol_breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 12px;
+}
+
+.total_vol_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.total_vol_ex_name {
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.total_vol_ex_val {
+    font-weight: 700;
+}
+
+.total_vol_ex_val .grand_total_unit {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
 /* 메모 카드 */
 .memo_card {
     background: #fff;
