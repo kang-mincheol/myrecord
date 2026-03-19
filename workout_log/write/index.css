@@ -454,6 +454,34 @@
   cursor: not-allowed;
 }
 
+.temp_save_btn {
+  flex: 0 0 auto;
+  height: 50px;
+  padding: 0 20px;
+  background: #fff;
+  border: 1.5px solid #0123b4;
+  border-radius: 12px;
+  color: #0123b4;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.temp_save_btn:hover {
+  background: #eef0fc;
+}
+
+.temp_save_btn:disabled {
+  border-color: #a0aacc;
+  color: #a0aacc;
+  cursor: not-allowed;
+}
+
 /* 반응형 */
 @media (max-width: 480px) {
   .workout_log_header {
