@@ -34,7 +34,7 @@ jobs:
             global-instruction.md
             config.php
             .htaccess
-            data/session/**
+            data/**
 
       - name: Slack - 배포 완료 알림
         env:
