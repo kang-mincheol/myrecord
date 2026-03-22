@@ -196,10 +196,17 @@ $exercises = WorkoutLog::getDetail($log_id);
 var exerciseIndex = <?= count($exercises) ?>;
 var weightUnit = '<?= $savedUnit ?>';
 var autoSavedLogId = <?= $log_id ?>; // 기존 log_id로 초기화
+var draftKey = 'workout_log_edit_draft_<?= $log_id ?>'; // 수정 페이지 전용 키
 
 $(function () {
     // 수정 페이지: 날짜/종목 이미 채워져 있으므로 타이머만 시작
     setInterval(function() { saveProgress(false); }, AUTO_SAVE_INTERVAL);
+
+    // 입력 시 로컬 임시저장 (500ms debounce)
+    $(document).on('input change', '#workout_date, #workout_duration, #workout_memo, .exercise_name_input, .set_weight_input, .set_reps_input', scheduleDraftSave);
+
+    // 로컬 임시저장 복구 확인
+    checkAndRestoreDraft();
 });
 </script>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php'); ?>
