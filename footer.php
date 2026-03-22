@@ -41,6 +41,7 @@ echo css_load('/common/footer.css');
                     <a href="/util/bmi/" class="nav_link">BMI 계산기</a>
                     <a href="/util/ffmi/" class="nav_link">FFMI 계산기</a>
                     <a href="/util/kg_lb/" class="nav_link">KG / LB 변환기</a>
+                    <a href="/util/1rm/" class="nav_link">1RM 계산기</a>
                 </div>
             </nav>
 

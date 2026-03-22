@@ -576,6 +576,80 @@
   }
 }
 
+/* ── 로컬 임시저장 복구 배너 ── */
+#draft_restore_banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #fffbeb;
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.draft_banner_text {
+  font-size: 13px;
+  color: #92400e;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.draft_banner_text i {
+  color: #f59e0b;
+  font-size: 14px;
+}
+
+.draft_banner_btns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.draft_restore_btn {
+  height: 32px;
+  padding: 0 14px;
+  background: #f59e0b;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.draft_restore_btn:hover {
+  background: #d97706;
+}
+
+.draft_dismiss_btn {
+  height: 32px;
+  padding: 0 14px;
+  background: transparent;
+  border: 1.5px solid #d97706;
+  border-radius: 8px;
+  color: #92400e;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.draft_dismiss_btn:hover {
+  background: #fef3c7;
+}
+
+@media (max-width: 480px) {
+  #draft_restore_banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
 /* ── 무게 단위 토글 ── */
 .unit_toggle_wrap {
   display: flex;

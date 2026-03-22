@@ -143,7 +143,7 @@ $exercises = WorkoutLog::getDetail($log_id);
     <!-- 버튼 -->
     <div class="form_footer">
         <button class="cancel_btn" onclick="history.back();"><i class="fa-solid fa-angle-left"></i> 취소</button>
-        <button class="temp_save_btn" onclick="intermediateSave(<?= $log_id ?>);"><i class="fa-regular fa-floppy-disk"></i> 중간저장</button>
+        <button class="temp_save_btn" onclick="saveProgress(true);"><i class="fa-regular fa-floppy-disk"></i> 중간저장</button>
         <button class="save_btn" onclick="saveLog(<?= $log_id ?>);"><i class="fa-solid fa-check"></i> 수정하기</button>
     </div>
 
@@ -195,9 +195,18 @@ $exercises = WorkoutLog::getDetail($log_id);
 <script>
 var exerciseIndex = <?= count($exercises) ?>;
 var weightUnit = '<?= $savedUnit ?>';
+var autoSavedLogId = <?= $log_id ?>; // 기존 log_id로 초기화
+var draftKey = 'workout_log_edit_draft_<?= $log_id ?>'; // 수정 페이지 전용 키
 
 $(function () {
-    // 수정 페이지는 init() 호출 안 함 (날짜/종목 이미 채워짐)
+    // 수정 페이지: 날짜/종목 이미 채워져 있으므로 타이머만 시작
+    setInterval(function() { saveProgress(false); }, AUTO_SAVE_INTERVAL);
+
+    // 입력 시 로컬 임시저장 (500ms debounce)
+    $(document).on('input change', '#workout_date, #workout_duration, #workout_memo, .exercise_name_input, .set_weight_input, .set_reps_input', scheduleDraftSave);
+
+    // 로컬 임시저장 복구 확인
+    checkAndRestoreDraft();
 });
 </script>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php'); ?>

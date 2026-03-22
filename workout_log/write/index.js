@@ -4,6 +4,118 @@ var KG_TO_LB = 2.20462;
 var autoSavedLogId = null;
 var AUTO_SAVE_INTERVAL = 10 * 60 * 1000; // 10분
 
+/* ── 로컬 임시저장 ── */
+var draftKey = 'workout_log_write_draft';
+var draftSaveTimer = null;
+
+function scheduleDraftSave() {
+    clearTimeout(draftSaveTimer);
+    draftSaveTimer = setTimeout(saveDraftToLocal, 500);
+}
+
+function saveDraftToLocal() {
+    var exercises = [];
+    document.querySelectorAll('#exercise_list .exercise_block').forEach(function(block) {
+        var sets = [];
+        block.querySelectorAll('.set_row').forEach(function(row) {
+            sets.push({
+                weight: row.querySelector('.set_weight_input').value,
+                reps:   row.querySelector('.set_reps_input').value
+            });
+        });
+        exercises.push({
+            exercise_name: block.querySelector('.exercise_name_input').value,
+            sets: sets
+        });
+    });
+    var data = {
+        workout_date:     $('#workout_date').val(),
+        workout_duration: $('#workout_duration').val(),
+        memo:             $('#workout_memo').val(),
+        weight_unit:      weightUnit,
+        exercises:        exercises,
+        saved_at:         new Date().toISOString()
+    };
+    try { localStorage.setItem(draftKey, JSON.stringify(data)); } catch(e) {}
+}
+
+function checkAndRestoreDraft() {
+    try {
+        var raw = localStorage.getItem(draftKey);
+        if (!raw) return;
+        var draft = JSON.parse(raw);
+        if (!draft || !draft.saved_at) return;
+        var timeStr = new Date(draft.saved_at).toLocaleString('ko-KR');
+        showRestoreBanner(timeStr);
+    } catch(e) {
+        localStorage.removeItem(draftKey);
+    }
+}
+
+function showRestoreBanner(timeStr) {
+    var banner = document.createElement('div');
+    banner.id = 'draft_restore_banner';
+    banner.innerHTML =
+        '<span class="draft_banner_text"><i class="fa-solid fa-clock-rotate-left"></i> ' + timeStr + '에 저장된 임시 데이터가 있습니다</span>' +
+        '<div class="draft_banner_btns">' +
+        '<button class="draft_restore_btn" onclick="restoreDraft()">불러오기</button>' +
+        '<button class="draft_dismiss_btn" onclick="dismissDraft()">삭제</button>' +
+        '</div>';
+    var wrap = document.querySelector('.workout_write_wrap');
+    wrap.insertBefore(banner, wrap.firstChild);
+}
+
+function restoreDraft() {
+    try {
+        var raw = localStorage.getItem(draftKey);
+        if (!raw) return;
+        var draft = JSON.parse(raw);
+
+        if (draft.workout_date)     $('#workout_date').val(draft.workout_date);
+        if (draft.workout_duration) $('#workout_duration').val(draft.workout_duration);
+        if (draft.memo) {
+            $('#workout_memo').val(draft.memo);
+            memoCount(document.getElementById('workout_memo'));
+        }
+        if (draft.weight_unit) setWeightUnit(draft.weight_unit, null);
+
+        if (draft.exercises && draft.exercises.length > 0) {
+            document.getElementById('exercise_list').innerHTML = '';
+            exerciseIndex = 0;
+            draft.exercises.forEach(function(ex) {
+                addExercise();
+                var blocks = document.querySelectorAll('#exercise_list .exercise_block');
+                var lastBlock = blocks[blocks.length - 1];
+                lastBlock.querySelector('.exercise_name_input').value = ex.exercise_name;
+
+                var setList = lastBlock.querySelector('.set_list');
+                setList.innerHTML = '';
+                (ex.sets || []).forEach(function(set) {
+                    addSetToBlock(lastBlock.querySelector('.add_set_btn'));
+                    var rows = setList.querySelectorAll('.set_row');
+                    var lastRow = rows[rows.length - 1];
+                    lastRow.querySelector('.set_weight_input').value = set.weight;
+                    lastRow.querySelector('.set_reps_input').value   = set.reps;
+                    lastRow.querySelector('.set_weight_unit').textContent = draft.weight_unit || 'kg';
+                });
+            });
+        }
+    } catch(e) {}
+
+    dismissDraft();
+    showToast('임시 데이터를 불러왔습니다', 'success');
+}
+
+function dismissDraft() {
+    clearLocalDraft();
+    var banner = document.getElementById('draft_restore_banner');
+    if (banner) banner.remove();
+}
+
+function clearLocalDraft() {
+    try { localStorage.removeItem(draftKey); } catch(e) {}
+}
+
 /* ── 무게 단위 선택 ── */
 function setWeightUnit(unit, btn) {
     if (weightUnit === unit) return;
@@ -39,15 +151,25 @@ function init() {
     addExercise();
 
     // 10분마다 자동 저장 시작
-    setInterval(autoSave, AUTO_SAVE_INTERVAL);
+    setInterval(function() { saveProgress(false); }, AUTO_SAVE_INTERVAL);
+
+    // 입력 시 로컬 임시저장 (500ms debounce)
+    $(document).on('input change', '#workout_date, #workout_duration, #workout_memo, .exercise_name_input, .set_weight_input, .set_reps_input', scheduleDraftSave);
+
+    // 로컬 임시저장 복구 확인
+    checkAndRestoreDraft();
 }
 
-/* ── 자동 저장 (서버) ── */
-function autoSave() {
+/* ── 통합 저장 (자동저장 + 중간저장) ── */
+function saveProgress(isManual) {
     var workout_date = $('#workout_date').val().trim();
-    if (!workout_date) return; // 날짜 없으면 스킵
 
-    // 유효한 종목만 수집 (이름 있는 것)
+    if (isManual && !workout_date) {
+        myrecordAlert('on', '운동 날짜를 입력해주세요', '알림', '');
+        return;
+    }
+    if (!isManual && !workout_date) return;
+
     var exercises = [];
     document.querySelectorAll('#exercise_list .exercise_block').forEach(function(block) {
         var exName = block.querySelector('.exercise_name_input').value.trim();
@@ -65,7 +187,11 @@ function autoSave() {
         }
     });
 
-    if (exercises.length === 0) return; // 저장할 종목 없으면 스킵
+    if (isManual && exercises.length === 0) {
+        myrecordAlert('on', '저장할 운동 종목을 1개 이상 입력해주세요', '알림', '');
+        return;
+    }
+    if (!isManual && exercises.length === 0) return;
 
     var payload = {
         workout_date:     workout_date,
@@ -79,21 +205,35 @@ function autoSave() {
         payload.log_id = autoSavedLogId;
     }
 
+    if (isManual) {
+        var $btn = $('.temp_save_btn');
+        $btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> 저장 중...');
+    }
+
     $.ajax({
         url: '/api/workout_log/set.workout_log_save.php',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(payload),
         success: function(res) {
+            if (isManual) {
+                $('.temp_save_btn').prop('disabled', false).html('<i class="fa-regular fa-floppy-disk"></i> 중간저장');
+            }
             if (res.code === 'SUCCESS') {
                 autoSavedLogId = res.log_id;
-                showToast('자동 저장되었습니다', 'success');
+                clearLocalDraft();
+                showToast(isManual ? '중간저장 되었습니다' : '자동 저장되었습니다', 'success');
             } else {
-                showToast('자동 저장에 실패했습니다', 'error');
+                if (isManual) {
+                    myrecordAlert('on', res.msg || '오류가 발생했습니다', '알림', '');
+                }
             }
         },
         error: function() {
-            showToast('자동 저장에 실패했습니다', 'error');
+            if (isManual) {
+                $('.temp_save_btn').prop('disabled', false).html('<i class="fa-regular fa-floppy-disk"></i> 중간저장');
+                myrecordAlert('on', '서버 오류가 발생했습니다', '알림', '');
+            }
         }
     });
 }
@@ -170,73 +310,6 @@ function updateSetNumbers(setList) {
 function memoCount(el) {
     var len = el.value.length;
     $('#memo_count').text(len);
-}
-
-/* ── 중간저장 (페이지 이동 없음) ── */
-function intermediateSave(logId) {
-    var workout_date = $('#workout_date').val().trim();
-    if (!workout_date) {
-        myrecordAlert('on', '운동 날짜를 입력해주세요', '알림', '');
-        return;
-    }
-
-    var exercises = [];
-    document.querySelectorAll('#exercise_list .exercise_block').forEach(function(block) {
-        var exName = block.querySelector('.exercise_name_input').value.trim();
-        if (!exName) return;
-        var sets = [];
-        block.querySelectorAll('.set_row').forEach(function(row) {
-            var w = row.querySelector('.set_weight_input').value.trim();
-            var r = row.querySelector('.set_reps_input').value.trim();
-            if (w !== '' && r !== '') {
-                sets.push({ weight: parseFloat(w) || 0, reps: parseInt(r) || 0 });
-            }
-        });
-        if (sets.length > 0) {
-            exercises.push({ exercise_name: exName, sets: sets });
-        }
-    });
-
-    if (exercises.length === 0) {
-        myrecordAlert('on', '저장할 운동 종목을 1개 이상 입력해주세요', '알림', '');
-        return;
-    }
-
-    var payload = {
-        workout_date:     workout_date,
-        workout_duration: $('#workout_duration').val().trim() !== '' ? parseInt($('#workout_duration').val().trim()) : null,
-        memo:             $('#workout_memo').val().trim(),
-        weight_unit:      weightUnit,
-        exercises:        exercises
-    };
-
-    var resolvedLogId = logId || autoSavedLogId;
-    if (resolvedLogId) {
-        payload.log_id = resolvedLogId;
-    }
-
-    var $btn = $('.temp_save_btn');
-    $btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> 저장 중...');
-
-    $.ajax({
-        url: '/api/workout_log/set.workout_log_save.php',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(payload),
-        success: function(res) {
-            $btn.prop('disabled', false).html('<i class="fa-regular fa-floppy-disk"></i> 중간저장');
-            if (res.code === 'SUCCESS') {
-                if (!logId) autoSavedLogId = res.log_id;
-                showToast('중간저장 되었습니다', 'success');
-            } else {
-                myrecordAlert('on', res.msg || '오류가 발생했습니다', '알림', '');
-            }
-        },
-        error: function() {
-            $btn.prop('disabled', false).html('<i class="fa-regular fa-floppy-disk"></i> 중간저장');
-            myrecordAlert('on', '서버 오류가 발생했습니다', '알림', '');
-        }
-    });
 }
 
 /* ── 저장 ── */
@@ -321,6 +394,7 @@ function saveLog(logId) {
         data: JSON.stringify(payload),
         success: function(res) {
             if(res.code === 'SUCCESS') {
+                clearLocalDraft();
                 location.href = '/workout_log/view/?id=' + res.log_id;
             } else {
                 myrecordAlert('on', res.msg || '오류가 발생했습니다', '알림', '');
