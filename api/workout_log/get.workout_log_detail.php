@@ -44,6 +44,7 @@ $exercises = WorkoutLog::getDetail($log_id);
 
 $returnArray["data"] = array(
     "id"               => $log["id"],
+    "title"            => $log["title"] ?? '',
     "workout_date"     => $log["workout_date"],
     "workout_duration" => $log["workout_duration"],
     "weight_unit"      => $log["weight_unit"] ?? 'kg',

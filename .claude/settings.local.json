@@ -10,7 +10,8 @@
       "Bash(grep -rho tb_[a-zA-Z_]* /c/Projects/myrecord_docker/app/ --include=*.php)",
       "Bash(grep -rho \"AccessLog\\\\|tb_[a-zA-Z_]*\" /c/Projects/myrecord_docker/app/ --include=*.php)",
       "Bash(find C:/Projects/myrecord_docker -name *.sql -o -name *.dump)",
-      "Bash(dir \"C:\\\\Projects\\\\myrecord_docker\\\\app\\\\api\")"
+      "Bash(dir \"C:\\\\Projects\\\\myrecord_docker\\\\app\\\\api\")",
+      "Bash(find C:Projectsmyrecord_dockerapp -type f -name *.ts -o -name *.tsx)"
     ]
   }
 }

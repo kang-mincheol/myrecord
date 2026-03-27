@@ -45,8 +45,13 @@ function renderList(res) {
         var summary    = row.exercise_summary || '';
         var memoHtml   = row.memo ? '<span class="log_memo_preview">' + escHtml(row.memo) + '</span>' : '<span></span>';
 
+        var titleHtml = row.title ? '<span class="log_title">' + escHtml(row.title) + '</span>' : '';
+
         html += '<a class="log_card" href="/workout_log/view/?id=' + row.id + '">';
         html += '  <div class="log_card_top">';
+        if (titleHtml) {
+            html += '    ' + titleHtml;
+        }
         html += '    <span class="log_date">' + dateStr + '</span>';
         html += '    ' + durationHtml;
         html += '  </div>';

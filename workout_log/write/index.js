@@ -29,6 +29,7 @@ function saveDraftToLocal() {
         });
     });
     var data = {
+        title:            $('#workout_title').val(),
         workout_date:     $('#workout_date').val(),
         workout_duration: $('#workout_duration').val(),
         memo:             $('#workout_memo').val(),
@@ -71,6 +72,7 @@ function restoreDraft() {
         if (!raw) return;
         var draft = JSON.parse(raw);
 
+        if (draft.title)            $('#workout_title').val(draft.title);
         if (draft.workout_date)     $('#workout_date').val(draft.workout_date);
         if (draft.workout_duration) $('#workout_duration').val(draft.workout_duration);
         if (draft.memo) {
@@ -154,7 +156,7 @@ function init() {
     setInterval(function() { saveProgress(false); }, AUTO_SAVE_INTERVAL);
 
     // 입력 시 로컬 임시저장 (500ms debounce)
-    $(document).on('input change', '#workout_date, #workout_duration, #workout_memo, .exercise_name_input, .set_weight_input, .set_reps_input', scheduleDraftSave);
+    $(document).on('input change', '#workout_title, #workout_date, #workout_duration, #workout_memo, .exercise_name_input, .set_weight_input, .set_reps_input', scheduleDraftSave);
 
     // 로컬 임시저장 복구 확인
     checkAndRestoreDraft();
@@ -194,6 +196,7 @@ function saveProgress(isManual) {
     if (!isManual && exercises.length === 0) return;
 
     var payload = {
+        title:            $('#workout_title').val().trim(),
         workout_date:     workout_date,
         workout_duration: $('#workout_duration').val().trim() !== '' ? parseInt($('#workout_duration').val().trim()) : null,
         memo:             $('#workout_memo').val().trim(),
@@ -373,6 +376,7 @@ function saveLog(logId) {
     if(!valid) return;
 
     var payload = {
+        title:            $('#workout_title').val().trim(),
         workout_date:     workout_date,
         workout_duration: workout_duration,
         memo:             memo,

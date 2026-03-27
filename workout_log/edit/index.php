@@ -41,6 +41,12 @@ $exercises = WorkoutLog::getDetail($log_id);
         </div>
 
         <div class="form_row">
+            <label class="form_label" for="workout_title">제목 <span class="optional_tag">선택</span></label>
+            <input type="text" id="workout_title" class="form_input" placeholder="예) 등, 가슴, 어깨, 하체, 전신 등" maxlength="100"
+                value="<?= htmlspecialchars($log['title'] ?? '') ?>" />
+        </div>
+
+        <div class="form_row">
             <label class="form_label" for="workout_date">운동 날짜 <span class="required_mark">*</span></label>
             <input type="date" id="workout_date" class="form_input" value="<?= htmlspecialchars($log['workout_date']) ?>" />
         </div>
@@ -203,7 +209,7 @@ $(function () {
     setInterval(function() { saveProgress(false); }, AUTO_SAVE_INTERVAL);
 
     // 입력 시 로컬 임시저장 (500ms debounce)
-    $(document).on('input change', '#workout_date, #workout_duration, #workout_memo, .exercise_name_input, .set_weight_input, .set_reps_input', scheduleDraftSave);
+    $(document).on('input change', '#workout_title, #workout_date, #workout_duration, #workout_memo, .exercise_name_input, .set_weight_input, .set_reps_input', scheduleDraftSave);
 
     // 로컬 임시저장 복구 확인
     checkAndRestoreDraft();

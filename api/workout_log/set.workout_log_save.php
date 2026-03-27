@@ -22,6 +22,9 @@ if(is_null($data) || !checkParams($data, ["workout_date", "exercises"])) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
+// 제목 (선택)
+$title = isset($data["title"]) ? mb_substr(trim($data["title"]), 0, 100) : '';
+
 // 운동 날짜 검증
 $workout_date = trim($data["workout_date"] ?? '');
 if(!preg_match('/^\d{4}-\d{2}-\d{2}$/', $workout_date)) {
@@ -105,11 +108,11 @@ if($log_id > 0) {
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
     }
 
-    WorkoutLog::updateLog($log_id, $workout_date, $workout_duration, $memo, $weight_unit);
+    WorkoutLog::updateLog($log_id, $title, $workout_date, $workout_duration, $memo, $weight_unit);
     WorkoutLog::deleteExercisesAndSets($log_id);
 } else {
     // 신규
-    $log_id = WorkoutLog::insertLog($member["id"], $workout_date, $workout_duration, $memo, $weight_unit);
+    $log_id = WorkoutLog::insertLog($member["id"], $title, $workout_date, $workout_duration, $memo, $weight_unit);
 }
 
 // 종목 + 세트 저장
