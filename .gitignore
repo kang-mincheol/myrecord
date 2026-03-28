@@ -3,4 +3,5 @@ test.php
 data/*
 config.php
 .claude/
+.claude/settings.local.json
 claude.md
