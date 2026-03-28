@@ -8,12 +8,6 @@ if (!$is_member) {
     echo '<script>myrecordAlert(\'on\', \'로그인 후 이용해주세요\', \'알림\', \'location.href="/account/login/"\');</script>';
     exit;
 }
-
-$log_id = (int)preg_replace("/[^0-9]+/u", "", $_GET['id'] ?? '');
-if (!$log_id) {
-    echo '<script>myrecordAlert(\'on\', \'잘못된 접근입니다\', \'알림\', \'location.href="/workout_log/list/"\');</script>';
-    exit;
-}
 ?>
 
 <div class="workout_log_header">
@@ -144,8 +138,13 @@ if (!$log_id) {
 <script>
 var exerciseIndex    = 0;
 var weightUnit       = 'kg';
-var autoSavedLogId   = <?= $log_id ?>;
-var draftKey         = 'workout_log_edit_draft_<?= $log_id ?>';
+var autoSavedLogId   = parseInt(new URLSearchParams(location.search).get('id') || '0');
+var draftKey         = 'workout_log_edit_draft_' + autoSavedLogId;
+
+// ── ID 유효성 검사
+if (!autoSavedLogId) {
+    myrecordAlert('on', '잘못된 접근입니다', '알림', 'location.href="/workout_log/list/"');
+}
 
 // ── 페이지 로드 시 API에서 데이터 불러와 폼 채우기
 fetch('/api/v1/workout-logs/' + autoSavedLogId)
