@@ -50,20 +50,17 @@ echo css_load('/community/free_board/view/index.css');
         <div id="comment_list"></div>
 
         <!-- 댓글 입력 -->
-        <?php if ($is_member): ?>
-        <div class="comment_input_wrap">
+        <div class="comment_input_wrap" id="comment_input_wrap" style="display:none;">
             <textarea id="comment_textarea" class="comment_textarea" placeholder="댓글을 입력해주세요 (최대 500자)" maxlength="500" oninput="commentInputCount(this);"></textarea>
             <div class="comment_input_bottom">
                 <span class="comment_char_count"><span id="comment_input_count">0</span> / 500</span>
                 <button class="comment_submit_btn" onclick="submitComment();"><i class="fa-solid fa-paper-plane"></i> 등록</button>
             </div>
         </div>
-        <?php else: ?>
-        <div class="comment_login_notice">
+        <div class="comment_login_notice" id="comment_login_notice" style="display:none;">
             <i class="fa-solid fa-lock"></i>
             <p>댓글은 <a href="/account/login/">로그인</a> 후 작성할 수 있습니다.</p>
         </div>
-        <?php endif; ?>
 
     </div>
     <!-- comment_card -->
@@ -76,7 +73,15 @@ echo css_load('/community/free_board/view/index.css');
 echo script_load('/community/free_board/view/index.js');
 ?>
 <script>
-window.addEventListener("DOMContentLoaded", () => {
+var IS_MEMBER = <?= json_encode($is_member) ?>;
+
+window.addEventListener("DOMContentLoaded", function () {
+    // 댓글 입력 영역 / 비로그인 안내 표시
+    if (IS_MEMBER) {
+        document.getElementById('comment_input_wrap').style.display = '';
+    } else {
+        document.getElementById('comment_login_notice').style.display = '';
+    }
     init();
 });
 </script>

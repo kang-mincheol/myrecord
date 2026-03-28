@@ -32,13 +32,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
         <a href="/" class="lp_logo">
             <img src="/img/company/myrecord_logo_header.png" alt="마이레코드">
         </a>
-        <div class="lp_nav_right">
-            <?php if ($is_member): ?>
-            <a href="/record/squat/list/" class="lp_nav_cta">기록 등록하기 <i class="fa-solid fa-arrow-right"></i></a>
-            <?php else: ?>
-            <a href="/account/login/" class="lp_nav_login">로그인</a>
-            <a href="/account/create/" class="lp_nav_cta">무료 가입 <i class="fa-solid fa-arrow-right"></i></a>
-            <?php endif; ?>
+        <div class="lp_nav_right" id="lp_nav_right">
+            <!-- JS에서 로그인 상태에 따라 렌더링 -->
         </div>
     </div>
 </nav>
@@ -288,6 +283,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 
 
 <script>
+var IS_MEMBER = <?= json_encode($is_member) ?>;
+
+// 네비게이션 로그인 상태 버튼 렌더링
+(function() {
+    var $nav = document.getElementById('lp_nav_right');
+    if (IS_MEMBER) {
+        $nav.innerHTML = '<a href="/record/squat/list/" class="lp_nav_cta">기록 등록하기 <i class="fa-solid fa-arrow-right"></i></a>';
+    } else {
+        $nav.innerHTML =
+            '<a href="/account/login/" class="lp_nav_login">로그인</a>' +
+            '<a href="/account/create/" class="lp_nav_cta">무료 가입 <i class="fa-solid fa-arrow-right"></i></a>';
+    }
+})();
+
 // 스크롤 진입 애니메이션
 (function() {
     const observer = new IntersectionObserver(function(entries) {

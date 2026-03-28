@@ -51,6 +51,7 @@ $routes = [
     ['GET',    '/records',                           'Records',     'list'],
     ['POST',   '/records',                           'Records',     'create'],
     ['GET',    '/records/{id}/certificate',          'Records',     'certificate'],
+    ['GET',    '/records/{id}/verify',               'Records',     'verify'],
     ['GET',    '/records/{id}/edit',                 'Records',     'editData'],
     ['GET',    '/records/{id}/comments',             'Records',     'listComments'],
     ['POST',   '/records/{id}/comments',             'Records',     'createComment'],
