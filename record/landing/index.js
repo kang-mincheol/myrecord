@@ -23,7 +23,7 @@ function getTotalRankingData() {
     $.ajax({
         async: false,
         type: "GET",
-        url: "/api/record/landing/get.record_total_ranking.php",
+        url: "/api/v1/records/ranking/total",
         success: function(data) {
             loadingOff();
             if(data["code"] == "SUCCESS") {
@@ -87,11 +87,9 @@ function getRecordRanking(name) {
     loadingOn();
     $.ajax({
         async: false,
-        type: "POST",
-        data: JSON.stringify({
-            record_type: name
-        }),
-        url: "/api/record/landing/get.record_ranking.php",
+        type: "GET",
+        data: { record_type: name },
+        url: "/api/v1/records/ranking",
         success: function(data) {
             loadingOff();
             if(data["code"] == "SUCCESS") {

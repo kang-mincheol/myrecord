@@ -32,13 +32,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
         <a href="/" class="lp_logo">
             <img src="/img/company/myrecord_logo_header.png" alt="마이레코드">
         </a>
-        <div class="lp_nav_right">
-            <?php if ($is_member): ?>
-            <a href="/record/squat/list/" class="lp_nav_cta">기록 등록하기 <i class="fa-solid fa-arrow-right"></i></a>
-            <?php else: ?>
-            <a href="/account/login/" class="lp_nav_login">로그인</a>
-            <a href="/account/create/" class="lp_nav_cta">무료 가입 <i class="fa-solid fa-arrow-right"></i></a>
-            <?php endif; ?>
+        <div class="lp_nav_right" id="lp_nav_right">
+            <!-- JS에서 로그인 상태에 따라 렌더링 -->
         </div>
     </div>
 </nav>
@@ -288,6 +283,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 
 
 <script>
+// 네비게이션 로그인 상태 버튼 렌더링
+(function() {
+    // 기본값: 비로그인 버튼 표시 후 로그인 확인 시 교체 (레이아웃 시프트 최소화)
+    var $nav = document.getElementById('lp_nav_right');
+    $nav.innerHTML =
+        '<a href="/account/login/" class="lp_nav_login">로그인</a>' +
+        '<a href="/account/create/" class="lp_nav_cta">무료 가입 <i class="fa-solid fa-arrow-right"></i></a>';
+
+    fetch('/api/v1/accounts/me')
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.code === 'SUCCESS') {
+                $nav.innerHTML = '<a href="/record/squat/list/" class="lp_nav_cta">기록 등록하기 <i class="fa-solid fa-arrow-right"></i></a>';
+            }
+        })
+        .catch(function () { /* 비로그인 상태 유지 */ });
+})();
+
 // 스크롤 진입 애니메이션
 (function() {
     const observer = new IntersectionObserver(function(entries) {

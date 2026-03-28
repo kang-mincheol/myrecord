@@ -1,37 +1,8 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/common.php");
-
 $admin_page_title = '접속 로그';
 
-// ===== 파라미터 =====
-$page         = max(1, (int)($_GET['page']       ?? 1));
-$page_size    = 30;
-$offset       = ($page - 1) * $page_size;
-$filter_type  = $_GET['type']       ?? 'all';
-$search_key   = $_GET['search_key'] ?? 'url';
-$search_val   = trim($_GET['search_val'] ?? '');
-
-if (!in_array($filter_type, ['all', 'member', 'guest'])) $filter_type = 'all';
-if (!in_array($search_key, ['url', 'ip', 'user']))       $search_key  = 'url';
-
-// ===== 통계 =====
-$stats = AdminAccessLog::getStats();
-
-// ===== 총 건수 / 목록 =====
-$total_count = AdminAccessLog::getTotalCount($filter_type, $search_key, $search_val);
-$total_pages = max(1, (int)ceil($total_count / $page_size));
-if ($page > $total_pages) $page = $total_pages;
-
-$list = AdminAccessLog::getList($page, $page_size, $filter_type, $search_key, $search_val);
-
-$base_query = http_build_query([
-    'type'       => $filter_type,
-    'search_key' => $search_key,
-    'search_val' => $search_val,
-]);
-
 $admin_extra_css = '<style>
-/* ─── 필터 ─── */
 .al_filter_card {
     background: var(--card-bg); border: 1px solid var(--border-color);
     border-radius: 14px; padding: 14px 20px; margin-bottom: 16px;
@@ -60,40 +31,27 @@ $admin_extra_css = '<style>
     transition: background 0.15s; font-family: inherit;
 }
 .al_filter_card .reset_btn:hover { background: #e2e8f0; color: var(--text-primary); }
-
-/* ─── 퀵필터 ─── */
 .status_quick_bar { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-.status_quick_bar a {
+.status_quick_bar button {
     display: inline-flex; align-items: center; gap: 6px;
     height: 34px; padding: 0 14px; border-radius: 8px;
     border: 1.5px solid var(--border-color); background: var(--card-bg);
     color: var(--text-secondary); font-size: 12px; font-weight: 600;
-    text-decoration: none; transition: all 0.15s;
+    cursor: pointer; transition: all 0.15s; font-family: inherit;
 }
-.status_quick_bar a:hover,
-.status_quick_bar a.on { border-color: var(--accent); color: var(--accent); background: #eef1fc; }
-.status_quick_bar a.on { font-weight: 700; }
-
-/* ─── 목록 info bar ─── */
+.status_quick_bar button:hover,
+.status_quick_bar button.on { border-color: var(--accent); color: var(--accent); background: #eef1fc; font-weight: 700; }
 .list_info_bar {
     display: flex; align-items: center; justify-content: space-between;
     padding: 10px 20px; border-bottom: 1px solid var(--border-color);
     font-size: 12px; color: var(--text-secondary);
 }
 .list_info_bar .total_count strong { color: var(--accent); font-weight: 700; }
-
-/* ─── 테이블 셀 ─── */
 .al_url_cell {
     max-width: 340px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     font-size: 12px; color: var(--text-primary); font-family: monospace;
 }
-.al_ip_cell {
-    font-size: 12px; font-family: monospace; color: var(--text-secondary);
-    white-space: nowrap;
-}
-.al_ua_cell {
-    font-size: 12px; color: var(--text-secondary);
-}
+.al_ip_cell { font-size: 12px; font-family: monospace; color: var(--text-secondary); white-space: nowrap; }
 .method_badge {
     display: inline-block; padding: 2px 7px; border-radius: 5px;
     font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
@@ -101,172 +59,223 @@ $admin_extra_css = '<style>
 }
 .method_badge.get  { background: #e8f0ff; color: #0123B4; }
 .method_badge.post { background: #fff4e0; color: #c47a00; }
-
-.member_badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 12px; font-weight: 600; color: var(--text-primary);
-}
-.guest_badge {
-    font-size: 11px; color: #aaa;
-}
+.member_badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.guest_badge { font-size: 11px; color: #aaa; }
 .device_icon { font-size: 13px; color: var(--text-secondary); }
-
-/* ─── 페이지네이션 ─── */
 .admin_paging {
     display: flex; justify-content: center; align-items: center;
     gap: 4px; padding: 18px 0 4px;
 }
-.admin_paging a, .admin_paging span {
+.admin_paging button, .admin_paging span {
     display: inline-flex; justify-content: center; align-items: center;
     width: 32px; height: 32px; border-radius: 8px;
     border: 1.5px solid var(--border-color); font-size: 13px; font-weight: 500;
-    color: #666; text-decoration: none; transition: all 0.15s;
+    color: #666; background: none; cursor: pointer; transition: all 0.15s; font-family: inherit;
 }
-.admin_paging a:hover { border-color: var(--accent); color: var(--accent); background: #eef1fc; }
+.admin_paging button:hover { border-color: var(--accent); color: var(--accent); background: #eef1fc; }
 .admin_paging span.current { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
-.admin_paging span.disabled { color: #ccc; cursor: default; }
+.admin_paging span.disabled { color: #ccc; cursor: default; border-color: var(--border-color); }
 </style>';
 
 include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
 ?>
 
-<!-- ===== Page Header ===== -->
 <div class="admin_page_header">
     <p class="admin_page_title">접속 로그</p>
     <p class="admin_page_sub">사이트 접속 기록을 조회합니다</p>
 </div>
 
-<!-- ===== Stats ===== -->
-<div class="stat_cards_grid">
-    <div class="stat_card">
-        <div class="stat_icon blue"><i class="fa-solid fa-list-check"></i></div>
-        <p class="stat_label">총 로그</p>
-        <p class="stat_value"><?= number_format($stats['total']) ?><span>건</span></p>
-    </div>
-    <div class="stat_card">
-        <div class="stat_icon green"><i class="fa-solid fa-calendar-day"></i></div>
-        <p class="stat_label">오늘 접속</p>
-        <p class="stat_value"><?= number_format($stats['today']) ?><span>건</span></p>
-    </div>
-    <div class="stat_card">
-        <div class="stat_icon orange"><i class="fa-solid fa-network-wired"></i></div>
-        <p class="stat_label">오늘 고유 IP</p>
-        <p class="stat_value"><?= number_format($stats['unique_ip']) ?><span>개</span></p>
-    </div>
-    <div class="stat_card">
-        <div class="stat_icon purple"><i class="fa-solid fa-user-check"></i></div>
-        <p class="stat_label">오늘 로그인 접속</p>
-        <p class="stat_value"><?= number_format($stats['member']) ?><span>건</span></p>
-    </div>
+<!-- Stats -->
+<div class="stat_cards_grid" id="stat_cards_wrap">
+    <div class="stat_card"><div class="stat_icon blue"><i class="fa-solid fa-spinner fa-spin"></i></div><p class="stat_label">로딩 중</p><p class="stat_value">-</p></div>
+    <div class="stat_card"><div class="stat_icon green"><i class="fa-solid fa-spinner fa-spin"></i></div><p class="stat_label">로딩 중</p><p class="stat_value">-</p></div>
+    <div class="stat_card"><div class="stat_icon orange"><i class="fa-solid fa-spinner fa-spin"></i></div><p class="stat_label">로딩 중</p><p class="stat_value">-</p></div>
+    <div class="stat_card"><div class="stat_icon purple"><i class="fa-solid fa-spinner fa-spin"></i></div><p class="stat_label">로딩 중</p><p class="stat_value">-</p></div>
 </div>
 
-<!-- ===== 퀵 필터 ===== -->
-<?php
-$qp = function($type) use ($search_key, $search_val) {
-    return http_build_query(['type' => $type, 'search_key' => $search_key, 'search_val' => $search_val, 'page' => 1]);
-};
-?>
+<!-- Quick Filter -->
 <div class="status_quick_bar">
-    <a href="?<?= $qp('all')    ?>" class="<?= $filter_type === 'all'    ? 'on' : '' ?>"><i class="fa-solid fa-globe"></i> 전체</a>
-    <a href="?<?= $qp('member') ?>" class="<?= $filter_type === 'member' ? 'on' : '' ?>"><i class="fa-solid fa-user"></i> 로그인</a>
-    <a href="?<?= $qp('guest')  ?>" class="<?= $filter_type === 'guest'  ? 'on' : '' ?>"><i class="fa-solid fa-user-slash"></i> 비로그인</a>
+    <button class="on" onclick="setType('all')"><i class="fa-solid fa-globe"></i> 전체</button>
+    <button onclick="setType('member')"><i class="fa-solid fa-user"></i> 로그인</button>
+    <button onclick="setType('guest')"><i class="fa-solid fa-user-slash"></i> 비로그인</button>
 </div>
 
-<!-- ===== 검색 ===== -->
-<form method="GET" action="">
-    <input type="hidden" name="type" value="<?= htmlspecialchars($filter_type) ?>"/>
-    <div class="al_filter_card">
-        <select name="search_key">
-            <option value="url"  <?= $search_key === 'url'  ? 'selected' : '' ?>>URL</option>
-            <option value="ip"   <?= $search_key === 'ip'   ? 'selected' : '' ?>>IP</option>
-            <option value="user" <?= $search_key === 'user' ? 'selected' : '' ?>>회원</option>
-        </select>
-        <input type="text" name="search_val" value="<?= htmlspecialchars($search_val) ?>" placeholder="검색어를 입력하세요"/>
-        <button type="submit" class="filter_btn"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
-        <a href="/admin_myrecord/access_log/" class="reset_btn"><i class="fa-solid fa-rotate-left"></i> 초기화</a>
-    </div>
-</form>
+<!-- Search -->
+<div class="al_filter_card">
+    <select id="f_search_key">
+        <option value="url">URL</option>
+        <option value="ip">IP</option>
+        <option value="user">회원</option>
+    </select>
+    <input type="text" id="f_search_val" placeholder="검색어를 입력하세요"/>
+    <button class="filter_btn" onclick="doSearch()"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
+    <button class="reset_btn" onclick="doReset()"><i class="fa-solid fa-rotate-left"></i> 초기화</button>
+</div>
 
-<!-- ===== 목록 테이블 ===== -->
+<!-- Table -->
 <div class="admin_card">
     <div class="list_info_bar">
-        <span class="total_count">총 <strong><?= number_format($total_count) ?></strong>건</span>
-        <span><?= number_format($page) ?> / <?= number_format($total_pages) ?> 페이지</span>
+        <span class="total_count">총 <strong id="total_count_val">-</strong>건</span>
+        <span id="page_info">- / - 페이지</span>
     </div>
     <table class="admin_table">
         <thead>
             <tr>
-                <th>#</th>
-                <th>회원</th>
-                <th>IP</th>
-                <th>URL</th>
-                <th style="text-align:center;">기기</th>
-                <th>접속일시</th>
+                <th>#</th><th>회원</th><th>IP</th><th>URL</th>
+                <th style="text-align:center;">기기</th><th>접속일시</th>
             </tr>
         </thead>
-        <tbody>
-        <?php if (empty($list)): ?>
-            <tr><td colspan="6" style="text-align:center; color:#aaa; padding:40px 0;">검색 결과가 없습니다</td></tr>
-        <?php else: ?>
-        <?php foreach ($list as $idx => $r):
-            $row_no = $total_count - $offset - $idx;
-            $method = AdminAccessLog::parseMethod($r['params'] ?? '');
-            $device = AdminAccessLog::parseDevice($r['user_agent'] ?? '');
-            $device_icon = match($device) {
-                'mobile'  => '<i class="fa-solid fa-mobile-screen-button device_icon" title="모바일"></i>',
-                'tablet'  => '<i class="fa-solid fa-tablet-screen-button device_icon" title="태블릿"></i>',
-                default   => '<i class="fa-solid fa-desktop device_icon" title="데스크톱"></i>',
-            };
-        ?>
-            <tr>
-                <td style="color:var(--text-secondary); font-size:12px;"><?= number_format($row_no) ?></td>
-                <td>
-                    <?php if (!empty($r['user_nickname'])): ?>
-                        <span class="member_badge"><i class="fa-solid fa-user" style="font-size:11px; color:var(--accent);"></i><?= htmlspecialchars($r['user_nickname']) ?></span>
-                    <?php else: ?>
-                        <span class="guest_badge">비로그인</span>
-                    <?php endif; ?>
-                </td>
-                <td class="al_ip_cell"><?= htmlspecialchars($r['ip_address'] ?? '-') ?></td>
-                <td>
-                    <span class="method_badge <?= strtolower($method) ?>"><?= $method ?></span><span class="al_url_cell" title="<?= htmlspecialchars($r['url'] ?? '') ?>"><?= htmlspecialchars($r['url'] ?? '-') ?></span>
-                </td>
-                <td style="text-align:center;"><?= $device_icon ?></td>
-                <td style="color:var(--text-secondary); font-size:12px; white-space:nowrap;">
-                    <?= $r['create_date'] ? date('Y.m.d H:i', strtotime($r['create_date'])) : '-' ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        <?php endif; ?>
+        <tbody id="list_tbody">
+            <tr><td colspan="6" style="text-align:center;color:#aaa;padding:40px 0;"><i class="fa-solid fa-spinner fa-spin"></i></td></tr>
         </tbody>
     </table>
-
-    <!-- 페이지네이션 -->
-    <?php if ($total_pages > 1):
-        $block       = 10;
-        $block_start = (int)(floor(($page - 1) / $block) * $block) + 1;
-        $block_end   = min($block_start + $block - 1, $total_pages);
-    ?>
-    <div class="admin_paging">
-        <?php if ($block_start > 1): ?>
-            <a href="?page=<?= $block_start - 1 ?>&<?= $base_query ?>"><i class="fa-solid fa-chevron-left"></i></a>
-        <?php else: ?>
-            <span class="disabled"><i class="fa-solid fa-chevron-left"></i></span>
-        <?php endif; ?>
-        <?php for ($p = $block_start; $p <= $block_end; $p++): ?>
-            <?php if ($p === $page): ?>
-                <span class="current"><?= $p ?></span>
-            <?php else: ?>
-                <a href="?page=<?= $p ?>&<?= $base_query ?>"><?= $p ?></a>
-            <?php endif; ?>
-        <?php endfor; ?>
-        <?php if ($block_end < $total_pages): ?>
-            <a href="?page=<?= $block_end + 1 ?>&<?= $base_query ?>"><i class="fa-solid fa-chevron-right"></i></a>
-        <?php else: ?>
-            <span class="disabled"><i class="fa-solid fa-chevron-right"></i></span>
-        <?php endif; ?>
-    </div>
-    <?php endif; ?>
+    <div class="admin_paging" id="paging_wrap"></div>
 </div>
+
+<script>
+var _state = { page: 1, type: 'all', search_key: 'url', search_val: '' };
+
+function init() {
+    var sp = new URLSearchParams(location.search);
+    _state.page       = parseInt(sp.get('page') || '1');
+    _state.type       = sp.get('type')       || 'all';
+    _state.search_key = sp.get('search_key') || 'url';
+    _state.search_val = sp.get('search_val') || '';
+
+    document.getElementById('f_search_key').value = _state.search_key;
+    document.getElementById('f_search_val').value = _state.search_val;
+    updateQuickBar();
+    loadData();
+}
+
+function loadData() {
+    var qs = new URLSearchParams({
+        page:       _state.page,
+        type:       _state.type,
+        search_key: _state.search_key,
+        search_val: _state.search_val,
+    }).toString();
+
+    history.replaceState(null, '', '?' + qs);
+
+    document.getElementById('list_tbody').innerHTML =
+        '<tr><td colspan="6" style="text-align:center;color:#aaa;padding:40px 0;"><i class="fa-solid fa-spinner fa-spin"></i></td></tr>';
+
+    fetch('/api/v1/admin/access-logs?' + qs)
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.code !== 'SUCCESS') { alert(res.msg || '오류가 발생했습니다.'); return; }
+            renderStats(res.stats);
+            renderTable(res);
+            renderPaging(res.total_count, res.page, res.page_size, res.total_pages);
+        })
+        .catch(function () { alert('서버 오류가 발생했습니다.'); });
+}
+
+function renderStats(s) {
+    document.getElementById('stat_cards_wrap').innerHTML =
+        statCard('blue',   'fa-list-check',      '총 로그',         s.total,     '건') +
+        statCard('green',  'fa-calendar-day',    '오늘 접속',       s.today,     '건') +
+        statCard('orange', 'fa-network-wired',   '오늘 고유 IP',    s.unique_ip, '개') +
+        statCard('purple', 'fa-user-check',      '오늘 로그인 접속', s.member,   '건');
+}
+
+function renderTable(res) {
+    document.getElementById('total_count_val').textContent = res.total_count.toLocaleString();
+    document.getElementById('page_info').textContent = Number(res.page).toLocaleString() + ' / ' + Number(res.total_pages).toLocaleString() + ' 페이지';
+
+    if (!res.data.length) {
+        document.getElementById('list_tbody').innerHTML =
+            '<tr><td colspan="6" style="text-align:center;color:#aaa;padding:40px 0;">검색 결과가 없습니다</td></tr>';
+        return;
+    }
+
+    var deviceIcon = {
+        mobile:  '<i class="fa-solid fa-mobile-screen-button device_icon" title="모바일"></i>',
+        tablet:  '<i class="fa-solid fa-tablet-screen-button device_icon" title="태블릿"></i>',
+        desktop: '<i class="fa-solid fa-desktop device_icon" title="데스크톱"></i>',
+    };
+
+    var html = '';
+    res.data.forEach(function (r, idx) {
+        var rowNo = res.total_count - res.offset - idx;
+        html += '<tr>' +
+            '<td style="color:var(--text-secondary);font-size:12px;">' + Number(rowNo).toLocaleString() + '</td>' +
+            '<td>' + (r.user_nickname
+                ? '<span class="member_badge"><i class="fa-solid fa-user" style="font-size:11px;color:var(--accent);"></i>' + esc(r.user_nickname) + '</span>'
+                : '<span class="guest_badge">비로그인</span>') + '</td>' +
+            '<td class="al_ip_cell">' + esc(r.ip_address) + '</td>' +
+            '<td><span class="method_badge ' + r.method.toLowerCase() + '">' + esc(r.method) + '</span>' +
+                '<span class="al_url_cell" title="' + esc(r.url) + '">' + esc(r.url) + '</span></td>' +
+            '<td style="text-align:center;">' + (deviceIcon[r.device] || deviceIcon.desktop) + '</td>' +
+            '<td style="color:var(--text-secondary);font-size:12px;white-space:nowrap;">' + esc(r.create_date) + '</td>' +
+        '</tr>';
+    });
+    document.getElementById('list_tbody').innerHTML = html;
+}
+
+function renderPaging(totalCount, page, pageSize, totalPages) {
+    if (totalPages <= 1) { document.getElementById('paging_wrap').innerHTML = ''; return; }
+    var block = 10;
+    var blockStart = Math.floor((page - 1) / block) * block + 1;
+    var blockEnd   = Math.min(blockStart + block - 1, totalPages);
+    var html = '';
+    if (blockStart > 1) html += '<button onclick="goPage(' + (blockStart - 1) + ')"><i class="fa-solid fa-chevron-left"></i></button>';
+    else                html += '<span class="disabled"><i class="fa-solid fa-chevron-left"></i></span>';
+    for (var p = blockStart; p <= blockEnd; p++) {
+        if (p === page) html += '<span class="current">' + p + '</span>';
+        else            html += '<button onclick="goPage(' + p + ')">' + p + '</button>';
+    }
+    if (blockEnd < totalPages) html += '<button onclick="goPage(' + (blockEnd + 1) + ')"><i class="fa-solid fa-chevron-right"></i></button>';
+    else                       html += '<span class="disabled"><i class="fa-solid fa-chevron-right"></i></span>';
+    document.getElementById('paging_wrap').innerHTML = html;
+}
+
+function setType(type) {
+    _state.type = type;
+    _state.page = 1;
+    updateQuickBar();
+    loadData();
+}
+
+function updateQuickBar() {
+    document.querySelectorAll('.status_quick_bar button').forEach(function (btn) {
+        btn.classList.toggle('on', btn.getAttribute('onclick').includes("'" + _state.type + "'"));
+    });
+}
+
+function goPage(p) { _state.page = p; loadData(); }
+
+function doSearch() {
+    _state.page       = 1;
+    _state.search_key = document.getElementById('f_search_key').value;
+    _state.search_val = document.getElementById('f_search_val').value.trim();
+    loadData();
+}
+
+function doReset() {
+    _state = { page: 1, type: 'all', search_key: 'url', search_val: '' };
+    document.getElementById('f_search_key').value = 'url';
+    document.getElementById('f_search_val').value = '';
+    updateQuickBar();
+    loadData();
+}
+
+document.getElementById('f_search_val').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') doSearch();
+});
+
+function statCard(color, icon, label, value, unit) {
+    return '<div class="stat_card"><div class="stat_icon ' + color + '"><i class="fa-solid ' + icon + '"></i></div>' +
+        '<p class="stat_label">' + label + '</p>' +
+        '<p class="stat_value">' + Number(value).toLocaleString() + '<span>' + unit + '</span></p></div>';
+}
+
+function esc(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+init();
+</script>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_footer.php"); ?>

@@ -52,6 +52,13 @@ if (!defined('NO_ALONE')) exit; // 개별 페이지 접근 불가
 
 
 <script src="https://kit.fontawesome.com/d56d6b9080.js" crossorigin="anonymous"></script>
+<script>
+function logoutAction() {
+    fetch('/api/v1/auth/logout', { method: 'POST' })
+        .then(function() { location.href = '/'; })
+        .catch(function() { location.href = '/'; });
+}
+</script>
 
 <?php
 echo css_load('/fonts/fonts.css');
@@ -147,7 +154,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
             if($is_member) {
             ?>
             <div class="menu_box">
-                <a href="/api/account/set.logout.php" class="menu_btn">로그아웃</a>
+                <a href="javascript:void(0)" onclick="logoutAction();" class="menu_btn">로그아웃</a>
             </div>
             <div class="menu_box">
                 <a href="/account/myaccount" class="menu_btn">내 정보</a>
@@ -188,7 +195,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/component/toast/toast.php');
                     <?php
                     if($is_member) {
                     ?>
-                    <a href="/api/account/set.logout.php" class="account_btn login"><i class="fa-solid fa-right-from-bracket"></i>로그아웃</a>
+                    <a href="javascript:void(0)" onclick="logoutAction();" class="account_btn login"><i class="fa-solid fa-right-from-bracket"></i>로그아웃</a>
                     <a href="/account/myaccount" class="account_btn"><i class="fa-solid fa-user"></i>내 정보</a>
                     <?php
                     } else {

@@ -3,25 +3,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
 
 echo css_load('/muscle_gain/calendar/index.css');
-
-// ── 연/월 파라미터 ──
-$year  = (int)($_GET['year']  ?? date('Y'));
-$month = (int)($_GET['month'] ?? date('n'));
-
-if ($month < 1)  { $month = 12; $year--; }
-if ($month > 12) { $month = 1;  $year++; }
-
-// ── 이동 URL ──
-$prev_month = $month == 1  ? 12 : $month - 1;
-$prev_year  = $month == 1  ? $year - 1 : $year;
-$next_month = $month == 12 ? 1  : $month + 1;
-$next_year  = $month == 12 ? $year + 1 : $year;
-
-// ── 달력 계산 ──
-$first_ts   = mktime(0, 0, 0, $month, 1, $year);
-$days_total = (int)date('t', $first_ts);   // 이번 달 총 일수
-$start_dow  = (int)date('w', $first_ts);   // 1일의 요일 (0=일, 6=토)
-$today      = date('Y-m-d');
 ?>
 
 <div class="calendar_page_header">
@@ -31,15 +12,15 @@ $today      = date('Y-m-d');
     </div>
 </div>
 
-<div id="calendar_wrap" data-year="<?= $year ?>" data-month="<?= $month ?>">
+<div id="calendar_wrap">
 
     <!-- 월 이동 네비 -->
     <div class="calendar_nav">
-        <a class="nav_btn prev" href="?year=<?= $prev_year ?>&month=<?= $prev_month ?>">
+        <a class="nav_btn prev" href="#" onclick="navMonth(-1); return false;">
             <i class="fa-solid fa-chevron-left"></i>
         </a>
-        <p class="nav_title"><?= $year ?>년 <?= $month ?>월</p>
-        <a class="nav_btn next" href="?year=<?= $next_year ?>&month=<?= $next_month ?>">
+        <p class="nav_title" id="nav_title"></p>
+        <a class="nav_btn next" href="#" onclick="navMonth(1); return false;">
             <i class="fa-solid fa-chevron-right"></i>
         </a>
     </div>
@@ -50,12 +31,11 @@ $today      = date('Y-m-d');
         이번 달 운동 <strong id="month_stat_count"><i class="fa-solid fa-spinner fa-spin"></i></strong>
     </div>
 
-    <?php if (!$is_member): ?>
-    <div class="login_notice">
+    <!-- 비로그인 안내 (JS에서 표시) -->
+    <div id="login_notice_wrap" class="login_notice" style="display:none;">
         <i class="fa-solid fa-lock"></i>
         <p><a href="/account/login/">로그인</a> 후 득근달력을 확인할 수 있습니다.</p>
     </div>
-    <?php endif; ?>
 
     <!-- 달력 -->
     <div class="calendar_card">
@@ -70,62 +50,18 @@ $today      = date('Y-m-d');
             <span class="dow sat">토</span>
         </div>
 
-        <!-- 날짜 그리드 -->
-        <div class="cal_grid">
-            <?php
-            $cell = 0;
-
-            // 1일 이전 빈 셀
-            for ($i = 0; $i < $start_dow; $i++, $cell++) {
-                echo '<div class="cal_cell empty"></div>';
-            }
-
-            // 날짜 셀
-            for ($d = 1; $d <= $days_total; $d++, $cell++) {
-                $date_str = sprintf('%04d-%02d-%02d', $year, $month, $d);
-                $is_today = ($date_str === $today);
-                $dow      = ($start_dow + $d - 1) % 7;
-                $is_sun   = $dow === 0;
-                $is_sat   = $dow === 6;
-
-                $classes = ['cal_cell'];
-                if ($is_today) $classes[] = 'today';
-                if ($is_sun)   $classes[] = 'sun';
-                if ($is_sat)   $classes[] = 'sat';
-            ?>
-                <div class="<?= implode(' ', $classes) ?>" data-date="<?= $date_str ?>">
-                    <div>
-                        <span class="cal_date"><?= $d ?></span>
-                    </div>
-                </div>
-            <?php } ?>
-
-            <!-- 마지막 주 나머지 빈 셀 -->
-            <?php
-            $remaining = (7 - ($cell % 7)) % 7;
-            for ($i = 0; $i < $remaining; $i++) {
-                echo '<div class="cal_cell empty"></div>';
-            }
-            ?>
-        </div>
+        <!-- 날짜 그리드 - JS로 생성 -->
+        <div class="cal_grid" id="cal_grid"></div>
     </div>
 
 </div>
 <!-- calendar_wrap -->
 
-<?php
-echo script_load('/muscle_gain/calendar/index.js');
-?>
+<?php echo script_load('/muscle_gain/calendar/index.js'); ?>
 <script>
 $(function () {
-    <?php if ($is_member): ?>
-    loadCalendar(<?= $year ?>, <?= $month ?>);
-    <?php else: ?>
-    $('#month_stat_count').text('0');
-    <?php endif; ?>
+    initCalendar();
 });
 </script>
 
-<?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
-?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php'); ?>

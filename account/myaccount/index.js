@@ -7,7 +7,7 @@ function getAccountData() {
 
   $.ajax({
     type: "GET",
-    url: "/api/account/get.myaccount_data.php",
+    url: "/api/v1/accounts/me",
     success: function (data) {
       loadingOff();
       if (data["code"] == "SUCCESS") {
@@ -148,9 +148,9 @@ function myaccountChange() {
     }
 
     $.ajax({
-      type: "POST",
+      type: "PUT",
       data: JSON.stringify(data),
-      url: "/api/account/set.myaccount_change.php",
+      url: "/api/v1/accounts/me",
       success: function (data) {
         loadingOff();
         console.log(data);

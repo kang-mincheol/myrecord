@@ -11,10 +11,9 @@ function loadList(page) {
     $('#pagination_wrap').html('');
 
     $.ajax({
-        url: '/api/workout_log/get.workout_log_list.php',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ page: page }),
+        url: '/api/v1/workout-logs',
+        type: 'GET',
+        data: { page: page },
         success: function(res) {
             if(res.code === 'SUCCESS') {
                 renderList(res);

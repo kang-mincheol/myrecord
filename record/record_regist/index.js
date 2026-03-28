@@ -35,7 +35,7 @@ function getRecordData(record_id) {
     data: JSON.stringify({
       record_id: record_id,
     }),
-    url: "/api/record/get.record_edit_data.php",
+    url: "/api/v1/records/" + record_id + "/edit",
     success: function (data) {
       console.log(data);
       if (data["code"] == "SUCCESS") {
@@ -178,7 +178,7 @@ function insertData() {
     async: false,
     type: "POST",
     data: recordData,
-    url: "/api/record/set.record_insert.php",
+    url: "/api/v1/records",
     contentType: false,
     processData: false,
     success: function (data) {

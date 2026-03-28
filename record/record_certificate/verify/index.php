@@ -1,61 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/header.php');
-
-// ── 인증번호 생성 함수 (API와 동일 로직)
-function generateCertCode(int $id): string {
-    $raw = strtoupper(substr(hash('sha256', 'mr_cert_f7e2_' . $id), 0, 16));
-    return implode('-', str_split($raw, 4));
-}
-
-// ── 파라미터 수신
-$record_id  = isset($_GET['id'])   ? (int)preg_replace('/[^0-9]/', '', $_GET['id'])   : 0;
-$input_code = isset($_GET['code']) ? preg_replace('/[^A-F0-9]/', '', strtoupper($_GET['code'])) : '';
-
-$is_valid   = false;
-$error_msg  = '';
-$record_data = null;
-
-if ($record_id > 0 && $input_code !== '') {
-
-    // 코드 검증
-    $expected_raw = strtoupper(substr(hash('sha256', 'mr_cert_f7e2_' . $record_id), 0, 16));
-    if ($input_code === $expected_raw) {
-
-        // 레코드 조회
-        $sql = "
-            Select  T1.id, T1.status, T2.user_nickname,
-                    T1.record_weight, T3.record_name_ko,
-                    T1.create_datetime  as request_datetime,
-                    T4.create_datetime  as certificate_datetime
-            From    tb_record_request T1
-            Inner Join Account T2 On T1.account_id = T2.id
-            Inner Join tb_record_master T3 On T1.record_type = T3.id
-            Left Outer Join tb_record_inspection T4
-                On  T1.id = T4.request_id
-                And T4.change_status = '2'
-            Where   T1.id = :id
-            And     T1.status = 2
-        ";
-        $record_data = $PDO->fetch($sql, [':id' => $record_id]);
-
-        if ($record_data) {
-            $is_valid = true;
-            $cert_date = $record_data['certificate_datetime']
-                ? date('Y년 m월 d일', strtotime($record_data['certificate_datetime']))
-                : date('Y년 m월 d일', strtotime($record_data['request_datetime']));
-            $cert_code_fmt = generateCertCode($record_id);
-        } else {
-            $error_msg = '해당 기록을 찾을 수 없거나 아직 승인되지 않은 기록입니다.';
-        }
-
-    } else {
-        $error_msg = '인증번호가 올바르지 않습니다. QR코드를 다시 스캔해주세요.';
-    }
-
-} else {
-    $error_msg = '잘못된 접근입니다. 인증서의 QR코드를 스캔해주세요.';
-}
 ?>
 
 <style>
@@ -224,6 +169,20 @@ if ($record_id > 0 && $input_code !== '') {
     margin-top: 28px;
 }
 
+.verify_loading {
+    text-align: center;
+    padding: 60px 0;
+    color: #aaa;
+    font-size: 15px;
+}
+
+.verify_loading i {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 12px;
+    color: #0123B4;
+}
+
 @media screen and (max-width: 600px) {
     .verify_page_wrap {
         padding: 24px 16px 60px;
@@ -240,56 +199,12 @@ if ($record_id > 0 && $input_code !== '') {
 
 <div class="verify_page_wrap">
 
-    <?php if ($is_valid): ?>
-
-    <div class="verify_result_card success">
-        <div class="verify_card_top success">
-            <i class="fa-solid fa-circle-check verify_icon"></i>
-            <div class="verify_status_text">
-                <p class="status_main">인증 완료</p>
-                <p class="status_sub">마이레코드에서 공식 승인된 기록입니다</p>
-            </div>
-        </div>
-        <div class="verify_card_body">
-            <div class="verify_info_row">
-                <span class="verify_info_label">닉네임</span>
-                <span class="verify_info_value"><?php echo htmlspecialchars($record_data['user_nickname']); ?></span>
-            </div>
-            <div class="verify_info_row">
-                <span class="verify_info_label">종목</span>
-                <span class="verify_info_value"><?php echo htmlspecialchars($record_data['record_name_ko']); ?></span>
-            </div>
-            <div class="verify_info_row">
-                <span class="verify_info_label">기록</span>
-                <span class="verify_info_value weight"><?php echo htmlspecialchars($record_data['record_weight']); ?> KG</span>
-            </div>
-            <div class="verify_info_row">
-                <span class="verify_info_label">인증일</span>
-                <span class="verify_info_value"><?php echo $cert_date; ?></span>
-            </div>
-            <div class="verify_cert_code_box">
-                <p class="code_label">인 증 번 호</p>
-                <p class="code_value"><?php echo $cert_code_fmt; ?></p>
-            </div>
+    <div id="verify_root">
+        <div class="verify_loading">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            인증 확인 중...
         </div>
     </div>
-
-    <?php else: ?>
-
-    <div class="verify_result_card fail">
-        <div class="verify_card_top fail">
-            <i class="fa-solid fa-circle-xmark verify_icon"></i>
-            <div class="verify_status_text">
-                <p class="status_main">인증 실패</p>
-                <p class="status_sub">유효하지 않은 인증서입니다</p>
-            </div>
-        </div>
-        <div class="verify_error_msg">
-            <?php echo nl2br(htmlspecialchars($error_msg)); ?>
-        </div>
-    </div>
-
-    <?php endif; ?>
 
     <div class="verify_back_wrap">
         <a href="/" class="verify_back_link">
@@ -298,5 +213,84 @@ if ($record_id > 0 && $input_code !== '') {
     </div>
 
 </div>
+
+<script>
+(function () {
+    var sp = new URLSearchParams(location.search);
+    var id   = parseInt(sp.get('id') || '0');
+    var code = sp.get('code') || '';
+
+    if (!id || !code) {
+        renderFail('잘못된 접근입니다. 인증서의 QR코드를 스캔해주세요.');
+        return;
+    }
+
+    fetch('/api/v1/records/' + id + '/verify?code=' + encodeURIComponent(code))
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.code === 'SUCCESS') {
+                renderSuccess(res.data);
+            } else {
+                renderFail(res.msg || '인증에 실패했습니다.');
+            }
+        })
+        .catch(function () {
+            renderFail('서버 오류가 발생했습니다.');
+        });
+
+    function renderSuccess(d) {
+        document.getElementById('verify_root').innerHTML =
+            '<div class="verify_result_card success">' +
+                '<div class="verify_card_top success">' +
+                    '<i class="fa-solid fa-circle-check verify_icon"></i>' +
+                    '<div class="verify_status_text">' +
+                        '<p class="status_main">인증 완료</p>' +
+                        '<p class="status_sub">마이레코드에서 공식 승인된 기록입니다</p>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="verify_card_body">' +
+                    '<div class="verify_info_row">' +
+                        '<span class="verify_info_label">닉네임</span>' +
+                        '<span class="verify_info_value">' + esc(d.nickname) + '</span>' +
+                    '</div>' +
+                    '<div class="verify_info_row">' +
+                        '<span class="verify_info_label">종목</span>' +
+                        '<span class="verify_info_value">' + esc(d.record_name) + '</span>' +
+                    '</div>' +
+                    '<div class="verify_info_row">' +
+                        '<span class="verify_info_label">기록</span>' +
+                        '<span class="verify_info_value weight">' + esc(String(d.record_weight)) + ' KG</span>' +
+                    '</div>' +
+                    '<div class="verify_info_row">' +
+                        '<span class="verify_info_label">인증일</span>' +
+                        '<span class="verify_info_value">' + esc(d.cert_date) + '</span>' +
+                    '</div>' +
+                    '<div class="verify_cert_code_box">' +
+                        '<p class="code_label">인 증 번 호</p>' +
+                        '<p class="code_value">' + esc(d.cert_code) + '</p>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+    }
+
+    function renderFail(msg) {
+        document.getElementById('verify_root').innerHTML =
+            '<div class="verify_result_card fail">' +
+                '<div class="verify_card_top fail">' +
+                    '<i class="fa-solid fa-circle-xmark verify_icon"></i>' +
+                    '<div class="verify_status_text">' +
+                        '<p class="status_main">인증 실패</p>' +
+                        '<p class="status_sub">유효하지 않은 인증서입니다</p>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="verify_error_msg">' + esc(msg).replace(/\n/g, '<br>') + '</div>' +
+            '</div>';
+    }
+
+    function esc(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+}());
+</script>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php'); ?>

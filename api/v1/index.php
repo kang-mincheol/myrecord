@@ -51,6 +51,7 @@ $routes = [
     ['GET',    '/records',                           'Records',     'list'],
     ['POST',   '/records',                           'Records',     'create'],
     ['GET',    '/records/{id}/certificate',          'Records',     'certificate'],
+    ['GET',    '/records/{id}/verify',               'Records',     'verify'],
     ['GET',    '/records/{id}/edit',                 'Records',     'editData'],
     ['GET',    '/records/{id}/comments',             'Records',     'listComments'],
     ['POST',   '/records/{id}/comments',             'Records',     'createComment'],
@@ -61,12 +62,49 @@ $routes = [
     // -------------------------
     // Workout Logs (득근일지) - 구체적 경로 우선
     // -------------------------
-    ['GET',    '/workout-logs/calendar',             'WorkoutLogs', 'calendar'],
-    ['GET',    '/workout-logs',                      'WorkoutLogs', 'list'],
-    ['POST',   '/workout-logs',                      'WorkoutLogs', 'create'],
-    ['GET',    '/workout-logs/{id}',                 'WorkoutLogs', 'view'],
-    ['PUT',    '/workout-logs/{id}',                 'WorkoutLogs', 'update'],
-    ['DELETE', '/workout-logs/{id}',                 'WorkoutLogs', 'delete'],
+    ['GET',    '/workout-logs/calendar',             'WorkoutLogs',   'calendar'],
+    ['GET',    '/workout-logs',                      'WorkoutLogs',   'list'],
+    ['POST',   '/workout-logs',                      'WorkoutLogs',   'create'],
+    ['GET',    '/workout-logs/{id}',                 'WorkoutLogs',   'view'],
+    ['PUT',    '/workout-logs/{id}',                 'WorkoutLogs',   'update'],
+    ['DELETE', '/workout-logs/{id}',                 'WorkoutLogs',   'delete'],
+
+    // -------------------------
+    // Admin - Dashboard
+    // -------------------------
+    ['GET',    '/admin/dashboard',                   'AdminDashboard','index'],
+
+    // -------------------------
+    // Admin - Accounts (회원 관리)
+    // -------------------------
+    ['GET',    '/admin/accounts',                    'AdminAccounts', 'list'],
+
+    // -------------------------
+    // Admin - Records (기록 관리) - 구체적 경로 우선
+    // -------------------------
+    ['GET',    '/admin/records',                     'AdminRecords',  'list'],
+    ['PUT',    '/admin/records/{id}/status',         'AdminRecords',  'updateStatus'],
+    ['GET',    '/admin/records/{id}',                'AdminRecords',  'view'],
+
+    // -------------------------
+    // Admin - Boards (자유게시판 관리) - 구체적 경로 우선
+    // -------------------------
+    ['GET',    '/admin/boards',                      'AdminBoards',   'list'],
+    ['DELETE', '/admin/boards/{id}/comments/{cid}',  'AdminBoards',   'deleteComment'],
+    ['POST',   '/admin/boards/{id}/restore',         'AdminBoards',   'restore'],
+    ['GET',    '/admin/boards/{id}',                 'AdminBoards',   'view'],
+    ['DELETE', '/admin/boards/{id}',                 'AdminBoards',   'delete'],
+
+    // -------------------------
+    // Admin - Access Logs (접속 로그)
+    // -------------------------
+    ['GET',    '/admin/access-logs',                 'AdminAccessLogs','list'],
+
+    // -------------------------
+    // Admin - System (시스템 관리) - 구체적 경로 우선
+    // -------------------------
+    ['GET',    '/admin/system/purge-stats',          'AdminSystem',   'purgeStats'],
+    ['DELETE', '/admin/system/expired-boards',       'AdminSystem',   'purgeExpiredBoards'],
 ];
 
 /**

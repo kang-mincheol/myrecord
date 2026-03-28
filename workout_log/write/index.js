@@ -204,9 +204,8 @@ function saveProgress(isManual) {
         exercises:        exercises
     };
 
-    if (autoSavedLogId) {
-        payload.log_id = autoSavedLogId;
-    }
+    var saveUrl    = autoSavedLogId ? '/api/v1/workout-logs/' + autoSavedLogId : '/api/v1/workout-logs';
+    var saveMethod = autoSavedLogId ? 'PUT' : 'POST';
 
     if (isManual) {
         var $btn = $('.temp_save_btn');
@@ -214,8 +213,8 @@ function saveProgress(isManual) {
     }
 
     $.ajax({
-        url: '/api/workout_log/set.workout_log_save.php',
-        type: 'POST',
+        url: saveUrl,
+        type: saveMethod,
         contentType: 'application/json',
         data: JSON.stringify(payload),
         success: function(res) {
@@ -390,16 +389,15 @@ function saveLog(logId) {
         exercises:        exercises
     };
 
-    if(logId) {
-        payload.log_id = logId;
-    }
+    var saveUrl    = logId ? '/api/v1/workout-logs/' + logId : '/api/v1/workout-logs';
+    var saveMethod = logId ? 'PUT' : 'POST';
 
     var $saveBtn = $('.save_btn');
     $saveBtn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin"></i> 저장 중...');
 
     $.ajax({
-        url: '/api/workout_log/set.workout_log_save.php',
-        type: 'POST',
+        url: saveUrl,
+        type: saveMethod,
         contentType: 'application/json',
         data: JSON.stringify(payload),
         success: function(res) {

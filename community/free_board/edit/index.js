@@ -13,15 +13,9 @@ const pageInit = async () => {
 
 const getEditData = async (id) => {
   try {
-    const url = `/api/free_board/get.free_board_edit_data.php?id=${id}`;
+    const url = `/api/v1/boards/${id}/edit`;
     const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: id,
-      }),
+      method: "GET",
     })
       .then((response) => response)
       .then((response) => response.json());
@@ -65,7 +59,7 @@ const insertBoard = () => {
     async: false,
     type: "POST",
     data: JSON.stringify(data),
-    url: "/api/free_board/set.free_board_insert.php",
+    url: "/api/v1/boards",
     success: (data) => {
       console.log(data);
       if (data["code"] === "SUCCESS") {
@@ -96,16 +90,15 @@ const updateBoard = () => {
   const contents = document.getElementById("board_editor").value;
 
   const data = {
-    id,
     title,
     contents,
   };
 
   $.ajax({
     async: false,
-    type: "POST",
+    type: "PUT",
     data: JSON.stringify(data),
-    url: "/api/free_board/set.free_board_update.php",
+    url: "/api/v1/boards/" + id,
     success: (data) => {
       console.log("data => ", data);
       if (data["code"] === "SUCCESS") {

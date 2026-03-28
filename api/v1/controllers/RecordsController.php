@@ -254,6 +254,71 @@ class RecordsController {
     }
 
     /**
+     * GET /api/v1/records/{id}/verify?code=XXXX-XXXX-XXXX-XXXX
+     * Public endpoint — no auth required
+     */
+    public static function verify(array $params): void {
+        global $PDO;
+
+        $returnArray = ["code" => "SUCCESS", "msg" => "정상 처리되었습니다"];
+
+        $record_id  = (int)$params["id"];
+        $input_code = isset($_GET['code']) ? preg_replace('/[^A-F0-9-]/', '', strtoupper($_GET['code'])) : '';
+        $input_raw  = str_replace('-', '', $input_code);
+
+        if ($record_id <= 0 || $input_raw === '') {
+            $returnArray["code"] = "INVALID";
+            $returnArray["msg"]  = "잘못된 접근입니다. 인증서의 QR코드를 스캔해주세요.";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        $expected_raw = strtoupper(substr(hash('sha256', 'mr_cert_f7e2_' . $record_id), 0, 16));
+
+        if ($input_raw !== $expected_raw) {
+            $returnArray["code"] = "INVALID_CODE";
+            $returnArray["msg"]  = "인증번호가 올바르지 않습니다. QR코드를 다시 스캔해주세요.";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        $sql = "
+            Select  T1.id, T1.status, T2.user_nickname,
+                    T1.record_weight, T3.record_name_ko,
+                    T1.create_datetime  as request_datetime,
+                    T4.create_datetime  as certificate_datetime
+            From    tb_record_request T1
+            Inner Join Account T2 On T1.account_id = T2.id
+            Inner Join tb_record_master T3 On T1.record_type = T3.id
+            Left Outer Join tb_record_inspection T4
+                On  T1.id = T4.request_id
+                And T4.change_status = '2'
+            Where   T1.id = :id
+            And     T1.status = 2
+        ";
+
+        $record_data = $PDO->fetch($sql, [':id' => $record_id]);
+
+        if (!$record_data) {
+            $returnArray["code"] = "NOT_FOUND";
+            $returnArray["msg"]  = "해당 기록을 찾을 수 없거나 아직 승인되지 않은 기록입니다.";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        $cert_date = $record_data['certificate_datetime']
+            ? date('Y년 m월 d일', strtotime($record_data['certificate_datetime']))
+            : date('Y년 m월 d일', strtotime($record_data['request_datetime']));
+
+        $returnArray["data"] = [
+            "nickname"      => $record_data['user_nickname'],
+            "record_name"   => $record_data['record_name_ko'],
+            "record_weight" => $record_data['record_weight'],
+            "cert_date"     => $cert_date,
+            "cert_code"     => self::generateCertCode($record_id),
+        ];
+
+        echo json_encode($returnArray, JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * GET /api/v1/records/{id}/edit
      */
     public static function editData(array $params): void {
