@@ -49,13 +49,11 @@ class AuthController {
             echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
         }
 
-        $login = Account::setLogin($member);
-        if (!$login) {
-            $returnArray["code"] = "LOGIN_FAIL";
-            $returnArray["msg"]  = "로그인에 실패했습니다";
-            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
-        }
+        $tokens = Account::setLogin($member);
 
+        // httpOnly 쿠키로 자동 설정됨. 토큰값은 Next.js 등 외부 클라이언트 대응용으로도 반환
+        $returnArray['access_token']  = $tokens['access'];
+        $returnArray['refresh_token'] = $tokens['refresh'];
         echo json_encode($returnArray, JSON_UNESCAPED_UNICODE);
     }
 
@@ -63,8 +61,11 @@ class AuthController {
      * POST /api/v1/auth/logout
      */
     public static function logout(array $params): void {
-        session_unset();
-        session_destroy();
+        $refresh_token = jwt_get_refresh_token();
+        if ($refresh_token !== '') {
+            jwt_delete_refresh_token($refresh_token);   // DB에서 삭제
+        }
+        jwt_clear_cookies();  // Access + Refresh 쿠키 모두 삭제
 
         echo json_encode(["code" => "SUCCESS", "msg" => "로그아웃 되었습니다."], JSON_UNESCAPED_UNICODE);
     }

@@ -46,6 +46,7 @@ function loginSubmit() {
   $.ajax({
     async: false,
     type: "POST",
+    contentType: "application/json",
     data: JSON.stringify({
       id: id,
       password: password,
