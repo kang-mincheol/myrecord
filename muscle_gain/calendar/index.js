@@ -11,13 +11,7 @@ function initCalendar() {
     if (_calMonth > 12) { _calMonth = 1;  _calYear++; }
 
     buildCalendarGrid(_calYear, _calMonth);
-
-    if (IS_MEMBER) {
-        loadCalendar(_calYear, _calMonth);
-    } else {
-        document.getElementById('login_notice_wrap').style.display = '';
-        $('#month_stat_count').text('0');
-    }
+    loadCalendar(_calYear, _calMonth);
 }
 
 function navMonth(delta) {
@@ -27,12 +21,7 @@ function navMonth(delta) {
 
     history.replaceState(null, '', '?year=' + _calYear + '&month=' + _calMonth);
     buildCalendarGrid(_calYear, _calMonth);
-
-    if (IS_MEMBER) {
-        loadCalendar(_calYear, _calMonth);
-    } else {
-        $('#month_stat_count').text('0');
-    }
+    loadCalendar(_calYear, _calMonth);
 }
 
 function buildCalendarGrid(year, month) {
@@ -92,7 +81,11 @@ function loadCalendar(year, month) {
         data: { year: year, month: month },
         success: function (res) {
             if (res.code === 'SUCCESS') {
+                document.getElementById('login_notice_wrap').style.display = 'none';
                 renderCalendar(res.data, res.total_count);
+            } else if (res.code === 'MEMBER_ONLY') {
+                document.getElementById('login_notice_wrap').style.display = '';
+                $('#month_stat_count').text('0');
             } else {
                 renderCalendar({}, 0);
             }

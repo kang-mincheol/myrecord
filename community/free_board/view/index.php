@@ -73,15 +73,20 @@ echo css_load('/community/free_board/view/index.css');
 echo script_load('/community/free_board/view/index.js');
 ?>
 <script>
-var IS_MEMBER = <?= json_encode($is_member) ?>;
-
 window.addEventListener("DOMContentLoaded", function () {
-    // 댓글 입력 영역 / 비로그인 안내 표시
-    if (IS_MEMBER) {
-        document.getElementById('comment_input_wrap').style.display = '';
-    } else {
-        document.getElementById('comment_login_notice').style.display = '';
-    }
+    // 로그인 상태 확인 후 댓글 입력 영역 표시
+    fetch('/api/v1/accounts/me')
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.code === 'SUCCESS') {
+                document.getElementById('comment_input_wrap').style.display = '';
+            } else {
+                document.getElementById('comment_login_notice').style.display = '';
+            }
+        })
+        .catch(function () {
+            document.getElementById('comment_login_notice').style.display = '';
+        });
     init();
 });
 </script>

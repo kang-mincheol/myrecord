@@ -283,18 +283,22 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/common.php');
 
 
 <script>
-var IS_MEMBER = <?= json_encode($is_member) ?>;
-
 // 네비게이션 로그인 상태 버튼 렌더링
 (function() {
+    // 기본값: 비로그인 버튼 표시 후 로그인 확인 시 교체 (레이아웃 시프트 최소화)
     var $nav = document.getElementById('lp_nav_right');
-    if (IS_MEMBER) {
-        $nav.innerHTML = '<a href="/record/squat/list/" class="lp_nav_cta">기록 등록하기 <i class="fa-solid fa-arrow-right"></i></a>';
-    } else {
-        $nav.innerHTML =
-            '<a href="/account/login/" class="lp_nav_login">로그인</a>' +
-            '<a href="/account/create/" class="lp_nav_cta">무료 가입 <i class="fa-solid fa-arrow-right"></i></a>';
-    }
+    $nav.innerHTML =
+        '<a href="/account/login/" class="lp_nav_login">로그인</a>' +
+        '<a href="/account/create/" class="lp_nav_cta">무료 가입 <i class="fa-solid fa-arrow-right"></i></a>';
+
+    fetch('/api/v1/accounts/me')
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.code === 'SUCCESS') {
+                $nav.innerHTML = '<a href="/record/squat/list/" class="lp_nav_cta">기록 등록하기 <i class="fa-solid fa-arrow-right"></i></a>';
+            }
+        })
+        .catch(function () { /* 비로그인 상태 유지 */ });
 })();
 
 // 스크롤 진입 애니메이션

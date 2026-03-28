@@ -59,8 +59,6 @@ echo css_load('/muscle_gain/calendar/index.css');
 
 <?php echo script_load('/muscle_gain/calendar/index.js'); ?>
 <script>
-var IS_MEMBER = <?= json_encode($is_member) ?>;
-
 $(function () {
     initCalendar();
 });
