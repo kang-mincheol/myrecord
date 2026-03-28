@@ -340,44 +340,39 @@ class Account {
         return (bool)$PDO->execute($sql, $param);
     }
 
-    public static function setLogin($member) {
+    /**
+     * 숫자 ID로 회원 정보 조회 (JWT 인증용)
+     */
+    public static function getAccountById(int $id): ?array {
+        global $PDO;
+        $sql   = "Select * From Account Where id = :id And is_withdraw = 0";
+        $account = $PDO->fetch($sql, [':id' => $id]);
+        return $account ?: null;
+    }
+
+    public static function setLogin(array $member): array {
         global $PDO;
 
-        // 회원아이디 세션 생성
-        set_session('user_id', $member["user_id"]);
+        // Access Token(60분) + Refresh Token(30일) 동시 발급 및 쿠키 설정
+        $tokens = jwt_issue_tokens((int)$member['id']);
 
-        // 로그인 성공로그 생성
-        $user_agent = $_SERVER["HTTP_USER_AGENT"];
-        $sql = "
-            Insert Into LoginLog
-            Set
-                ip_address = :ip_address,
-                user_agent = :user_agent,
-                user_id = :user_id,
-                is_success = 1
-        ";
-        $param = array(
-            ":ip_address" => getenv('REMOTE_ADDR'),
-            ":user_agent" => $_SERVER['HTTP_USER_AGENT'],
-            ":user_id" => $member["user_id"]
-        );
-        $PDO->execute($sql, $param);
-
-        // 로그인 일자 update
-        $login_date_sql = "
-            Update  Account
-            SET
-                login_date = :login_date
-            Where   id = :id
-        ";
-        $param = array(
-            ":login_date" => date("Y-m-d H:i:s"),
-            ":id" => $member["id"]
+        // 로그인 성공 로그
+        $PDO->execute(
+            "Insert Into LoginLog Set ip_address = :ip, user_agent = :ua, user_id = :uid, is_success = 1",
+            [
+                ':ip'  => $_SERVER['REMOTE_ADDR']     ?? '',
+                ':ua'  => $_SERVER['HTTP_USER_AGENT'] ?? '',
+                ':uid' => $member['user_id'],
+            ]
         );
 
-        $PDO -> execute($login_date_sql, $param);
+        // 로그인 일자 업데이트
+        $PDO->execute(
+            "Update Account Set login_date = :login_date Where id = :id",
+            [':login_date' => date('Y-m-d H:i:s'), ':id' => $member['id']]
+        );
 
-        return true;
+        return $tokens;  // ['access' => '...', 'refresh' => '...']
     }
 }
 

@@ -46,11 +46,12 @@ function loginSubmit() {
   $.ajax({
     async: false,
     type: "POST",
+    contentType: "application/json",
     data: JSON.stringify({
       id: id,
       password: password,
     }),
-    url: "/api/account/set.login_check.php",
+    url: "/api/v1/auth/login",
     success: function (data) {
       loadingOff();
       if (data["code"] == "SUCCESS") {
