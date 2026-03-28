@@ -18,15 +18,21 @@ $next_month = $month == 12 ? 1  : $month + 1;
 $next_year  = $month == 12 ? $year + 1 : $year;
 
 // ── 이번 달 운동 데이터 ──
-$workout_map = []; // workout_date => ['id' => ..., 'exercise_summary' => ...]
+$workout_map = []; // workout_date => ['id' => ..., 'title' => ...]
 $month_count = 0;
 
 if ($is_member) {
     $logs = WorkoutLog::getMonthDates($member['id'], $year, $month);
     foreach ($logs as $log) {
-        $workout_map[$log['workout_date']] = $log;
+        $date = $log['workout_date'];
+        if (!isset($workout_map[$date])) {
+            $workout_map[$date] = $log;
+            $workout_map[$date]['count'] = 1;
+        } else {
+            $workout_map[$date]['count']++;
+        }
     }
-    $month_count = count($workout_map);
+    $month_count = count($logs);
 }
 
 // ── 달력 계산 ──
@@ -101,7 +107,8 @@ $today      = date('Y-m-d');
                 $is_sat    = $dow === 6;
                 $has_log   = isset($workout_map[$date_str]);
                 $log_id    = $has_log ? $workout_map[$date_str]['id'] : null;
-                $summary   = $has_log ? htmlspecialchars($workout_map[$date_str]['exercise_summary'] ?? '') : '';
+                $summary   = $has_log ? htmlspecialchars($workout_map[$date_str]['title'] ?? '') : '';
+                $log_count = $has_log ? (int)$workout_map[$date_str]['count'] : 0;
 
                 $classes = ['cal_cell'];
                 if ($is_today) $classes[] = 'today';
@@ -119,6 +126,9 @@ $today      = date('Y-m-d');
                             <span class="workout_dot" title="<?= $summary ?>"></span>
                             <?php if ($summary): ?>
                                 <span class="workout_summary"><?= $summary ?></span>
+                            <?php endif; ?>
+                            <?php if ($log_count > 1): ?>
+                                <span class="workout_count_badge">×<?= $log_count ?></span>
                             <?php endif; ?>
                         <?php endif; ?>
                     <?= $inner_close ?>

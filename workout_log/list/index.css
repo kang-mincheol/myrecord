@@ -55,24 +55,16 @@
 .write_btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 6px;
     background: #0123B4;
     color: #fff;
     font-size: 14px;
     font-weight: 600;
-    line-height: 1;
     padding: 10px 18px;
     border-radius: 10px;
     text-decoration: none;
     transition: background 0.15s;
-}
-
-.write_btn i {
-    font-size: 13px;
     line-height: 1;
-    display: flex;
-    align-items: center;
 }
 
 .write_btn:hover {
@@ -85,7 +77,7 @@
 .log_list_box {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 /* 로딩 */
@@ -118,24 +110,16 @@
 .list_empty .empty_write_btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 6px;
     background: #0123B4;
     color: #fff;
     font-size: 14px;
     font-weight: 600;
-    line-height: 1;
     padding: 12px 22px;
     border-radius: 10px;
     text-decoration: none;
     transition: background 0.15s;
-}
-
-.list_empty .empty_write_btn i {
-    font-size: 13px;
     line-height: 1;
-    display: flex;
-    align-items: center;
 }
 
 .list_empty .empty_write_btn:hover {
@@ -144,78 +128,98 @@
     text-decoration: none;
 }
 
-/* 일지 카드 */
+/* ── 일지 카드 ── */
 .log_card {
-    background: #fff;
-    border: 1px solid #eaeef5;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-    padding: 18px 20px;
-    cursor: pointer;
-    transition: box-shadow 0.15s, transform 0.1s;
-    text-decoration: none;
     display: block;
+    background: #fff;
+    border: 1px solid #e8ecf5;
+    border-left: 4px solid #0123B4;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+    padding: 16px 18px;
+    text-decoration: none;
     color: inherit;
+    transition: box-shadow 0.15s, transform 0.1s;
 }
 
 .log_card:hover {
-    box-shadow: 0 4px 20px rgba(1, 35, 180, 0.1);
-    transform: translateY(-1px);
+    box-shadow: 0 4px 18px rgba(1, 35, 180, 0.12);
+    transform: translateY(-2px);
     text-decoration: none;
     color: inherit;
 }
 
-.log_card_top {
+/* 카드 상단: 날짜 + 운동시간 */
+.log_card_head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .log_date {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+}
+
+.log_duration {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #0123B4;
+    background: #eef0fc;
+    padding: 3px 9px;
+    border-radius: 20px;
+}
+
+/* 제목 */
+.log_title {
     font-size: 16px;
     font-weight: 700;
     color: #1a1a2e;
     letter-spacing: -0.3px;
+    margin-bottom: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.log_duration {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 13px;
-    color: #0123B4;
-    background: #eef0fc;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-weight: 600;
-}
-
+/* 종목 요약 */
 .log_exercise_summary {
-    font-size: 14px;
-    color: #555;
+    font-size: 13px;
+    color: #777;
     line-height: 1.5;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-.log_card_bottom {
+/* 카드 하단: 종목 수 + 메모 */
+.log_card_foot {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-top: 1px solid #f0f3f9;
+    padding-top: 10px;
 }
 
 .log_exercise_count {
-    font-size: 13px;
-    color: #888;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #555;
+    font-weight: 500;
 }
 
-.log_exercise_count strong {
-    color: #333;
-    font-weight: 700;
+.log_exercise_count i {
+    color: #0123B4;
+    font-size: 11px;
 }
 
 .log_memo_preview {
@@ -278,10 +282,10 @@
     }
 
     .log_card {
-        padding: 14px 16px;
+        padding: 14px 14px;
     }
 
-    .log_date {
+    .log_title {
         font-size: 15px;
     }
 
@@ -298,14 +302,5 @@
 
     .log_card {
         padding: 12px 12px;
-    }
-
-    .log_date {
-        font-size: 14px;
-    }
-
-    .log_duration {
-        font-size: 12px;
-        padding: 3px 8px;
     }
 }

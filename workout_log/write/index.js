@@ -320,6 +320,12 @@ function saveLog(logId) {
     if (!logId && autoSavedLogId) {
         logId = autoSavedLogId;
     }
+    var title = $('#workout_title').val().trim();
+    if(!title) {
+        myrecordAlert('on', '제목을 입력해주세요', '알림', '');
+        return;
+    }
+
     var workout_date = $('#workout_date').val().trim();
     if(!workout_date) {
         myrecordAlert('on', '운동 날짜를 입력해주세요', '알림', '');

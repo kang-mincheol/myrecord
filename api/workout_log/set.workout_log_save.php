@@ -22,8 +22,13 @@ if(is_null($data) || !checkParams($data, ["workout_date", "exercises"])) {
     echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
 }
 
-// 제목 (선택)
+// 제목 (필수)
 $title = isset($data["title"]) ? mb_substr(trim($data["title"]), 0, 100) : '';
+if($title === '') {
+    $returnArray["code"] = "PARAM_ERROR";
+    $returnArray["msg"]  = "제목을 입력해주세요";
+    echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); exit;
+}
 
 // 운동 날짜 검증
 $workout_date = trim($data["workout_date"] ?? '');

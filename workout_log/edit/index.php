@@ -41,7 +41,7 @@ $exercises = WorkoutLog::getDetail($log_id);
         </div>
 
         <div class="form_row">
-            <label class="form_label" for="workout_title">제목 <span class="optional_tag">선택</span></label>
+            <label class="form_label" for="workout_title">제목 <span class="required_mark">*</span></label>
             <input type="text" id="workout_title" class="form_input" placeholder="예) 등, 가슴, 어깨, 하체, 전신 등" maxlength="100"
                 value="<?= htmlspecialchars($log['title'] ?? '') ?>" />
         </div>

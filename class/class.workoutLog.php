@@ -48,6 +48,7 @@ class WorkoutLog {
         $sql = "
             Select
                 wl.id,
+                wl.title,
                 wl.workout_date,
                 wl.workout_duration,
                 Group_Concat(we.exercise_name Order by we.order_no Separator ', ') as exercise_summary
