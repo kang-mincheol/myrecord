@@ -51,12 +51,16 @@ function renderPage(data) {
 /* ── 페이지 헤더 ── */
 function renderHeader(data) {
     var date      = formatDate(data.workout_date);
+    var titleHtml = data.title
+        ? '<p class="page_title">' + escHtml(data.title) + '</p>' +
+          '<p class="page_subtitle">' + escHtml(date) + '</p>'
+        : '<p class="page_title">' + escHtml(date) + '</p>';
     var durationHtml = data.workout_duration
         ? '<p class="page_subtitle"><i class="fa-regular fa-clock"></i> ' + parseInt(data.workout_duration) + '분 운동</p>'
         : '';
     return '<div class="workout_log_header">' +
                '<div class="header_inner">' +
-                   '<p class="page_title">' + escHtml(date) + '</p>' +
+                   titleHtml +
                    durationHtml +
                '</div>' +
            '</div>';

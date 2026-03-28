@@ -254,6 +254,18 @@
     font-weight: 500;
 }
 
+.workout_count_badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--main-color-1);
+    border-radius: 8px;
+    padding: 1px 5px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    line-height: 1.5;
+}
+
 
 /* ===== 반응형 ===== */
 

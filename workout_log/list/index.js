@@ -40,21 +40,22 @@ function renderList(res) {
     $.each(res.data, function(i, row) {
         var dateStr    = formatDate(row.workout_date);
         var durationHtml = row.workout_duration
-            ? '<span class="log_duration"><i class="fa-regular fa-clock"></i>' + row.workout_duration + '분</span>'
+            ? '<span class="log_duration"><i class="fa-regular fa-clock"></i> ' + row.workout_duration + '분</span>'
             : '';
-        var summary    = row.exercise_summary || '';
-        var memoHtml   = row.memo ? '<span class="log_memo_preview">' + escHtml(row.memo) + '</span>' : '<span></span>';
+        var summary  = row.exercise_summary || '';
+        var memoHtml = row.memo ? '<span class="log_memo_preview">' + escHtml(row.memo) + '</span>' : '<span></span>';
 
         html += '<a class="log_card" href="/workout_log/view/?id=' + row.id + '">';
-        html += '  <div class="log_card_top">';
+        html += '  <div class="log_card_head">';
         html += '    <span class="log_date">' + dateStr + '</span>';
         html += '    ' + durationHtml;
         html += '  </div>';
-        if(summary) {
+        html += '  <div class="log_title">' + escHtml(row.title) + '</div>';
+        if (summary) {
             html += '  <div class="log_exercise_summary">' + escHtml(summary) + '</div>';
         }
-        html += '  <div class="log_card_bottom">';
-        html += '    <span class="log_exercise_count"><strong>' + row.exercise_count + '</strong>개 종목</span>';
+        html += '  <div class="log_card_foot">';
+        html += '    <span class="log_exercise_count"><i class="fa-solid fa-dumbbell"></i>' + row.exercise_count + '개 종목</span>';
         html += '    ' + memoHtml;
         html += '  </div>';
         html += '</a>';

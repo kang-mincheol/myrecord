@@ -15,6 +15,7 @@ class WorkoutLog {
         $sql = "
             Select
                 wl.id,
+                wl.title,
                 wl.workout_date,
                 wl.workout_duration,
                 wl.memo,
@@ -47,6 +48,7 @@ class WorkoutLog {
         $sql = "
             Select
                 wl.id,
+                wl.title,
                 wl.workout_date,
                 wl.workout_duration,
                 Group_Concat(we.exercise_name Order by we.order_no Separator ', ') as exercise_summary
@@ -150,14 +152,15 @@ class WorkoutLog {
      * 일지 신규 등록
      * @return int 생성된 log ID
      */
-    public static function insertLog(int $accountId, string $workoutDate, ?int $duration, string $memo, string $weightUnit = 'kg'): int {
+    public static function insertLog(int $accountId, string $title, string $workoutDate, ?int $duration, string $memo, string $weightUnit = 'kg'): int {
         global $PDO;
         $sql = "
-            Insert Into WorkoutLog (account_id, workout_date, workout_duration, memo, weight_unit)
-            Values (:account_id, :workout_date, :workout_duration, :memo, :weight_unit)
+            Insert Into WorkoutLog (account_id, title, workout_date, workout_duration, memo, weight_unit)
+            Values (:account_id, :title, :workout_date, :workout_duration, :memo, :weight_unit)
         ";
         $param = [
             ":account_id"       => $accountId,
+            ":title"            => $title,
             ":workout_date"     => $workoutDate,
             ":workout_duration" => $duration,
             ":memo"             => $memo,
@@ -169,17 +172,19 @@ class WorkoutLog {
     /**
      * 일지 기본 정보 수정
      */
-    public static function updateLog(int $logId, string $workoutDate, ?int $duration, string $memo, string $weightUnit = 'kg'): void {
+    public static function updateLog(int $logId, string $title, string $workoutDate, ?int $duration, string $memo, string $weightUnit = 'kg'): void {
         global $PDO;
         $sql = "
             Update WorkoutLog
-            Set workout_date     = :workout_date,
+            Set title            = :title,
+                workout_date     = :workout_date,
                 workout_duration = :workout_duration,
                 memo             = :memo,
                 weight_unit      = :weight_unit
             Where id = :id
         ";
         $param = [
+            ":title"            => $title,
             ":workout_date"     => $workoutDate,
             ":workout_duration" => $duration,
             ":memo"             => $memo,

@@ -38,6 +38,7 @@ $returnArray["data"]        = [];
 foreach($list as $row) {
     $returnArray["data"][] = array(
         "id"               => $row["id"],
+        "title"            => $row["title"] ?? '',
         "workout_date"     => $row["workout_date"],
         "workout_duration" => $row["workout_duration"],
         "memo"             => $row["memo"] ?? '',

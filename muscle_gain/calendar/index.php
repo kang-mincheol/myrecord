@@ -17,18 +17,6 @@ $prev_year  = $month == 1  ? $year - 1 : $year;
 $next_month = $month == 12 ? 1  : $month + 1;
 $next_year  = $month == 12 ? $year + 1 : $year;
 
-// ── 이번 달 운동 데이터 ──
-$workout_map = []; // workout_date => ['id' => ..., 'exercise_summary' => ...]
-$month_count = 0;
-
-if ($is_member) {
-    $logs = WorkoutLog::getMonthDates($member['id'], $year, $month);
-    foreach ($logs as $log) {
-        $workout_map[$log['workout_date']] = $log;
-    }
-    $month_count = count($workout_map);
-}
-
 // ── 달력 계산 ──
 $first_ts   = mktime(0, 0, 0, $month, 1, $year);
 $days_total = (int)date('t', $first_ts);   // 이번 달 총 일수
@@ -43,7 +31,7 @@ $today      = date('Y-m-d');
     </div>
 </div>
 
-<div id="calendar_wrap">
+<div id="calendar_wrap" data-year="<?= $year ?>" data-month="<?= $month ?>">
 
     <!-- 월 이동 네비 -->
     <div class="calendar_nav">
@@ -59,7 +47,7 @@ $today      = date('Y-m-d');
     <!-- 이번 달 통계 -->
     <div class="month_stat">
         <i class="fa-solid fa-dumbbell"></i>
-        이번 달 운동 <strong><?= $month_count ?>회</strong>
+        이번 달 운동 <strong id="month_stat_count"><i class="fa-solid fa-spinner fa-spin"></i></strong>
     </div>
 
     <?php if (!$is_member): ?>
@@ -94,34 +82,21 @@ $today      = date('Y-m-d');
 
             // 날짜 셀
             for ($d = 1; $d <= $days_total; $d++, $cell++) {
-                $date_str  = sprintf('%04d-%02d-%02d', $year, $month, $d);
-                $is_today  = ($date_str === $today);
-                $dow       = ($start_dow + $d - 1) % 7;
-                $is_sun    = $dow === 0;
-                $is_sat    = $dow === 6;
-                $has_log   = isset($workout_map[$date_str]);
-                $log_id    = $has_log ? $workout_map[$date_str]['id'] : null;
-                $summary   = $has_log ? htmlspecialchars($workout_map[$date_str]['exercise_summary'] ?? '') : '';
+                $date_str = sprintf('%04d-%02d-%02d', $year, $month, $d);
+                $is_today = ($date_str === $today);
+                $dow      = ($start_dow + $d - 1) % 7;
+                $is_sun   = $dow === 0;
+                $is_sat   = $dow === 6;
 
                 $classes = ['cal_cell'];
                 if ($is_today) $classes[] = 'today';
                 if ($is_sun)   $classes[] = 'sun';
                 if ($is_sat)   $classes[] = 'sat';
-                if ($has_log)  $classes[] = 'has_log';
-
-                $inner_open  = $has_log ? "<a href=\"/workout_log/view/?id={$log_id}\">" : '<div>';
-                $inner_close = $has_log ? '</a>' : '</div>';
             ?>
-                <div class="<?= implode(' ', $classes) ?>">
-                    <?= $inner_open ?>
+                <div class="<?= implode(' ', $classes) ?>" data-date="<?= $date_str ?>">
+                    <div>
                         <span class="cal_date"><?= $d ?></span>
-                        <?php if ($has_log): ?>
-                            <span class="workout_dot" title="<?= $summary ?>"></span>
-                            <?php if ($summary): ?>
-                                <span class="workout_summary"><?= $summary ?></span>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    <?= $inner_close ?>
+                    </div>
                 </div>
             <?php } ?>
 
@@ -137,6 +112,19 @@ $today      = date('Y-m-d');
 
 </div>
 <!-- calendar_wrap -->
+
+<?php
+echo script_load('/muscle_gain/calendar/index.js');
+?>
+<script>
+$(function () {
+    <?php if ($is_member): ?>
+    loadCalendar(<?= $year ?>, <?= $month ?>);
+    <?php else: ?>
+    $('#month_stat_count').text('0');
+    <?php endif; ?>
+});
+</script>
 
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/footer.php');
