@@ -1,12 +1,5 @@
 <?php
 if (!defined('NO_ALONE')) exit;
-
-$current_path = $_SERVER['PHP_SELF'];
-
-function admin_nav_class($path) {
-    global $current_path;
-    return strpos($current_path, $path) !== false ? 'nav_item active' : 'nav_item';
-}
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -37,45 +30,45 @@ function admin_nav_class($path) {
             <span class="logo_badge">ADMIN</span>
         </div>
 
-        <nav class="sidebar_nav">
+        <nav class="sidebar_nav" id="admin_sidebar_nav">
 
             <div class="nav_section">
                 <p class="nav_section_title">대시보드</p>
-                <a href="/admin_myrecord/" class="<?= admin_nav_class('/admin_myrecord/index') ?>">
+                <a href="/admin_myrecord/" class="nav_item" data-nav="/admin_myrecord/index">
                     <i class="fa-solid fa-gauge"></i> 대시보드
                 </a>
             </div>
 
             <div class="nav_section">
                 <p class="nav_section_title">회원</p>
-                <a href="/admin_myrecord/account/" class="<?= admin_nav_class('/admin_myrecord/account') ?>">
+                <a href="/admin_myrecord/account/" class="nav_item" data-nav="/admin_myrecord/account">
                     <i class="fa-solid fa-users"></i> 회원 관리
                 </a>
             </div>
 
             <div class="nav_section">
                 <p class="nav_section_title">기록</p>
-                <a href="/admin_myrecord/record/" class="<?= admin_nav_class('/admin_myrecord/record') ?>">
+                <a href="/admin_myrecord/record/" class="nav_item" data-nav="/admin_myrecord/record">
                     <i class="fa-solid fa-dumbbell"></i> 기록 관리
                 </a>
             </div>
 
             <div class="nav_section">
                 <p class="nav_section_title">커뮤니티</p>
-                <a href="/admin_myrecord/free_board/" class="<?= admin_nav_class('/admin_myrecord/free_board') ?>">
+                <a href="/admin_myrecord/free_board/" class="nav_item" data-nav="/admin_myrecord/free_board">
                     <i class="fa-solid fa-comments"></i> 자유게시판
                 </a>
-                <a href="/admin_myrecord/muscle_gain/" class="<?= admin_nav_class('/admin_myrecord/muscle_gain') ?>">
+                <a href="/admin_myrecord/muscle_gain/" class="nav_item" data-nav="/admin_myrecord/muscle_gain">
                     <i class="fa-solid fa-fire"></i> 득근일지
                 </a>
             </div>
 
             <div class="nav_section">
                 <p class="nav_section_title">시스템</p>
-                <a href="/admin_myrecord/access_log/" class="<?= admin_nav_class('/admin_myrecord/access_log') ?>">
+                <a href="/admin_myrecord/access_log/" class="nav_item" data-nav="/admin_myrecord/access_log">
                     <i class="fa-solid fa-list-check"></i> 접속 로그
                 </a>
-                <a href="/admin_myrecord/system/" class="<?= admin_nav_class('/admin_myrecord/system') ?>">
+                <a href="/admin_myrecord/system/" class="nav_item" data-nav="/admin_myrecord/system">
                     <i class="fa-solid fa-gear"></i> 시스템 설정
                 </a>
             </div>
@@ -97,7 +90,7 @@ function admin_nav_class($path) {
         <!-- Topbar -->
         <header id="admin_topbar">
             <div class="topbar_left">
-                <p class="page_title"><?= $admin_page_title ?? '대시보드' ?></p>
+                <p class="page_title" id="admin_page_title"><?= $admin_page_title ?? '' ?></p>
             </div>
             <div class="topbar_right">
                 <a href="/" class="site_link" target="_blank">
@@ -107,7 +100,7 @@ function admin_nav_class($path) {
                     <div class="admin_avatar">
                         <i class="fa-solid fa-user-shield"></i>
                     </div>
-                    <span class="admin_name"><?= htmlspecialchars($member['user_nickname'] ?? '관리자') ?></span>
+                    <span class="admin_name" id="admin_name">관리자</span>
                 </div>
             </div>
         </header>
