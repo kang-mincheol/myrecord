@@ -19,6 +19,21 @@ class AdminSystemController {
     }
 
     /**
+     * GET /api/v1/admin/system/purge-stats
+     * 영구 삭제 대상 게시글/댓글/파일 통계 조회
+     */
+    public static function purgeStats(array $params): void {
+        self::guardAdmin();
+
+        $result = AdminSystem::getPurgeStats();
+
+        echo json_encode([
+            'code' => 'SUCCESS',
+            'data' => $result,
+        ], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * DELETE /api/v1/admin/system/expired-boards
      * 소프트 삭제된 지 1년 이상 경과한 게시글 영구 삭제
      */

@@ -1,33 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/common.php");
-
 $admin_page_title = '자유게시판 관리';
-
-// ===== 파라미터 =====
-$page          = max(1, (int)($_GET['page']       ?? 1));
-$page_size     = 20;
-$offset        = ($page - 1) * $page_size;
-$filter_status = $_GET['status']     ?? 'all';
-$search_key    = $_GET['search_key'] ?? 'title';
-$search_val    = trim($_GET['search_val'] ?? '');
-
-if (!in_array($search_key, ['title', 'contents', 'writer'])) $search_key = 'title';
-
-// ===== 통계 =====
-$stats = AdminFreeBoard::getStats();
-
-// ===== 총 건수 / 목록 =====
-$total_count = AdminFreeBoard::getTotalCount($filter_status, $search_key, $search_val);
-$total_pages = max(1, (int)ceil($total_count / $page_size));
-if ($page > $total_pages) $page = $total_pages;
-
-$list = AdminFreeBoard::getList($page, $page_size, $filter_status, $search_key, $search_val);
-
-$base_query = http_build_query([
-    'status'     => $filter_status,
-    'search_key' => $search_key,
-    'search_val' => $search_val,
-]);
 
 $admin_extra_css = '<style>
 .fb_filter_card {
@@ -48,198 +21,263 @@ $admin_extra_css = '<style>
 .fb_filter_card .filter_btn {
     height: 38px; padding: 0 18px; background: var(--accent); color: #fff;
     border-radius: 8px; font-size: 13px; font-weight: 700; border: none; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s;
+    display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s; font-family: inherit;
 }
 .fb_filter_card .filter_btn:hover { background: #0118a0; }
 .fb_filter_card .reset_btn {
     height: 38px; padding: 0 14px; background: #f1f5f9; color: var(--text-secondary);
     border-radius: 8px; font-size: 13px; font-weight: 600; border: none; cursor: pointer;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s; font-family: inherit;
 }
 .fb_filter_card .reset_btn:hover { background: #e2e8f0; color: var(--text-primary); }
-
 .status_quick_bar { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-.status_quick_bar a {
+.status_quick_bar button {
     display: inline-flex; align-items: center; gap: 6px;
     height: 34px; padding: 0 14px; border-radius: 8px;
     border: 1.5px solid var(--border-color); background: var(--card-bg);
     color: var(--text-secondary); font-size: 12px; font-weight: 600;
-    text-decoration: none; transition: all 0.15s;
+    cursor: pointer; transition: all 0.15s; font-family: inherit;
 }
-.status_quick_bar a:hover, .status_quick_bar a.on {
+.status_quick_bar button:hover, .status_quick_bar button.on {
     border-color: var(--accent); color: var(--accent); background: #eef1fc;
 }
-.status_quick_bar a.on { font-weight: 700; }
+.status_quick_bar button.on { font-weight: 700; }
 .status_quick_bar .q_count {
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px;
     background: var(--accent); color: #fff; font-size: 10px; font-weight: 700;
 }
-.status_quick_bar a:not(.on) .q_count { background: #e2e8f0; color: var(--text-secondary); }
-
+.status_quick_bar button:not(.on) .q_count { background: #e2e8f0; color: var(--text-secondary); }
 .list_info_bar {
     display: flex; align-items: center; justify-content: space-between;
     padding: 12px 20px; border-bottom: 1px solid var(--border-color);
     font-size: 12px; color: var(--text-secondary);
 }
 .list_info_bar .total_count strong { color: var(--accent); font-weight: 700; }
-
 .admin_table tbody tr { cursor: pointer; }
 .post_title_cell {
     max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     font-weight: 600; color: var(--text-primary);
 }
-
 .admin_paging {
     display: flex; justify-content: center; align-items: center;
     gap: 4px; padding: 20px 0 0;
 }
-.admin_paging a, .admin_paging span {
+.admin_paging button, .admin_paging span {
     display: inline-flex; justify-content: center; align-items: center;
     width: 32px; height: 32px; border-radius: 8px;
     border: 1.5px solid var(--border-color); font-size: 13px; font-weight: 500;
-    color: #666; text-decoration: none; transition: all 0.15s;
+    color: #666; background: none; cursor: pointer; transition: all 0.15s; font-family: inherit;
 }
-.admin_paging a:hover { border-color: var(--accent); color: var(--accent); background: #eef1fc; }
+.admin_paging button:hover { border-color: var(--accent); color: var(--accent); background: #eef1fc; }
 .admin_paging span.current { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
-.admin_paging span.disabled { color: #ccc; cursor: default; }
+.admin_paging span.disabled { color: #ccc; cursor: default; border-color: var(--border-color); }
 </style>';
 
 include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
 ?>
 
-<!-- ===== Page Header ===== -->
 <div class="admin_page_header">
     <p class="admin_page_title">자유게시판 관리</p>
     <p class="admin_page_sub">커뮤니티 자유게시판 게시글을 조회하고 관리합니다</p>
 </div>
 
-<!-- ===== Stats ===== -->
-<div class="stat_cards_grid">
-    <div class="stat_card">
-        <div class="stat_icon blue"><i class="fa-solid fa-comments"></i></div>
-        <p class="stat_label">총 게시글</p>
-        <p class="stat_value"><?= number_format($stats['total']) ?><span>건</span></p>
-    </div>
-    <div class="stat_card">
-        <div class="stat_icon green"><i class="fa-solid fa-calendar-day"></i></div>
-        <p class="stat_label">오늘 작성</p>
-        <p class="stat_value"><?= number_format($stats['today']) ?><span>건</span></p>
-    </div>
-    <div class="stat_card">
-        <div class="stat_icon orange"><i class="fa-solid fa-comment-dots"></i></div>
-        <p class="stat_label">총 댓글</p>
-        <p class="stat_value"><?= number_format($stats['comments']) ?><span>건</span></p>
-    </div>
-    <div class="stat_card">
-        <div class="stat_icon red"><i class="fa-solid fa-trash"></i></div>
-        <p class="stat_label">삭제된 게시글</p>
-        <p class="stat_value"><?= number_format($stats['deleted']) ?><span>건</span></p>
-    </div>
+<!-- Stats -->
+<div class="stat_cards_grid" id="stat_cards_wrap">
+    <div class="stat_card"><div class="stat_icon blue"><i class="fa-solid fa-spinner fa-spin"></i></div><p class="stat_label">로딩 중</p><p class="stat_value">-</p></div>
+    <div class="stat_card"><div class="stat_icon green"><i class="fa-solid fa-spinner fa-spin"></i></div><p class="stat_label">로딩 중</p><p class="stat_value">-</p></div>
+    <div class="stat_card"><div class="stat_icon orange"><i class="fa-solid fa-spinner fa-spin"></i></div><p class="stat_label">로딩 중</p><p class="stat_value">-</p></div>
+    <div class="stat_card"><div class="stat_icon red"><i class="fa-solid fa-spinner fa-spin"></i></div><p class="stat_label">로딩 중</p><p class="stat_value">-</p></div>
 </div>
 
-<!-- ===== 상태 퀵 필터 ===== -->
-<?php
-$qp = function($status) use ($search_key, $search_val) {
-    return http_build_query(['status' => $status, 'search_key' => $search_key, 'search_val' => $search_val, 'page' => 1]);
-};
-?>
-<div class="status_quick_bar">
-    <a href="?<?= $qp('all')     ?>" class="<?= $filter_status === 'all'     ? 'on' : '' ?>">전체 <span class="q_count"><?= $stats['total'] ?></span></a>
-    <a href="?<?= $qp('deleted') ?>" class="<?= $filter_status === 'deleted' ? 'on' : '' ?>">삭제됨 <span class="q_count"><?= $stats['deleted'] ?></span></a>
+<!-- Quick Filter -->
+<div class="status_quick_bar" id="quick_bar">
+    <button class="on" onclick="setStatus('all')">전체 <span class="q_count" id="qc_all">-</span></button>
+    <button onclick="setStatus('deleted')">삭제됨 <span class="q_count" id="qc_deleted">-</span></button>
 </div>
 
-<!-- ===== 검색 필터 ===== -->
-<form method="GET" action="">
-    <input type="hidden" name="status" value="<?= htmlspecialchars($filter_status) ?>"/>
-    <div class="fb_filter_card">
-        <select name="search_key">
-            <option value="title"    <?= $search_key === 'title'    ? 'selected' : '' ?>>제목</option>
-            <option value="contents" <?= $search_key === 'contents' ? 'selected' : '' ?>>내용</option>
-            <option value="writer"   <?= $search_key === 'writer'   ? 'selected' : '' ?>>닉네임</option>
-        </select>
-        <input type="text" name="search_val" value="<?= htmlspecialchars($search_val) ?>" placeholder="검색어를 입력하세요"/>
-        <button type="submit" class="filter_btn"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
-        <a href="/admin_myrecord/free_board/" class="reset_btn"><i class="fa-solid fa-rotate-left"></i> 초기화</a>
-    </div>
-</form>
+<!-- Search Filter -->
+<div class="fb_filter_card">
+    <select id="f_search_key">
+        <option value="title">제목</option>
+        <option value="contents">내용</option>
+        <option value="writer">닉네임</option>
+    </select>
+    <input type="text" id="f_search_val" placeholder="검색어를 입력하세요"/>
+    <button class="filter_btn" onclick="doSearch()"><i class="fa-solid fa-magnifying-glass"></i> 검색</button>
+    <button class="reset_btn" onclick="doReset()"><i class="fa-solid fa-rotate-left"></i> 초기화</button>
+</div>
 
-<!-- ===== 목록 테이블 ===== -->
+<!-- Table -->
 <div class="admin_card">
     <div class="list_info_bar">
-        <span class="total_count">총 <strong><?= number_format($total_count) ?></strong>건</span>
-        <span><?= $page ?> / <?= $total_pages ?> 페이지</span>
+        <span class="total_count">총 <strong id="total_count_val">-</strong>건</span>
+        <span id="page_info">- / - 페이지</span>
     </div>
     <table class="admin_table">
         <thead>
             <tr>
-                <th>#</th>
-                <th>제목</th>
-                <th>작성자</th>
+                <th>#</th><th>제목</th><th>작성자</th>
                 <th style="text-align:center;">댓글</th>
                 <th style="text-align:center;">조회</th>
                 <th>작성일</th>
                 <th style="text-align:center;">상태</th>
             </tr>
         </thead>
-        <tbody>
-        <?php if (empty($list)): ?>
-            <tr><td colspan="7" style="text-align:center; color:#aaa; padding:40px;">검색 결과가 없습니다</td></tr>
-        <?php else: ?>
-        <?php foreach ($list as $idx => $r):
-            $row_no   = $total_count - $offset - $idx;
-            $view_url = '/admin_myrecord/free_board/view/?id=' . $r['id'] . '&' . $base_query . '&page=' . $page;
-        ?>
-            <tr onclick="location.href='<?= $view_url ?>'">
-                <td style="color:var(--text-secondary); font-size:12px;"><?= $row_no ?></td>
-                <td class="post_title_cell"><?= htmlspecialchars($r['title']) ?></td>
-                <td style="font-weight:600;"><?= htmlspecialchars($r['user_nickname'] ?? '-') ?></td>
-                <td style="text-align:center; color:var(--text-secondary);"><?= number_format($r['comment_count']) ?></td>
-                <td style="text-align:center; color:var(--text-secondary);"><?= number_format($r['view_count']) ?></td>
-                <td style="color:var(--text-secondary);">
-                    <?= $r['create_date'] ? date('Y.m.d', strtotime($r['create_date'])) : '-' ?>
-                </td>
-                <td style="text-align:center;">
-                    <?php if ($r['is_delete']): ?>
-                        <span class="admin_badge reject">삭제됨</span>
-                    <?php else: ?>
-                        <span class="admin_badge approval">정상</span>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        <?php endif; ?>
+        <tbody id="list_tbody">
+            <tr><td colspan="7" style="text-align:center;color:#aaa;padding:40px;"><i class="fa-solid fa-spinner fa-spin"></i></td></tr>
         </tbody>
     </table>
-
-    <!-- 페이지네이션 -->
-    <?php if ($total_pages > 1):
-        $block       = 10;
-        $block_start = (int)(floor(($page - 1) / $block) * $block) + 1;
-        $block_end   = min($block_start + $block - 1, $total_pages);
-    ?>
-    <div class="admin_paging">
-        <?php if ($block_start > 1): ?>
-            <a href="?page=<?= $block_start - 1 ?>&<?= $base_query ?>"><i class="fa-solid fa-chevron-left"></i></a>
-        <?php else: ?>
-            <span class="disabled"><i class="fa-solid fa-chevron-left"></i></span>
-        <?php endif; ?>
-        <?php for ($p = $block_start; $p <= $block_end; $p++): ?>
-            <?php if ($p === $page): ?>
-                <span class="current"><?= $p ?></span>
-            <?php else: ?>
-                <a href="?page=<?= $p ?>&<?= $base_query ?>"><?= $p ?></a>
-            <?php endif; ?>
-        <?php endfor; ?>
-        <?php if ($block_end < $total_pages): ?>
-            <a href="?page=<?= $block_end + 1 ?>&<?= $base_query ?>"><i class="fa-solid fa-chevron-right"></i></a>
-        <?php else: ?>
-            <span class="disabled"><i class="fa-solid fa-chevron-right"></i></span>
-        <?php endif; ?>
-    </div>
-    <?php endif; ?>
+    <div class="admin_paging" id="paging_wrap"></div>
 </div>
 
-<?php
-include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_footer.php");
-?>
+<script>
+var _state = { page: 1, status: 'all', search_key: 'title', search_val: '' };
+var _stats = {};
+
+function init() {
+    var sp = new URLSearchParams(location.search);
+    _state.page       = parseInt(sp.get('page') || '1');
+    _state.status     = sp.get('status')     || 'all';
+    _state.search_key = sp.get('search_key') || 'title';
+    _state.search_val = sp.get('search_val') || '';
+
+    document.getElementById('f_search_key').value = _state.search_key;
+    document.getElementById('f_search_val').value = _state.search_val;
+    updateQuickBar();
+    loadData();
+}
+
+function loadData() {
+    var qs = new URLSearchParams({
+        page:       _state.page,
+        status:     _state.status,
+        search_key: _state.search_key,
+        search_val: _state.search_val,
+    }).toString();
+
+    history.replaceState(null, '', '?' + qs);
+
+    document.getElementById('list_tbody').innerHTML =
+        '<tr><td colspan="7" style="text-align:center;color:#aaa;padding:40px;"><i class="fa-solid fa-spinner fa-spin"></i></td></tr>';
+
+    fetch('/api/v1/admin/boards?' + qs)
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.code !== 'SUCCESS') { alert(res.msg || '오류가 발생했습니다.'); return; }
+            _stats = res.stats;
+            renderStats(res.stats);
+            renderTable(res);
+            renderPaging(res.total_count, res.page, res.page_size, res.total_pages);
+        })
+        .catch(function () { alert('서버 오류가 발생했습니다.'); });
+}
+
+function renderStats(s) {
+    document.getElementById('stat_cards_wrap').innerHTML =
+        statCard('blue',   'fa-comments',     '총 게시글',      s.total,    '건') +
+        statCard('green',  'fa-calendar-day', '오늘 작성',      s.today,    '건') +
+        statCard('orange', 'fa-comment-dots', '총 댓글',        s.comments, '건') +
+        statCard('red',    'fa-trash',        '삭제된 게시글',  s.deleted,  '건');
+    document.getElementById('qc_all').textContent     = s.total;
+    document.getElementById('qc_deleted').textContent = s.deleted;
+}
+
+function renderTable(res) {
+    document.getElementById('total_count_val').textContent = res.total_count.toLocaleString();
+    document.getElementById('page_info').textContent = res.page + ' / ' + res.total_pages + ' 페이지';
+
+    if (!res.data.length) {
+        document.getElementById('list_tbody').innerHTML =
+            '<tr><td colspan="7" style="text-align:center;color:#aaa;padding:40px;">검색 결과가 없습니다</td></tr>';
+        return;
+    }
+
+    var html = '';
+    res.data.forEach(function (r, idx) {
+        var rowNo   = res.total_count - res.offset - idx;
+        var viewUrl = '/admin_myrecord/free_board/view/?id=' + r.id +
+            '&status=' + encodeURIComponent(_state.status) +
+            '&search_key=' + encodeURIComponent(_state.search_key) +
+            '&search_val=' + encodeURIComponent(_state.search_val) +
+            '&page=' + res.page;
+        html += '<tr onclick="location.href=\'' + viewUrl + '\'">' +
+            '<td style="color:var(--text-secondary);font-size:12px;">' + rowNo + '</td>' +
+            '<td class="post_title_cell">' + esc(r.title) + '</td>' +
+            '<td style="font-weight:600;">' + esc(r.user_nickname) + '</td>' +
+            '<td style="text-align:center;color:var(--text-secondary);">' + r.comment_count.toLocaleString() + '</td>' +
+            '<td style="text-align:center;color:var(--text-secondary);">' + r.view_count.toLocaleString() + '</td>' +
+            '<td style="color:var(--text-secondary);">' + esc(r.create_date) + '</td>' +
+            '<td style="text-align:center;">' +
+                (r.is_delete ? '<span class="admin_badge reject">삭제됨</span>' : '<span class="admin_badge approval">정상</span>') +
+            '</td>' +
+        '</tr>';
+    });
+    document.getElementById('list_tbody').innerHTML = html;
+}
+
+function renderPaging(totalCount, page, pageSize, totalPages) {
+    if (totalPages <= 1) { document.getElementById('paging_wrap').innerHTML = ''; return; }
+    var block = 10;
+    var blockStart = Math.floor((page - 1) / block) * block + 1;
+    var blockEnd   = Math.min(blockStart + block - 1, totalPages);
+    var html = '';
+    if (blockStart > 1) html += '<button onclick="goPage(' + (blockStart - 1) + ')"><i class="fa-solid fa-chevron-left"></i></button>';
+    else                html += '<span class="disabled"><i class="fa-solid fa-chevron-left"></i></span>';
+    for (var p = blockStart; p <= blockEnd; p++) {
+        if (p === page) html += '<span class="current">' + p + '</span>';
+        else            html += '<button onclick="goPage(' + p + ')">' + p + '</button>';
+    }
+    if (blockEnd < totalPages) html += '<button onclick="goPage(' + (blockEnd + 1) + ')"><i class="fa-solid fa-chevron-right"></i></button>';
+    else                       html += '<span class="disabled"><i class="fa-solid fa-chevron-right"></i></span>';
+    document.getElementById('paging_wrap').innerHTML = html;
+}
+
+function setStatus(status) {
+    _state.status = status;
+    _state.page   = 1;
+    updateQuickBar();
+    loadData();
+}
+
+function updateQuickBar() {
+    document.querySelectorAll('.status_quick_bar button').forEach(function (btn) {
+        btn.classList.toggle('on', btn.getAttribute('onclick').includes("'" + _state.status + "'"));
+    });
+}
+
+function goPage(p) { _state.page = p; loadData(); }
+
+function doSearch() {
+    _state.page       = 1;
+    _state.search_key = document.getElementById('f_search_key').value;
+    _state.search_val = document.getElementById('f_search_val').value.trim();
+    loadData();
+}
+
+function doReset() {
+    _state = { page: 1, status: 'all', search_key: 'title', search_val: '' };
+    document.getElementById('f_search_key').value = 'title';
+    document.getElementById('f_search_val').value = '';
+    updateQuickBar();
+    loadData();
+}
+
+document.getElementById('f_search_val').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') doSearch();
+});
+
+function statCard(color, icon, label, value, unit) {
+    return '<div class="stat_card"><div class="stat_icon ' + color + '"><i class="fa-solid ' + icon + '"></i></div>' +
+        '<p class="stat_label">' + label + '</p>' +
+        '<p class="stat_value">' + Number(value).toLocaleString() + '<span>' + unit + '</span></p></div>';
+}
+
+function esc(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+init();
+</script>
+
+<?php include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_footer.php"); ?>

@@ -1,9 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/common.php");
-
 $admin_page_title = '시스템 설정';
-$purge_stats = AdminSystem::getPurgeStats();
-
 include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
 ?>
 
@@ -119,26 +116,26 @@ include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
 
     <div class="card_body">
 
-        <div class="purge_info_grid">
+        <div class="purge_info_grid" id="purge_info_grid">
             <div class="purge_info_item">
                 <div class="info_icon red"><i class="fa-solid fa-file-lines"></i></div>
                 <div>
                     <p class="info_label">삭제 대상 게시글</p>
-                    <p class="info_value"><?= number_format($purge_stats['board_count']) ?><span>건</span></p>
+                    <p class="info_value" id="stat_board">-<span>건</span></p>
                 </div>
             </div>
             <div class="purge_info_item">
                 <div class="info_icon orange"><i class="fa-solid fa-comments"></i></div>
                 <div>
                     <p class="info_label">삭제 대상 댓글</p>
-                    <p class="info_value"><?= number_format($purge_stats['comment_count']) ?><span>건</span></p>
+                    <p class="info_value" id="stat_comment">-<span>건</span></p>
                 </div>
             </div>
             <div class="purge_info_item">
                 <div class="info_icon blue"><i class="fa-solid fa-image"></i></div>
                 <div>
                     <p class="info_label">삭제 대상 파일</p>
-                    <p class="info_value"><?= number_format($purge_stats['file_count']) ?><span>건</span></p>
+                    <p class="info_value" id="stat_file">-<span>건</span></p>
                 </div>
             </div>
         </div>
@@ -149,10 +146,9 @@ include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
             게시글 · 댓글 · 파일 DB 및 서버에 저장된 이미지 파일이 <strong>모두 복구 불가하게 삭제</strong>됩니다.
         </div>
 
-        <button class="purge_btn" id="purge_btn" onclick="runPurge();"
-            <?= $purge_stats['board_count'] === 0 ? 'disabled' : '' ?>>
+        <button class="purge_btn" id="purge_btn" onclick="runPurge();" disabled>
             <i class="fa-solid fa-trash-can"></i>
-            영구 삭제 실행 (<?= number_format($purge_stats['board_count']) ?>건)
+            <span id="purge_btn_label">불러오는 중...</span>
         </button>
 
         <div class="purge_result" id="purge_result"></div>
@@ -162,6 +158,27 @@ include_once($_SERVER['DOCUMENT_ROOT']."/admin_myrecord/admin_header.php");
 </div>
 
 <script>
+// 페이지 로드 시 통계 조회
+(function loadPurgeStats() {
+    fetch('/api/v1/admin/system/purge-stats')
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+            if (res.code !== 'SUCCESS') return;
+            var d = res.data;
+            var fmt = function (n) { return Number(n).toLocaleString(); };
+            document.getElementById('stat_board').innerHTML   = fmt(d.board_count)   + '<span>건</span>';
+            document.getElementById('stat_comment').innerHTML = fmt(d.comment_count) + '<span>건</span>';
+            document.getElementById('stat_file').innerHTML    = fmt(d.file_count)    + '<span>건</span>';
+            document.getElementById('purge_btn_label').textContent = '영구 삭제 실행 (' + fmt(d.board_count) + '건)';
+            if (d.board_count > 0) {
+                document.getElementById('purge_btn').disabled = false;
+            }
+        })
+        .catch(function () {
+            document.getElementById('purge_btn_label').textContent = '통계 조회 실패';
+        });
+}());
+
 function runPurge() {
     if (!confirm('삭제된 지 1년 이상 경과한 게시글을 영구 삭제합니다.\n이 작업은 되돌릴 수 없습니다.\n\n계속하시겠습니까?')) return;
 

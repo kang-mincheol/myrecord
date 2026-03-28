@@ -19,6 +19,64 @@ class AdminRecordsController {
     }
 
     /**
+     * GET /api/v1/admin/records?page=1&record=0&status=all&search_val=
+     * 기록 목록 + 통계 + 종목 마스터
+     */
+    public static function list(array $params): void {
+        self::guardAdmin();
+
+        $dir = $_SERVER['DOCUMENT_ROOT'] . '/admin_myrecord/class/';
+        require_once $dir . 'class.AdminRecord.php';
+
+        $page          = max(1, (int)($_GET['page']       ?? 1));
+        $page_size     = 20;
+        $filter_record = (int)($_GET['record'] ?? 0);
+        $filter_status = $_GET['status']    ?? 'all';
+        $search_val    = trim($_GET['search_val'] ?? '');
+
+        $allowed_status = ['all', '0', '1', '2', '9'];
+        if (!in_array($filter_status, $allowed_status, true)) $filter_status = 'all';
+
+        $stats   = AdminRecord::getStats();
+        $masters = AdminRecord::getMasterList();
+
+        $total_count = AdminRecord::getTotalCount($filter_record, $filter_status, $search_val);
+        $total_pages = max(1, (int)ceil($total_count / $page_size));
+        if ($page > $total_pages) $page = $total_pages;
+
+        $offset = ($page - 1) * $page_size;
+        $list   = AdminRecord::getList($page, $page_size, $filter_record, $filter_status, $search_val);
+
+        $data = array_map(function ($r) {
+            return [
+                'id'            => (int)$r['id'],
+                'user_nickname' => $r['user_nickname']  ?? '-',
+                'user_id'       => $r['user_id']        ?? '-',
+                'record_name'   => $r['record_name']    ?? '-',
+                'record_name_ko'=> $r['record_name_ko'] ?? '-',
+                'record_weight' => $r['record_weight'],
+                'memo'          => $r['memo'] ?? '',
+                'status_text'   => $r['status_text']  ?? '신청',
+                'status_value'  => $r['status_value'] ?? 'request',
+                'create_datetime' => $r['create_datetime']
+                    ? date('Y.m.d', strtotime($r['create_datetime'])) : '-',
+            ];
+        }, $list);
+
+        echo json_encode([
+            'code'        => 'SUCCESS',
+            'stats'       => $stats,
+            'masters'     => $masters,
+            'data'        => $data,
+            'total_count' => $total_count,
+            'page'        => $page,
+            'page_size'   => $page_size,
+            'total_pages' => $total_pages,
+            'offset'      => $offset,
+        ], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * GET /api/v1/admin/records/{id}
      * 기록 상세 조회 (첨부파일, 검증이력 포함)
      */

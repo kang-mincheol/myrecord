@@ -19,6 +19,58 @@ class AdminBoardsController {
     }
 
     /**
+     * GET /api/v1/admin/boards?page=1&status=all&search_key=title&search_val=
+     * 게시글 목록 + 통계
+     */
+    public static function list(array $params): void {
+        self::guardAdmin();
+
+        $dir = $_SERVER['DOCUMENT_ROOT'] . '/admin_myrecord/class/';
+        require_once $dir . 'class.AdminFreeBoard.php';
+
+        $page          = max(1, (int)($_GET['page']       ?? 1));
+        $page_size     = 20;
+        $filter_status = $_GET['status']     ?? 'all';
+        $search_key    = $_GET['search_key'] ?? 'title';
+        $search_val    = trim($_GET['search_val'] ?? '');
+
+        if (!in_array($search_key, ['title', 'contents', 'writer'], true)) $search_key = 'title';
+        if (!in_array($filter_status, ['all', 'deleted'], true)) $filter_status = 'all';
+
+        $stats       = AdminFreeBoard::getStats();
+        $total_count = AdminFreeBoard::getTotalCount($filter_status, $search_key, $search_val);
+        $total_pages = max(1, (int)ceil($total_count / $page_size));
+        if ($page > $total_pages) $page = $total_pages;
+
+        $offset = ($page - 1) * $page_size;
+        $list   = AdminFreeBoard::getList($page, $page_size, $filter_status, $search_key, $search_val);
+
+        $data = array_map(function ($r) {
+            return [
+                'id'            => (int)$r['id'],
+                'title'         => $r['title'],
+                'user_nickname' => $r['user_nickname'] ?? '-',
+                'comment_count' => (int)$r['comment_count'],
+                'view_count'    => (int)$r['view_count'],
+                'is_delete'     => (int)$r['is_delete'],
+                'create_date'   => $r['create_date']
+                    ? date('Y.m.d', strtotime($r['create_date'])) : '-',
+            ];
+        }, $list);
+
+        echo json_encode([
+            'code'        => 'SUCCESS',
+            'stats'       => $stats,
+            'data'        => $data,
+            'total_count' => $total_count,
+            'page'        => $page,
+            'page_size'   => $page_size,
+            'total_pages' => $total_pages,
+            'offset'      => $offset,
+        ], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * GET /api/v1/admin/boards/{id}
      * 게시글 상세 조회 (댓글 포함)
      */
