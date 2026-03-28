@@ -48,12 +48,12 @@ const PasswordChangeModal = {
 
     $.ajax({
       async: false,
-      type: "POST",
+      type: "PUT",
       data: JSON.stringify({
         now_password: nowPassword,
         new_password: newPassword,
       }),
-      url: "/api/account/set.password_change.php",
+      url: "/api/v1/accounts/me/password",
       success: (data) => {
         if (data["code"] === "SUCCESS") {
           myrecordAlert(

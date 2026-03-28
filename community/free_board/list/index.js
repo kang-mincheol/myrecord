@@ -24,9 +24,9 @@ const getFreeBoardList = async () => {
   }
 
   $.ajax({
-    type: "POST",
-    data: JSON.stringify(param),
-    url: "/api/free_board/get.free_board_list_data.php",
+    type: "GET",
+    data: param,
+    url: "/api/v1/boards",
     success: (data) => {
       loadingOff();
       if (data["code"] === "SUCCESS") {

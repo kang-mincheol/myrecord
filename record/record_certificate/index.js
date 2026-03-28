@@ -19,9 +19,8 @@ function getCertificateData() {
     }
 
     $.ajax({
-        type: "POST",
-        url: "/api/record/certificate/get.certificate_data.php",
-        data: JSON.stringify({ record_id: record_id }),
+        type: "GET",
+        url: "/api/v1/records/" + record_id + "/certificate",
         success: function(data) {
             loadingOff();
             if(data["code"] == "SUCCESS") {

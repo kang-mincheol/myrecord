@@ -15,11 +15,8 @@ function requestDelete() {
     }
 
     $.ajax({
-        type: "POST",
-        url: "/api/record/set.record_delete.php",
-        data: JSON.stringify({
-            record_id: record_id
-        }),
+        type: "DELETE",
+        url: "/api/v1/records/" + record_id,
         success: function(data) {
             console.log(data);
             if(data["code"] == "SUCCESS") {
@@ -40,11 +37,8 @@ function getRecordData() {
     record_id = record_id.replace(/[^0-9]/g, "");
 
     $.ajax({
-        type: "POST",
-        url: "/api/record/get.record_view_data.php",
-        data: JSON.stringify({
-            record_id: record_id
-        }),
+        type: "GET",
+        url: "/api/v1/records/" + record_id,
         success: function(data) {
             console.log(data);
             if(data["code"] == "SUCCESS") {
@@ -135,8 +129,7 @@ function loadComments() {
 
     $.ajax({
         type: "GET",
-        url: "/api/record/get.record_comment_list.php",
-        data: { record_id: recordId },
+        url: "/api/v1/records/" + recordId + "/comments",
         success: function(res) {
             if (res.code === "SUCCESS") {
                 $("#comment_count").text(res.data.count);
@@ -192,9 +185,9 @@ function submitComment() {
 
     $.ajax({
         type: "POST",
-        url: "/api/record/set.record_comment_insert.php",
+        url: "/api/v1/records/" + recordId + "/comments",
         contentType: "application/json",
-        data: JSON.stringify({ record_id: recordId, contents: contents }),
+        data: JSON.stringify({ contents: contents }),
         success: function(res) {
             $btn.prop("disabled", false);
             if (res.code === "SUCCESS") {
@@ -213,15 +206,14 @@ function submitComment() {
 }
 
 function deleteComment(commentId) {
+    var recordId = getParam('record_id');
     myrecordConfirm(
         "on",
         "댓글을 삭제하시겠습니까?",
         function() {
             $.ajax({
-                type: "POST",
-                url: "/api/record/set.record_comment_delete.php",
-                contentType: "application/json",
-                data: JSON.stringify({ comment_id: commentId }),
+                type: "DELETE",
+                url: "/api/v1/records/" + recordId + "/comments/" + commentId,
                 success: function(res) {
                     if (res.code === "SUCCESS") {
                         loadComments();

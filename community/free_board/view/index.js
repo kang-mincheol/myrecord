@@ -8,11 +8,8 @@ const getFreeBoardViewData = () => {
 
   $.ajax({
     async: false,
-    type: "POST",
-    data: JSON.stringify({
-      boardId: boardId,
-    }),
-    url: "/api/free_board/get.free_board_view_data.php",
+    type: "GET",
+    url: "/api/v1/boards/" + boardId,
     success: (response) => {
       if (response["code"] === "SUCCESS") {
         $("#view_header_wrap #contents_title").text(response.data.title);
@@ -58,10 +55,8 @@ const deleteBoard = (boardId) => {
     "게시글을 삭제하시겠습니까?",
     () => {
       $.ajax({
-        type: "POST",
-        url: "/api/free_board/set.free_board_delete.php",
-        contentType: "application/json",
-        data: JSON.stringify({ board_id: boardId }),
+        type: "DELETE",
+        url: "/api/v1/boards/" + boardId,
         success: (res) => {
           if (res.code === "SUCCESS") {
             myrecordAlert("on", "게시글이 삭제되었습니다.", "알림", "location.href='/community/free_board/list/';");
@@ -86,8 +81,7 @@ const loadComments = () => {
 
   $.ajax({
     type: "GET",
-    url: "/api/free_board/get.free_board_comment_list.php",
-    data: { board_id: boardId },
+    url: "/api/v1/boards/" + boardId + "/comments",
     success: (res) => {
       if (res.code === "SUCCESS") {
         $("#comment_count").text(res.data.count);
@@ -143,9 +137,9 @@ const submitComment = () => {
 
   $.ajax({
     type: "POST",
-    url: "/api/free_board/set.free_board_comment_insert.php",
+    url: "/api/v1/boards/" + boardId + "/comments",
     contentType: "application/json",
-    data: JSON.stringify({ board_id: boardId, contents: contents }),
+    data: JSON.stringify({ contents: contents }),
     success: (res) => {
       $btn.prop("disabled", false);
       if (res.code === "SUCCESS") {
@@ -164,15 +158,14 @@ const submitComment = () => {
 };
 
 const deleteComment = (commentId) => {
+  const boardId = getParam("id");
   myrecordConfirm(
     "on",
     "댓글을 삭제하시겠습니까?",
     () => {
       $.ajax({
-        type: "POST",
-        url: "/api/free_board/set.free_board_comment_delete.php",
-        contentType: "application/json",
-        data: JSON.stringify({ comment_id: commentId }),
+        type: "DELETE",
+        url: "/api/v1/boards/" + boardId + "/comments/" + commentId,
         success: (res) => {
           if (res.code === "SUCCESS") {
             loadComments();

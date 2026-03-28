@@ -15,14 +15,14 @@ function getRecordData() {
     var search_keyword = getParam('search_keyword');
 
     $.ajax({
-        type: "POST",
-        data: JSON.stringify({
+        type: "GET",
+        data: {
             "record_type": record_type,
             "page": page,
             "search_key": search_key,
             "search_keyword": search_keyword
-        }),
-        url: "/api/record/get.record_board_list_data.php",
+        },
+        url: "/api/v1/records",
         success: function(data) {
             console.log(data);
             if(data["code"] == "SUCCESS") {

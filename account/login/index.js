@@ -50,7 +50,7 @@ function loginSubmit() {
       id: id,
       password: password,
     }),
-    url: "/api/account/set.login_check.php",
+    url: "/api/v1/auth/login",
     success: function (data) {
       loadingOff();
       if (data["code"] == "SUCCESS") {

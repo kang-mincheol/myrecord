@@ -1,9 +1,8 @@
 function loadCalendar(year, month) {
     $.ajax({
-        url: '/api/workout_log/get.calendar.php',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ year: year, month: month }),
+        url: '/api/v1/workout-logs/calendar',
+        type: 'GET',
+        data: { year: year, month: month },
         success: function (res) {
             if (res.code === 'SUCCESS') {
                 renderCalendar(res.data, res.total_count);

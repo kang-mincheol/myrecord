@@ -5,7 +5,7 @@ function init() {
 function getMyRecordData() {
     $.ajax({
         type: "GET",
-        url: "/api/record/get.my_record_data.php",
+        url: "/api/v1/records/me",
         success: function(data) {
             console.log(data);
             if(data["code"] == "SUCCESS") {

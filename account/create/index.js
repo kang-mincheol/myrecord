@@ -192,7 +192,7 @@ function createAccountSubmit() {
       account_email: email,
       terms_marketing: terms_marketing,
     }),
-    url: "/api/account/set.create_account.php",
+    url: "/api/v1/accounts",
     success: function (data) {
       console.log(data);
       if (data["code"] == "SUCCESS") {

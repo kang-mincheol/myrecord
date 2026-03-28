@@ -10,10 +10,8 @@ function initPage(logId) {
     loadingOn();
 
     $.ajax({
-        type: 'POST',
-        url: '/api/workout_log/get.workout_log_detail.php',
-        contentType: 'application/json',
-        data: JSON.stringify({ log_id: logId }),
+        type: 'GET',
+        url: '/api/v1/workout-logs/' + logId,
         success: function (res) {
             loadingOff();
             if (res.code === 'SUCCESS') {
@@ -246,10 +244,8 @@ function confirmDelete(logId) {
 
 function deleteLog(logId) {
     $.ajax({
-        url: '/api/workout_log/set.workout_log_delete.php',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ log_id: logId }),
+        url: '/api/v1/workout-logs/' + logId,
+        type: 'DELETE',
         success: function (res) {
             if (res.code === 'SUCCESS') {
                 location.href = '/workout_log/list/';
