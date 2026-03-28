@@ -172,10 +172,8 @@ function runPurge() {
     $btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 처리 중...';
     $result.style.display = 'none';
 
-    fetch('/admin_myrecord/system/set_purge.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'purge_expired_boards' }),
+    fetch('/api/v1/admin/system/expired-boards', {
+        method: 'DELETE',
     })
     .then(r => r.json())
     .then(res => {

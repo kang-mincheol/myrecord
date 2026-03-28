@@ -61,12 +61,31 @@ $routes = [
     // -------------------------
     // Workout Logs (득근일지) - 구체적 경로 우선
     // -------------------------
-    ['GET',    '/workout-logs/calendar',             'WorkoutLogs', 'calendar'],
-    ['GET',    '/workout-logs',                      'WorkoutLogs', 'list'],
-    ['POST',   '/workout-logs',                      'WorkoutLogs', 'create'],
-    ['GET',    '/workout-logs/{id}',                 'WorkoutLogs', 'view'],
-    ['PUT',    '/workout-logs/{id}',                 'WorkoutLogs', 'update'],
-    ['DELETE', '/workout-logs/{id}',                 'WorkoutLogs', 'delete'],
+    ['GET',    '/workout-logs/calendar',             'WorkoutLogs',   'calendar'],
+    ['GET',    '/workout-logs',                      'WorkoutLogs',   'list'],
+    ['POST',   '/workout-logs',                      'WorkoutLogs',   'create'],
+    ['GET',    '/workout-logs/{id}',                 'WorkoutLogs',   'view'],
+    ['PUT',    '/workout-logs/{id}',                 'WorkoutLogs',   'update'],
+    ['DELETE', '/workout-logs/{id}',                 'WorkoutLogs',   'delete'],
+
+    // -------------------------
+    // Admin - Records (기록 관리) - 구체적 경로 우선
+    // -------------------------
+    ['PUT',    '/admin/records/{id}/status',         'AdminRecords',  'updateStatus'],
+    ['GET',    '/admin/records/{id}',                'AdminRecords',  'view'],
+
+    // -------------------------
+    // Admin - Boards (자유게시판 관리) - 구체적 경로 우선
+    // -------------------------
+    ['DELETE', '/admin/boards/{id}/comments/{cid}',  'AdminBoards',   'deleteComment'],
+    ['POST',   '/admin/boards/{id}/restore',         'AdminBoards',   'restore'],
+    ['GET',    '/admin/boards/{id}',                 'AdminBoards',   'view'],
+    ['DELETE', '/admin/boards/{id}',                 'AdminBoards',   'delete'],
+
+    // -------------------------
+    // Admin - System (시스템 관리)
+    // -------------------------
+    ['DELETE', '/admin/system/expired-boards',       'AdminSystem',   'purgeExpiredBoards'],
 ];
 
 /**

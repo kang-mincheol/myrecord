@@ -238,11 +238,12 @@ function postAction(action) {
     var label = action === 'delete_post' ? '삭제' : '복원';
     if (!confirm('이 게시글을 ' + label + '하시겠습니까?')) return;
 
+    var isDelete = action === 'delete_post';
     $.ajax({
-        type: 'POST',
-        url: '/admin_myrecord/free_board/set_action.php',
-        contentType: 'application/json',
-        data: JSON.stringify({ action: action, id: postId }),
+        type: isDelete ? 'DELETE' : 'POST',
+        url: isDelete
+            ? '/api/v1/admin/boards/' + postId
+            : '/api/v1/admin/boards/' + postId + '/restore',
         success: function(res) {
             if (res.code === 'SUCCESS') {
                 location.reload();
@@ -258,10 +259,8 @@ function deleteComment(id, btn) {
     if (!confirm('이 댓글을 삭제하시겠습니까?')) return;
 
     $.ajax({
-        type: 'POST',
-        url: '/admin_myrecord/free_board/set_action.php',
-        contentType: 'application/json',
-        data: JSON.stringify({ action: 'delete_comment', id: id }),
+        type: 'DELETE',
+        url: '/api/v1/admin/boards/' + postId + '/comments/' + id,
         success: function(res) {
             if (res.code === 'SUCCESS') {
                 var item = document.getElementById('cmt_' + id);

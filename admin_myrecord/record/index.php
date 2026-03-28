@@ -460,7 +460,7 @@ function openVerifyModal(id) {
 
     $.ajax({
         type: 'GET',
-        url: '/admin_myrecord/record/get_detail.php?id=' + id,
+        url: '/api/v1/admin/records/' + id,
         success: function(res) {
             if (res.code === 'SUCCESS') {
                 renderVerifyModal(res);
@@ -625,10 +625,10 @@ function saveVerify() {
     btn.disabled = true;
 
     $.ajax({
-        type: 'POST',
-        url: '/admin_myrecord/record/set_status.php',
+        type: 'PUT',
+        url: '/api/v1/admin/records/' + currentRecordId + '/status',
         contentType: 'application/json',
-        data: JSON.stringify({ id: currentRecordId, status: status, comment: comment }),
+        data: JSON.stringify({ status: status, comment: comment }),
         success: function(res) {
             btn.disabled = false;
             if (res.code === 'SUCCESS') {
