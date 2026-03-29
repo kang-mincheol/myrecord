@@ -248,6 +248,26 @@ class Record {
     }
 
     /**
+     * 기록 수정 (무게, 메모)
+     */
+    public static function updateRecord(int $recordId, int $weight, string $memo): bool {
+        global $PDO;
+        $sql = "
+            Update tb_record_request
+            Set
+                record_weight = :record_weight,
+                memo          = :memo
+            Where id = :id
+        ";
+        $param = [
+            ":record_weight" => $weight,
+            ":memo"          => $memo,
+            ":id"            => $recordId,
+        ];
+        return (bool)$PDO->execute($sql, $param);
+    }
+
+    /**
      * 기록 삭제 (파일 물리 삭제 + DB 삭제 + 검증이력 삭제 + 기록 요청 삭제)
      */
     public static function deleteRecord(int $recordId): void {

@@ -56,8 +56,9 @@ $routes = [
     ['GET',    '/records/{id}/comments',             'Records',     'listComments'],
     ['POST',   '/records/{id}/comments',             'Records',     'createComment'],
     ['DELETE', '/records/{id}/comments/{cid}',       'Records',     'deleteComment'],
-    ['GET',    '/records/{id}',                      'Records',     'view'],
-    ['DELETE', '/records/{id}',                      'Records',     'delete'],
+    ['GET',    '/records/{id}',                       'Records',     'view'],
+    ['PUT',    '/records/{id}',                       'Records',     'update'],
+    ['DELETE', '/records/{id}',                       'Records',     'delete'],
 
     // -------------------------
     // Workout Logs (득근일지) - 구체적 경로 우선

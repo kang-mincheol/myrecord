@@ -1,6 +1,6 @@
 function init() {
   //등록 수정 체크
-  //    recordEditCheck();
+  recordEditCheck();
 
   //셀렉트박스 사용시 아래함수를 호출할것
   selectDeviceCheck();
@@ -15,7 +15,6 @@ function noticePopupOff() {
 }
 
 function recordEditCheck() {
-  return;
   let record_id = getParam("record_id");
   record_id = record_id.replace(/[^0-9]/g, "");
 
@@ -28,13 +27,9 @@ function recordEditCheck() {
 }
 
 function getRecordData(record_id) {
-  return;
   $.ajax({
-    type: "POST",
+    type: "GET",
     async: false,
-    data: JSON.stringify({
-      record_id: record_id,
-    }),
     url: "/api/v1/records/" + record_id + "/edit",
     success: function (data) {
       console.log(data);
@@ -60,6 +55,7 @@ function getRecordData(record_id) {
             "]"
         ).click();
         $("#record_weight").val(record_data["weight"]);
+        $("#record_memo").val(record_data["memo"]);
 
         let fileRenderHtml = "";
         for (key in record_data["file"]) {
@@ -102,7 +98,7 @@ function setRecordData() {
   if (record_id == "") {
     insertData();
   } else {
-    //        updateData();
+    updateData();
   }
 }
 
@@ -204,21 +200,58 @@ function insertData() {
 }
 
 function updateData() {
-  myrecordAlert("on", "사용불가능한 기능입니다");
-  return;
-  //    loadingOn();
-  //    let record_id = getParam('record_id');
-  //    record_id = record_id.replace(/[^0-9]/g, "");
-  //
-  //    if(record_id == "") {
-  //        myrecordAlert('on', '올바르지 않은 값입니다');
-  //        loadingOff();
-  //        return;
-  //    }
-  //
-  //    let recordData = new FormData();
-  //
-  //    loadingOff();
+  loadingOn();
+  let record_id = getParam("record_id");
+  record_id = record_id.replace(/[^0-9]/g, "");
+
+  if (record_id == "") {
+    myrecordAlert("on", "올바르지 않은 값입니다");
+    loadingOff();
+    return;
+  }
+
+  let record_weight = $("#record_weight").val();
+  record_weight = record_weight.replace(/[^0-9]/g, "");
+
+  if (record_weight == "") {
+    myrecordAlert("on", "무게를 입력해 주세요");
+    loadingOff();
+    return;
+  }
+
+  let recordData = new FormData();
+  let record_memo = $("#record_memo").val().trim();
+
+  recordData.append("record_weight", record_weight);
+  recordData.append("record_memo", record_memo);
+
+  $.ajax({
+    async: false,
+    type: "PUT",
+    data: recordData,
+    url: "/api/v1/records/" + record_id,
+    contentType: false,
+    processData: false,
+    success: function (data) {
+      loadingOff();
+      console.log(data);
+      if (data["code"] == "SUCCESS") {
+        myrecordAlert(
+          "on",
+          "수정 완료",
+          "알림",
+          "location.href='/record/my_record/'"
+        );
+      } else {
+        myrecordAlert("on", data["msg"]);
+      }
+    },
+    error: function (error) {
+      loadingOff();
+      myrecordAlert("on", "Record 수정 중 에러가 발생 했습니다.");
+      console.log(error);
+    },
+  });
 }
 
 function memoCountUpdate(obj) {
