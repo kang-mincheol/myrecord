@@ -550,6 +550,73 @@ class RecordsController {
     }
 
     /**
+     * PUT /api/v1/records/{id}
+     * multipart/form-data: record_weight, record_memo
+     */
+    public static function update(array $params): void {
+        global $is_member, $member;
+
+        $returnArray = ["code" => "SUCCESS", "msg" => "정상 처리되었습니다"];
+
+        if (!$is_member) {
+            $returnArray["code"] = "MEMBER_ONLY";
+            $returnArray["msg"]  = "로그인 후 이용해주세요.";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        $record_id   = (int)$params["id"];
+        $record_data = Record::getRecordById($record_id);
+
+        if (!$record_data) {
+            $returnArray["code"] = "ERROR";
+            $returnArray["msg"]  = "잘못된 값 입니다.<br/>-2";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        if ($member["id"] != $record_data["account_id"]) {
+            $returnArray["code"] = "ERROR";
+            $returnArray["msg"]  = "잘못된 값 입니다.<br/>-3";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        if ($record_data["status"] == '2') {
+            $returnArray["code"] = "ERROR";
+            $returnArray["msg"]  = "승인 완료된 마이레코드는 수정이 불가합니다.";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        } elseif ($record_data["status"] == '1') {
+            $returnArray["code"] = "ERROR";
+            $returnArray["msg"]  = "현재 심사중으로 수정이 불가합니다.";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        $record_weight = preg_replace('/[^0-9]+/u', '', $_POST['record_weight'] ?? '');
+        if ($record_weight === '') {
+            $returnArray["code"] = "PARAM_ERROR";
+            $returnArray["msg"]  = "등록할 무게를 입력해 주세요";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+        if ((int)$record_weight > 9999) {
+            $returnArray["code"] = "PARAM_ERROR";
+            $returnArray["msg"]  = "Record 무게를 확인해 주세요";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        $record_memo = isset($_POST['record_memo']) ? trim($_POST['record_memo']) : '';
+        if (mb_strlen($record_memo) > 500) {
+            $record_memo = mb_substr($record_memo, 0, 500);
+        }
+
+        $result = Record::updateRecord($record_id, (int)$record_weight, $record_memo);
+        if (!$result) {
+            $returnArray["code"] = "ERROR";
+            $returnArray["msg"]  = "수정 중 에러가 발생했습니다.<br/>고객센터에 문의해 주세요";
+            echo json_encode($returnArray, JSON_UNESCAPED_UNICODE); return;
+        }
+
+        echo json_encode($returnArray, JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * DELETE /api/v1/records/{id}
      */
     public static function delete(array $params): void {
